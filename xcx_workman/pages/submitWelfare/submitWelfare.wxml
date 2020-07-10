@@ -8,7 +8,7 @@
 		</view>
 		<view class="content-item hengxiang">
 			<view class="content-title">主办单位<text style="color:red;">*</text></view>
-			<input type="text" placeholder="输入主办单位" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{activityCompany}}' name="activityCompany" bindinput='activityCompanyinput' bindblur="activitynameblur"></input>
+			<input type="text" placeholder="输入主办单位" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{activityCompany}}' name="activityCompany" bindinput='activityCompanyinput' bindblur="activityCompanyblur"></input>
 			<!-- <view class="enter"> 
 				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
 			</view> -->
