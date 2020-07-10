@@ -547,10 +547,14 @@ page {
 
 .button1 {
   width: 50%;
+  background-color: white;
+  text-align: center;
 }
 
 .button2 {
   width: 50%;
+  background-color: white;
+  text-align: center;
 }
 
 .button1 button {

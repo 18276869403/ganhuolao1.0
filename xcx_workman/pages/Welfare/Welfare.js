@@ -38,6 +38,21 @@ Page({
   },
   confirmAcceptance:function(){
     var that = this
+    var data={
+      sign_Name:that.data.signName,
+      sign_Phone:that.data.signPhone,
+      activityId:that.data.activityId
+    }
+    debugger
+    qingqiu.get("insertActivitySign",data,function(res){
+      if(res.success == true){
+        wx.showToast({
+          title: '报名成功',
+          icon: 'none',
+          duration: 2000
+        })
+      }
+    },'post')
     that.setData({
       isShowConfirm: false,
     })
@@ -85,8 +100,10 @@ Page({
       url: '../WelfareDetail/WelfareDetail?obj='+list1,
     })
   },
-  zaixianlianxi:function(){
+  zaixianlianxi:function(e){
+    var activityId=e.currentTarget.dataset.id
     this.setData({
+      activityId:activityId,
       isShowConfirm:true
     })
   },
@@ -96,52 +113,4 @@ Page({
       url: '../submitWelfare/submitWelfare',
     })
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
