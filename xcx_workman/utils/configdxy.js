@@ -54,6 +54,10 @@ const messageForMe = baseUrl + "pc/user/messageForMe"
 const myMessage = baseUrl + "pc/user/myMessage"
 // 微信小程序公众号
 const getOpenIdbyjscode = baseUrl + "pc/wx_small_app/get_openid_by_js_code"
+// 获取公益活动列表
+const getActivityList = baseUrl + "pc/hall/getActivityList"
+// 发布公益活动
+const addActivity = baseUrl + "pc/hall/addActivity"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -80,5 +84,7 @@ module.exports = {
   updateYeedById:updateYeedById,
   messageForMe:messageForMe,
   myMessage:myMessage,
-  getOpenIdbyjscode:getOpenIdbyjscode
+  getOpenIdbyjscode:getOpenIdbyjscode,
+  getActivityList:getActivityList,
+  addActivity:addActivity
 };
