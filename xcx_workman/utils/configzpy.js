@@ -1,6 +1,6 @@
 var api = require('./config.js')
-// const baseUrl = "http://miss.it-ys.com:91/work-boot/"
-const baseUrl = "http://192.168.1.204:8080/work-boot/" 
+const baseUrl = "http://miss.it-ys.com:91/work-boot/"
+// const baseUrl = "http://192.168.1.248:8080/work-boot/" 
 // const baseUrl = "http://192.168.1.233:8080/work-boot/" 
 // const baseUrl = "http://192.168.1.235:8080/work-boot/" 
 
@@ -56,6 +56,10 @@ const list = baseUrl + "work/loclahire/list"
 const queryloclaById = baseUrl + "work/loclahire/queryloclaById"
 // 发布招工
 const localHireAdd = baseUrl + "work/loclahire/localHireAdd"
+// 公益活动-接单人员
+const getActivitySign = baseUrl + "pc/hall/getActivitySign"
+// 公益活动-我要报名
+const insertActivitySign = baseUrl + "pc/hall/insertActivitySign"
 
 module.exports = {
   twoClassList:twoClassList,
@@ -84,5 +88,7 @@ module.exports = {
   editMyGoodTop:editMyGoodTop,
   list:list,
   queryloclaById:queryloclaById,
-  localHireAdd:localHireAdd
+  localHireAdd:localHireAdd,
+  getActivitySign:getActivitySign,
+  insertActivitySign:insertActivitySign
 };
