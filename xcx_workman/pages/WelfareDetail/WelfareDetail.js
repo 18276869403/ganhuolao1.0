@@ -21,7 +21,7 @@ Page({
     tupianlist:[],
     id:'',
     wxUserid:'',
-    type:''
+    type:'',
   },
 
   aixinzhuanfa:function(e){
@@ -54,51 +54,29 @@ Page({
     if(gongyilist.pic!=''&&gongyilist.pic!=null){
       piclist=gongyilist.pic.split(',')
     }
+    var activityid=gongyilist.id
     this.setData({
       gongyilist: gongyilist,
-      piclist:piclist
+      piclist:piclist,
+      activityid:activityid
     })
     console.log(gongyilist)
+    this.SelectjiedanList()
   }, 
   // 接单人员
   SelectjiedanList() {
     var that = this
     var data={
-      needId: that.data.id,
-      pages: 1,
-      size: 10
+      activityid:that.data.activityid
     }
-    console.log(data)
-    that.data.type=''
-    qingqiu.get("needSignPage", data, function(re) {
+    qingqiu.get("getActivitySign", data, function(re) {
       if (re.success == true) {
         if (re.result != null) {
-          console.log(re)
-          var list  = re.result.records
-          for(let obj of list){
-            if(obj.name != null && obj.name != "" && obj.name != "null"){
-              obj.name = obj.name
-            }else if(obj.shopName != null && obj.shopName != "" && obj.shopName != "null"){
-              obj.name = obj.shopName
-            }else{
-              obj.name = obj.wxNc
-            }
-            if(obj.picIurl != null && obj.picIurl!=""&& obj.picIurl!= "null"){
-              obj.picIurl = api.viewUrl + obj.picIurl
-            }else{
-              obj.picIurl = obj.picUrl
-            }
-            if(obj.signTime != null && obj.signTime != undefined && obj.signTime != ""){
-              obj.signTime = obj.signTime.slice(0,16)
-            }
-            if(obj.wxUserId==app.globalData.wxid){
-              that.data.type=1
-            }
-          }
-          that.setData ({
-            jiedanList : list,
-            type:that.data.type
+          that.data.jiedanList=re.result
+          that.setData({
+            jiedanList:that.data.jiedanList
           })
+          console.log(that.data.jiedanList)
         } else {
           qingqiu.tk('未查询到任何数据')
         }
