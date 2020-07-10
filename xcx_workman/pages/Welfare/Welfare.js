@@ -39,8 +39,8 @@ Page({
   confirmAcceptance:function(){
     var that = this
     var data={
-      sign_Name:that.data.signName,
-      sign_Phone:that.data.signPhone,
+      signName:that.data.signName,
+      signPhone:that.data.signPhone,
       activityId:that.data.activityId
     }
     console.log(data)
@@ -52,9 +52,11 @@ Page({
           icon: 'none',
           duration: 2000
         })
-        that.setData({
-          isShowConfirm: false,
-        })
+        qingqiu.get("updateActivity",{id:that.data.activityId},function(res){
+          that.setData({
+            isShowConfirm: false,
+          })
+        },"PUT")
       }
     },'post')
     that.setData({

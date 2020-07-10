@@ -81,12 +81,12 @@
 				<view class='toast-button'>
 					<view class='button1'>
 						<view catchtap='confirmAcceptance'>
-							<image src="../image/woyaobaoming.png" class="button-img"></image>
+							<image src="{{viewUrl}}static/image/querenbaoming.png" class="button-img"></image>
 						</view>
 					</view>
 					<view class='button2'>
 						<view catchtap='cancel'>
-							<image src="../image/guanbibaoming.png" class="button-img"></image>
+							<image src="{{viewUrl}}static/image/guanbibaoming.png" class="button-img"></image>
 						</view>
 					</view>
 				</view>
