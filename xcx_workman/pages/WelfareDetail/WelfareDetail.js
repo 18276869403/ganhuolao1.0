@@ -47,8 +47,16 @@ Page({
     })
     var gongyilist = JSON.parse(options.obj)
     gongyilist.createTime=gongyilist.createTime.split(' ')[0]
+    if(gongyilist.signNum==''||gongyilist.signNum==null){
+      gongyilist.signNum=0
+    }
+    var piclist=[]
+    if(gongyilist.pic!=''&&gongyilist.pic!=null){
+      piclist=gongyilist.pic.split(',')
+    }
     this.setData({
-      gongyilist: gongyilist
+      gongyilist: gongyilist,
+      piclist:piclist
     })
     console.log(gongyilist)
   }, 

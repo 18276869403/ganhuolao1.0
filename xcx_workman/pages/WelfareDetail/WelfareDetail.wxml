@@ -20,8 +20,8 @@
 					<image src="{{gongyilist.picUrl}}" class="header-icon"></image>
 				</view>
 				<view class="header-text">
-					<view class="header-text-class" wx-if='{{gongyilist.name!=null}}'>{{gongyilist.name}}</view>
-					<view class="header-text-class" wx-if='{{gongyilist.name==null&&gongyilist.shopName!=null}}'>{{gongyilist.shopName}}</view>
+					<view class="header-text-class" wx-if='{{gongyilist.name!=""&&gongyilist.name!=null}}'>{{gongyilist.name}}</view>
+					<view class="header-text-class" wx-if='{{gongyilist.name==""&&gongyilist.shopName!=null}}'>{{gongyilist.shopName}}</view>
 					<view class="header-text-class" wx-if='{{gongyilist.name==null&&gongyilist.shopName==null}}'>{{gongyilist.wxNc}}</view>
 					<view class="header-danwei">主办单位：{{gongyilist.company}}</view>
 				</view>
@@ -35,15 +35,15 @@
 				<view>活动描述</view>
 			</view>
 			<view class="content-content-list">
-				<view>招募人数：{{gongyilist.activityNum}}/{{gongyilist.activityNum}}</view>
+				<view>招募人数：{{gongyilist.signNum}}/{{gongyilist.activityNum}}</view>
 				<view>活动时间：{{gongyilist.activityTime}}</view>
 				<view>活动内容：{{gongyilist.content}}</view>
 				<view>报名截止：{{gongyilist.endTime}}</view>
 				<view class="image-view hengxiang">
 					<swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
-						<block wx:for="{{bannerImg}}" wx:for-index="index" wx:key="{{item.id}}">
+						<block wx:for="{{piclist}}" wx:for-index="index" wx:key="{{item.id}}">
 							<swiper-item>
-								<image src="{{item.bannerUrl}}" mode="scaleToFill" class="slide-image" />
+								<image src="{{viewUrl}}{{item}}" mode="scaleToFill" class="slide-image" />
 							</swiper-item>
 						</block>
 					</swiper>
