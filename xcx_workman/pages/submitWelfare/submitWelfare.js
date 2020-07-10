@@ -15,11 +15,12 @@ Page({
     enddate: '选择截止时间',
     // 添加参数
     activityname:'',
+    activitynameinput:'',
     activityCompany:'',
     activityrenshu:'',
     activitycontent:'',
-    startdate:'',
-    enddate:'',
+    // startdate:'',
+    // enddate:'',
     picIurl1:'',
     picIurl:'',
     newDate:'',
@@ -35,28 +36,29 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.setData({
-      newDate:utils.newDate(),
-      startdate:'选择活动时间',
-      enddate:'选择截止时间'
-    })
+    // this.setData({
+    //   // newDate:utils.newDate(),
+    //   startdate:'选择活动时间',
+    //   enddate:'选择截止时间'
+    // })
     console.log(this.data.newDate)
   },
   // 发布活动
   fabugongyi(){
     var that = this
     var data = {
-      id: app.globalData.wxid,
-      title:that.data.activityname,
+      wxUserId: app.globalData.wxid,
+      title:that.data.activitynameinput,
       company:that.data.activityCompany,
       activityNum:that.data.activityrenshu,
       content:that.data.activitycontent,
-      activityTime:that.data.startdate,
-      endTime:that.data.enddate,
+      activityTime:that.data.startdate + " 00:00:00",
+      endTime:that.data.enddate + " 00:00:00",
       pic:that.data.picIurl1,
     }
     console.log(data)
     qingqiu.get("addActivity", data, function (re) {
+      console.log(re)
       if (re.success == true) {
         wx.showToast({
           title: '发布成功',
@@ -76,10 +78,33 @@ Page({
     }, 'post')
   },
   //获取活动名称
-  activityname: function (e) {
+  activitynameinput: function (e) {
+    console.log(e.detail.value)
     this.setData({
-      activityname: e.detail.value
+      activitynameinput: e.detail.value
     })
+  },
+  // 活动名称失去焦点
+  activitynameblur:function(e){
+    var that=this
+    qingqiu.messageReg(e.detail.value,0,function(res){
+      console.log('回调函数',res)
+      if(res == 87014){
+        that.setData({
+          activitynameinput:''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon:'none',
+          duration:2000
+        })
+        return
+      }else{
+        that.setData({
+          activitynameinput:e.detail.value
+        })
+      }
+    },'POST')
   },
   //获取主办单位
   activityCompanyinput: function (e) {
@@ -87,9 +112,27 @@ Page({
       activityCompany: e.detail.value
     })
   },
-  //
-  activitynameblur:function(e){
-
+  // 主办单位失去焦点
+  activityCompanyblur:function(e){
+    var that=this
+    qingqiu.messageReg(e.detail.value,0,function(res){
+      console.log('回调函数',res)
+      if(res == 87014){
+        that.setData({
+          activityCompany:''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon:'none',
+          duration:2000
+        })
+        return
+      }else{
+        that.setData({
+          activityCompany:e.detail.value
+        })
+      }
+    },'POST')
   },
   //获取招募人数
   activityrenshu: function (e) {
@@ -103,10 +146,27 @@ Page({
       activitycontent: e.detail.value
     })
   },
+  // 活动内容失去焦点
   activitycontentblur:function(e){
-    // this.setData({
-      
-    // })
+    var that=this
+    qingqiu.messageReg(e.detail.value,0,function(res){
+      console.log('回调函数',res)
+      if(res == 87014){
+        that.setData({
+          activitycontent:''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon:'none',
+          duration:2000
+        })
+        return
+      }else{
+        that.setData({
+          activitycontent:e.detail.value
+        })
+      }
+    },'POST')
   },
    // 活动时间
    bindDateChange: function (e) {
