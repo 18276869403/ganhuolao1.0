@@ -61,7 +61,6 @@
 		立即发布
 	</view>
 </view>
-
 <!-- 遮罩层显示 工作区域 -->
 <view>
 	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
