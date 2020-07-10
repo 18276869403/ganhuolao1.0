@@ -78,9 +78,11 @@ Page({
     })
   },
   // 公益详情
-  WelfareDetail:function(){
+  WelfareDetail:function(e){
+    var list=e.currentTarget.dataset.list
+    var list1 = JSON.stringify(list)
     wx.navigateTo({
-      url: '../WelfareDetail/WelfareDetail',
+      url: '../WelfareDetail/WelfareDetail?obj='+list1,
     })
   },
   zaixianlianxi:function(){
