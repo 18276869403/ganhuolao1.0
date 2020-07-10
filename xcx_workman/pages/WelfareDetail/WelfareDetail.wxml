@@ -50,12 +50,12 @@
 				</view>
 			</view>
 		</view>
-		<!-- 图片 -->
+		<!-- 按钮 -->
 		<view class="content-sign hengxiang">
-			<view class="sign-view" wx:if="{{1==1}}">
+			<view class="sign-view" wx:if="{{1!=1}}">
 				<image src="{{viewUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
 			</view>
-			<view class="sign-view" wx:if="{{1!=1}}">
+			<view class="sign-view" wx:if="{{1==1}}">
 				<image src="{{viewUrl}}static/image/woyaosign.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view">
