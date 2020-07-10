@@ -1,0 +1,76 @@
+<!--pages/myneeds/myneeds.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="content zongxiang">
+		<!-- 最新需求模块 --> 
+		<view class="content-need">
+			<view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index">
+				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
+					<view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
+						<image src="{{viewUrl}}static/image/zawu1.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.backup1[0]!=null}}">
+						<image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
+					</view>
+					<view class="need-list-right zongxiang">
+						<view class="content-list zongxiang">
+							<view class="content-list-item hengxiang">
+
+							</view>
+							<view class="content-list-item hengxiang">
+								<view class="content-list-title text-jiequ">
+									{{item.needTitle}}
+								</view>
+								<view class="hengxiang content-status">
+									<view class="content-status-img">
+										<image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+									</view>
+									<view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
+									<view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
+								</view>
+							</view>
+							<view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+										</view>
+										<view class="bottom-dingwei text-jiequ">
+											{{item.oneAreaName}}|{{item.twoAreaName}}
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item-time hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/shijian.png" class="shijian-img"></image>
+										</view>
+										<view>
+											{{item.publishTime}}
+										</view>
+									</view>
+								</view>
+								<view class="list-bottom-item1 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/renyuan.png" class="baoming-img"></image>
+										</view>
+										<view>
+											<text style="color:#333333">{{item.backup2}}</text>人
+										</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="shuju" wx:if="{{needsList.length==0}}">
+	<image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+	<view>暂无数据</view>
+</view>

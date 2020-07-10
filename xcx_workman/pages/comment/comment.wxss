@@ -1,0 +1,45 @@
+/* pages/comment/comment.wxss */
+.content {
+  width: 100%;
+}
+ 
+.content-item {
+  width: 690rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  margin-top: 32rpx;
+  height: 72rpx;
+  border: 2rpx solid rgba(240, 240, 240, 1);
+  position: relative;
+}
+
+.content-item-textarea {
+  width: 100%;
+  margin-top: 32rpx;
+}
+
+.textarea {
+  width: 640rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+  height: 198px;
+  border: 2rpx solid rgba(240, 240, 240, 1);
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  padding-left: 25rpx;
+  padding-right: 25rpx;
+}
+
+.content-button {
+  width: 692rpx;
+  height: 98rpx;
+  background: rgba(237, 48, 48, 1);
+  border-radius: 8px;
+  margin: auto;
+  margin-top: 65rpx;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 98rpx;
+}

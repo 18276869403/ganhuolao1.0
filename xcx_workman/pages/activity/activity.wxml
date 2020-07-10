@@ -1,0 +1,11 @@
+<!--pages/activity/activity.wxml-->
+<view class="container">
+	<view class="content">
+		<image src="{{viewUrl}}static/image/tuijieyouli.png" mode="widthFix" class="haibao-img"></image>
+    <image src="{{viewUrl}}{{imgurl}}" class="erweima-img"></image>
+		<button open-type="share" class="sharebutton">
+			<image src="{{viewUrl}}static/image/lijiyaoqing.png" class="code-img" bindtap="fenxiang"></image>
+		</button> 
+	</view>
+</view>
+<!-- <canvas canvas-id="shareCanvas" style="width:{{codew}}px;height:{{codeh}}px"></canvas> -->

@@ -1,0 +1,105 @@
+<view class="container">
+  <image src="{{viewUrl}}static/image/xuqiubg.png" class="top"></image>
+  <view class="content zongxiang">
+    <view class="content-list zongxiang">
+      <view class="content-list-item hengxiang">
+        <view class="content-list-jiaji" style="background:#339966" wx:if="{{xqxqlist.needType==0}}">普通</view>
+        <view class="content-list-jiaji" wx:if="{{xqxqlist.needType==1}}">加急</view>
+        <view>
+          <image src="{{viewUrl}}static/image/shang.png" wx:if="{{yneed.wxState==0}}" class="gong-img"></image>
+        </view>
+        <view class="content-list-time hengxiang">
+          <view class="list-time-shalou">
+            <image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+          </view>
+          <view class="list-time-text" wx:if="{{xqxqlist.needState==0}}">进行中</view>
+          <view class="list-time-text" wx:if="{{xqxqlist.needState==1}}">已完成</view>
+        </view>
+      </view>
+      <view class="content-list-title">{{xqxqlist.needTitle}}</view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="{{viewUrl}}static/image/dizhi.png" class="leixing-img"></image>
+        </view>
+        <view>
+          {{xqxqlist.oneAreaName}} | {{xqxqlist.twoAreaName}}
+        </view>
+      </view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="{{viewUrl}}static/image/lianxiren.png" class="leixing-img"></image>
+        </view>
+        <view>
+          {{xqxqlist.publishMan}}
+        </view>
+      </view>
+      <view class="hengxiang content-list-type">
+        <view>
+          <image src="{{viewUrl}}static/image/baoming2.png" class="leixing-img"></image>
+        </view>
+
+        <view>
+          {{xqxqlist.backup2}}人浏览
+        </view>
+
+        <!-- 修改，删除，确认完成，用户为创建者 -->
+        <view class="content-chuangjian hengxiang">
+          <view class="delete-button" bindtap="baoming" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+            报名
+          </view>
+          <view class="complete-button" style="width:155rpx;" bindtap="liuyan" data-wxid="{{xqxqlist.wxUserId}}" data-shopName="{{xqxqlist.shopName}}" data-name="{{xqxqlist.name}}" data-wxNc="{{xqxqlist.wxNc}}" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+            在线联系
+          </view>
+          <view class="update-button" bindtap="xiugaigunali" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+            修改
+          </view>
+          <view class="delete-button" bindtap="shancuoxuqiu" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+            删除
+          </view>
+          <view class="complete-button" bindtap="lianxita" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+            完成
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <view class="content-content zongxiang">
+      <view class="content-content-title">需求内容</view>
+      <view class="content-content-list" wx:if="{{xqxqlist.needContent!='undefined'&&xqxqlist.needContent!=null&&xqxqlist.needContent!='null'}}">{{xqxqlist.needContent}}</view>
+    </view>
+    <!-- 图片 -->
+    <view class="content-content zongxiang" wx:if="{{xqxqlist.backup1 != null}}">
+      <view class="content-content-title">图片</view>
+      <view class="zhanshi" wx:if="{{xqxqlist.backup1.length>0}}">
+        <view class="zhanshi-item" wx:for='{{xqxqlist.backup1}}' data-id="{{item.id}}">
+          <image src="{{viewUrl}}{{item}}" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{item}}"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 接单报名人员 -->
+    <view class="content-content zongxiang" wx-if="{{xqxqlist.wxUserId==wxUserid||type=='1'}}">
+      <view class="content-content-title">报名接单人员</view>
+      <view class="content-jiedan zongxiang" wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}">
+        <view class="jiedan-top hengxiang">
+          <view class="jiedan-top-left">
+            <image src="{{item.picIurl}}" class="avator-img" wx-if="{{item.picIurl!=''|| item.picIurl!=null}}"></image>
+            <image src="{{item.picUrl}}" class="avator-img" wx-if="{{item.picIurl==''|| item.picIurl==null}}"></image>
+          </view>
+          <view class="jiedan-top-content zongxiang">
+            <view class="jiedan-top-content-name">{{item.name}}</view>
+            <view class="jiedan-top-content-date">{{item.signTime}}</view>
+          </view>
+          <view class="jiedan-top-right" wx-if="{{xqxqlist.wxUserId==wxUserid}}">
+            <image src="{{viewUrl}}static/image/liuyan.png" class="img" bindtap="liuyan" data-wxid="{{item.wxUserId}}" data-name="{{item.name}}" data-shopName="{{item.shopName}}" data-wxNc="{{item.wxNc}}"></image>
+          </view>
+          <view class="jiedan-top-right1" wx-if="{{xqxqlist.wxUserId==wxUserid}}">
+            <image src="{{viewUrl}}static/image/dianhua.png" bindtap="phonecell" class="img"></image>
+          </view>
+        </view>
+        <!-- <view class="content-bottom">
+       {{item.moneyMemo}}
+        </view> -->
+      </view>
+    </view>
+  </view>
+</view>

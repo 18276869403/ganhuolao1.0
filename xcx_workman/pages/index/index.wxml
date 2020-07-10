@@ -1,0 +1,338 @@
+<!--index.wxml-->
+<view class="container">
+	<dialog id='dialog' title='微信授权登录' content='获取你的公开信息（昵称、头像等）' confirmText='发起授权' bind:confirmEvent='bindGetUserInfo'>
+	</dialog>
+	<view class="hengxian"></view>
+	<view class="top zongxiang">
+		<view class="top-title hengxiang">
+			<view class="top-title-left hengxiang" bindtap="showModal">
+				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
+				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
+				<view class="top-title-left-enter">
+					<image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+				</view>
+			</view>
+			<view class="top-title-right hengxiang">
+				<view class="top-title-right-img">
+					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+				</view>
+				<view class="top-title-right-shuru">
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入需求标题搜索" class="shurukuang"></input>
+				</view>
+				<view class="top-title-right-sousuo">
+					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+				</view>
+			</view>
+		</view>
+		<!-- 滚动图 -->
+		<view class="banner">
+			<swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
+				<block wx:for="{{bannerImg}}" wx:for-index="index" wx:key="{{item.id}}">
+					<swiper-item bindtap='goBaidu' data-url="{{item.backup2}}">
+						<image src="{{item.bannerUrl}}" class="slide-image" />
+					</swiper-item>
+				</block>
+			</swiper>
+		</view>
+		<!-- 通知模块 -->
+		<view class="tongzhi hengxiang">
+			<view class="tongzhi-img">
+				<image src="{{viewUrl}}static/image/laba.png" class="laba-img"></image>
+			</view>
+			<!-- <view class="tongzhi-text">恭喜王根入驻成功</view> -->
+			<view class="tongzhi-text" bindtap="advertisement">
+				<swiper class="swiper_container" vertical="true" autoplay="true" circular="true" interval="2000">
+					<block wx:for="{{msgList}}" wx:key="">
+						<navigator>
+							<swiper-item catchtouchmove='catchTouchMove'>
+								<view class="swiper_item" data-name="{{item.name}}">{{item.name}}</view>
+							</swiper-item>
+						</navigator>
+					</block>
+				</swiper>
+			</view>
+		</view>
+		<!-- 四大板块 -->
+		<view class="sort zongxiang">
+			<view class="sort-top hengxiang">
+				<view class="sortImg" bindtap="applyBusiness" data-typeid="1">
+					<image src="{{viewUrl}}static/image/gongrenruzhu.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="applyBusiness" data-typeid="2">
+					<image src="{{viewUrl}}static/image/shangjiaruzhu.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="activity">
+					<image src="{{viewUrl}}static/image/tuijianyouli.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="activity02">
+					<image src="{{viewUrl}}static/image/jiangongjisuan.png" class="sort-img"></image>
+				</view>
+			</view>
+			<view class="sort-bottom hengxiang">
+				<view class="sort-text">
+					工人入驻
+				</view>
+				<view class="sort-text">
+					商家入驻
+				</view>
+				<view class="sort-text">
+					推荐有礼
+				</view>
+				<view class="sort-text">
+					建工计算
+				</view>
+
+			</view>
+		</view>
+		<view class="sort zongxiang">
+			<view class="sort-top hengxiang">
+				<view class="sortImg" bindtap="gongyi">
+					<image src="{{viewUrl}}static/image/gonyihuodong.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="ershou">
+					<image src="{{viewUrl}}static/image/ershoushangping.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="bendi">
+					<image src="{{viewUrl}}static/image/bendizhaogong.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="cuxiao">
+					<image src="{{viewUrl}}static/image/shangjiacuxiao.png" class="sort-img"></image>
+				</view>
+			</view>
+			<view class="sort-bottom hengxiang">
+				<view class="sort-text">
+					公益活动
+				</view>
+				<view class="sort-text">
+					剩料交易
+				</view>
+				<view class="sort-text">
+					本地招工
+				</view>
+				<view class="sort-text">
+					优惠商城
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="content zongxiang">
+		<!-- 最新需求模块 -->
+		<view class="content-need">
+			<view class="need-title hengxiang">
+				<view class="need-title-left">最新需求</view>
+				<view class="need-title-right" bindtap="need">更多 > </view>
+			</view>
+			<view class="list zongxiang" wx:for="{{xuqiulist}}" wx:for-index="index" wx:key="index">
+				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
+					<view class="need-list-left" wx:if="{{item.backup1[0] !=null}}">
+						<image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.backup1[0] ==null}}">
+						<image src="{{viewUrl}}static/image/zawu1.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-right">
+						<view class="content-list">
+							<view class="content-list-item hengxiang">
+								<view class="content-neirong-title">
+									{{item.needTitle}}
+								</view>
+								<view class="content-list-leixing">
+									<view class="content-list-type" wx:if="{{item.needType==1}}">加急</view>
+									<view class="content-list-type" style="background:#339966" wx:if="{{item.needType==0}}">普通</view>
+								</view>
+							</view>
+							<view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+										</view>
+										<view class="bottom-dingwei">
+											{{item.oneAreaName}}|{{item.twoAreaName}}
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/renyuan.png" class="baoming-img"></image>
+										</view>
+										<view>
+											<text style="color:#333333">{{item.backup2}}</text>人
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/shijian.png" class="shijian-img"></image>
+										</view>
+										<view>
+											{{item.publishTime}}
+										</view>
+									</view>
+								</view>
+								<view class="hengxiang content-status">
+									<view class="content-status-img">
+										<image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+									</view>
+									<view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
+									<view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<!-- 推荐工人 -->
+		<view class="content-worker1">
+			<view class="need-title hengxiang">
+				<view class="need-title-left">推荐工人</view>
+				<view class="need-title-right" bindtap="services" data-type="1">更多 > </view>
+			</view>
+			<scroll-view class="worker-list" scroll-x="true" style='width:100%'>
+				<view class="hengxiang">
+					<view class="" wx:for="{{workerList}}" wx:for-index="index" wx:key="id">
+						<view class="worker-item1 zongxiang" bindtap="workerDetails" data-vals="{{item}}">
+							<view class="worker-item-img">
+								<image src="{{item.picIurl}}" class="worker-img1"></image>
+							</view>
+							<view class="worker-item-top hengxiang">
+								<view class="worker-item-top-left">
+									{{item.name}}
+								</view>
+								<view class="hengxiang worker-rank">
+									<view>
+										<image class="rank-img" src="{{viewUrl}}static/image/rank.png"></image>
+									</view>
+									<view>{{item.shopName}}</view>
+								</view>
+							</view>
+							<view class="worker-item-bottom hengxiang">
+								<view class="dot"></view>
+								<view class="worker-sort shenglue">
+									{{item.oneClassName}}
+								</view>
+							</view>
+							<view class="worker-item-bottom hengxiang" wx:if="{{item.twoClassName != ''}}">
+								<view class="dot"></view>
+								<view class="worker-sort shenglue">
+									{{item.twoClassName}}
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+
+		</view>
+
+		<!-- 推荐商家 -->
+		<view class="content-worker">
+			<view class="need-title hengxiang">
+				<view class="need-title-left">推荐商家</view>
+				<view class="need-title-right" bindtap="services" data-type="0">更多 > </view>
+			</view>
+			<scroll-view class="worker-list" scroll-x="true" style='width:100%'>
+				<view class="hengxiang">
+					<view class="" wx:for="{{storeList}}" wx:for-index="index" wx:key='index'>
+						<view class="worker-item zongxiang" bindtap="businessDetails" data-vals="{{item}}">
+							<view class="worker-item-img">
+								<image src="{{item.picIurl}}" class="worker-img"></image>
+							</view>
+							<view class="worker-item-top shenglue">
+								{{item.shopName}}
+							</view>
+							<view class="worker-item-bottom hengxiang">
+								<view class="dot"></view>
+								<view class="worker-sort shenglue">
+									{{item.oneClassName}}
+								</view>
+							</view>
+							<view class="worker-item-bottom hengxiang" wx:if="{{item.twoClassName != ''}}">
+								<view class="dot"></view>
+								<view class="worker-sort shenglue">
+									{{item.twoClassName}}
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+
+		</view>
+
+		<!-- 推荐商品 -->
+		<view class="content-worker">
+			<view class="need-title hengxiang">
+				<view class="need-title-left">推荐商品</view>
+				<view class="need-title-right" bindtap="goodList">更多 > </view>
+			</view>
+			<scroll-view class="worker-list" scroll-x="true" style='width:100%'>
+				<view class="hengxiang">
+					<view class="" wx:for="{{goodsList}}" wx:for-index="index" wx:key="index">
+						<view class="worker-item zongxiang" bindtap="goodsDetails" data-vals="{{item}}">
+							<view class="worker-item-img">
+								<image src="{{viewUrl}}{{item.goodPic1[0]}}" class="worker-img"></image>
+							</view>
+							<view class="worker-item-top shenglue">
+								{{item.goodName}}
+							</view>
+							<view class="worker-item-bottom hengxiang">
+								<view class="worker-price">
+									¥{{item.newPrice}}
+								</view>
+							</view>
+							<view class="worker-item-bottom hengxiang">
+								<view class="">
+									<image src="{{viewUrl}}static/image/store.png" class="store-img"></image>
+								</view>
+								<view class="worker-sort shenglue">
+									{{item.shopName}}
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
+
+
+		</view>
+	</view>
+
+	<view class="bottom">
+		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
+			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+		</button>
+	</view>
+</view>
+<!-- 遮罩层显示 工作区域 -->
+<view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<!-- <view class='normal-title'>一级分类</view> -->
+					<view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+
+			<view class='s-right'>
+				<scroll-view class='left-navbar1' scroll-y="true">
+					<!-- <view class='normal-title'>二级分类</view> -->
+					<view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
+</view>

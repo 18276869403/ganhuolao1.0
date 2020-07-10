@@ -1,0 +1,87 @@
+<!--pages/addEditGoods/addEditGoods.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="content zongxiang">
+    <view class="content-item hengxiang">
+      <view class="content-title">商品名字</view>
+      <input type="text" placeholder="输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.goodName}}' name="goodsname" bindinput='goodsnameinput'>{{spxglist.goodName}}</input>
+    </view>
+    <view class="content-item hengxiang">
+      <view class="content-title">商品原价</view>
+      <input type="digit" placeholder="输入商品原价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.oldPrice}}' name="originalPrice" bindinput='originalPriceinput'>{{spxglist.oldPrice}}</input>
+    </view>
+
+    <view class="content-item hengxiang">
+      <view class="content-title">优惠价</view>
+      <input type="digit" placeholder="输入优惠价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.newPrice}}' name="salesPrice" bindinput='salesPriceinput'>{{spxglist.newPrice}}</input>
+    </view>
+
+    <view class="content-item-textarea">
+      <textarea class="textarea" placeholder="输入商品描述" placeholder-class="placeholder1" maxlength='-1' value='{{spxglist.goodMemo}}' name="detailscontent" bindinput='detailscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+    </view>
+  </view>
+
+  <!-- 商品轮播图样式 -->
+  <view class="showImg hengxiang">
+    <view class="showImg-text">商品轮播图（二张）</view>
+    <view class="hengxiang"></view>
+    <view class="showImg-item">
+      <!-- 无数据 上传图片样式 -->
+      <image src="{{viewUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="1" class="show-img" wx:if="{{picIurl1==''}}"></image>
+      <image src="{{viewUrl}}{{picIurl1}}" class="show-img" wx:if="{{picIurl1!=''}}"></image>
+      <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu1" data-tplj="{{picIurl1}}" wx:if="{{picIurl1!=''}}"></image>
+      <!-- 轮播图展示第一张 -->
+      <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+    <view class="showImg-item">
+
+      <!-- 无数据 上传图片样式 -->
+      <image src="{{viewUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="2" class="show-img" wx:if="{{picIurltwo1==''}}"></image>
+      <image src="{{viewUrl}}{{picIurltwo1}}" class="show-img" wx:if="{{picIurltwo1!=''}}"></image>
+      <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu2" data-tplj="{{picIurltwo1}}" wx:if="{{picIurltwo1!=''}}"></image>
+      <!-- 轮播图展示第二张 -->
+      <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+  </view>
+
+  <!-- 详情展示图样式 -->
+  <view class="showImg hengxiang">
+    <view class="showImg-text">商品详情展示图（二张长版图）</view>
+    <view class="hengxiang"></view>
+    <view class="showImg-item">
+      <!-- 无数据 上传图片样式 -->
+      <image src="{{viewUrl}}static/image/shangchuan.png"  bindtap='upimg' data-number="0" data-type="3" class="show-img" wx:if="{{picDetail1==''}}"></image>
+      <image src="{{viewUrl}}{{picDetail1}}" class="show-img" wx:if="{{picDetail1!=''}}"></image>
+      <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu3" data-tplj="{{picDetail1}}" wx:if="{{picDetail1!=''}}"></image>
+      <!-- 轮播图展示第一张 -->
+      <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+    <view class="showImg-item">
+
+      <!-- 无数据 上传图片样式 -->
+      <image src="{{viewUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="4" class="show-img" wx:if="{{picDetailtwo1==''}}"></image>
+      <image src="{{viewUrl}}{{picDetailtwo1}}" class="show-img" wx:if="{{picDetailtwo1!=''}}"></image>
+      <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu4" data-tplj="{{picDetailtwo1}}" wx:if="{{picDetailtwo1!=''}}"></image>
+      <!-- 轮播图展示第二张 -->
+      <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
+      <!-- 有数据展示样式 -->
+      <!-- 删除图 -->
+      <!-- <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchutup" data-img="{{item}}"></image> -->
+    </view>
+  </view>
+
+
+  <view class="bottom hengxiang">
+    <view class="bottom-right" bindtap="xugaispxx" wx:if="{{spxglist.goodName != null}}">保存</view>
+    <view class="bottom-right" bindtap="lijifabu" wx:if="{{spxglist.goodName == null}}">保存</view>
+  </view>
+</view>

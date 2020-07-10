@@ -1,0 +1,82 @@
+<!--pages/applyBusiness/applyBusiness.wxml-->
+<view class="container">
+	<view class="content zongxiang">
+		<view class="content-item hengxiang">
+			<view class="content-title">职位标题<text style="color:red;">*</text></view>
+			<input type="text" placeholder="输入职位标题" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{needsname}}' name="needsname" bindinput='needsnameinput' bindblur="needsnameblur"></input>
+		</view>
+    <view class="content-item hengxiang">
+			<view class="content-title">薪资<text style="color:red;">*</text></view>
+			<input type="number" placeholder="输入薪资" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{salary}}' name="salary" bindinput='salaryinput'></input>
+		</view>
+		<view class="content-item hengxiang" bindtap="showModal">
+			<view class="content-title">工作地<text style="color:red;">*</text></view>
+			<view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999;">选择工作地</view>
+			<view class='content-text2' wx:if="{{workcityname!=''}}" style="color:#999999">{{workcityname}} - {{workareaname}}</view>
+			<view class="enter">
+				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+		<view class="content-item hengxiang">
+			<view class="content-title">联系人<text style="color:red;">*</text></view>
+			<input type="text" placeholder="输入联系人" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{linkman}}' name="linkman" bindinput='linkmaninput' bindblur="linkmanblur"></input>
+		</view>
+		<view class="content-item hengxiang">
+			<view class="content-title">联系电话<text style="color:red;">*</text></view>
+			<input type="number" placeholder="输入联系电话" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input>
+		</view>
+		<view class="content-item-textarea">
+			<textarea class="textarea" placeholder="输入招工描述" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+		</view>
+
+		<view class="hengxiang fabu-list1">
+			<view class="fabu" bindtap='upimg' data-number="0">
+			  <image src="{{picIurl}}" class="fabu-item" wx:if="{{picIurl!=''}}"></image>
+				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
+			</view>
+		</view>
+	</view>
+	<view class="bottom" bindtap="fabuzhaogong">
+		发布
+	</view>
+</view>
+
+<!-- 遮罩层显示 工作区域 -->
+<view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<view wx:for="{{city}}" class="nav_left_items {{typeid == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+
+			<view class='s-right'>
+				<scroll-view class='left-navbar1' scroll-y="true">
+					<view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name="{{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+<!-- 注册协议 -->
+<view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
+<view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
+	<view class='tanchuang zongxiang'>
+		<view class='tankuang-top'>《干活佬使用协议》</view>
+
+		<scroll-view scroll-y style="height: 275px;" class='tankuang-content'>
+			<view>{{mianzhe}}</view>
+		</scroll-view>
+		<view class='close-button' bindtap='hideModal1'>关闭</view>
+	</view>
+</view>
+
+<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

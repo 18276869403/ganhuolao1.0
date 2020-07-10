@@ -1,0 +1,28 @@
+/* pages/activity02/activity02.wxss */
+/**index.wxss**/
+
+page {
+ 
+}
+.zt{
+  width: 27%;
+  height: 240rpx;
+  /* background: #ccc; */
+  margin: 3% 0 1% 5%;
+  float: left;
+}
+.tp{
+  width: 100%;
+  /* height: 200rpx; */
+  /* background: #bbb; */
+  text-align: center;
+}
+.wenz{
+  margin: 0 auto; 
+  text-align:center;
+  /* display: none; */
+}
+.tpp02{
+  width: 110rpx;
+  height: 110rpx;
+}

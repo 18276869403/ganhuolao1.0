@@ -1,0 +1,114 @@
+<!--pages/need/need.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="top zongxiang">
+		<view class="top-title hengxiang">
+			<view class="top-title-left hengxiang" bindtap="showModal">
+				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
+				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
+				<view class="top-title-left-enter">
+					<image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+				</view>
+			</view>
+			<view class="top-title-right hengxiang">
+				<view class="top-title-right-img">
+					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+				</view>
+				<view class="top-title-right-shuru">
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="搜索职位" class="shurukuang"></input>
+				</view>
+				<view class="top-title-right-sousuo">
+					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+				</view>
+				<view class="top-search-fabu">
+					<image src="{{viewUrl}}static/image/fabuMaterial.png" class="fabu-img" bindtap="submitRecruitment"></image>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="content zongxiang">
+		<!-- 本地招工模块 -->
+		<view class="recruitment-need">
+			<view class="list zongxiang" wx:for="{{workList}}" wx:for-index="index" wx:key="index">
+				<view class="recruitment-list" bindtap="recruitmentDetail" data-list="{{item}}">
+					<view class="list-top hangxiang">
+						<view class="list-top-right list-top-right-text">{{item.hireTitle}}</view>
+						<view class="list-top-left">
+							<!-- <view>
+								<image src="{{viewUrl}}static/image/zhaogongstate.png" class="shalou-img"></image>
+							</view>
+							<view class="list-top-status">进行中</view> -->
+							<view class="list-top-price">薪资：{{item.backup3}}元</view>
+						</view>
+					</view>
+					<view class="list-top-henxian"></view>
+					<view class="list-top list-top-margin hangxiang">
+						<view class="content-left-img zongxiang">
+							<view>
+								<image src="{{viewUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
+							</view>
+						</view>
+						<view class="content-text">
+							<text class="content-text-page">介绍：{{item.hireContent}}</text>
+						</view>
+					</view>
+					<view class="list-top list-top-margin hangxiang">
+						<view class="content-left-img zongxiang">
+							<view>
+								<image src="{{viewUrl}}static/image/zhaogongname.png" class="content-shalou-img"></image>
+							</view>
+						</view>
+						<view class="content-text1 text-jiequ">
+							<text>{{item.publishMan}}</text>
+						</view>
+						<view class="content-left-img zongxiang">
+							<view>
+								<image src="{{viewUrl}}static/image/zhaogongdizhi.png" class="content-shalou-img"></image>
+							</view>
+						</view>
+						<view class="content-text1 text-jiequ" style="width:38%;">
+							<text>{{item.oneAreaName}}{{item.twoAreaName}}</text>
+						</view>
+						<view class="complete-button" style="width:135rpx;" bindtap="zaixianlianxi" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}">
+						联系TA
+					</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+	</view>
+
+	<view class="bottom zongxiang">
+		<image src="{{viewUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
+			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+		</button>
+	</view>
+</view>
+
+<!-- 遮罩层显示 地址区域 -->
+<view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<!-- <view class='normal-title'>一级分类</view> -->
+					<view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+
+			<view class='s-right'>
+				<scroll-view class='left-navbar1' scroll-y="true">
+					<!-- <view class='normal-title'>二级分类</view> -->
+					<view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
+</view>

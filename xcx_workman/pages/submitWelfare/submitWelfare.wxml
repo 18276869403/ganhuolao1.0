@@ -1,0 +1,99 @@
+<!--pages/submitWelfare/submitWelfare.wxml-->
+<!-- <text>pages/submitWelfare/submitWelfare.wxml</text> -->
+<view class="container">
+	<view class="content zongxiang">
+		<view class="content-item hengxiang">
+			<view class="content-title">活动名称<text style="color:red;">*</text></view>
+			<input type="text" placeholder="输入活动名称" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{activityname}}' name="activityname" bindinput='activitynameinput' bindblur="activitynameblur"></input>
+		</view>
+		<view class="content-item hengxiang">
+			<view class="content-title">主办单位<text style="color:red;">*</text></view>
+			<input type="text" placeholder="输入主办单位" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{activityCompany}}' name="activityCompany" bindinput='activitynameinput' bindblur="activitynameblur"></input>
+			<!-- <view class="enter">
+				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+			</view> -->
+		</view>
+		<view class="content-item hengxiang">
+			<view class="content-title">招募人数<text style="color:red;">*</text></view>
+			<input type="text" placeholder="输入人数" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{activityrenshu}}' name="activityrenshu" bindinput='linkmaninput' bindblur="linkmanblur"></input>
+		</view>
+		<view class="content-item-textarea">
+			<textarea class="textarea" placeholder="输入活动内容" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{activitycontent}}' name="activitycontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+		</view>
+    <view class="content-item hengxiang">
+			<view class="content-title">活动时间</view>
+				<picker mode="date" value="{{startdate}}" bindchange="bindDateChange" class="shurukuang">
+					<view class="picker" style="color:#999999;">
+						{{startdate}}
+					</view>
+				</picker>
+			<view class="enter">
+				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+    <view class="content-item hengxiang">
+			<view class="content-title">报名截止</view>
+				<picker mode="date" value="{{enddate}}" bindchange="FindDateChange" class="shurukuang">
+					<view class="picker" style="color:#999999;">
+						{{enddate}}
+					</view>
+				</picker>
+			<view class="enter">
+				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+    <view class="shangchuan-font">上传图片</view>
+		<view class="hengxiang fabu-list1">
+      <view class="fabu" wx:for="{{piclist}}" wx:for-index="index" wx:key="{{item.id}}">
+        <image src="{{viewUrl}}{{item}}" class="fabu-item"></image>
+        <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+      </view>
+      <view class="fabu" bindtap='upimg' data-number="0" wx:if="{{piclist.length<4}}">
+				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+			</view>
+		</view>
+	</view>
+	<view class="bottom" bindtap="fabugongyi">
+		立即发布
+	</view>
+</view>
+
+<!-- 遮罩层显示 工作区域 -->
+<view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<view wx:for="{{city}}" class="nav_left_items {{typeid == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+
+			<view class='s-right'>
+				<scroll-view class='left-navbar1' scroll-y="true">
+					<view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name="{{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
+</view>
+
+
+<!-- 注册协议 -->
+<view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
+<view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
+	<view class='tanchuang zongxiang'>
+		<view class='tankuang-top'>《干活佬使用协议》</view>
+
+		<scroll-view scroll-y style="height: 275px;" class='tankuang-content'>
+			<view>{{mianzhe}}</view>
+		</scroll-view>
+		<view class='close-button' bindtap='hideModal1'>关闭</view>
+	</view>
+</view>
+
+<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

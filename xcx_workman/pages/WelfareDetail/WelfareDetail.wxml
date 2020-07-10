@@ -1,0 +1,90 @@
+<view class="container">
+	<view class="content zongxiang">
+		<view class="content-list zongxiang">
+			<view class="content-list-item hengxiang">
+				<view class="title hengxiang">
+					<view class="title-text">
+						七月敬老活动
+					</view>
+					<view class="title-time hengxiang">
+						<view>
+							<image src="{{viewUrl}}static/image/huodongtime.png" class="time-icon"></image>
+						</view>
+						<view class="title-time-text">2020-7-09</view>
+					</view>
+				</view>
+			</view>
+			<view class="uhengxiang"></view>
+			<view class="hengxiang content-list-type">
+				<view class="header-image">
+					<image src="{{viewUrl}}static/image/headericon.png" class="header-icon"></image>
+				</view>
+				<view class="header-text">
+					<view class="header-text-class">大爱无疆</view>
+					<view class="header-danwei">主办单位：万载爱心组织</view>
+				</view>
+			</view>
+		</view>
+		<view class="content-content zongxiang">
+			<view class="content-content-title hengxiang">
+				<view>
+					<image src="{{viewUrl}}static/image/huodongcontext.png" class="activity-icon"></image>
+				</view>
+				<view>活动描述</view>
+			</view>
+			<view class="content-content-list">
+				<view>招募人数：3/200</view>
+				<view>活动时间：2020-7-20</view>
+				<view>活动内容：于本月20日组织爱心人士前往万载养老院，针对老师做些基本护理工作，帮助老人打扫房间、清理敬老院；陪老人聊天、散步、锻炼身体；为老人奉上丰富多彩的文艺表演活动；进行各种各样的小活动。欢迎爱心人士踊跃报名</view>
+				<view>报名截止：2020-7-19</view>
+				<view class="image-view hengxiang">
+					<swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
+						<block wx:for="{{bannerImg}}" wx:for-index="index" wx:key="{{item.id}}">
+							<swiper-item>
+								<image src="{{item.bannerUrl}}" mode="scaleToFill" class="slide-image" />
+							</swiper-item>
+						</block>
+					</swiper>
+				</view>
+			</view>
+		</view>
+		<!-- 图片 -->
+		<view class="content-sign hengxiang">
+			<view class="sign-view" wx:if="{{1==1}}">
+				<image src="{{viewUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
+			</view>
+			<view class="sign-view" wx:if="{{1!=1}}">
+				<image src="{{viewUrl}}static/image/woyaosign.png" class="sign-img"></image>
+			</view>
+			<view class="sign-view">
+				<button open-type="share" class="sharebutton">
+					<image src="{{viewUrl}}static/image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image>
+				</button>
+			</view>
+		</view>
+		<!-- 接单报名人员 -->
+		<view class="content-content zongxiang" wx-if="{{1==1}}">
+			<view class="content-content-title">报名人员</view>
+			<!-- wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}" -->
+			<view class="content-jiedan zongxiang">
+				<view class="jiedan-top hengxiang">
+					<view class="jiedan-top-left">
+						<!-- <image src="{{item.picIurl}}" class="avator-img" wx-if="{{item.picIurl!=''|| item.picIurl!=null}}"></image>
+						<image src="{{item.picUrl}}" class="avator-img" wx-if="{{item.picIurl==''|| item.picIurl==null}}"></image> -->
+						<image src="{{viewUrl}}static/image/headericon.png" class="avator-img"></image>
+					</view>
+					<view class="jiedan-top-content zongxiang">
+						<view class="jiedan-top-content-name">邓星玉</view>
+						<view class="jiedan-top-content-date">2020-07-09 15:59:00</view>
+					</view>
+					<view class="jiedan-top-right1">
+						<view class="contact-button" bindtap="phonecell">联系TA</view>
+					</view>
+				</view>
+				<!-- <view class="content-bottom">
+       {{item.moneyMemo}}
+        </view> -->
+			</view>
+		</view>
+	</view>
+</view>

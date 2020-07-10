@@ -1,0 +1,11 @@
+<!--pages/comment/comment.wxml-->
+<view class="container">
+  <view class="content zongxiang">
+    <view class="content-item-textarea">
+      <textarea class="textarea" placeholder="输入评论内容..." placeholder-class="placeholder" maxlength='-1' value='{{comment}}' name="comment" bindinput='commentinput'></textarea>
+    </view>
+    <view class="content-button" bindtap="pinglun">
+      提交 
+    </view>
+  </view>
+</view>

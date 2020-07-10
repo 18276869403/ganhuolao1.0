@@ -1,0 +1,77 @@
+<view class="container">
+	<!-- <image src="{{viewUrl}}static/image/xuqiubg.png" class="top"></image> -->
+	<view class="content zongxiang">
+		<view class="content-list zongxiang">
+			<view class="content-list-item hengxiang">
+				<view class="content-list-time hengxiang">
+					<view class="list-time-shalou">
+						<image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+					</view>
+					<view class="list-time-text">进行中</view>
+					<view class="list-time-text" wx:if="{{xqxqlist.needState==1}}">已完成</view>
+				</view>
+			</view>
+			<view class="content-list-title">{{zhaogong.hireTitle}}</view>
+			<view class="content-list-type-henxian"></view>
+			<!-- <view class="hengxiang content-list-type">
+        <view>
+          <image src="{{viewUrl}}static/image/jiancailei.png" class="leixing-img"></image>
+        </view> 
+        <view>
+          {{xqxqlist.oneClassName}} | {{xqxqlist.twoClassName}}
+        </view>
+      </view> -->
+			<view class="content-list-title-price">
+				￥{{zhaogong.backup3}} 月薪
+			</view>
+			<view class="hengxiang content-list-type">
+				<view>
+					<image src="{{viewUrl}}static/image/zhaogongname.png" class="leixing-img"></image>
+				</view>
+				<view>
+					联系人：{{zhaogong.publishMan}}
+				</view>
+			</view>
+			<view class="hengxiang content-list-type">
+				<view>
+					<image src="{{viewUrl}}static/image/zhaogongdizhi.png" class="leixing-img"></image>
+				</view>
+				<view>
+					{{zhaogong.oneAreaName}}|{{zhaogong.twoAreaName}}
+				</view>
+			</view>
+			<view class="hengxiang content-list-type">
+				<view>
+					<image src="{{viewUrl}}static/image/huodongshijian.png" class="leixing-img"></image>
+				</view>
+				<view>
+					{{zhaogong.createTime}}
+				</view>
+
+				<!-- 修改，删除，确认完成，用户为创建者 -->
+				<view class="content-chuangjian hengxiang">
+					<view class="complete-button" style="width:155rpx;" bindtap="zaixianlianxi" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+						联系TA
+					</view>
+				</view>
+			</view>
+
+		</view>
+		<view class="content-content zongxiang">
+			<view class="content-content-title">招工详情</view>
+			<view class="content-content-list"><text>{{zhaogong.hireContent}}</text></view>
+		</view>
+		<!-- 图片 -->
+		<view class="content-content zongxiang">
+			<view class="content-content-title">图片介绍</view>
+			<view class="zhanshi">
+				<view class="zhanshi-item" data-id="{{item.id}}" wx:if="{{zhaogong.backup4 != null}}">
+					<image src="{{viewUrl}}{{zhaogong.backup4}}" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{zhaogong.backup4}}"></image>
+				</view>
+			</view>
+			<view class="zhanshi" wx:if="{{zhaogong.backup4 == null}}">
+				<image src="{{viewUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
+			</view>
+		</view>
+	</view>
+</view>

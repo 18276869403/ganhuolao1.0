@@ -1,0 +1,27 @@
+<!--pages/myRecommend/myRecommend.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="content zongxiang">
+    <view class="content-list hengxiang" wx:for="{{recommendLists}}" wx:key="{{item.id}}">
+      <view class="content-list-left">
+        <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img"></image>
+      </view>
+      <view class="content-list-content zongxiang">
+        <view class="content-name" wx:if="{{item.wxState==0}}">{{item.shopName}}</view>
+        <view class="content-name" wx:if="{{item.wxState==1}}">{{item.name}}</view>
+        <view class="content-ruzhu">
+          <image src="{{viewUrl}}static/image/ruzhushangjia.png" class="ruzhu-img" wx:if="{{item.wxState==0}}"></image>
+          <image src="{{viewUrl}}static/image/ruzhugongren.png" class="ruzhu-img" wx:if="{{item.wxState==1}}"></image>
+        </view> 
+      </view>
+      <view class="content-list-right ">
+        +{{item.backup2}}
+        <text class="jifen">积分</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="shuju" wx:if="{{recommendLists.length==0}}">
+  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <view>暂无数据</view>
+</view>

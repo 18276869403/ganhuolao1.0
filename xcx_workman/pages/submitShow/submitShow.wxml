@@ -1,0 +1,66 @@
+<!--pages/submitShow/submitShow.wxml-->
+<view class="container">
+  <view class="content zongxiang">
+    <view class="content-item-title hengxiang">
+      <input class="content-item-text" placeholder="输入晒晒标题" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="comment" bindinput='commentinput' bindblur="commentinputblur"></input> 
+    </view> 
+    <view class="content-item hengxiang" bindtap="showModal">
+      <view class="content-text" wx:if="{{cityname==''}}">选择晒晒区域</view>
+      <view class='content-text1' wx:if="{{cityname!=''}}">{{cityname}} - {{areaname}}</view>
+      <view>
+        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+      </view>
+    </view>
+    <view class="showImg">
+    <view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
+      <image src="{{viewUrl}}{{item}}" class="show-img"></image>
+      <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+    </view>
+  </view>
+    
+    <!-- 上传 -->
+     <view class="fabu" wx-if="{{tupianlists.length<7}}">
+      <view class="fabu-item zongxiang" bindtap='upimg' data-number="0" data-type="{{num}}">
+        <view>
+          <image src="{{viewUrl}}static/image/jiahao.png" class="fabu-img"></image>
+        </view>
+        <view>
+          上传照片
+        </view>
+      </view>
+    </view>
+    <view class="content-button" bindtap="lijifabu">
+      立即发布
+    </view>
+    <!-- <view class="content-button" bindtap="fanhui" style=" margin-top: 11rpx;background: #bec2c6;">
+      不想发布了，返回
+    </view> -->
+  </view>
+</view>
+
+<!-- 遮罩层显示 工作区域 -->
+<view>
+  <view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+  <view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+    <view class='alert hengxiang'>
+      <view class='s-left'>
+        <scroll-view class='left-navbar' scroll-y="true">
+          <!-- <view class='normal-title'>一级分类</view> -->
+          <view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+            {{item.areaName}}
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class='s-right'>
+        <scroll-view class='left-navbar1' scroll-y="true">
+          <!-- <view class='normal-title'>二级分类</view> -->
+          <view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+            {{item.areaName}}
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>
+<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

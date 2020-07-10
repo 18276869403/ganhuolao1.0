@@ -1,0 +1,82 @@
+<view class="container">
+	<!-- <image src="{{viewUrl}}static/image/xuqiubg.png" class="top"></image> -->
+	<!-- <view class="top"></view> -->
+	<view class="content zongxiang">
+		<view class="content-list zongxiang">
+			<view class="content-list-title">{{xqxqlist.needTitle}}</view>
+			<view class="content-list-title-price" wx:if="{{xqxqlist.needPrice != null && xqxqlist.needPrice != '' && xqxqlist.needPrice != 0}}">
+				￥{{xqxqlist.needPrice}} 元
+			</view>
+			<view class="content-list-title-price" wx:if="{{xqxqlist.needPrice == null || xqxqlist.needPrice == '' || xqxqlist.needPrice == 0}}">
+				￥ 面议
+			</view>
+			<!-- <view class="hengxiang content-list-type">
+        <view>
+          <image src="{{viewUrl}}static/image/jiancailei.png" class="leixing-img"></image>
+        </view> 
+        <view>
+          {{xqxqlist.oneClassName}} | {{xqxqlist.twoClassName}}
+        </view>
+      </view> -->
+			<view class="hengxiang content-list-type">
+				<view>
+					<image src="{{viewUrl}}static/image/dizhi.png" class="leixing-img"></image>
+				</view>
+				<view>
+					{{xqxqlist.oneAreaName}} | {{xqxqlist.twoAreaName}}
+				</view>
+			</view>
+			<view class="hengxiang content-list-type">
+				<view>
+					<image src="{{viewUrl}}static/image/lianxiren.png" class="leixing-img"></image>
+				</view>
+				<view>
+					{{xqxqlist.publishMan}}
+				</view>
+			</view>
+			<view class="hengxiang content-list-type">
+				<view>
+					<image src="{{viewUrl}}static/image/baoming2.png" class="leixing-img"></image>
+				</view>
+
+				<view>
+					{{xqxqlist.backup2}}人浏览
+				</view>
+ 
+				<view class="content-chuangjian hengxiang">
+					<view class="complete-button" style="width:155rpx;" wx:if="{{xqxqlist.wxUserId != wxUserid}}" bindtap="zaixianlianxi" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}" data-shopName="{{xqxqlist.shopName}}" data-wxNc="{{xqxqlist.wxNc}}">
+						在线联系
+					</view>
+					<view class="update-button" bindtap="xiugaigunali" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+            修改
+          </view>
+          <view class="delete-button" bindtap="shancuoxuqiu" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+            删除
+          </view>
+          <view class="complete-button" bindtap="lianxita" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+            完成
+          </view>
+				</view>
+			</view>
+
+		</view>
+		<view class="content-content zongxiang">
+			<view class="content-content-title">剩料描述</view>
+			<view class="content-content-list">{{xqxqlist.needContent}}</view>
+		</view>
+		<!-- 图片 -->
+		<view class="content-content zongxiang">
+			<view class="content-content-title">图片</view>
+			<view class="zhanshi" wx:if="{{xqxqlist.backup1.length>0}}">
+				<view class="zhanshi-item" wx:for='{{xqxqlist.backup1}}' data-id="{{item.id}}">
+					<view>
+						<image src="{{viewUrl}}{{item}}" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{item}}"></image>
+					</view>
+				</view>
+			</view>
+			<view class="zhanshi" wx:if="{{xqxqlist.backup1 == null}}">
+				<image src="{{viewUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
+			</view>
+		</view>
+	</view>
+</view>

@@ -1,0 +1,63 @@
+<!--pages/showwork/showwork.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="bottom1">
+    <!-- 左侧 -->
+    <view class="left">
+      <block wx:for-items="{{showList}}">
+        <view class="show" wx:if="{{index%2 == 0}}">
+          <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}">
+            </image>
+            <video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" ></video>
+          </view>
+          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
+            <view class="hengxiang" >
+              <view>
+                <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+              </view>
+              <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
+              <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
+            </view>
+            <view class="hengxiang">
+              <view>
+                <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+              </view>
+              <view>{{item.messageSum}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+     <!-- 右侧 -->
+    <view class="right"> 
+      <block wx:for-items="{{showList}}">
+        <view class="show" wx:if="{{index%2 != 0}}">
+          <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+            <video autoplay loop muted src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}"></video>
+          </view>
+          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
+            <view class="hengxiang" >
+              <view>
+                <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+              </view>
+              <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
+              <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
+            </view>
+            <view class="hengxiang">
+              <view>
+                <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+              </view>
+              <view>{{item.messageSum}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+<view class="shuju" wx:if="{{showList.length==0}}">
+  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <view>暂无数据</view>
+</view>

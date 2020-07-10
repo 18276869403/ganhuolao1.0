@@ -1,0 +1,26 @@
+<!--pages/myGoods/myGoods.wxml-->
+<view class="container">
+  <view class="goods zongxiang">
+    <view class="goods-list hengxiang" wx:for="{{goodsLists}}"  wx:key="{{item.id}}" bindtap="mygooddetail" data-mgd="{{item}}">
+      <view class="goods-list-left">
+        <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="goods-img"></image>
+      </view>
+      <view class="goods-list-right zongxiang">
+        <view class="goods-name">{{item.goodName}}</view>
+        <view class="goods-price">¥{{item.newPrice}}</view>
+        <view class="hengxiang goods-button">
+          <view class="shanchu-button" catchtap="DeletemyGood" data-myspid="{{item.id}}">删除</view>
+          <view class="xiugai-button" catchtap="addEditGoods2" data-spxx="{{item}}">修改</view>
+          <view class="zhiding-bu tton" catchtap="onemyGood" data-myspid="{{item.id}}">置顶</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="goods-bottom" bindtap="addEditGoods" data-addspid="{{item}}">
+  <image src="{{viewUrl}}static/image/addgoods.png" class="add-img"></image>
+  </view>
+</view> 
+<view class="shuju" wx:if="{{goodsLists.length==0}}">
+  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <view>暂无数据</view>
+</view>

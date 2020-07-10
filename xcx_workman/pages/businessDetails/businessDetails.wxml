@@ -1,0 +1,126 @@
+<!--pages/businessDetails/businessDetails.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="content zongxiang">
+    <!-- 商家照片 -->
+    <view class="businessStore"> 
+      <image src="{{goodsList.picIurl}}" class="businessStore-img" bindtap="tupian" data-src="{{goodsList.picIurl}}"></image>
+    </view>
+    <!-- 商家详情 -->
+    <view class="content-list zongxiang">
+      <view class="content-list-name">{{goodsList.shopName}}</view>
+      <view class="hengxiang content-lianxi">
+        <view class="hengxiang" wx:for="{{5}}">
+          <image src='{{viewUrl}}static/image/starhui.png' class='star-img' wx:if="{{goodsList.starClass<=index}}"></image>
+          <image src='{{viewUrl}}static/image/starhuang.png' class='star-img' wx:if="{{goodsList.starClass>index}}"></image>
+        </view>
+        <view class="hengxiang shiming">
+          <view>
+            <image src="{{viewUrl}}static/image/shiming.png" class="shiming-img"></image>
+          </view>
+          <view>实名认证</view>
+        </view>
+        <view class="content-online" bindtap="liuyan" data-wxid="{{goodsList.id}}" data-name="{{goodsList.shopName}}" data-wxNc="{{goodsList.wxNc}}">在线联系</view>
+        <view class="content-phone" bindtap="phonecall" data-phone="{{goodsList.phone}}">电话联系</view>
+      </view>
+      <view class="content-gongzhong zongxiang">
+        <view class="hengxiang content-gongzhong-item">
+          #
+          <view class="content-gongzhong-item-text">
+            {{goodsList.oneClassName}}
+          </view>
+          #
+        </view>
+        <view class="hengxiang content-gongzhong-item">
+          #
+          <view class="content-gongzhong-item-text">
+            {{goodsList.twoClassName}}
+          </view>
+          #
+        </view>
+      </view>
+    </view>
+    <!-- 基本信息 -->
+    <view class="content-basic zongxiang">
+      <view class="content-basic-title">店铺信息</view>
+      <view class="content-basic-list zongxiang">
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/xingming.png" class="basic-img"></image>
+          </view>
+          <view class="basic-text">{{goodsList.wxNc}}</view>
+        </view>
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/diqu.png" class="basic-img"></image>
+          </view>
+          <view class="basic-text">{{goodsList.oneAreaName}} | {{goodsList.twoAreaName}}</view>
+        </view>
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/jiedao.png" class="basic-img"></image>
+          </view>
+          <view class="basic-text">{{goodsList.shopAddress}}</view>
+        </view>
+        <view class="basic-list-item1 hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/jianjie.png" class="basic-img"></image>
+          </view>
+          <view class="basic-text">{{goodsList.content}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 晒晒 -->
+    <view class="content-basic zongxiang">
+      <view class='content-basic-title hengxiang'>
+        <block wx:for="{{goodsdata1}}" wx:key="item.id">
+          <view id="{{item.id}}" bindtap="serviceSelection1" class="{{item.id==CheckItem?'content-basic-title-checked':'content-basic-title-normal'}} {{CheckItem==0&&index==0?'content-basic-title-checked':'content-basic-title-normal'}}">
+            {{item.colName}}
+          </view>
+        </block>
+      </view>
+      <!-- 商品样式 CheckItem==0-->
+      <view class="content-show" wx:if="{{CheckItem==0}}">
+        <view class="show-item zongxiang" wx:for="{{goodslists}}" wx:key="key" data-id="{{item.id}}">
+          <view class="goods" bindtap="goGoodsDetails" data-vals="{{item}}">
+            <view class="show-item-top">
+              <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="show-img"></image>
+            </view>
+            <view class="goods-name">{{item.goodName}}</view>
+            <view class="goods-price">¥{{item.newPrice}}</view>
+          </view>
+        </view>
+
+      </view>
+      <!-- 晒晒样式 CheckItem==1-->
+      <view class="content-show" wx:if="{{CheckItem==1}}">
+        <view class="show-item zongxiang" wx:for="{{showList}}" bindtap="goshowshai" wx:key="key" data-ssid="{{item.id}}">
+          <view class="show">
+            <view class="show-item-top">
+              <image src="{{item.picOne}}" class="show-img"></image>
+            </view>
+            <view class="show-item-bottom hengxiang">
+              <view class="hengxiang">
+                <view>
+                  <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                </view>
+                 <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
+                 <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
+              </view>
+              <view class="hengxiang">
+                <view>
+                  <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                </view>
+                <view>{{item.messageSum}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+
+    </view>
+  </view>
+
+
+</view>

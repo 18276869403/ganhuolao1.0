@@ -1,0 +1,167 @@
+<!--pages/need/need.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="top zongxiang">
+		<view class="top-title hengxiang">
+			<view class="top-title-left hengxiang" bindtap="showModal">
+				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
+				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
+				<view class="top-title-left-enter">
+					<image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+				</view>
+			</view>
+			<view class="top-title-sort hengxiang">
+				<view class="top-title-right-img">
+					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+				</view>
+				<view class="top-title-right-shuru">
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入剩料关键字" class="shurukuang"></input>
+				</view>
+				<view class="top-title-right-sousuo">
+					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+				</view>
+				<view class="top-search-fabu">
+					<image src="{{viewUrl}}static/image/fabuMaterial.png" class="fabu-img" bindtap="submitNeeds"></image>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="content zongxiang">
+		<!-- 最新剩料模块 -->
+		<view class="content-need">
+			<view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index">
+				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
+					<view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
+						<image src="{{viewUrl}}static/image/zawu1.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.backup1[0]!=null}}">
+						<image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
+					</view>
+					<view class="need-list-right zongxiang">
+						<view class="content-list zongxiang">
+							<view class="content-neirong hengxiang">
+								<view class="content-neirong-title">{{item.needTitle}}</view>
+							</view>
+							<view class="sp-hengxiang"></view>
+							<view class="content-list-item hengxiang">
+								<view class="content-list-title" wx:if="{{item.needPrice != null && item.needPrice != '' && item.needPrice != 0}}">
+									￥{{item.needPrice}} 元
+								</view>
+								<view class="content-list-title" wx:if="{{item.needPrice == null || item.needPrice == '' || item.needPrice == 0}}">
+									￥ 面议
+								</view>
+							</view>
+							<view class="content-list-bottom zongxiang">
+								<!-- <view class="list-bottom-item1 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/renyuan.png" class="baoming-img"></image>
+										</view>
+										<view>
+											<text>{{item.backup2}}</text>人
+										</view>
+									</view>
+								</view> -->
+								<view class="list-bottom-item hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+										</view>
+										<view class="bottom-dingwei">
+											{{item.oneAreaName}}|{{item.twoAreaName}}
+										</view>
+									</view>
+								</view>
+								<view class="list-bottom-item2 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view>
+											<image src="{{viewUrl}}static/image/shijian.png" class="shijian-img"></image>
+										</view>
+										<view>
+											{{item.publishTime}}
+										</view>
+									</view>
+								</view>
+							</view>
+							<view class="content-list-bottom-t hengxiang">
+								<view class="list-bottom-status hengxiang">
+									<view class="content-status-img">
+										<image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+									</view>
+									<view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
+									<view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
+								</view>
+								<view class="right-bottom-right">
+									<view class="contact-button">详情</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+	</view>
+
+	<view class="bottom zongxiang">
+		<image src="{{viewUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
+			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+		</button>
+	</view>
+</view>
+
+<!-- 遮罩 -->
+<view class="commodity_screen2" wx:if="{{showModalStatuslist}}"></view>
+<view animation="{{animationData2}}" class="commodity_attr_box2" wx:if="{{showModalStatuslist}}">
+	<view class="tanchuang2 zongxiang">
+		<view class="tankuang-top2 hengxiang">
+			<view class="tankuang-top2-left" bindtap="hideModallist" data-return="false">取消</view>
+			<view class="tankuang-top2-content">选择业务类型</view>
+			<view class="tankuang-top2-right" bindtap="hideModallist" data-return="ture">确认</view>
+		</view>
+		<scroll-view scroll-y style="height:310px;" class="tankuang-content2 zongxiang">
+			<view class="content-list-one" bindtap="typeQuan" data-id="-1">
+				【查询全部】
+			</view>
+			<view class="content2-list zongxiang" wx:for="{{gongzhong}}" wx:key="key" wx:for-index="keys" wx:for-item="itemaa">
+				<view class="content-list-one">
+					【行业大类： {{itemaa.oneclass}}】
+				</view>
+				<view class="content-list-two zongxiang" wx:for="{{itemaa.twoclasslist}}" wx:key="key" wx:for-index="keys" wx:for-item="item">
+					<view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
+						<view class="list-two-item-left">{{item.className}}</view>
+						<view class="list-two-item-right" wx:if="{{flerjiid==item.id}}">
+							<image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>
+<!-- 遮罩层显示 地址区域 -->
+<view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<!-- <view class='normal-title'>一级分类</view> -->
+					<view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+
+			<view class='s-right'>
+				<scroll-view class='left-navbar1' scroll-y="true">
+					<!-- <view class='normal-title'>二级分类</view> -->
+					<view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
+</view>

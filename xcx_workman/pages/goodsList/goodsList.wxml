@@ -1,0 +1,124 @@
+<!--pages/goodsList/goodsList.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="top zongxiang">
+    <view class="top-title hengxiang">
+      <view class="top-title-left hengxiang" bindtap="showModal">
+        <view class="top-title-left-name" wx-if="{{weizhi==undefined}}">{{weizhi}}</view>
+        <view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
+        <view class="top-title-left-enter">
+          <image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+        </view>
+      </view>
+      <view class="top-title-sort hengxiang" bindtap="showModallist">
+        <view class="sort-fenzu">
+          <image class="fenzu-img" src="{{viewUrl}}static/image/fenzu.png"></image>
+        </view>
+        <view class="sort-text" wx-if="{{yijiname==''}}">
+          按分类
+        </view>
+        <view class="sort-text" wx-if="{{yijiname!=''}}">
+          {{yijiname}}-{{erjiname}}
+        </view>
+        <view class="sort-fenzu">
+          <image class="xiamian-img" src="{{viewUrl}}static/image/xiamian.png"></image>
+        </view>
+      </view>
+    </view>
+    <view class="top-img">
+      <image src="{{viewUrl}}static/image/shopping.png" class="bg-img"></image>
+    </view>
+    <view class="hengxiang top-search">
+      <view class="top-title-right hengxiang">
+        <view class="top-title-right-img">
+          <image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+        </view>
+        <view class="top-title-right-shuru">
+          <input type="text" placeholder="输入商品名称搜索" bindinput="getText" class="shurukuang"></input>
+        </view>
+        <view class="top-title-right-sousuo">
+          <view class="sousuo-button" bindtap="getGoods">搜索</view>
+        </view>
+      </view>
+      <view class="top-search-fabu">
+        <image src="{{viewUrl}}static/image/kaidian.png" bindtap="kaidian" data-type="2" class="fabu-img"></image>
+      </view>
+    </view> 
+  </view>
+  <view class="content-show">
+    <view class="show-item zongxiang" wx:for="{{goodslist}}" wx:key="key" data-id="{{item.id}}">
+      <view class="goods" bindtap="goodsDetails" data-vals="{{item}}">
+        <view class="show-item-top">
+          <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="show-img"></image>
+        </view>
+        <view class="goods-name">{{item.goodName}}</view>
+        <view class="goods-price">¥{{item.newPrice}}</view>
+        <view class="goods-store hengxiang">
+        <view class="goods-store-img">
+        <image src="{{viewUrl}}static/image/store.png" class="store-img"></image>
+        </view>
+        <view class="goods-store-text">
+        {{item.goodMemo}}
+        </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 遮罩层显示 地址区域 -->
+<view>
+  <view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+  <view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+    <view class='alert hengxiang'>
+      <view class='s-left'>
+        <scroll-view class='left-navbar' scroll-y="true">
+          <!-- <view class='normal-title'>一级分类</view> -->
+          <view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+            {{item.areaName}}
+          </view>
+        </scroll-view>
+      </view>
+
+      <view class='s-right'>
+        <scroll-view class='left-navbar1' scroll-y="true">
+          <!-- <view class='normal-title'>二级分类</view> -->
+          <view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+            {{item.areaName}}
+          </view>
+        </scroll-view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 遮罩 -->
+<view class="commodity_screen2" wx:if="{{showModalStatuslist}}"></view>
+<view animation="{{animationData2}}" class="commodity_attr_box2" wx:if="{{showModalStatuslist}}">
+  <view class="tanchuang2 zongxiang">
+    <view class="tankuang-top2 hengxiang">
+      <view class="tankuang-top2-left" bindtap="hideModallist" data-return="false">取消</view> 
+      <view class="tankuang-top2-content">选择商品类型</view>
+      <view class="tankuang-top2-right" bindtap="hideModallist" data-return="ture">确认</view>
+    </view>
+    <scroll-view scroll-y style="height:310px;" class="tankuang-content2 zongxiang">
+      <view class="content-list-one" bindtap="typeQuan" data-id="-1">
+          【查询全部】
+      </view> 
+      <view class="content2-list zongxiang" wx:for="{{gongzhong}}" wx:key="key" wx:for-index="keys" wx:for-item="itemaa">
+        <view class="content-list-one">
+          【商品大类： {{itemaa.oneclass}}】
+        </view>
+        <view class="content-list-two zongxiang" wx:for="{{itemaa.twoclasslist}}" wx:key="key" wx:for-index="keys" wx:for-item="item">
+          <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
+            <view class="list-two-item-left">{{item.className}}</view>
+            <view class="list-two-item-right" wx:if="{{erjiid==item.id}}">
+              <image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

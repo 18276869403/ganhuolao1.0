@@ -1,0 +1,43 @@
+<!--pages/myInfo/myInfo.wxml-->
+<view class='container'>
+  <view class='content zongxiang'>
+    <view class='content-list'>
+      <view class='list hengxiang'>
+        <view class='list-left'>姓名：</view>
+        <view class='list-right'>
+          <input type='text' placeholder='输入名字' class='shurukuang' placeholder-class='placeholder' value='{{wxUser.name}}' name="name" bindinput='nameinput'></input>
+        </view>
+      </view>
+    </view>
+    <view class='content-list'>
+      <view class='list hengxiang' bindtap='sexChoose'>
+        <view class='list-left'>性别：</view>
+        <view class='list-right'>
+          {{itemList[wxUser.sex]}}
+        </view> 
+      </view>
+    </view>
+    <view class='content-list'>
+      <view class='list hengxiang'>
+        <view class='list-left'>生日：</view>
+        <view class='list-right'>
+          <picker mode="date" value="{{wxUser.dateBirth}}" start="1900-01-01" bindchange="bindDateChange">
+            <view class="picker" wx:if='{{wxUser.dateBirth != null}}'>
+              {{wxUser.dateBirth}}
+            </view>
+            <view class="picker" wx:if='{{wxUser.dateBirth == null}}'>1970-01-01</view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='content-list'>
+      <view class='list hengxiang'>
+        <view class='list-left'>手机号码：</view>
+        <view class='list-right'>
+          <input type='number' placeholder='输入手机号' class='shurukuang' placeholder-class='placeholder' value='{{wxUser.phone}}' name="phone" bindinput='phoneinput'></input>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='button' style='margin-top:136rpx;' bindtap='UpdateUserInfo'>保存</view>
+</view>

@@ -1,0 +1,201 @@
+<!--pages/HM-chat/HM-chat.wxml--> 
+<view>
+		<view class="content" bindtouchstart="hideDrawer">
+			<scroll-view class="msg-list" scroll-y="true" 
+				scroll-with-animation="{{scrollAnimation}}" 
+				scroll-top="{{scrollTop}}" 
+				scroll-into-view="{{scrollToView}}" 
+				bindscrolltoupper="loadHistory" 
+				upper-threshold="50">
+				<!-- 加载历史数据waitingUI -->
+				<view class="loading" wx:if="{{isHistoryLoading}}">
+					<view class="spinner">
+						<view class="rect1"></view>
+						<view class="rect2"></view>
+						<view class="rect3"></view>
+						<view class="rect4"></view>
+						<view class="rect5"></view>
+					</view>
+				</view>
+				<view class="row" 
+					wx:for="{{msgList}}" 
+					wx:for-item="row"> 
+					<!-- 用户消息  wx:if="{{ row.type == 'user' }}"-->
+					<block>
+						<!-- 自己发出的消息 -->
+						<view class="my" wx:if="{{ row.userId == myuid}}" id="msg{{row.id}}">
+							<!-- 左-消息 -->
+							<view class="left">
+								<!-- 文字消息 -->
+								<view wx:if="{{ row.type == 'text'}}" class="bubble">
+									<rich-text nodes="{{row.content.text}}"></rich-text>
+								</view>
+								<!-- 语言消息 -->
+								<view wx:if="{{ row.type == 'voice' }}"
+									bindtap="playVoice" 
+									data-msg="{{row}}"
+									class="bubble voice {{playMsgid == row.id?'play':''}}">
+									<view class="length">{{row.content.length}}</view>
+									<view class="icon my-voice"></view>
+								</view>
+								<!-- 图片消息 -->
+								<view wx:if="{{ row.type == 'img'}}" class="bubble img" 
+									bindtap="showPic"
+									data-msg="{{row}}">
+									<image src="{{row.content.url}}" 
+									style="width: {{row.content.w+'px'}},height: {{row.content.h+'px'}}"></image>
+								</view>
+								<!-- 红包 -->
+								<view wx:if="{{row.type == 'redEnvelope'}}" class="bubble red-envelope" bindtap="openRedEnvelope(row,index)">
+									<image src="/static/img/red-envelope.png"></image>
+									<view class="tis">
+										<!-- 点击开红包 -->
+									</view>
+									<view class="blessing">
+										{{row.content.blessing}}
+									</view>
+								</view>
+								
+							</view>
+							<!-- 右-头像 -->
+							<view class="right">
+								<image src="{{row.userinfo.face}}"></image>
+							</view>
+						</view>
+						<!-- 别人发出的消息 -->
+						<view class="other" wx:if="{{row.userId != myuid}}" id="msg{{row.id}}">
+							<!-- 左-头像 -->
+							<view class="left">
+								<image src="{{row.toUserinfo.face}}"></image>
+							</view>
+							<!-- 右-用户名称-时间-消息 -->
+							<view class="right">
+								<view class="username">
+									<!-- <view class="name">{{row.msg.userinfo.username}}</view>  -->
+									<view class="name">{{toUserName}}</view>
+									<view class="time">{{row.time}}</view>
+								</view>
+								<!-- 文字消息 -->
+								<view wx:if="{{row.type=='text'}}" class="bubble">
+									<rich-text nodes="{{row.content.text}}"></rich-text>
+								</view>
+								<!-- 语音消息 -->
+								<view wx:if="{{row.type=='voice'}}"
+									bindtap="playVoice" 
+									data-msg="{{row}}"
+									class="bubble voice {{playMsgid == row.id?'play':''}}">
+									<view class="icon other-voice"></view>
+									<view class="length">{{row.content.length}}</view>
+								</view>
+								<!-- 图片消息 -->
+								<view wx:if="{{row.type=='img'}}" class="bubble img" 
+									bindtap="showPic"
+									data-msg="{{row}}">
+									<image src="{{row.content.url}}" 
+										style="{{'width:' + row.content.w + 'px;height' + row.content.h + 'px'}}"></image>
+								</view> 
+
+
+							</view>
+						</view>
+					</block>
+				</view>
+			</scroll-view>
+		</view>
+		<!-- 抽屉栏 bindtouchmove.stop.prevent="discard"-->
+		<view class="popup-layer {{popupLayerClass}}" >
+			<!-- 表情 --> 
+			<swiper class="emoji-swiper {{hideEmoji ? 'hidden' : ''}}" indicator-dots="true" duration="150">
+				<swiper-item wx:for="{{emojiList}}" wx:for-item="page" :key="pid">
+					<view wx:for="{{page}}"  
+						wx:for-item="em"  
+						data-em="{{em}}"
+						bindtap="addEmoji">
+						<image class="emoji-image"   src="http://miss.it-ys.com:9123/work-boot/sys/common/view/static{{'/img/emoji/'+em.url}}"></image>
+					</view>
+				</swiper-item> 
+			</swiper>
+			<!-- 更多功能 相册-拍照-红包 -->
+			<view class="more-layer {{hideMore? 'hidden' : ''}}">
+				<view class="list">
+					<view class="box" bindtap="chooseImage">
+						<view class="icon tupian2"></view>
+					</view>
+					<view class="box" bindtap="camera">
+						<view class="icon paizhao"></view>
+					</view>
+					<!-- <view class="box" bindtap="handRedEnvelopes">
+						<view class="icon hongbao"></view>
+					</view> -->
+				</view>
+			</view>
+		</view>
+		<!-- 底部输入栏 bindtouchmove.stop.prevent="discard"-->
+		<view class="input-box {{popupLayerClass}}" >
+			<!-- H5下不能录音，输入栏布局改动一下 -->
+			<!-- #ifndef H5 -->
+			<view class="voice">
+				<view class="icon {{isVoice?'jianpan':'yuyin'}}" bindtap="switchVoice"></view>
+			</view>
+			<!-- #endif -->
+			<!-- #ifdef H5 
+			<view class="more" bindtap="showMore">
+				<view class="icon add"></view>
+			</view>-->
+			<!-- #endif bindtouchmove.stop.prevent="voiceIng" -->
+			<view class="textbox">
+				<view class="voice-mode {{isVoice}} {{isVoice?'':'hidden'}} {{recording?'recording':''}}" 
+					bindtouchstart="voiceBegin" 
+					bindtouchend="voiceEnd" 
+					bindtouchcancel="voiceCancel">{{voiceTis}}</view>
+				<view class="text-mode {{isVoice?'hidden':''}}">
+					<view class="box">
+						<textarea auto-height="true"
+							bindinput="textMsgInput"
+							value="{{textMsg}}"
+							bindfocus="textareaFocus" bindblur="textMsgInputblur"></textarea>
+					</view>
+					<view class="em" bindtap="chooseEmoji">
+						<view class="icon biaoqing"></view>
+					</view>
+				</view>
+			</view>
+			<!-- #ifndef H5 -->
+			<view class="more" bindtap="showMore">
+				<view class="icon add"></view>
+			</view>
+			<!-- #endif -->
+			<view class="send {{isVoice?'hidden':''}}" bindtap="sendText">
+				<view class="btn">发送</view>
+			</view>
+		</view>
+		<!-- 录音UI效果 -->
+		<view class="record {{recording?'':'hidden'}}">
+			<view class="ing {{willStop?'hidden':''}}"><view class="icon luyin2" ></view></view>
+			<view class="cancel {{willStop?'':'hidden'}}"><view class="icon chehui" ></view></view>
+			<view class="tis {{willStop?'change':''}}">{{recordTis}}</view>
+		</view>
+		<!-- 红包弹窗 bindtouchmove.stop.prevent="discard"-->
+		<view class="windows {{windowsState}}">
+			<!-- 遮罩层 -->
+			<view class="mask"  bindtap="closeRedEnvelope"></view>
+      <!-- bindtouchmove.stop.prevent="discard" -->
+			<view class="layer" >
+				<view class="open-redenvelope">
+					<view class="top">
+						<view class="close-btn">
+							<view class="icon close" bindtap="closeRedEnvelope"></view>
+						</view>
+						<image src="/static/img/im/face/face_1.jpg"></image>
+					</view>
+					<view class="from">来自{{redenvelopeData.from}}</view>
+					<view class="blessing">{{redenvelopeData.blessing}}</view>
+					<view class="money">{{redenvelopeData.money}}</view>
+					<view class="showDetails" bindtap="toDetails(redenvelopeData.rid)">
+						查看领取详情 <view class="icon to"></view>
+					</view>
+				</view>
+			</view>
+			
+		</view>
+	</view>

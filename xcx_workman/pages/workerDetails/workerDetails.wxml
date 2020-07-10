@@ -1,0 +1,171 @@
+<!--pages/workerDetails/workerDetails.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="content zongxiang">
+    <!-- 工人详情 -->
+    <view class="content-list zongxiang">
+      <view class="content-list-item hengxiang">
+        <view class="list-item-left">
+          <image src="{{workerDetail.picIurl}}" bindtap="preview" data-src="{{workerDetail.picIurl}}" class="worker-img"></image>
+        </view>
+        <view class="list-item-right zongxiang">
+          <view class="right-name">
+            {{workerDetail.name}}
+          </view>
+          <view class="right-content hengxiang">
+
+            <view class="right-content-item hengxiang">
+              <view class="">
+                <image src="{{viewUrl}}static/image/dengji.png" class="dengji-img"></image>
+              </view>
+              <view>{{workerDetail.shopName}}</view>
+            </view>
+            <view class="right-content-item hengxiang">
+              <view class="">
+                <image src="{{viewUrl}}static/image/shiming.png" class="dengji-img"></image>
+              </view>
+              <view>实名认证</view>
+            </view>
+            <view class="right-content-item hengxiang">
+              <view class="">
+                <image src="{{viewUrl}}static/image/shengri.png" class="dengji-img"></image>
+              </view>
+              <view>{{workerDetail.dateBirth}}岁</view>
+            </view>
+          </view>
+          <view class="right-sort zongxiang">
+            <view class="right-sort-item hengxiang">
+              <view class="dot"></view>
+              <view>{{workerDetail.oneClassName}} </view>
+            </view>
+            <view class="right-sort-item hengxiang">
+              <view class="dot"></view>
+              <view>{{workerDetail.twoClassName}}</view>
+            </view>
+          </view>
+          <view class="right-bottom hengxiang">
+            <view class="right-bottom-left hengxiang">
+              <view class="guyong-button" bindtap="bintapDetails">雇佣TA</view>
+            </view>
+            <view class="right-bottom-right"> 
+              <view class="contact-button" bindtap="phonecall" 
+                data-wxNc="{{workerDetail.wxNc}}" 
+                data-id="{{workerDetail.id}}"
+                data-name="{{workerDetail.name}}">在线联系</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+    <!-- 基本信息 -->
+    <view class="content-basic zongxiang">
+      <view class="content-basic-title">基本信息</view>
+      <view class="content-basic-list zongxiang">
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/jingyan.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">经验：</view>
+          <view class="basic-text">{{workerDetail.employ}}年</view>
+        </view>
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/diqu.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">地区：</view>
+          <view class="basic-text">{{workerDetail.oneAreaName}} | {{workerDetail.twoAreaName}}</view>
+        </view>
+        <view class="basic-list-item hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/phone.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">电话：</view>
+          <view class="basic-text1" wx:if="{{istrue==1}}">{{workerDetail.phone}}</view>
+          <view class="basic-text1" wx:if="{{istrue==0}}">{{phone}}</view>
+          <view class="basic-look">
+            <view class="look-button" bindtap="phoneshow">查看电话</view>
+          </view>
+        </view>
+        <view class="basic-list-item1 hengxiang">
+          <view class="basicImg">
+            <image src="{{viewUrl}}static/image/jieshao.png" class="basic-img"></image>
+          </view>
+          <view class="basic-tips">介绍：</view>
+          <view class="basic-text">{{workerDetail.content}}</view>
+        </view>
+      </view>
+    </view>
+    <!-- 晒晒 -->
+    <view class="content-basic zongxiang">
+      <view class="content-basic-title">晒晒</view>
+      <view class="content-show">
+        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key">
+          <view class="show" bindtap="goshowshai" data-id="{{item.id}}">
+            <view class="show-item-top">
+              <image src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='0'}}"></image>
+              <video src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='1'}}"></video>
+            </view>
+            <view class="show-item-bottom hengxiang">
+              <view class="hengxiang">
+                <view>
+                  <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                </view>
+                <view>{{item.giveGood}}</view>
+              </view>
+              <view class="hengxiang">
+                <view>
+                  <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                </view>
+                <view>{{item.messageSum}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+  <view class="an" hidden="{{flag}}">
+    <view class="boxinfo">
+      <view class="fymate hengxiang">
+        <view class="fy_name">费用预计</view>
+        <input class="fy_inp" bindchange="bindPrice" placeholder="" type="number" value="{{price}}">
+        </input>
+        <view class="fy_drop">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="time hengxiang">
+              <view class="time_day">{{array[index]}}</view>
+              <view class="time_img">
+                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="gy">
+        <textarea class="gy_inp" placeholder="输入雇佣事项" maxlength="-1" type="text"  bindinput='guyongshiinput'></textarea>
+      </view>
+      <view class="yj hengxiang">
+        <view class="fy_name">预计工期</view>
+        <input class="fy_inp" type="number" bindchange="bindDate" value="{{predict}}"></input>
+        <view class="fy_drop">
+          <picker bindchange="bindPickerDay" value="{{day}}" range="{{tian}}">
+            <view class="time hengxiang">
+              <view class="time_dy">{{tian[day]}}</view>
+              <view class="time_ig">
+                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <!-- 按钮 -->
+      <view class="but hengxiang">
+        <view class="but_close" bindtap="bindClose">关闭</view>
+        <view class="but_con" bindtap="bindCon">确认雇佣</view>
+      </view> 
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,47 @@
+<!--pages/jsjg/jsjg.wxml-->
+
+<view>
+  <view class="top-class">
+  <image src="http://111.231.51.198:91/work-boot/sys/common/view/static/image/jisuanResult.png" class="jieguo-img-class"></image>
+    <view class="jieguo-class">{{jieguo}}</view>
+  </view>
+  <view class="xinq">
+    <text>你可能感兴趣的商品</text>
+  </view>
+</view>
+<view class="bottom1">
+  <view class="bottom-left">
+    <block wx:for="{{goodslist}}" wx:key="{{item.id}}" data-id="{{item.id}}" wx:if="{{index%2==0}}">
+      <view class="bottom-content">
+        <view class="bottom-content-list" bindtap="goodsDetails" data-vals="{{item}}">
+          <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="goods-img"></image>
+        </view>
+        <view class="bottom-content-bottom">
+          <view class="goods-bottom-title">
+            {{item.goodName}}
+          </view>
+          <view class="goods-bottom-price" wx:if="{{item.state!=false}}">
+            ￥{{item.newPrice}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="bottom-right">
+    <block wx:for="{{goodslist}}" wx:key="{{item.id}}" data-id="{{item.id}}" wx:if="{{index%2!=0}}">
+      <view class="bottom-content">
+        <view class="bottom-content-list" bindtap="goodsDetails" data-vals="{{item}}">
+          <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="goods-img"></image>
+        </view>
+        <view class="bottom-content-bottom">
+          <view class="goods-bottom-title">
+            {{item.goodName}}
+          </view>
+          <view class="goods-bottom-price" wx:if="{{item.state!=false}}">
+            ￥{{item.newPrice}}
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

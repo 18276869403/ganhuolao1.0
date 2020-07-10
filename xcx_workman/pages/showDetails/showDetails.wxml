@@ -1,0 +1,82 @@
+<!--pages/showDetails/showDetails.wxml-->
+<view class="container">
+  <view class='banner' wx:if="{{caseMsgList.caseType==0}}">
+    <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
+      <block wx:for="{{caseMsgList.picOne}}">
+        <swiper-item bindtap="imgYu" data-src="{{item}}">
+          <image src=" {{viewUrl}}{{item}}" bindtap="fangda" class="slide-image" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='banner' wx:if="{{caseMsgList.caseType=='1'}}">
+    <video src="{{viewUrl}}{{caseMsgList.picOne[0]}}" style="width:100%"></video>
+  </view>
+  <!-- 产品名 -->
+  <view class="top-text" wx:if="{{caseMsgList.caseName != null&&caseMsgList.caseName != 'null'&&caseMsgList.caseName!=''}}">
+    {{caseMsgList.caseName}}
+  </view>
+  <!-- 顶部详情 -->
+  <view class="top hengxiang">
+    <view class="top-left">
+      <image src="{{viewUrl}}{{caseMsgList.piciurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl != null || caseMsgList.piciurl != ''}}"></image>
+      <image src="{{caseMsgList.wximgurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl == null || caseMsgList.piciurl == ''}}"></image>
+      <image src="{{viewUrl}}{{caseMsgList.picOne[0]}}" class="avator-img" wx:if="{{caseMsgList.piciurl == null && caseMsgList.piciurl == ''}}"></image>
+    </view>
+    <view class="top-content zongxiang">
+      <view class="top-content-top">{{caseMsgList.name}}</view>
+      <view class="top-content-bottom hengxiang">
+        <view class="top-content-bottom-item hengxiang">
+          <image src="{{viewUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+          <view class="top-dingwei" wx-if="{{caseMsgList.oneAreaName==null}}"></view>
+          <view class="top-dingwei" wx-if="{{caseMsgList.oneAreaName!=null}}">{{caseMsgList.oneAreaName}} | {{caseMsgList.twoAreaName}}</view>
+        </view>
+        <view class="hengxiang top-content-bottom-item1">
+          <view>
+            <image src="{{viewUrl}}static/image/shijian.png" class="time-img"></image>
+          </view> 
+          <view class="top-time">
+            {{caseMsgList.addTime}}
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- <view class="top-button" bindtap="lianxita">
+      联系TA
+    </view> -->
+  </view>
+  <!-- 评论 -->
+  <view class="content zongxiang">
+    <view class="content-title hengxiang">
+      <view class="content-text">
+        评论
+      </view>
+      <view class="content-button" bindtap="comment">
+        +我来评论
+      </view>
+    </view>
+  </view>
+  <!-- 评论内容 -->
+  <view class="bottom zongxiang">
+    <view class="bottom-list zongxiang" wx:for='{{pinglunList}}'>
+      <view class="hengxiang">
+        <view class="top-left">
+          <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img1" wx:if="{{item.picIurl!=''&&item.picIurl!=null}}"></image>
+          <image src="{{item.wximgurl}}" class="avator-img1" wx:if="{{item.picIurl==''||item.picIurl==null}}"></image>
+        </view>
+        <view class="top-content-top1">{{item.name}}</view>
+        <view class="hengxiang bottom-time">
+          <view>
+            <image src="{{viewUrl}}static/image/shijian.png" class="time-img1"></image>
+          </view>
+          <view class="bottom-time-text">
+            {{item.createTime}}
+          </view>
+        </view>
+      </view>
+      <view class="bottom-details">
+        {{item.content}}
+      </view>
+    </view>
+  </view>
+</view>

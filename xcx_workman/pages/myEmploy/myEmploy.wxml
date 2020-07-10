@@ -1,0 +1,105 @@
+<!--pages/myEmploy/myEmploy.wxml-->
+<view class="container">
+  <view class="hengxian"></view>
+  <view class="top hengxiang">
+    <view wx:for="{{needsTypeList}}" wx:key="key" bindtap="changeType" data-id="{{item.id}}" class="xuanzhong">
+      <view wx:if="{{needsTypeid==item.id}}" class="top-item-checked">
+        <text class="bian"> {{item.name}}</text>
+      </view>
+      <view wx:if="{{needsTypeid!=item.id}}" class="top-item-normal">
+        <text class="">{{item.name}}</text>
+      </view>
+    </view>
+  </view> 
+  <!-- 我的留言列表 -->
+  <view class="content zongxiang">
+    <view class="content-list zongxiang" wx:for="{{messageList}}" wx:key="{{item.id}}">
+      <view class="content-list-top hengxiang">
+        <view class="list-top-img">
+          <image src="{{item.picIurl}}" mode="aspectFill" class="avator-img"></image>
+        </view>
+        <view class="list-top-text zongxiang" wx:if="{{needsTypeid==1}}">
+          工人：{{item.name}}
+        </view>
+        <view class="list-top-text zongxiang" wx:if="{{needsTypeid==2}}">
+          雇主：{{item.name}}
+        </view>
+        <view class="list-top-edit">
+          <image src="{{viewUrl}}static/image/edit.png" class="delete-img" bindtap="bintapDetails" data-item="{{item}}"></image>
+        </view>
+        <view class="list-top-delete">
+          <image src="{{viewUrl}}static/image/delete.png" class="delete-img" bindtap="delEmploy" data-id="{{item.id}}"></image>
+        </view>
+      </view>
+      <view class="content-list-content zongxiang">
+        <view class="list-content-item hengxiang">
+          <view class="item-title">雇佣时间：</view>
+          <view class="item-type">{{item.hiringTime}}</view>
+        </view>
+        <view class="list-content-item hengxiang">
+          <view class="item-title">费用预计：</view>
+          <view class="item-type">{{item.predict}}</view>
+        </view>
+        <view class="list-content-item hengxiang">
+          <view class="item-title">预计工期：</view>
+          <view class="item-type">{{item.estimatedCost}}天</view>
+        </view>
+        <view class="list-content-item hengxiang">
+          <view class="item-title">雇佣事项：</view>
+          <view class="item-type">{{item.employmentMatters}}</view>
+        </view>
+      </view>
+      <view class="content-list-bottom hengxiang">
+        <view class="phone-button" bindtap="phonecall" data-phone="{{item.phone}}">电话联系</view>
+        <view class="online-button" bindtap="liuyan" data-wxid="{{item.wxUserId}}" data-name="{{item.name}}">在线联系</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="an" hidden="{{flag}}">
+    <view class="boxinfo">
+      <view class="fymate hengxiang">
+        <view class="fy_name">费用预计</view>
+        <input class="fy_inp" bindchange="bindPrice" placeholder="" type="number" value="{{xqlist.estimatedCost}}">
+        </input>
+        <view class="fy_drop">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+            <view class="time hengxiang">
+              <view class="time_day">{{array[index]}}</view>
+              <view class="time_img">
+                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class="gy">
+        <textarea class="gy_inp" placeholder="请输入雇佣事项" maxlength="-1" type="text"  bindinput='guyongshiinput' value="{{xqlist.employmentMatters}}"></textarea>
+      </view>
+      <view class="yj hengxiang">
+        <view class="fy_name">预计工期</view>
+        <input class="fy_inp" type="number" bindchange="bindDate" value="{{xqlist.predict}}"></input>
+        <view class="fy_drop">
+          <picker bindchange="bindPickerDay" value="{{day}}" range="{{tian}}">
+            <view class="time hengxiang">
+              <view class="time_dy">{{tian[day]}}</view>
+              <view class="time_ig">
+                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <!-- 按钮 -->
+      <view class="but hengxiang">
+        <view class="but_close" bindtap="bindClose">关闭</view>
+        <view class="but_con" bindtap="bindCon">确认雇佣</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="shuju" wx:if="{{messageList.length==0}}">
+  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <view>暂无数据</view>
+</view>
