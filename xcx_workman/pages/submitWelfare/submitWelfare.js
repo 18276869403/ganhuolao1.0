@@ -2,6 +2,8 @@
 const app = getApp()
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const utils = require('../../utils/util.js')
+
 Page({
 
   /**
@@ -11,12 +13,21 @@ Page({
     viewUrl: api.viewUrl,
     startdate: '选择活动时间',
     enddate: '选择截止时间',
-    picIurl:'',
+    // 添加参数
+    activityname:'',
+    activityCompany:'',
+    activityrenshu:'',
+    activitycontent:'',
+    startdate:'',
+    enddate:'',
     picIurl1:'',
+    picIurl:'',
+    newDate:'',
     piclist:[],
     workcityname:'',
     workareaname:''
   },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -24,23 +35,28 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.getcity()
+    this.setData({
+      newDate:utils.newDate(),
+      startdate:'选择活动时间',
+      enddate:'选择截止时间'
+    })
+    console.log(this.data.newDate)
   },
   // 发布活动
   fabugongyi(){
+    var that = this
     var data = {
       id: app.globalData.wxid,
-      hireTitle:that.data.activityname,
-      hireTitle:that.data.activityCompany,
-      hireTitle:that.data.activityrenshu,
-      hireTitle:that.data.activitycontent,
-      hireTitle:that.data.startdate,
-      hireTitle:that.data.enddate,
-      hireTitle:that.data.picIurl1,
+      title:that.data.activityname,
+      company:that.data.activityCompany,
+      activityNum:that.data.activityrenshu,
+      content:that.data.activitycontent,
+      activityTime:that.data.startdate,
+      endTime:that.data.enddate,
+      pic:that.data.picIurl1,
     }
     console.log(data)
-    debugger
-    qingqiu.get("", data, function (re) {
+    qingqiu.get("addActivity", data, function (re) {
       if (re.success == true) {
         wx.showToast({
           title: '发布成功',
@@ -50,7 +66,7 @@ Page({
         wx.redirectTo({
           url: '../Welfare/Welfare',
         })
-      } else {
+      } else { 
         wx.showToast({
           title: re.message,
           icon: 'none',
@@ -66,10 +82,14 @@ Page({
     })
   },
   //获取主办单位
-  activityCompany: function (e) {
+  activityCompanyinput: function (e) {
     this.setData({
       activityCompany: e.detail.value
     })
+  },
+  //
+  activitynameblur:function(e){
+
   },
   //获取招募人数
   activityrenshu: function (e) {
@@ -82,6 +102,11 @@ Page({
     this.setData({
       activitycontent: e.detail.value
     })
+  },
+  activitycontentblur:function(e){
+    // this.setData({
+      
+    // })
   },
    // 活动时间
    bindDateChange: function (e) {

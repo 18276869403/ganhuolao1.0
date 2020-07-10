@@ -58,9 +58,9 @@
 			</view>
 			<view class="sign-view">
 				<button open-type="share" class="sharebutton">
-					<image src="{{viewUrl}}static/image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image>
+					<image src="{{viewUrl}}static/image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image> 
 				</button>
-			</view>
+			</view> 
 		</view>
 		<!-- 接单报名人员 -->
 		<view class="content-content zongxiang" wx-if="{{1==1}}">

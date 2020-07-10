@@ -2,26 +2,19 @@
 const app = getApp()
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const utils = require('../../utils/util.js')
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     viewUrl: api.viewUrl,
-    isShowConfirm:false,
-    gongyilist:[{
-      id:1,
-      title:'七月敬老活动',
-      content:'关爱老人，关爱留守儿童',
-      time:'2020-7-20'
-    },{
-      id:2,
-      title:'七月敬老活动',
-      content:'关爱老人，关爱留守儿童',
-      time:'2020-7-20'
-    }],
-    signName:'',
-    signPhone:''
+    isShowConfirm:false, // 报名弹窗
+    gongyilist:[],  // 活动集合
+    titleText:'', // 搜索框
+    signName:'',  //报名人数
+    signPhone:'', //报名电话
+    pageNo:1
   },
 
   // 弹窗
@@ -49,12 +42,40 @@ Page({
       isShowConfirm: false,
     })
   },
-
+  getText:function(e){
+    console.log("搜索内容",e.detail.value)
+    this.setData({
+      titleText:e.detail.value
+    })
+  },
+  // 搜索
+  getGoods:function(){
+    this.getActivity()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getActivity()
+  },
+  // 获取公益活动列表
+  getActivity:function(){
+    var that = this
+    var data = {
+      pageNo:that.data.pageNo,
+      pageSize:10
+    }
+    if(that.data.titleText != '' || that.data.titleText != null || that.data.titleText != undefined){
+      data.title = that.data.titleText
+    }
+    qingqiu.get("getActivityList",data,function(res){
+      console.log('公益活动列表',res)
+      if(res.success == true){
+        that.setData({
+          gongyilist:res.result.records
+        })
+      }
+    })
   },
   // 公益详情
   WelfareDetail:function(){
@@ -69,7 +90,7 @@ Page({
   },
   // 发布工艺活动
   submitWelfare:function(){
-    wx.navigateTo({
+    wx.navigateTo({ 
       url: '../submitWelfare/submitWelfare',
     })
   },
