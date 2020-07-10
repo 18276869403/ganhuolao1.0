@@ -43,13 +43,17 @@ Page({
       sign_Phone:that.data.signPhone,
       activityId:that.data.activityId
     }
-    debugger
+    console.log(data)
     qingqiu.get("insertActivitySign",data,function(res){
+      console.log(res)
       if(res.success == true){
         wx.showToast({
           title: '报名成功',
           icon: 'none',
           duration: 2000
+        })
+        that.setData({
+          isShowConfirm: false,
         })
       }
     },'post')

@@ -529,16 +529,19 @@ page {
   padding-bottom: 2vh;
   background-color: white;
   text-align: center;
+  border-radius:6px;
 }
 
 .toast-input {
   margin-left: 5%;
   margin-right: 5%;
   border: 1px solid #ddd;
-  padding-left: 2vh;
-  padding-right: 2vh;
-  padding-top: 1vh;
-  padding-bottom: 1vh;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  height: 48rpx;
+  line-height: 48rpx;
+  /* padding-top: 1vh;
+  padding-bottom: 1vh; */
 }
 
 .toast-button {
@@ -555,6 +558,11 @@ page {
   width: 50%;
   background-color: white;
   text-align: center;
+}
+
+.button-img{
+  width: 199rpx;
+  height: 66rpx;
 }
 
 .button1 button {
@@ -575,8 +583,13 @@ page {
 
 .key-class {
   width: 30%;
+  font-size: 26rpx;
+  font-weight: 600;
+  text-align: left;
 }
 
 .value-class {
   width: 70%;
+  font-size: 26rpx;
+  text-align: right;
 }
