@@ -46,6 +46,54 @@ Page({
   // 发布活动
   fabugongyi(){
     var that = this
+    if(that.data.activitynameinput==''){
+      wx.showToast({
+        title: '请输入活动名称',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
+    if(that.data.activityCompany==''){
+      wx.showToast({
+        title: '请输入主办单位',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
+    if(that.data.activityrenshu==''){
+      wx.showToast({
+        title: '请输入招募人数',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
+    if(that.data.startdate=='选择活动时间'){
+      wx.showToast({
+        title: '请输入活动时间',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
+    if(that.data.enddate=='选择截止时间'){
+      wx.showToast({
+        title: '请输入截止时间',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
+    if(that.data.picIurl1==''){
+      wx.showToast({
+        title: '请上传图片',
+        icon: 'none',
+        duration: 3000
+      })
+      return
+    }
     var data = {
       wxUserId: app.globalData.wxid,
       title:that.data.activitynameinput,
