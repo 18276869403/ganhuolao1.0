@@ -41,7 +41,8 @@ Page({
     var data={
       signName:that.data.signName,
       signPhone:that.data.signPhone,
-      activityId:that.data.activityId
+      activityId:that.data.activityId,
+      wxUserId:app.globalData.wxid
     }
     console.log(data)
     qingqiu.get("insertActivitySign",data,function(res){
