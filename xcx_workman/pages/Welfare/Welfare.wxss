@@ -511,7 +511,7 @@ page {
   opacity: 1;
   width: 70%;
   margin-left: 15%;
-  margin-top: 60%;
+  margin-top: 50%;
 }
 
 .toast-title {
