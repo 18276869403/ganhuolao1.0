@@ -841,7 +841,7 @@ Page({
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
                   wx.switchTab({
-                    url: '../mine/mine',
+                    url: '../thePublic/thePublic',
                   })
                 }, "POST")
               }
