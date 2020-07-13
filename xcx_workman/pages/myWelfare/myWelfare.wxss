@@ -32,7 +32,11 @@ page {
   font-weight: 400;
   color: #e02323;
   line-height: 98rpx;
+}
+
+.bian {
   border-bottom: 6rpx solid #e02323;
+  padding-bottom: 30rpx;
 }
 
 .top-item-normal {
