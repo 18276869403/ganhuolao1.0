@@ -138,6 +138,7 @@ Page({
     num: 1,
     yijiname1: ''
   },
+
   // 获取Token
   getAccessToken: function () {
     qingqiu.getAccessTokenApplets(function () {})
@@ -320,6 +321,7 @@ Page({
             icon: 'success',
             duration: 2000
           })
+          
           setTimeout(function () {
             wx.switchTab({
               url: '../need/need',

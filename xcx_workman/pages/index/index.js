@@ -69,13 +69,23 @@ Page({
   },
   getUserInfo: function () {
     var that = this
-    for (let obj of app.globalData.nextOpenid) {
-      wx.request({
-        url: 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' + app.globalData.access_TokenOff + '&openid=' + obj + '&lang=zh_CN',
-        success: function (res) {
-          console.log('获取用户信息', res)
-        }
-      })
+    console.log(app.globalData.nextOpenid)
+    if (app.globalData.nextOpenid.length > 0) {
+      for (let i = 0; i < app.globalData.nextOpenid[0].length; i++) {
+        wx.request({
+          url: 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' + app.globalData.access_TokenOff + '&openid=' + app.globalData.nextOpenid[0][i] + '&lang=zh_CN',
+          success: function (res) {
+            console.log('获取用户信息', res)
+            var data = {
+              openid: res.data.openid,
+              unionid: res.data.unionid
+            }
+            qingqiu.get("addPublicUser", data, function (res) {
+              console.log(res)
+            }, "post")
+          }
+        })
+      }
     }
   },
   // 授权
@@ -89,6 +99,8 @@ Page({
           wx.login({
             success: function (res) {
               var code = res.code
+              var encryptedData = res.encryptedData
+              var iv = res.iv
               console.log(code)
               // qingqiu.get("getOpenIdbyjscode", {
               //   js_code: code
@@ -112,7 +124,7 @@ Page({
                     backup1: openid
                   }
                   qingqiu.get("getKeyInfo", data, function (re) {
-                    console.log(re)
+                    console.log('保存后的用户信息', re)
                     app.globalData.wxid = re.result.wxUser.id
                     if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
                       app.globalData.sqgl = 1
@@ -221,35 +233,36 @@ Page({
     var NEXT_OPENID = ''
     var total = 0
     var count = 0
-    do {
-      wx.request({
-        url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
-        success: function (res) {
-          console.log('公众号用户', res)
-          if (res.data.next_openid != '') {
-            NEXT_OPENID = res.data.next_openid
-            total = res.data.total
-            count = res.data.count + count
-            app.globalData.nextOpenid = res.data.data.openid
+    app.globalData.nextOpenid = []
+    qingqiu.get("getPublicUserById", null, function (res) {
+      console.log('最后一条数据', res)
+      if (res.result != null) {
+        NEXT_OPENID = res.result.openid
+      }
+      do {
+        wx.request({
+          url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
+          success: function (re) {
+            console.log('公众号用户', re)
+            if (re.data.next_openid != '') {
+              NEXT_OPENID = re.data.next_openid
+              total = re.data.total
+              count = re.data.count + count
+              app.globalData.nextOpenid.push(re.data.data.openid)
+            }
           }
-        }
-      })
-    } while (count < total);
+        })
+      } while (count < total);
+    })
   },
-  onShow: function (options) {
+  onShow: function () {
     this.getTokenValue()
     wx.showShareMenu({
       withShareTicket: true
     })
     //获得dialog组件
     this.dialog = this.selectComponent("#dialog");
-    // 获取二维码参数
-    // var scene = decodeURIComponent(options.scene);
-    // if (scene != undefined) {
-    //   wx.setStorageSync('openid', scene)
-    // } else {
-    //   wx.setStorageSync('openid', '')
-    // }
+
     // this.getAddress() // 获取位置信息
     this.chushishouquan()
     this.firstbanner() //banner
@@ -313,6 +326,17 @@ Page({
         backup1: 1,
         oneAreaId: app.globalData.oneCity.id
       }) //商品
+    }
+  },
+  onLoad: function (options) {
+    // 获取二维码参数
+    if (options.scene != undefined) {
+      var scene = decodeURIComponent(options.scene);
+      if (scene != undefined) {
+        wx.setStorageSync('openid', scene)
+      } else {
+        wx.setStorageSync('openid', '')
+      }
     }
   },
   // onLoad: function(options) {

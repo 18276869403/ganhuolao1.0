@@ -91,6 +91,8 @@ Page({
 			AUDIO.onEnded((res)=>{
 				this.playMsgid=null;
 			});
+			AUDIO.onPlay(() => { AUDIO.offCanplay() });
+			AUDIO.onEnded(() => { wx.hideLoading() });//我这里不用 onstop
 			// #ifndef H5
 			//录音开始事件
 			RECORDER.onStart((e)=>{
@@ -295,10 +297,38 @@ Page({
 					}) 
 				}); 
 			},
+			
+  onUser: function(cb) {
+    var that = this
+    wx.login({
+      success: function(res) {
+        qingqiu.get("getKeyInfo", {
+          code: res.code
+        }, function(re) {
+          app.globalData.wxid = re.result.wxUser.id
+          if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
+            app.globalData.sqgl = 1
+          }
+          app.globalData.openid = re.result.openId
+					app.globalData.wxState = re.result.wxUser.wxState
+					if(cb){
+						cb();
+					}
+        }, "POST")
+      }
+    })
+  },
 			// 加载初始页面消息
 			getMsgList(){ 
 				// 创建websocket链接
-				this.createWebsocket(app.globalData.wxid);
+				if(app.globalData.wxid){
+					this.createWebsocket(app.globalData.wxid);
+				} else {
+					this.onUser(res=>{
+						this.getMsgList
+					});
+					return;
+				}
 				this.setData({
 					isHistoryLoading : true,//参数作为进入请求标识，防止重复请求
 					scrollAnimation  : false //关闭滑动动画
@@ -642,8 +672,8 @@ Page({
 				});  
 			},
 			// 添加图片消息到列表
-			addImgMsg(msg){
-				console.log(msg)
+			addImgMsg(msg){ 
+				console.log(msg) 
 				msg.content = this.setPicSize(msg.content);
 				this.data.msgImgList.push(msg.content.url);
 				this.data.msgList.push(msg);
@@ -753,17 +783,34 @@ Page({
 				this.setData({
 					playMsgid : msg.id,
 					AUDIO : msg.content.url
-				}); 
-				AUDIO.stop();
-				AUDIO.onError = (e)=>{
-					console.log("语音播放失败", e);
-				}
-				AUDIO.src = msg.content.url;
-				wx.nextTick(()=>{ 
-					wx.downloadFile({ url: AUDIO.src })
-					// AUDIO.autoplay = true;
-					AUDIO.play();
-				});
+				});  
+				// AUDIO.onError = (e)=>{
+				// 	console.log("语音播放失败", e);
+				// }
+				// AUDIO.src   = msg.content.url;
+				// AUDIO.title = "语音留言";
+				// AUDIO.autoplay = true;
+				//  wx.nextTick(()=>{ 
+				// 	AUDIO.play();
+				//  });
+				
+			// 	if( AUDIO.src == msg.content.url ){ 
+			// 		AUDIO.play(); 
+			// 	} else { //不一致时 要用 onCanplay 才不会报错和出奇怪的问题 
+			// 		AUDIO.src = msg.content.url ; 
+			// 		AUDIO.onCanplay(() => { 
+			// 			AUDIO.play(); 
+			// 	  }) 
+			// }
+
+				// 背景播放
+				var am   = wx.getBackgroundAudioManager();
+				am.src   =  msg.content.url;
+				am.onError = function(ex){
+					console.log(ex);
+				} 
+				am.title =  "语音留言";
+				am.play();  
 			},
 			// 录音开始
 			voiceBegin(e){
@@ -779,7 +826,8 @@ Page({
 				}); 
 				RECORDER.start({  
 						// format: 'aac' 
-						format: 'mp3' 
+						format: 'wav'
+						// format: 'mp3' 
 				});//录音开始, 
 			},
 			//录音开始UI效果

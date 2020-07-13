@@ -31,9 +31,6 @@ const Get = function(url, data, huidiao, method = 'GET') {
 			if (res.statusCode == 401) {
 				huidiao("用户需要重新登入")
 				wx.removeStorageSync('yrzuser');
-				// uni.redirectTo({
-				// 	url: "../login/login"
-				// })
 			} else {
 				huidiao(res.data)
 			}

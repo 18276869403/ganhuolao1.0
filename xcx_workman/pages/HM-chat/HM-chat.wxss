@@ -26,6 +26,7 @@
 /* 文章场景相关 */
 page {
   background-color: #e5e5e5;
+  padding-bottom: 50rpx;
 }
 @font-face {
   font-family: "HMfont-home";

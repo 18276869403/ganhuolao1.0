@@ -72,6 +72,7 @@
       <text style="font-size:14px;">¥</text> 0 元
     </view> -->
 		<view class="bottom-right" bindtap="lijifabu">立即发布</view>
+		
 	</view>
 </view>
 

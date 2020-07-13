@@ -1,6 +1,6 @@
 var api = require('./config.js')
-// const baseUrl = "http://miss.it-ys.com:91/work-boot/"  
-const baseUrl = "http://192.168.1.248:8080/work-boot/"  
+const baseUrl = "http://miss.it-ys.com:91/work-boot/"  
+// const baseUrl = "http://192.168.1.250:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.233:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.235:8080/work-boot/"  
 
@@ -8,6 +8,8 @@ const baseUrl = "http://192.168.1.248:8080/work-boot/"
 const WxUserAdd = baseUrl + "pc/hall/wxUserAdd"
 // 登录
 const GetKeyInfo = baseUrl + "work/wxLogin/getKeyInfo"
+// 公众号推送 
+const GetUnionid = baseUrl + "work/wxLogin/GetUnionid"
 // 图片上传
 const Upload = baseUrl + "sys/common/upload"
 // 获取广告列表
@@ -58,6 +60,12 @@ const getOpenIdbyjscode = baseUrl + "pc/wx_small_app/get_openid_by_js_code"
 const getActivityList = baseUrl + "pc/hall/getActivityList"
 // 发布公益活动
 const addActivity = baseUrl + "pc/hall/addActivity"
+// 图片过滤
+const checkPic = baseUrl + "work/wxLogin/checkPic"
+// 公众号用户添加
+const addPublicUser = baseUrl + "pc/hall/addPublicUser"
+// 获取数据库最后一个
+const getPublicUserById = baseUrl + "pc/hall/getPublicUserById"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -86,5 +94,9 @@ module.exports = {
   myMessage:myMessage,
   getOpenIdbyjscode:getOpenIdbyjscode,
   getActivityList:getActivityList,
-  addActivity:addActivity
+  addActivity:addActivity,
+  GetUnionid:GetUnionid,
+  checkPic:checkPic,
+  addPublicUser:addPublicUser,
+  getPublicUserById:getPublicUserById
 };

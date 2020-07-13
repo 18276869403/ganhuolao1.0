@@ -149,6 +149,7 @@ Page({
 
   // 确认雇佣
   bindCon: function() {
+    var that = this
     if(app.globalData.wxid == ""||app.globalData.wxid == null){
       this.onUser()
     }
@@ -167,6 +168,42 @@ Page({
           title: '雇佣成功',
           icon:'success',
           duration:2000
+        })
+        var obj = {
+          wxUserId:that.data.workerDetail.id
+        }
+        qingqiu.get("getPublicUserById",obj,function(res){
+          console.log(res)
+          var unionid = res.result.unionid
+          var openid = res.result.openid
+          var mesdata = {
+            first:{
+              value:"干活佬有人联系您啦！"
+            },
+            keyword1:{
+              value:"有人雇佣你啦！"
+            },
+            keyword2:{
+              value:"2020-07-13 20:20:05"
+            },
+            remark:{
+              value:"干活佬,助力工人/商家接单！"
+            }
+          }
+          var objdata = {
+            touser:openid,
+            template_id:"JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+            appid:"wx14e076d27e942480",
+            data:mesdata
+          }
+          wx.request({
+            url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+app.globalData.access_TokenOff,
+            data:objdata,
+            method:'POST',
+            success:function(res){
+              console.log(res)
+            }
+          })
         })
         setTimeout(function(){
           wx.navigateTo({
