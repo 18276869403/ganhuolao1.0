@@ -1,6 +1,6 @@
 var api = require('./config.js')
-// const baseUrl = "http://miss.it-ys.com:91/work-boot/"
-const baseUrl = "http://192.168.1.248:8080/work-boot/" 
+const baseUrl = "http://miss.it-ys.com:91/work-boot/"
+// const baseUrl = "http://192.168.1.250:8080/work-boot/" 
 // const baseUrl = "http://192.168.1.233:8080/work-boot/" 
 // const baseUrl = "http://192.168.1.235:8080/work-boot/" 
 
@@ -60,6 +60,14 @@ const localHireAdd = baseUrl + "work/loclahire/localHireAdd"
 const getActivitySign = baseUrl + "pc/hall/getActivitySign"
 // 公益活动-我要报名
 const insertActivitySign = baseUrl + "pc/hall/insertActivitySign"
+// 公益活动-报名人数+1
+const updateActivity = baseUrl + "pc/hall/updateActivity"
+// 公益活动-我发起的公益活动
+const myActivityList = baseUrl + "pc/hall/myActivityList"
+// 公益活动-我参与的公益活动
+const myActivitySignList = baseUrl + "pc/hall/myActivitySignList"
+// 公益活动-删除公益活动
+const delActivity = baseUrl + "pc/hall/delActivity"
 
 module.exports = {
   twoClassList:twoClassList,
@@ -90,5 +98,9 @@ module.exports = {
   queryloclaById:queryloclaById,
   localHireAdd:localHireAdd,
   getActivitySign:getActivitySign,
-  insertActivitySign:insertActivitySign
+  insertActivitySign:insertActivitySign,
+  updateActivity:updateActivity,
+  myActivityList:myActivityList,
+  myActivitySignList:myActivitySignList,
+  delActivity:delActivity
 };
