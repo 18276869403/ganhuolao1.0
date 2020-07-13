@@ -58,7 +58,8 @@ Page({
     this.setData({
       gongyilist: gongyilist,
       piclist:piclist,
-      activityid:activityid
+      activityid:activityid,
+      wxUserId:app.globalData.wxid
     })
     console.log(gongyilist)
     this.SelectjiedanList()
@@ -112,7 +113,15 @@ Page({
       url: '../submitNeeds/submitNeeds?type=1&id=' + this.data.xqxqlist.id,
     })
   },
-  
+  // 需求人数+1
+  AddActivity(){
+    var data = {
+      needId:that.data.id,
+      wxUserId:app.globalData.wxid
+    }
+    qingqiu.get("updateActivity", data, function(re) {
+    },'put')
+  },
   // 需求报名
   baoming(){
     var that = this
@@ -135,6 +144,7 @@ Page({
                 icon:'success',
                 duration:2000
               })
+              that.AddActivity()
               that.SelectjiedanList()
             }else{
               wx.showToast({

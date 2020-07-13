@@ -52,10 +52,10 @@
 		</view>
 		<!-- 按钮 -->
 		<view class="content-sign hengxiang">
-			<view class="sign-view" wx:if="{{1!=1}}">
+			<view class="sign-view" wx:if="{{wxUserId==gongyilist.wxId}}">
 				<image src="{{viewUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
 			</view>
-			<view class="sign-view" wx:if="{{1==1}}">
+			<view class="sign-view" wx:if="{{wxUserId!=gongyilist}}">
 				<image src="{{viewUrl}}static/image/woyaosign.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view">
@@ -65,7 +65,7 @@
 			</view> 
 		</view>
 		<!-- 接单报名人员 -->
-		<view class="content-content zongxiang" wx:if="{{jiedanList.length>0}}">
+		<view class="content-content zongxiang" wx:if="{{jiedanList.length>0}}&&{{wxUserId==gongyilist.wxId}}">
 			<view class="content-content-title">报名人员</view>
 			<!-- wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}" -->
 			<view class="content-jiedan zongxiang"  wx:for="{{jiedanList}}">
