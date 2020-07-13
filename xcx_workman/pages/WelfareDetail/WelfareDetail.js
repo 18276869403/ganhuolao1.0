@@ -161,17 +161,17 @@ Page({
     })
   },
   // 需求删除
-  shancuoxuqiu() {
+  deleteActive() {
     var that = this
     var data={
-      id: that.data.id
+      id: that.data.activityid
     }
     wx.showModal({
       title:'提示',
       content:'您确定删除吗？',
       success:function(res){
         if(res.confirm){
-          qingqiu.get("delYneedAndNeedSign", data, function(re) {
+          qingqiu.get("delActivity", data, function(re) {
             if (re.success == true) {
                wx.showToast({
                  title: '删除成功',
@@ -180,7 +180,7 @@ Page({
                })
                setTimeout(function(){
                 wx.redirectTo({
-                  url: '../myneeds/myneeds',
+                  url: '../Welfare/Welfare',
                 })
                },1000)
               } else {
