@@ -93,6 +93,11 @@ Page({
     qingqiu.get("getActivityList",data,function(res){
       console.log('公益活动列表',res)
       if(res.success == true){
+        // for(let obj of res.result.records){
+        //   obj.createTime=obj.createTime.substring(0,16)
+        //   obj.endTime=obj.endTime.substring(0,16)
+        //   obj.activityTime=obj.activityTime.substring(0,16)
+        // }
         that.setData({
           gongyilist:res.result.records
         })
