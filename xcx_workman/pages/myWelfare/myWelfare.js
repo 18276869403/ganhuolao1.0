@@ -20,17 +20,7 @@ Page({
       tid:2,
       name:'我参加的公益'
     }],
-    gongyilist:[{
-      id:1,
-      title:'七月敬老活动',
-      content:'于本月20日组织爱心人士前往万载养老院，针对老师做些基本护理工作，帮助老人打扫房间、清理敬老院；陪老人聊天、散步、锻炼身体；为老人奉上丰富多彩的文艺表演活动；进行各种各样的小活动。欢迎爱心人士踊跃报名',
-      time:'2020-7-20'
-    },{
-      id:2,
-      title:'七月敬老活动',
-      content:'关爱老人，关爱留守儿童',
-      time:'2020-7-20' 
-    }],
+    gongyilist:[],
     pageNo:1,
   },
 
@@ -49,7 +39,7 @@ Page({
     })
     that.getActivity()
   },
-  // 获取公益活动列表
+  // 获取我发布的公益活动
   getActivity:function(){
     var that = this
     var data = {
@@ -57,14 +47,25 @@ Page({
       pageNo:that.data.pageNo,
       pageSize:10
     }
-    qingqiu.get("getActivityList",data,function(res){
-      console.log('我的公益活动列表',res)
-      if(res.success == true){
-        that.setData({
-          gongyilist:res.result.records
-        })
-      }
-    })
+    if(that.data.GyTypeid==1){
+      qingqiu.get("myActivityList",data,function(res){
+        console.log('我发布的公益活动',res)
+        if(res.success == true){
+          that.setData({
+            gongyilist:res.result.records
+          })
+        }
+      })
+    }else{
+      qingqiu.get("myActivitySignList",data,function(res){
+        console.log('我参加的公益活动',res)
+        if(res.success == true){
+          that.setData({
+            gongyilist:res.result.records
+          })
+        }
+      })
+    }
   },
   // 公益详情
   WelfareDetail:function(e){
