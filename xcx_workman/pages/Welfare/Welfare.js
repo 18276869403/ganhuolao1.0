@@ -53,6 +53,7 @@ Page({
           duration: 2000
         })
         qingqiu.get("updateActivity",{id:that.data.activityId},function(res){
+          console.log(res)
           that.setData({
             isShowConfirm: false,
           })
