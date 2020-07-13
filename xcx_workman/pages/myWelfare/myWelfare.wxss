@@ -15,7 +15,7 @@ page {
 .hengxiangs{
   display: flex;
   flex-direction: row;
-  height: 98rpx;
+  height: 80rpx;
   width: 94%;
 }
 
