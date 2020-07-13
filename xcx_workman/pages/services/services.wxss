@@ -433,7 +433,7 @@ page {
   padding-left: 3%;
   color: rgba(102, 102, 102, 1);
   height: 36rpx;
-  line-height: 36rpx;
+  line-height: 42rpx;
 }
 
 .content-business-bottom-text-type {
