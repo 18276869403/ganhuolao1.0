@@ -145,11 +145,13 @@
 							<view class="content-business-bottom-text">{{item.shopName}}</view>
 						</view>
 						<view class="content-business-bottom-type hengxiang">
-							<view class="content-icon">■</view>
+							<!-- <view class="content-icon">■</view> -->
+							<view class="dot"></view>
 							<view class="content-business-bottom-text-type">{{item.oneClassName}}</view>
 						</view>
-						<view class="content-business-bottom-type hengxiang" wx:if="{{item.twoClassName!=''}}">
-							<view class="content-icon">■</view>
+						<view class="content-business-bottom-type hengxiang">
+							<!-- <view class="content-icon" wx:if="{{item.twoClassName!=''}}">■</view> -->
+							<view class="dot" wx:if="{{item.twoClassName!=''}}"></view>
 							<view class="content-business-bottom-text-type">{{item.twoClassName}}</view>
 						</view>
 					</view>
@@ -166,11 +168,12 @@
 								<view class="content-business-bottom-text">{{item.shopName}}</view>
 							</view>
 							<view class="content-business-bottom-type hengxiang">
-								■ 
+								<view class="dot"></view>
 								<view class="content-business-bottom-text-type">{{item.oneClassName}}</view>
 							</view>
 							<view class="content-business-bottom-type hengxiang">
-								<text wx:if="{{item.twoClassName}}">■</text>
+								<!-- <text wx:if="{{item.twoClassName!=''}}">■</text> -->
+								<view class="dot" wx:if="{{item.twoClassName!=''}}"></view>
 								<view class="content-business-bottom-text-type">{{item.twoClassName}}</view>
 							</view>
 						</view>
