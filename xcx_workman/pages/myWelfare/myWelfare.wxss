@@ -12,6 +12,39 @@ page {
   padding: 3%;
 }
 
+.hengxiangs{
+  display: flex;
+  flex-direction: row;
+  height: 98rpx;
+  width: 94%;
+}
+
+.xuanzhong {
+  width: 50%;
+  text-align: center;
+}
+
+.top-item-checked {
+  width: 100%;
+  text-align: center;
+  height: 98rpx;
+  font-size: 32rpx;
+  font-weight: 400;
+  color: #e02323;
+  line-height: 98rpx;
+  border-bottom: 6rpx solid #e02323;
+}
+
+.top-item-normal {
+  height: 98rpx;
+  font-size: 32rpx;
+  font-weight: 400;
+  color: #999;
+  line-height: 98rpx;
+  width: 100%;
+  text-align: center;
+}
+
 .top-title {
   width: 100%;
   margin-top: 10rpx;

@@ -2,6 +2,16 @@
 <!-- <text>pages/Welfare/Welfare.wxml</text> -->
 <view class="container">
 	<view class="hengxian"></view>
+  <view class="top hengxiangs">
+    <view wx:for="{{type}}" wx:key="key" bindtap="changetype" data-id="{{item.tid}}" class="xuanzhong">
+      <view wx:if="{{GyTypeid==item.tid}}" class="top-item-checked">
+        <text class="bian">{{item.name}}</text>
+      </view>
+      <view wx:if="{{GyTypeid!=item.tid}}" class="top-item-normal">
+        <text class="">{{item.name}}</text>
+      </view>
+    </view>
+  </view> 
 	<view class="content zongxiang">
 		<!-- 公益活动模块 -->
 		<view class="recruitment-need">
@@ -28,7 +38,7 @@
 							</view>
 						</view>
 						<view class="content-text1 text-jiequ" style="width:68%;">
-							<text>{{item.time}}</text>
+							<text>{{item.createTime}}</text>
 						</view>
 						<view class="complete-button" style="width:135rpx;" catchtap="zaixianlianxi" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}">我要报名</view>
 					</view>
