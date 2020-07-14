@@ -31,10 +31,10 @@ Page({
       openid:getApp().globalData.openid
     }
     qingqiu.get("getCode",data,function(res){
+      console.log(res)
       that.setData({
         imgurl:res.twoCodeUrl
       })
-      
       that.getImg()
     })
   },

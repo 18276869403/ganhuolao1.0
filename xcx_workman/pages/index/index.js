@@ -79,6 +79,7 @@ Page({
               unionid: res.data.unionid
             }
             qingqiu.get("addPublicUser", data, function (res) {
+              console.log(res)
             }, "post")
           }
         })
@@ -229,6 +230,7 @@ Page({
     var count = 0
     app.globalData.nextOpenid = []
     qingqiu.get("getPublicUserByIdDesc", null, function (res) {
+      console.log(res)
       if (res.result != null) {
         if(res.result.openid != ''){
           NEXT_OPENID = res.result.openid
@@ -238,6 +240,7 @@ Page({
         wx.request({
           url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
           success: function (re) {
+            console.log(re)
             if (re.data.next_openid != '') {
               if(NEXT_OPENID != re.data.next_openid){
                 app.globalData.nextOpenid.push(re.data.data.openid)
