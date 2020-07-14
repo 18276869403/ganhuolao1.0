@@ -55,7 +55,7 @@ const FormatName = function (str) {
   if (str.length > 1) {
     return temp = str.substring(0, 1) + '**';
   } else {
-    return temp
+    return str + "**"
   }
 }
 
