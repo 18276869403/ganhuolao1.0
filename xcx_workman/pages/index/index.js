@@ -125,6 +125,7 @@ Page({
                       app.globalData.sqgl = 1
                     }
                     app.globalData.openid = re.result.openId
+                    app.globalData.unionid = re.result.wxUser.unionid
                     app.globalData.wxState = re.result.wxUser.wxState
                     app.globalData.gender = re.result.wxUser.sex
                   }, 'post')
@@ -544,38 +545,67 @@ Page({
 
   // 跳转到工人入驻页面
   applyBusiness: function (e) {
+    var that =this
     var obj = e.currentTarget.dataset.typeid
-    if (obj == 1) {
-      if (app.globalData.wxState == 0) {
-        wx.showToast({
-          title: '您已入驻商家,同一微信不能入驻两种类型',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      } else {
-        wx.navigateTo({
-          url: '../applyBusiness/applyBusiness?typeid=' + obj
-        })
+    // var data={
+    //   wxUserId: app.globalData.openid
+    // }
+    qingqiu.get("getPublicUser", null, function (re) {
+      console.log(re)
+      if (re.success == true) {
+        if (re.result != null&&re.result != '') {
+          var s=''
+          for(let obj of re.result){
+            if(obj.unionid == app.globalData.unionid){
+              s=1
+            }
+          }
+          if(s!=1){
+            wx.showToast({
+            title: '请先关注公众号！',
+            icon: 'none',
+            duration: 2000
+          })
+          wx.navigateTo({
+            url: '../thePublic/thePublic'
+          })
+          return
+          }else{
+          if (obj == 1) {
+            if (app.globalData.wxState == 0) {
+              wx.showToast({
+                title: '您已入驻商家,同一微信不能入驻两种类型',
+                icon: 'none',
+                duration: 2000
+              })
+              return
+            } else {
+              wx.navigateTo({
+                url: '../applyBusiness/applyBusiness?typeid=' + obj
+              })
+            }
+          } else if (obj == 2) {
+            if (app.globalData.wxState == 1) {
+              wx.showToast({
+                title: '您已入驻工人,同一微信不能入驻两种类型',
+                icon: 'none',
+                duration: 2000
+              })
+              return
+            } else {
+              wx.navigateTo({
+                url: '../applyBusiness/applyBusiness?typeid=' + obj
+              })
+            }
+          } else {
+            wx.navigateTo({
+              url: '../applyBusiness/applyBusiness?typeid=' + obj
+            })
+          }
+        }
+        }
       }
-    } else if (obj == 2) {
-      if (app.globalData.wxState == 1) {
-        wx.showToast({
-          title: '您已入驻工人,同一微信不能入驻两种类型',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      } else {
-        wx.navigateTo({
-          url: '../applyBusiness/applyBusiness?typeid=' + obj
-        })
-      }
-    } else {
-      wx.navigateTo({
-        url: '../applyBusiness/applyBusiness?typeid=' + obj
-      })
-    }
+    })
   },
   // 商家促销
   cuxiao: function () {
