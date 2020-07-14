@@ -62,15 +62,15 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.data.goodsLists=[]
-    this.data.pageNo=1
     this.mygoodsList()
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.data.isLastPage=false
-    this.data.pageNo=1
-    this.data.goodsLists=[]
+    this.setData({
+      isLastPage:false,
+      pageNo:1,
+      goodsLists:[]
+    })
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
