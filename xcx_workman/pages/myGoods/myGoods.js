@@ -9,42 +9,43 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
-    goodsList: [{
-        id: 1,
-        img: '../image/top.png', 
-        name: '室内F-10木门（含五金件五',
-        price: '299'
-      },
-      {
-        id: 2,
-        img: '../image/top.png',
-        name: '室内F-10木门（含五金件五',
-        price: '299'
-      },
-      {
-        id: 3,
-        img: '../image/top.png',
-        name: '室内F-10木门（含五金件五',
-        price: '299'
-      },
-      {
-        id: 4,
-        img: '../image/top.png',
-        name: '室内F-10木门（含五金件五',
-        price: '299'
-      },
-      {
-        id: 5,
-        img: '../image/top.png',
-        name: '室内F-10木门（含五金件五',
-        price: '299'
-      },
-      {
-        id: 6,
-        img: '../image/top.png',
-        name: '室内F-10木门（10木门（含五金件五10木门（含五金件五含五金件五',
-        price: '299'
-      }
+    goodsList: [
+      // {
+      //   id: 1,
+      //   img: '../image/top.png', 
+      //   name: '室内F-10木门（含五金件五',
+      //   price: '299'
+      // },
+      // {
+      //   id: 2,
+      //   img: '../image/top.png',
+      //   name: '室内F-10木门（含五金件五',
+      //   price: '299'
+      // },
+      // {
+      //   id: 3,
+      //   img: '../image/top.png',
+      //   name: '室内F-10木门（含五金件五',
+      //   price: '299'
+      // },
+      // {
+      //   id: 4,
+      //   img: '../image/top.png',
+      //   name: '室内F-10木门（含五金件五',
+      //   price: '299'
+      // },
+      // {
+      //   id: 5,
+      //   img: '../image/top.png',
+      //   name: '室内F-10木门（含五金件五',
+      //   price: '299'
+      // },
+      // {
+      //   id: 6,
+      //   img: '../image/top.png',
+      //   name: '室内F-10木门（10木门（含五金件五10木门（含五金件五含五金件五',
+      //   price: '299'
+      // }
     ],
     goodsLists:[],
     spmyid:'',
@@ -128,8 +129,9 @@ Page({
   },
   //置顶
   onemyGood:function(e){
+    var  that=this
     var spid =e.currentTarget.dataset.myspid;
-    this.data.spid=spid
+    that.data.spid=spid
     var data={
       id: spid 
     }
@@ -140,9 +142,9 @@ Page({
         icon:'none',
         duration:2000
       })
+      that.onLoad()
     }
   },'put')
-  this.onLoad()
   },
 
   // 编辑商品
