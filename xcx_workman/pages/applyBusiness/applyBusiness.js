@@ -942,7 +942,6 @@ Page({
       }, 'post')
     }
   },
-
   // 图片上传（对接完成）
   upimg: function (e) {
     var type = e.currentTarget.dataset.type
