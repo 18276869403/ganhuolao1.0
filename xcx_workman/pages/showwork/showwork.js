@@ -8,31 +8,6 @@ const api = require('../../utils/config.js')
 Page({
   data: {
     viewUrl:api.viewUrl,
-    // showList: [{
-    //   id: 1,
-    //   pinglun: '120000',
-    //   liulan: '1200000',
-    //   url:'../image/top.png'
-    // },
-    // {
-    //   id: 2,
-    //   pinglun: '12',
-    //   liulan: '12',
-    //   url: '../image/chuang.png'
-    // },
-    // {
-    //   id: 3,
-    //   pinglun: '12',
-    //   liulan: '12',
-    //   url: '../image/chuang.png'
-    // },
-    //   {
-    //     id: 4,
-    //     pinglun: '12',
-    //     liulan: '12',
-    //     url: '../image/top.png'
-    //   },
-    // ],
     showList:[],
     // imgList: [
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
@@ -147,14 +122,28 @@ Page({
       } 
     })
   },
-  // // 晒晒点击事件
-  // imgYu:function(event){
-  //   var src = event.currentTarget.dataset.src;
-  //   wx.previewImage({
-  //     current: src,
-  //     urls: this.data.imgList
-  //   })
-  // },
+  // 晒晒点赞
+  dianzan:function(e){
+    var that=this
+    var shaid = e.currentTarget.dataset.shaid;
+    var data={
+      wxCaseId:shaid
+    }
+    qingqiu.get("userLikes",data,function(re) {
+      console.log(re)
+      if (re.success == true) {
+        for(let obj of that.data.showList){
+          if(obj.id==shaid){
+            obj.giveGood+=1
+            obj.backup1=1
+          }
+        }
+        that.setData({
+          showList:that.data.showList
+        })
+      } 
+    })
+  },
   // 发布弹窗显示
   showModal1: function () {
     this.setData({
