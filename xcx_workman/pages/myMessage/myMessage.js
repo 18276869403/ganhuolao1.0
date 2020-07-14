@@ -72,8 +72,16 @@ Page({
     var that = this;
     var id = e.currentTarget.dataset.id
     if(id == 1){
+      this.data.messageList=[]
+      this.data.formymessageList=[]
+      this.data.isLastPage=false
+      this.data.pageNo=1
       this.mymessageList()
     }else{
+      this.data.messageList=[]
+      this.data.formymessageList=[]
+      this.data.isLastPage=false
+      this.data.pageNo=1
       this.givemymessageList()
     }
     that.setData({
@@ -126,7 +134,7 @@ givemymessageList() {
     console.log(res)
   if (res.success == true) {
     if (res.result != null) {
-      if(re.result==''){
+      if(res.result==''){
         that.data.isLastPage=true
         return
       }
