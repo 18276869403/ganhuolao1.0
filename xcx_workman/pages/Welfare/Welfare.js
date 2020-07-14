@@ -44,6 +44,27 @@ Page({
       activityId:that.data.activityId,
       wxUserId:app.globalData.wxid
     }
+    if(data.signName == "" || data.signName == undefined){
+      wx.showToast({
+        title: '请输入姓名',
+        icon:'none'
+      })
+      return
+    }
+    if(data.signPhone == "" || data.signPhone == undefined){
+      wx.showToast({
+        title: '请输入联系电话',
+        icon:'none'
+      })
+      return 
+    }
+    if(data.signPhone.length != 11){
+      wx.showToast({
+        title: '请输入11位数的联系电话',
+        icon:'none'
+      })
+      return
+    }
     console.log(data)
     qingqiu.get("insertActivitySign",data,function(res){
       console.log(res)
@@ -59,6 +80,12 @@ Page({
             isShowConfirm: false,
           })
         },"PUT")
+      }else{
+        wx.showToast({
+          title: res.message,
+          icon:'none'
+        })
+        return
       }
     },'post')
     that.setData({
