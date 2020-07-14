@@ -30,15 +30,33 @@ Page({
     predict: '',
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年'],
-    messageList: []
+    messageList: [],
+    isLastPage:false,
+    pageNo:1
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    this.data.messageList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
+  },
+   // 上拉功能
+   onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon:'none',
+        duration:2000
+      })
+        return
+    }
+    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.getmyEmploy()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -101,10 +119,14 @@ Page({
     var data = ""
     if (that.data.needsTypeid == 1) {
       data = {
+        pageNo:that.data.pageNo,
+        pageSize:10,
         wxCaseId: app.globalData.wxid
       }
     } else {
       data = {
+        pageNo:that.data.pageNo,
+        pageSize:10,
         wxCaseId2: app.globalData.wxid
       }
     }
@@ -112,6 +134,10 @@ Page({
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
+          if(re.result.records==''){
+            that.data.isLastPage=true
+            return
+          }
           for (let obj of re.result.records) {
             obj.picIurl = api.viewUrl + obj.picIurl
             obj.hiringTime = obj.hiringTime.split(' ')[0]
