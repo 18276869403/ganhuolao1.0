@@ -40,43 +40,9 @@
 						<view class="content-text1 text-jiequ" style="width:68%;">
 							<text>{{item.createTime}}</text>
 						</view>
-						<view class="complete-button" style="width:135rpx;" catchtap="zaixianlianxi" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}">我要报名</view>
 					</view>
 				</view>
 			</view>
 		</view>
-
 	</view>
 </view>
-
-
-<block wx:if="{{isShowConfirm}}">
-	<view class='toast-box'>
-		<view class='toastbg'></view>
-		<view class='showToast'>
-			<view class='toast-title'>
-				<text>填写个人信息</text>
-			</view>
-			<view class='toast-main'>
-				<view class='toast-input hengxiang'>
-					<view class="key-class">姓名：</view>
-					<view class="value-class"><input type='password' placeholder='输入姓名' bindinput='signName' value="{{signName}}"></input></view>
-				</view>
-			</view>
-			<view class='toast-main'>
-				<view class='toast-input hengxiang'>
-					<view class="key-class">电话</view>
-					<view class="value-class"><input type='text' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}'></input></view>
-				</view>
-			</view>
-			<view class='toast-button'>
-				<view class='button1'>
-					<view catchtap='cancel'>取消</view>
-				</view>
-				<view class='button2'>
-					<view catchtap='confirmAcceptance'>确定</view>
-				</view>
-			</view>
-		</view>
-	</view>
-</block>

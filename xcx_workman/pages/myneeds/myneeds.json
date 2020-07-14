@@ -2,5 +2,6 @@
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
   "navigationBarTitleText": "我的需求",
+  "enablePullDownRefresh": true,
   "usingComponents": {}
 }

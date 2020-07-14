@@ -9,25 +9,26 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
-    isShowConfirm:false, // 报名弹窗
-    gongyilist:[],  // 活动集合
-    titleText:'', // 搜索框
-    signName:'',  //报名人数
-    signPhone:'', //报名电话
-    pageNo:1
+    isShowConfirm: false, // 报名弹窗
+    gongyilist: [], // 活动集合
+    titleText: '', // 搜索框
+    signName: '', //报名人数
+    signPhone: '', //报名电话
+    pageNo: 1,
+    wxUserId: ''
   },
 
   // 弹窗
   signName: function (e) {
-    console.log('报名人员姓名：',e.detail.value)
+    console.log('报名人员姓名：', e.detail.value)
     this.setData({
       signName: e.detail.value
     })
   },
-  signPhone:function(e){
-    console.log('报名人员电话：',e.detail.value)
+  signPhone: function (e) {
+    console.log('报名人员电话：', e.detail.value)
     this.setData({
-      signPhone:e.detail.value
+      signPhone: e.detail.value
     })
   },
   cancel: function () {
@@ -36,70 +37,72 @@ Page({
       isShowConfirm: false,
     })
   },
-  confirmAcceptance:function(){
+  confirmAcceptance: function () {
     var that = this
-    var data={
-      signName:that.data.signName,
-      signPhone:that.data.signPhone,
-      activityId:that.data.activityId,
-      wxUserId:app.globalData.wxid
+    var data = {
+      signName: that.data.signName,
+      signPhone: that.data.signPhone,
+      activityId: that.data.activityId,
+      wxUserId: app.globalData.wxid
     }
-    if(data.signName == "" || data.signName == undefined){
+    if (data.signName == "" || data.signName == undefined) {
       wx.showToast({
         title: '请输入姓名',
-        icon:'none'
+        icon: 'none'
       })
       return
     }
-    if(data.signPhone == "" || data.signPhone == undefined){
+    if (data.signPhone == "" || data.signPhone == undefined) {
       wx.showToast({
         title: '请输入联系电话',
-        icon:'none'
+        icon: 'none'
       })
-      return 
+      return
     }
-    if(data.signPhone.length != 11){
+    if (data.signPhone.length != 11) {
       wx.showToast({
         title: '请输入11位数的联系电话',
-        icon:'none'
+        icon: 'none'
       })
       return
     }
     console.log(data)
-    qingqiu.get("insertActivitySign",data,function(res){
+    qingqiu.get("insertActivitySign", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         wx.showToast({
           title: '报名成功',
           icon: 'none',
           duration: 2000
         })
-        qingqiu.get("updateActivity",{id:that.data.activityId},function(res){
+        qingqiu.get("updateActivity", {
+          id: that.data.activityId
+        }, function (res) {
           console.log(res)
           that.setData({
             isShowConfirm: false,
           })
-        },"PUT")
-      }else{
+        }, "PUT")
+      } else {
         wx.showToast({
           title: res.message,
-          icon:'none'
+          icon: 'none'
         })
         return
       }
-    },'post')
+    }, 'post')
     that.setData({
       isShowConfirm: false,
     })
   },
-  getText:function(e){
-    console.log("搜索内容",e.detail.value)
+  getText: function (e) {
+    console.log("搜索内容", e.detail.value)
     this.setData({
-      titleText:e.detail.value
+      titleText: e.detail.value
     })
   },
   // 搜索
-  getGoods:function(){
+  getGoods: function () {
     this.getActivity()
   },
   /**
@@ -107,49 +110,61 @@ Page({
    */
   onLoad: function (options) {
     this.getActivity()
+    this.setData({
+      wxUserId: app.globalData.wxid
+    })
   },
+
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
+
   // 获取公益活动列表
-  getActivity:function(){
+  getActivity: function () {
     var that = this
     var data = {
-      pageNo:that.data.pageNo,
-      pageSize:10
+      pageNo: that.data.pageNo,
+      pageSize: 10
     }
-    if(that.data.titleText != '' || that.data.titleText != null || that.data.titleText != undefined){
+    if (that.data.titleText != '' || that.data.titleText != null || that.data.titleText != undefined) {
       data.title = that.data.titleText
     }
-    qingqiu.get("getActivityList",data,function(res){
-      console.log('公益活动列表',res)
-      if(res.success == true){
+    qingqiu.get("getActivityList", data, function (res) {
+      console.log('公益活动列表', res)
+      if (res.success == true) {
         // for(let obj of res.result.records){
         //   obj.createTime=obj.createTime.substring(0,16)
         //   obj.endTime=obj.endTime.substring(0,16)
         //   obj.activityTime=obj.activityTime.substring(0,16)
         // }
         that.setData({
-          gongyilist:res.result.records
+          gongyilist: res.result.records
         })
       }
     })
   },
   // 公益详情
-  WelfareDetail:function(e){
-    var list=e.currentTarget.dataset.list
+  WelfareDetail: function (e) {
+    var list = e.currentTarget.dataset.list
     var list1 = JSON.stringify(list)
     wx.navigateTo({
-      url: '../WelfareDetail/WelfareDetail?obj='+list1,
+      url: '../WelfareDetail/WelfareDetail?obj=' + list1,
     })
   },
-  zaixianlianxi:function(e){
-    var activityId=e.currentTarget.dataset.id
+  zaixianlianxi: function (e) {
+    var activityId = e.currentTarget.dataset.id
     this.setData({
-      activityId:activityId,
-      isShowConfirm:true
+      activityId: activityId,
+      isShowConfirm: true
     })
   },
   // 发布工艺活动
-  submitWelfare:function(){
-    wx.navigateTo({ 
+  submitWelfare: function () {
+    wx.navigateTo({
       url: '../submitWelfare/submitWelfare',
     })
   },

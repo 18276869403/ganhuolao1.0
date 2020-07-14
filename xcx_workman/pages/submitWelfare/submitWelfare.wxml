@@ -36,7 +36,7 @@
 		<view class="content-item hengxiang">
 			<view class="content-title">报名截止</view>
 			<view class="content-value">
-				<picker mode="date" value="{{enddate}}" bindchange="FindDateChange">
+				<picker mode="date" value="{{enddate}}" start="{{endDate}}" bindchange="FindDateChange">
 					<view class="picker" style="color:#999999;">
 						{{enddate}}
 					</view>

@@ -162,7 +162,7 @@ const checkDate = function(startTime,endTime) {
   //转换成天数
   var day = parseInt(ms / (1000 * 60 * 60 * 24));
   //do something
-  console.log("day = ", day);
+  return day;
 }
 
 module.exports = {

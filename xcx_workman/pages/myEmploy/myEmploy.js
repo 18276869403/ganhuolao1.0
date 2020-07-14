@@ -9,9 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl,
-    xqlist:{},
-    id:'',
+    viewUrl: api.viewUrl,
+    xqlist: {},
+    id: '',
     needsTypeid: 1,
     needsTypeList: [{
         id: 1,
@@ -22,27 +22,34 @@ Page({
         name: '雇佣我的'
       }
     ],
-    price:'',
-    istrue:0,
+    price: '',
+    istrue: 0,
     flag: true,
     index: 0,
     day: 0,
-    predict:'',
+    predict: '',
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年'],
     messageList: []
   },
 
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
+  onLoad: function () {
     wx.showShareMenu({
       withShareTicket: true
     })
     this.getmyEmploy()
   },
-  changeType: function(e) {
+  changeType: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id
     that.setData({
@@ -50,103 +57,103 @@ Page({
     })
     this.getmyEmploy()
   },
-  phonecall: function(e) {
+  phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
     wx.makePhoneCall({
-      phoneNumber: phone 
+      phoneNumber: phone
     })
   },
   // 删除我的雇佣
-  delEmploy:function(e){
+  delEmploy: function (e) {
     var that = this
     var data = {
-      id:e.currentTarget.dataset.id
+      id: e.currentTarget.dataset.id
     }
-    qingqiu.get("deleteUserWork",data,function(res){
+    qingqiu.get("deleteUserWork", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         wx.showToast({
           title: '删除成功',
-          icon:'success',
-          duration:2000
+          icon: 'success',
+          duration: 2000
         })
-        setTimeout(function(){
+        setTimeout(function () {
           wx.redirectTo({
             url: '../myEmploy/myEmploy',
           })
-        },1000)
+        }, 1000)
       }
-    },'delete')
+    }, 'delete')
   },
-  
+
   // 在线联系
-  liuyan:function(e){
+  liuyan: function (e) {
     var id = e.currentTarget.dataset.wxid
     var name = e.currentTarget.dataset.name
     wx.redirectTo({
-      url: '../HM-chat/HM-chat?id='+id+"&name="+name ,
+      url: '../HM-chat/HM-chat?id=' + id + "&name=" + name,
     })
   },
 
   // 获取我的雇佣
-  getmyEmploy:function(){
+  getmyEmploy: function () {
     var that = this
     var data = ""
-    if(that.data.needsTypeid == 1){
+    if (that.data.needsTypeid == 1) {
       data = {
-        wxCaseId:app.globalData.wxid
+        wxCaseId: app.globalData.wxid
       }
-    }else{
+    } else {
       data = {
-        wxCaseId2:app.globalData.wxid
+        wxCaseId2: app.globalData.wxid
       }
     }
-    qingqiu.get("userWorkPage",data,function(re){
+    qingqiu.get("userWorkPage", data, function (re) {
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
-          for(let obj of re.result.records){
+          for (let obj of re.result.records) {
             obj.picIurl = api.viewUrl + obj.picIurl
             obj.hiringTime = obj.hiringTime.split(' ')[0]
           }
           that.setData({
-            messageList:re.result.records
+            messageList: re.result.records
           })
-        }else{
+        } else {
           wx.showToast({
             title: '未雇佣工人',
-            icon:'none',
-            duration:3000
+            icon: 'none',
+            duration: 3000
           })
         }
-      } 
+      }
     })
   },
-  bindPickerChange: function(e) {
+  bindPickerChange: function (e) {
     // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       index: e.detail.value
     })
   },
-  bindPickerDay: function(e) {
+  bindPickerDay: function (e) {
     this.setData({
       day: e.detail.value
     })
   },
-  bindPrice:function(e){
+  bindPrice: function (e) {
     this.setData({
-      price:e.detail.value
+      price: e.detail.value
     })
   },
-  bindDate:function(e){
+  bindDate: function (e) {
     this.setData({
       predict: e.detail.value
     })
   },
-  bintapDetails: function(e) {
+  bintapDetails: function (e) {
     // console.log(1)
     var xqlist = e.currentTarget.dataset.item
-    xqlist.estimatedCost = xqlist.estimatedCost.replace('天/元','')
+    xqlist.estimatedCost = xqlist.estimatedCost.replace('天/元', '')
     console.log(xqlist)
     this.setData({
       flag: false,
@@ -154,48 +161,48 @@ Page({
     })
   },
   // 修改雇佣
-  bindCon: function() {
+  bindCon: function () {
     var data = {
-      id:this.data.xqlist.id,
-      estimatedCost:this.data.price + this.data.array[this.data.index],
-      employmentMatters:this.data.workerskill==undefined?this.data.xqlist.employmentMatters:this.data.workerskill,
-      hiringTime:util.formatDate(new Date()),
-      predict:this.data.predict,
-      backup1:this.data.tian[this.data.day]
+      id: this.data.xqlist.id,
+      estimatedCost: this.data.price + this.data.array[this.data.index],
+      employmentMatters: this.data.workerskill == undefined ? this.data.xqlist.employmentMatters : this.data.workerskill,
+      hiringTime: util.formatDate(new Date()),
+      predict: this.data.predict,
+      backup1: this.data.tian[this.data.day]
     }
     console.log(data)
-    qingqiu.get("userWorkUpdateById",data,function(res){
+    qingqiu.get("userWorkUpdateById", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         wx.showToast({
           title: '修改成功',
-          icon:'success',
-          duration:2000 
+          icon: 'success',
+          duration: 2000
         })
-        setTimeout(function(){
+        setTimeout(function () {
           wx.redirectTo({
             url: '../myEmploy/myEmploy',
           })
-        },1000)
-      }else{
+        }, 1000)
+      } else {
         wx.showToast({
           title: '修改失败',
-          icon:'none',
-          duration:3000
+          icon: 'none',
+          duration: 3000
         })
       }
-    },'put')
+    }, 'put')
     this.setData({
       flag: true
     })
   },
-  bindClose: function() {
+  bindClose: function () {
     this.setData({
       flag: true
     })
   },
   //获取雇佣事项
-  guyongshiinput: function(e) {
+  guyongshiinput: function (e) {
     this.setData({
       workerskill: e.detail.value
     })

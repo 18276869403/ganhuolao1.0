@@ -13,6 +13,8 @@ Page({
     viewUrl: api.viewUrl,
     startdate: '选择活动时间',
     enddate: '选择截止时间',
+    endDate:'',
+    newDate:'',
     // 添加参数
     activityname:'',
     activitynameinput:'',
@@ -23,7 +25,6 @@ Page({
     // enddate:'',
     picIurl1:'',
     picIurl:'',
-    newDate:'',
     piclist:[],
     workcityname:'',
     workareaname:''
@@ -36,12 +37,10 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    // this.setData({
-    //   // newDate:utils.newDate(),
-    //   startdate:'选择活动时间',
-    //   enddate:'选择截止时间'
-    // })
-    console.log(this.data.newDate)
+    this.setData({
+      newDate:utils.newDate(),
+      endDate:utils.newDate()
+    })
   },
   // 发布活动
   fabugongyi(){
@@ -51,6 +50,13 @@ Page({
         title: '请输入活动名称',
         icon: 'none',
         duration: 3000
+      })
+      return
+    }
+    if(that.data.activitynameinput.length > 15){
+      wx.showToast({
+        title: '活动标题不能超过15个字',
+        icon:'none'
       })
       return
     }
@@ -86,6 +92,13 @@ Page({
       })
       return
     }
+    if(utils.checkDate(that.data.enddate,that.data.startdate) < 1){
+      wx.showToast({
+        title: '报名时间不能大于活动截止时间哦',
+        icon:'none'
+      })
+      return
+    }
     if(that.data.picIurl1==''){
       wx.showToast({
         title: '请上传图片',
@@ -104,6 +117,7 @@ Page({
       endTime:that.data.enddate + " 00:00:00",
       pic:that.data.picIurl1,
     }
+    
     console.log(data)
     qingqiu.get("addActivity", data, function (re) {
       console.log(re)
@@ -135,6 +149,13 @@ Page({
   // 活动名称失去焦点
   activitynameblur:function(e){
     var that=this
+    if(e.detail.value.length > 15){
+      wx.showToast({
+        title: '活动标题不能超过15个字',
+        icon:'none'
+      })
+      return
+    }
     qingqiu.messageReg(e.detail.value,0,function(res){
       console.log('回调函数',res)
       if(res == 87014){

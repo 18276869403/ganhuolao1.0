@@ -171,7 +171,7 @@ Page({
   // 提交申请
   fabuzhaogong: function () {
     var that = this
-    var s = qingqiu.yanzheng(that.data.needsname + ",请输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",请选择工作地|" + that.data.linkman + "请输入联系人|" + that.data.phone + ",输入联系电话|")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",选择工作地|" + that.data.linkman + "输入联系人|" + that.data.phone + ",输入联系电话")
     if (s != 0) {
       wx.showToast({
         title: s,
@@ -181,7 +181,7 @@ Page({
       return
     }
     var data = {
-      id: app.globalData.wxid,
+      wxUserId: app.globalData.wxid,
       hireTitle:that.data.needsname,
       backup3:that.data.salary,
       oneAreaId:that.data.typeid,
@@ -239,7 +239,7 @@ Page({
               }
             })
           }
-          wx.navigateTo({
+          wx.redirectTo({
             url: '../recruitment/recruitment',
           })
         })

@@ -14,6 +14,13 @@ Page({
     needsList:[]
   },
 
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   /**
    * 生命周期函数--监听页面加载
    */

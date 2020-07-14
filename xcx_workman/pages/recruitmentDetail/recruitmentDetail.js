@@ -27,9 +27,11 @@ Page({
     })
     var zhaogong = JSON.parse(options.obj)
     this.setData({
-      zhaogong: zhaogong
+      zhaogong: zhaogong,
+      wxUserid:app.globalData.wxid
     })
     console.log(zhaogong)
+    console.log(this.data.wxUserid)
   }, 
   // 接单人员
   SelectjiedanList() {
@@ -105,10 +107,6 @@ Page({
       url: '../submitNeeds/submitNeeds?type=1&id=' + this.data.xqxqlist.id,
     })
   },
-  // 需求在线联系
-  zaixianlianxi(e){
-   
-  },
   // 需求报名
   baoming(){
     var that = this
@@ -147,17 +145,17 @@ Page({
     })
   },
   // 需求删除
-  shancuoxuqiu() {
+  delete() {
     var that = this
     var data={
-      id: that.data.id
+      id: that.data.zhaogong.id
     }
     wx.showModal({
       title:'提示',
       content:'您确定删除吗？',
       success:function(res){
         if(res.confirm){
-          qingqiu.get("delYneedAndNeedSign", data, function(re) {
+          qingqiu.get("workdelete", data, function(re) {
             if (re.success == true) {
                wx.showToast({
                  title: '删除成功',
@@ -165,8 +163,8 @@ Page({
                  duration:2000
                })
                setTimeout(function(){
-                wx.redirectTo({
-                  url: '../myneeds/myneeds',
+                wx.switchTab({
+                  url: '../mine/mine',
                 })
                },1000)
               } else {
@@ -233,7 +231,7 @@ Page({
     })
   },
   // 打电话
-  phonecell:function(e){
+  zaixianlianxi:function(e){
     var phone = e.currentTarget.dataset.phone
     wx.makePhoneCall({
       phoneNumber: phone, 

@@ -10,11 +10,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl,
-    workList:[],
-    pageNo:1
+    viewUrl: api.viewUrl,
+    workList: [],
+    pageNo: 1
   },
 
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onShow()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -40,19 +47,19 @@ Page({
     }
     console.log(data)
     qingqiu.get("list", data, function (re) {
-      console.log('请求数据',re)
+      console.log('请求数据', re)
       if (re.success == true) {
         if (re.result != null) {
-          if(re.result.records==''){
-            that.data.isLastPage=true
+          if (re.result.records == '') {
+            that.data.isLastPage = true
             return
           }
           for (var i = 0; i < re.result.records.length; i++) {
-            re.result.records[i].createTime = re.result.records[i].createTime.substring(0,16)
+            re.result.records[i].createTime = re.result.records[i].createTime.substring(0, 16)
             if (re.result.records[i].backup4 != null && re.result.records[i].backup4.length > 0) {
               re.result.records[i].backup4 = re.result.records[i].backup4.split(',')
             }
-            if(re.result.records[i].backup3 == null){
+            if (re.result.records[i].backup3 == null) {
               re.result.records[i].backup3 = 0
             }
             that.data.workList.push(re.result.records[i])
@@ -70,11 +77,11 @@ Page({
       }
     })
   },
-   // 跳转到需求详情页面 
-   recruitmentDetail: function (e) {
+  // 跳转到需求详情页面 
+  recruitmentDetail: function (e) {
     var list1 = JSON.stringify(e.currentTarget.dataset.vall)
     wx.navigateTo({
-      url: '../recruitmentDetail/recruitmentDetail?obj='+list1,
+      url: '../recruitmentDetail/recruitmentDetail?obj=' + list1,
     })
   },
   /**

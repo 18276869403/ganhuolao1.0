@@ -50,8 +50,11 @@
 
 				<!-- 修改，删除，确认完成，用户为创建者 -->
 				<view class="content-chuangjian hengxiang">
-					<view class="complete-button" style="width:155rpx;" bindtap="zaixianlianxi" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+					<view class="complete-button" style="width:155rpx;" bindtap="zaixianlianxi" data-phone="{{zhaogong.publishPhone}}" wx:if="{{zhaogong.wxUserId!=wxUserid}}">
 						联系TA
+					</view>
+					<view class="delete-button" style="width:155rpx;" bindtap="delete" wx:if="{{zhaogong.wxUserId==wxUserid}}">
+						删除
 					</view>
 				</view>
 			</view>

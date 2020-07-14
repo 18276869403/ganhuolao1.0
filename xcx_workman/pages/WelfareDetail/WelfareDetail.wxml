@@ -53,14 +53,14 @@
 		<!-- 按钮 -->
 		<view class="content-sign hengxiang">
 			<view class="sign-view" wx:if="{{wxUserId==gongyilist.wxId}}" bindtap="deleteActive">
-				<image src="../image/shanchuhuodong.png" class="sign-img"></image>
+				<image src="{{viewUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view" wx:if="{{wxUserId!=gongyilist.wxId}}" bindtap="woyaobaoming">
 				<image src="{{viewUrl}}static/image/woyaosign.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view">
 				<button open-type="share" class="sharebutton">
-					<image src="../image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image> 
+					<image src="{{viewUrl}}static/image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image> 
 				</button>
 			</view> 
 		</view>

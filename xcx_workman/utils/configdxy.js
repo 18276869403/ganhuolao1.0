@@ -70,6 +70,8 @@ const getPublicUserByIdDesc = baseUrl + "pc/hall/getPublicUserByIdDesc"
 const getPublicUserById = baseUrl + "pc/hall/getPublicUserById"
 // 获取所有关注公众号的用户
 const getPublicUser = baseUrl + "pc/hall/getPublicUser"
+// 招工删除
+const workdelete = baseUrl + "work/loclahire/delete"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -104,5 +106,6 @@ module.exports = {
   addPublicUser:addPublicUser,
   getPublicUserById:getPublicUserById,
   getPublicUserByIdDesc:getPublicUserByIdDesc,
-  getPublicUser:getPublicUser
+  getPublicUser:getPublicUser,
+  workdelete:workdelete
 };

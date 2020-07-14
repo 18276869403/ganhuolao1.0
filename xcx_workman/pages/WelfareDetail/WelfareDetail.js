@@ -50,6 +50,13 @@ Page({
     if(gongyilist.signNum==''||gongyilist.signNum==null){
       gongyilist.signNum=0
     }
+    if(gongyilist.name != '' || gongyilist.name != null){
+      gongyilist.name = gongyilist.name
+    }else if(gongyilist.shopName != '' || gongyilist.shopName != null){
+      gongyilist.name = gongyilist.shopName
+    }else{
+      gongyilist.name = gongyilist.wxNc
+    }
     var piclist=[]
     if(gongyilist.pic!=''&&gongyilist.pic!=null){
       piclist=gongyilist.pic.split(',')
