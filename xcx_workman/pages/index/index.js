@@ -230,30 +230,22 @@ Page({
     var total = 0
     var count = 0
     app.globalData.nextOpenid = []
-    qingqiu.get("getPublicUserByIdDesc", null, function (res) {
-      console.log(res)
-      if (res.result != null) {
-        if(res.result.openid != ''){
-          NEXT_OPENID = res.result.openid
-        }
-      }
-      do {
-        wx.request({
-          url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
-          success: function (re) {
-            console.log(re)
-            if (re.data.next_openid != '') {
-              if(NEXT_OPENID != re.data.next_openid){
-                app.globalData.nextOpenid.push(re.data.data.openid)
-              }
-              NEXT_OPENID = re.data.next_openid
-              total = re.data.total
-              count = re.data.count + count
+    do {
+      wx.request({
+        url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
+        success: function (re) {
+          console.log(re)
+          if (re.data.next_openid != '') {
+            if (NEXT_OPENID != re.data.next_openid) {
+              app.globalData.nextOpenid.push(re.data.data.openid)
             }
+            NEXT_OPENID = re.data.next_openid
+            total = re.data.total
+            count = re.data.count + count
           }
-        })
-      } while (count < total);
-    })
+        }
+      })
+    } while (count < total);
   },
   onShow: function () {
     this.getTokenValue()
@@ -529,7 +521,7 @@ Page({
       if (re.success == true) {
         if (re.result != null) {
           for (let obj of re.result.records) {
-            if(obj.name == ''|| obj.name == null){
+            if (obj.name == '' || obj.name == null) {
               obj.name = obj.shopName
             }
             obj.name = util.formatName(obj.name)
@@ -545,61 +537,61 @@ Page({
 
   // 跳转到工人入驻页面
   applyBusiness: function (e) {
-    var that =this
+    var that = this
     var obj = e.currentTarget.dataset.typeid
     qingqiu.get("getPublicUser", null, function (re) {
       console.log(re)
       if (re.success == true) {
-        if (re.result != null&&re.result != '') {
-          var s=''
-          for(let obj of re.result){
-            if(obj.unionid == app.globalData.unionid){
-              s=1
+        if (re.result != null && re.result != '') {
+          var s = ''
+          for (let obj of re.result) {
+            if (obj.unionid == app.globalData.unionid) {
+              s = 1
             }
           }
-          if(s!=1){
+          if (s != 1) {
             wx.showToast({
-            title: '请先关注公众号！',
-            icon: 'none',
-            duration: 2000
-          })
-          wx.navigateTo({
-            url: '../thePublic/thePublic'
-          })
-          return
-          }else{
-          if (obj == 1) {
-            if (app.globalData.wxState == 0) {
-              wx.showToast({
-                title: '您已入驻商家,同一微信不能入驻两种类型',
-                icon: 'none',
-                duration: 2000
-              })
-              return
-            } else {
-              wx.navigateTo({
-                url: '../applyBusiness/applyBusiness?typeid=' + obj
-              })
-            }
-          } else if (obj == 2) {
-            if (app.globalData.wxState == 1) {
-              wx.showToast({
-                title: '您已入驻工人,同一微信不能入驻两种类型',
-                icon: 'none',
-                duration: 2000
-              })
-              return
-            } else {
-              wx.navigateTo({
-                url: '../applyBusiness/applyBusiness?typeid=' + obj
-              })
-            }
-          } else {
-            wx.navigateTo({
-              url: '../applyBusiness/applyBusiness?typeid=' + obj
+              title: '请先关注公众号！',
+              icon: 'none',
+              duration: 2000
             })
+            wx.navigateTo({
+              url: '../thePublic/thePublic'
+            })
+            return
+          } else {
+            if (obj == 1) {
+              if (app.globalData.wxState == 0) {
+                wx.showToast({
+                  title: '您已入驻商家,同一微信不能入驻两种类型',
+                  icon: 'none',
+                  duration: 2000
+                })
+                return
+              } else {
+                wx.navigateTo({
+                  url: '../applyBusiness/applyBusiness?typeid=' + obj
+                })
+              }
+            } else if (obj == 2) {
+              if (app.globalData.wxState == 1) {
+                wx.showToast({
+                  title: '您已入驻工人,同一微信不能入驻两种类型',
+                  icon: 'none',
+                  duration: 2000
+                })
+                return
+              } else {
+                wx.navigateTo({
+                  url: '../applyBusiness/applyBusiness?typeid=' + obj
+                })
+              }
+            } else {
+              wx.navigateTo({
+                url: '../applyBusiness/applyBusiness?typeid=' + obj
+              })
+            }
           }
-        }
         }
       }
     })
