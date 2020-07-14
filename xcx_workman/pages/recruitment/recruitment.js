@@ -255,7 +255,7 @@ Page({
   },
   // 跳转到提交需求页面
   submitRecruitment: function (e) {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../submitRecruitment/submitRecruitment',
     })
   },

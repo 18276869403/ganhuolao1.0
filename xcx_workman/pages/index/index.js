@@ -65,7 +65,7 @@ Page({
       qingqiu.getAccessTokenApplets(function () {
         that.getUserInfo()
       })
-    }, 5000)
+    }, 2000)
   },
   getUserInfo: function () {
     var that = this
