@@ -25,6 +25,17 @@
               </view>
               <view>{{item.messageSum}}</view>
             </view>
+            <view class="hengxiang">
+              <view>
+                <image src="../image/zan.png" class="pinglun-img"></image>
+              </view>
+              <view>{{item.giveGood}}</view>
+            </view>
+            <view class="hengxiang">
+              <view catchtap="deletess" data-shaid="{{item.id}}">
+                <image src="../image/shanchu.png" class="pinglun-img"></image>
+              </view>
+            </view>
           </view>
         </view>
       </block>
@@ -50,6 +61,17 @@
                 <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
               </view>
               <view>{{item.messageSum}}</view>
+            </view>
+            <view class="hengxiang">
+              <view>
+                <image src="../image/zan.png" class="pinglun-img"></image>
+              </view>
+              <view>{{item.giveGood}}</view>
+            </view>
+            <view class="hengxiang">
+              <view catchtap="deletess" data-shaid="{{item.id}}">
+                <image src="../image/shanchu.png" class="pinglun-img"></image>
+              </view>
             </view>
           </view>
         </view>

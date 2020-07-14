@@ -86,13 +86,14 @@ Page({
       phoneNumber: phone 
     })
   },
-  // 删除我的雇佣
-  delEmploy:function(e){
+  // 删除我的晒晒
+  deletess(e){
     var that = this
     var data = {
-      id:e.currentTarget.dataset.id
+      id:e.currentTarget.dataset.shaid
     }
-    qingqiu.get("deleteUserWork",data,function(res){
+    debugger
+    qingqiu.get("",data,function(res){
       console.log(res)
       if(res.success == true){
         wx.showToast({
