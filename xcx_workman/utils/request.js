@@ -16,7 +16,7 @@ const Get = function(url, data, huidiao, method = 'GET') {
 	} else {
 		geturl = url;
 	}
-	console.log(geturl)
+	// console.log(geturl)
 	wx.request({
 		url: geturl,
 		method: method,
