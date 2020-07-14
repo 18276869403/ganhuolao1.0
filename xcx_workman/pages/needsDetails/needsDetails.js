@@ -63,6 +63,7 @@ Page({
     this.setData({
       xqxqlist: xqxqlist,
       id:xqxqlist.id,
+      xid:xqxqlist.wxUserId,
       wxUserid: app.globalData.wxid
     })
     console.log(this.data.wxUserid)
@@ -166,6 +167,50 @@ Page({
                 title: '报名成功',
                 icon:'success',
                 duration:2000
+              })
+              var obj = {
+                wxUserId:that.data.xid
+              }
+              console.log(that.data.xid)
+              qingqiu.get("getPublicUserById",obj,function(res){
+                console.log(res)
+                // var unionid = res.result.unionid
+                var openid = res.result.openid
+                var mesdata = {
+                  first:{
+                    value:"干活佬有人联系您啦！",
+                    color:"#173177"
+                  },
+                  keyword1:{
+                    value:"您的需求有人报名了！",
+                    color:"#173177"
+                  },
+                  keyword2:{
+                    value:util.nowTime(),
+                    color:"#173177"
+                  },
+                  remark:{
+                    value:"干活佬,助力工人/商家接单！",
+                    color:"#173177"
+                  }
+                }
+                var objdata = {
+                  touser:openid,
+                  template_id:"JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+                  miniprogram:{
+                    appid:"wx14e076d27e942480"
+                  },
+                  url:"http://www.baidu.com/",
+                  data:mesdata
+                }
+                wx.request({
+                  url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+app.globalData.access_TokenOff,
+                  data:objdata,
+                  method:'POST',
+                  success:function(res){
+                    console.log(res)
+                  }
+                })
               })
               that.SelectjiedanList()
             }else{
