@@ -11,15 +11,38 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    pageNo: 1,
+    isLastPage: false,
     needsList: []
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    this.setData({
+      pageNo: 1,
+      isLastPage: false,
+      needsList: []
+    })
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
+  },
+
+  // 上拉功能
+  onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
+    this.xqneedlist()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -34,7 +57,7 @@ Page({
   xqneedlist() {
     var that = this
     var data = {
-      pageNo: 1,
+      pageNo: that.data.pageNo,
       pageSize: 10,
       wxUserId: app.globalData.wxid,
       backup5: 1
@@ -44,21 +67,27 @@ Page({
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
-          var needsList = that.data.needsList
-          for (let obj of re.result.records) {
-            obj.publishTime = obj.publishTime.split(' ')[0]
-            if (obj.backup1 != null && obj.backup1.length > 0) {
-              obj.backup1 = obj.backup1.split(',')
+          if (re.result.records.length > 0) {
+            var needsList = that.data.needsList
+            for (let obj of re.result.records) {
+              obj.publishTime = obj.publishTime.split(' ')[0]
+              if (obj.backup1 != null && obj.backup1.length > 0) {
+                obj.backup1 = obj.backup1.split(',')
+              }
+              if (obj.needPrice == '' || obj.needPrice == 'null' || obj.needPrice == null) {
+                obj.needPrice = 0
+              }
+              needsList.push(obj)
             }
-            if (obj.needPrice == '' || obj.needPrice == 'null' || obj.needPrice == null) {
-              obj.needPrice = 0
-            }
-            needsList.push(obj)
+            that.setData({
+              needsList: needsList,
+            })
+          } else {
+            that.setData({
+              isLastPage: true
+            })
+            return
           }
-          that.setData({
-            needsList: needsList,
-            needsListfy: re.result.records
-          })
         } else {
           wx.showToast({
             title: '暂无数据',

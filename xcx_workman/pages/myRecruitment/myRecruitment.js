@@ -12,15 +12,36 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     workList: [],
+    isLastPage:false,
     pageNo: 1
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.onShow()
+    this.setData({
+      pageNo:1,
+      isLastPage:false,
+      workList:[]
+    })
+    this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
+  },
+  // 上拉功能
+  onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
+    this.FindWorklist()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -37,15 +58,7 @@ Page({
     var data = {
       pageNo: that.data.pageNo,
       pageSize: 10,
-      // needTitle:that.data.needTitle
     }
-    if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
-      data.oneAreaId = app.globalData.oneCity.id
-    }
-    if (app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined") {
-      data.twoAreaId = app.globalData.twoCity.id
-    }
-    console.log(data)
     qingqiu.get("list", data, function (re) {
       console.log('请求数据', re)
       if (re.success == true) {

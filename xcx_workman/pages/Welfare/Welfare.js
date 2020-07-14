@@ -15,9 +15,23 @@ Page({
     signName: '', //报名人数
     signPhone: '', //报名电话
     pageNo: 1,
-    wxUserId: ''
+    wxUserId: '',
+    isLastPage:false
   },
 
+  // 上拉功能
+  onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon:'none',
+        duration:2000
+      })
+        return
+    }
+    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.getActivity()
+  },
   // 弹窗
   signName: function (e) {
     console.log('报名人员姓名：', e.detail.value)
@@ -117,6 +131,10 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    this.setData({
+      pageNo:1,
+      gongyilist:[]
+    })
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
@@ -136,14 +154,20 @@ Page({
     qingqiu.get("getActivityList", data, function (res) {
       console.log('公益活动列表', res)
       if (res.success == true) {
-        // for(let obj of res.result.records){
-        //   obj.createTime=obj.createTime.substring(0,16)
-        //   obj.endTime=obj.endTime.substring(0,16)
-        //   obj.activityTime=obj.activityTime.substring(0,16)
-        // }
-        that.setData({
-          gongyilist: res.result.records
-        })
+        if(res.result.records.length > 0){
+          var gongyilist = that.data.gongyilist
+          for(let obj of res.result.records){
+            gongyilist.push(obj)
+          }
+          that.setData({
+            gongyilist: gongyilist
+          })
+        }else{
+          that.setData({
+            isLastPage:true
+          })
+          return
+        }
       }
     })
   },

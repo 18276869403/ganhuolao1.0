@@ -50,8 +50,11 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.data.pageNo = 1
-    this.data.isLastPage = false
+    this.setData({
+      pageNo:1,
+      isLastPage:false,
+      workList:[]
+    })
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()

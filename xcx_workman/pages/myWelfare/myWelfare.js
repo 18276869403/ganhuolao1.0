@@ -21,15 +21,36 @@ Page({
       name: '我参加的公益'
     }],
     gongyilist: [],
+    isLastPage: false,
     pageNo: 1,
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    this.setData({
+      pageNo: 1,
+      isLastPage: false,
+      gongyilist: []
+    })
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
+  },
+  // 上拉功能
+  onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
+    this.getActivity()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -58,18 +79,40 @@ Page({
       qingqiu.get("myActivityList", data, function (res) {
         console.log('我发布的公益活动', res)
         if (res.success == true) {
-          that.setData({
-            gongyilist: res.result.records
-          })
+          if (res.result.records.length > 0) {
+            var gongyilist = that.data.gongyilist
+            for (let obj of res.result.records) {
+              gongyilist.push(obj)
+            }
+            that.setData({
+              gongyilist: gongyilist
+            })
+          } else {
+            that.setData({
+              isLastPage: true
+            })
+            return
+          }
         }
       })
     } else {
       qingqiu.get("myActivitySignList", data, function (res) {
         console.log('我参加的公益活动', res)
         if (res.success == true) {
-          that.setData({
-            gongyilist: res.result.records
-          })
+          if(res.result.records.length > 0){
+            var gongyilist = that.data.gongyilist
+            for(let obj of res.result.records){
+              gongyilist.push(obj)
+            }
+            that.setData({
+              gongyilist: gongyilist
+            })
+          }else{
+            that.setData({
+              isLastPage:true
+            })
+            return
+          }
         }
       })
     }
