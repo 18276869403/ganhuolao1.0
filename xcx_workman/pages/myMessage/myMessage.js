@@ -110,7 +110,6 @@ Page({
         that.setData ({
           messageList:messageList
         })
-        console.log(that.data.messageList)
       } else {
         qingqiu.tk('未查询到任何数据')
       }
