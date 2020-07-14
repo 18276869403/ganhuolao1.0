@@ -84,6 +84,7 @@ Page({
   mymessageList() {
     var that = this
     var data={
+
       wxId:app.globalData.wxid
     }
     qingqiu.get("myMessage", data, function(re) {
@@ -104,7 +105,7 @@ Page({
           }else{
             obj.name = obj.wxNc
           }
-          that.data.messageList.push(re.result)
+          that.data.messageList.push(re.result[i])
         }
         that.setData ({
           messageList :that.data.messageList
@@ -141,7 +142,7 @@ givemymessageList() {
         }else{
           obj.name = obj.wxNc
         }
-        that.data.formymessageList.push(res.result)
+        that.data.formymessageList.push(obj)
       }
       that.setData ({
         formymessageList:that.data.formymessageList

@@ -141,9 +141,10 @@ Page({
           for (let obj of re.result.records) {
             obj.picIurl = api.viewUrl + obj.picIurl
             obj.hiringTime = obj.hiringTime.split(' ')[0]
+            that.data.messageList.push(obj)
           }
           that.setData({
-            messageList: re.result.records
+            messageList: that.data.messageList
           })
         } else {
           wx.showToast({
