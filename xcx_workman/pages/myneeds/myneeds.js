@@ -16,16 +16,7 @@ Page({
     pageNo:1
   },
 
-  // 下拉刷新
-  onPullDownRefresh: function () {
-    this.data.needsList=[]
-    this.data.isLastPage=false
-    this.data.pageNo=1
-    this.onLoad()
-    setTimeout(() => {
-      wx.stopPullDownRefresh()
-    }, 1000);
-  },
+  
    // 上拉功能
    onReachBottom: function () {
     if (this.data.isLastPage) {
@@ -47,6 +38,16 @@ Page({
       withShareTicket: true
     })
     this.xqneedlist()
+  },
+  // 下拉刷新
+  onPullDownRefresh:function () {
+    this.data.needsList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
   },
   // 需求列表
   xqneedlist() {
@@ -134,12 +135,12 @@ Page({
   },
 
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
+  // /**
+  //  * 页面相关事件处理函数--监听用户下拉动作
+  //  */
+  // onPullDownRefresh: function () {
 
-  },
+  // },
 
   /**
    * 页面上拉触底事件的处理函数
