@@ -34,6 +34,10 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+    this.data.messageList=[]
+    this.data.formymessageList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
     if(this.data.needsTypeid == 1){
       this.mymessageList()
     }else{
