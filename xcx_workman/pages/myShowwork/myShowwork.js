@@ -21,7 +21,9 @@ Page({
     predict:'',
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年'],
-    showList: []
+    showList: [],
+    isLastPage:false,
+    pageNo:1
   },
 
   /**
@@ -33,6 +35,29 @@ Page({
     })
     this.getShowList()
   },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.data.showList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
+  // 上拉功能
+  onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon:'none',
+        duration:2000
+      })
+        return
+    }
+    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.getShowList()
+  },
   // 获取晒晒
   getShowList(){
     var that = this
@@ -42,12 +67,17 @@ Page({
     qingqiu.get("casePage",data,function(re){
       console.log(re)
       if(re.success==true){
-        that.data.showList=re.result.records
-        for(var i= 0 ; i < that.data.showList.length; i++){
-          that.data.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
+        if(re.result.records==''){
+          that.data.isLastPage=true
+          return
+        }
+        // that.data.showList=re.result.records
+        for(var i= 0 ; i < re.result.records.length; i++){
+          re.result.records[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
+          that.data.showList.push(re.result.records)
         } 
         that.setData({
-          showList:re.result.records
+          showList:that.data.showList
         })
       }else{
         wx.showToast({

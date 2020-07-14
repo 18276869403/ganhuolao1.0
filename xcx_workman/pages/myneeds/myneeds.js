@@ -11,15 +11,33 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
-    needsList:[]
+    needsList:[],
+    isLastPage:false,
+    pageNo:1
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    this.data.needsList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
+  },
+   // 上拉功能
+   onReachBottom: function () {
+    if (this.data.isLastPage) {
+      wx.showToast({
+        title: '没有更多了！',
+        icon:'none',
+        duration:2000
+      })
+        return
+    }
+    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.xqneedlist()
   },
   /**
    * 生命周期函数--监听页面加载
@@ -34,7 +52,7 @@ Page({
   xqneedlist() {
     var that = this
     var data={
-      pageNo:1,
+      pageNo:that.data.pageNo,
       pageSize:10,
       wxUserId:app.globalData.wxid,
       backup5:0
@@ -43,6 +61,10 @@ Page({
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
+          if(re.result.records==''){
+            that.data.isLastPage=true
+            return
+          }
           that.needsList = re.result.records
           for(var i= 0 ; i < that.needsList.length; i++){
             re.result.records[i].publishTime = re.result.records[i].publishTime.split(' ')[0]
