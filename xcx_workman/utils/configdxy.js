@@ -1,6 +1,6 @@
 var api = require('./config.js')
-const baseUrl = "http://miss.it-ys.com:91/work-boot/"  
-// const baseUrl = "http://192.168.1.250:8080/work-boot/"  
+// const baseUrl = "http://miss.it-ys.com:91/work-boot/"  
+const baseUrl = "http://192.168.1.250:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.233:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.235:8080/work-boot/"  
 
@@ -64,8 +64,12 @@ const addActivity = baseUrl + "pc/hall/addActivity"
 const checkPic = baseUrl + "work/wxLogin/checkPic"
 // 公众号用户添加
 const addPublicUser = baseUrl + "pc/hall/addPublicUser"
-// 获取数据库最后一个
+// 获取公众号最后一个openid
+const getPublicUserByIdDesc = baseUrl + "pc/hall/getPublicUserByIdDesc"
+// 获取个人的公众号openid
 const getPublicUserById = baseUrl + "pc/hall/getPublicUserById"
+// 获取所有关注公众号的用户
+const getPublicUser = baseUrl + "pc/hall/getPublicUser"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -98,5 +102,7 @@ module.exports = {
   GetUnionid:GetUnionid,
   checkPic:checkPic,
   addPublicUser:addPublicUser,
-  getPublicUserById:getPublicUserById
+  getPublicUserById:getPublicUserById,
+  getPublicUserByIdDesc:getPublicUserByIdDesc,
+  getPublicUser:getPublicUser
 };
