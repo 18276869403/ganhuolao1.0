@@ -2,7 +2,7 @@ var api = require('./config.js')
 const baseUrl = "http://miss.it-ys.com:91/work-boot/"
 // const baseUrl = "http://192.168.1.250:8080/work-boot/" 
 // const baseUrl = "http://192.168.1.233:8080/work-boot/" 
-// const baseUrl = "http://192.168.1.235:8080/work-boot/" 
+// const baseUrl = "http://192.168.1.235:8080/work-boot/"  
 
 // 大厅最新需求
 const zuixinxq = baseUrl + "pc/hall/yneedList" 
