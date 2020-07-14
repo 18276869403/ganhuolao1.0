@@ -173,27 +173,33 @@ Page({
           wxUserId:that.data.workerDetail.id
         }
         qingqiu.get("getPublicUserById",obj,function(res){
-          console.log(res)
           var unionid = res.result.unionid
           var openid = res.result.openid
           var mesdata = {
             first:{
-              value:"干活佬有人联系您啦！"
+              value:"干活佬有人联系您啦！",
+              color:"#173177"
             },
             keyword1:{
-              value:"有人雇佣你啦！"
+              value:"有人雇佣你啦！",
+              color:"#173177"
             },
             keyword2:{
-              value:"2020-07-13 20:20:05"
+              value:util.nowTime(),
+              color:"#173177"
             },
             remark:{
-              value:"干活佬,助力工人/商家接单！"
+              value:"干活佬,助力工人/商家接单！",
+              color:"#173177"
             }
           }
           var objdata = {
             touser:openid,
             template_id:"JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
-            appid:"wx14e076d27e942480",
+            miniprogram:{
+              appid:"wx14e076d27e942480"
+            },
+            url:"http://www.baidu.com/",
             data:mesdata
           }
           wx.request({

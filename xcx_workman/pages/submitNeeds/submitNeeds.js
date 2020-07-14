@@ -321,7 +321,6 @@ Page({
             icon: 'success',
             duration: 2000
           })
-          
           setTimeout(function () {
             wx.switchTab({
               url: '../need/need',
@@ -351,18 +350,56 @@ Page({
       }
       console.log(data)
       qingqiu.get("insertYneed", data, function (re) {
-        console.log(re)
         if (re.success == true) {
           wx.showToast({
             title: '提交成功,等待后台审核...',
             icon: 'none',
             duration: 2000
           })
-          setTimeout(function () {
+          // 公众号消息推送
+          qingqiu.get("getPublicUser", null, function (res) {
+            for (let obj of res.result) {
+              var openid = obj.openid
+              var mesdata = {
+                first: {
+                  value: "干活佬又上新啦，赶紧去看看！",
+                  color: "#173177"
+                },
+                keyword1: {
+                  value: "有1条需求发布啦",
+                  color: "#173177"
+                },
+                keyword2: {
+                  value: util.nowTime(),
+                  color: "#173177"
+                },
+                remark: {
+                  value: "请进入干活佬查看详情",
+                  color: "#173177"
+                }
+              }
+              var objdata = {
+                touser: openid,
+                template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+                miniprogram: {
+                  appid: "wx14e076d27e942480"
+                },
+                url: "http://www.baidu.com/",
+                data: mesdata
+              }
+              wx.request({
+                url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
+                data: objdata,
+                method: 'POST',
+                success: function (res) {
+                  console.log(res)
+                }
+              })
+            }
             wx.switchTab({
               url: '../need/need',
             })
-          }, 1000)
+          })
         } else {
           wx.showToast({
             title: re.message,

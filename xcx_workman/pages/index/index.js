@@ -234,10 +234,12 @@ Page({
     var total = 0
     var count = 0
     app.globalData.nextOpenid = []
-    qingqiu.get("getPublicUserById", null, function (res) {
-      console.log('最后一条数据', res)
+    qingqiu.get("getPublicUserByIdDesc", null, function (res) {
+      console.log('最后一个公众号用户信息',res)
       if (res.result != null) {
-        NEXT_OPENID = res.result.openid
+        if(res.result.openid != ''){
+          NEXT_OPENID = res.result.openid
+        }
       }
       do {
         wx.request({
@@ -245,10 +247,12 @@ Page({
           success: function (re) {
             console.log('公众号用户', re)
             if (re.data.next_openid != '') {
+              if(NEXT_OPENID != re.data.next_openid){
+                app.globalData.nextOpenid.push(re.data.data.openid)
+              }
               NEXT_OPENID = re.data.next_openid
               total = re.data.total
               count = re.data.count + count
-              app.globalData.nextOpenid.push(re.data.data.openid)
             }
           }
         })
