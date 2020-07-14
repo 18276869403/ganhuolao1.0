@@ -43,7 +43,7 @@ const SubName = function (str) {
   var temp = "";
   if (str.length > 2) {
     temp = temp + str.substring(0, 3) + "...";
-  } else {
+  } else { 
     temp = str
   }
   return temp;
