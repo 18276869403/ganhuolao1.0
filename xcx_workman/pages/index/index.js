@@ -547,9 +547,6 @@ Page({
   applyBusiness: function (e) {
     var that =this
     var obj = e.currentTarget.dataset.typeid
-    // var data={
-    //   wxUserId: app.globalData.openid
-    // }
     qingqiu.get("getPublicUser", null, function (re) {
       console.log(re)
       if (re.success == true) {
