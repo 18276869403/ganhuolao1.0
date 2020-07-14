@@ -22,7 +22,9 @@ Page({
     ],
     messageList:[],
     formymessageList:[],
-    Lyid:''
+    Lyid:'',
+    isLastPage:false,
+    pageNo:1
   },
 
   /**
@@ -38,6 +40,34 @@ Page({
       this.givemymessageList()
     }
   },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.data.messageList=[]
+    this.data.formymessageList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
+    // 上拉功能
+    onReachBottom: function () {
+      if (this.data.isLastPage) {
+        wx.showToast({
+          title: '没有更多了！',
+          icon:'none',
+          duration:2000
+        })
+          return
+      }
+      this.setData({ pageNo: this.data.pageNo + 1 })
+      if(this.data.needsTypeid == 1){
+        this.mymessageList()
+      }else{
+        this.givemymessageList()
+      }
+    },
   changeType: function(e) {
     var that = this;
     var id = e.currentTarget.dataset.id
@@ -59,6 +89,10 @@ Page({
     qingqiu.get("myMessage", data, function(re) {
     if (re.success == true) {
       if (re.result != null) {
+        if(re.result==''){
+          that.data.isLastPage=true
+          return
+        }
         for(let obj of re.result){
           if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
             obj.picIurl = ''
@@ -70,9 +104,10 @@ Page({
           }else{
             obj.name = obj.wxNc
           }
+          that.data.messageList.push(re.result)
         }
         that.setData ({
-          messageList : re.result
+          messageList :that.data.messageList
         })
         console.log(that.data.messageList)
       } else {
@@ -91,6 +126,10 @@ givemymessageList() {
     console.log(res)
   if (res.success == true) {
     if (res.result != null) {
+      if(re.result==''){
+        that.data.isLastPage=true
+        return
+      }
       for(let obj of res.result){
         if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
           obj.picIurl = ''
@@ -102,9 +141,10 @@ givemymessageList() {
         }else{
           obj.name = obj.wxNc
         }
+        that.data.formymessageList.push(res.result)
       }
       that.setData ({
-        formymessageList:res.result 
+        formymessageList:that.data.formymessageList
       })
     } else {
       qingqiu.tk('未查询到任何数据')
