@@ -1,8 +1,8 @@
 var deng = require('./configdxy.js')
 var zhu = require('./configzpy.js')
 var im = require('./config-im.js')
-// const imgurl = "http://miss.it-ys.com:91/work-boot/" 
-const imgurl = "http://192.168.1.250:8080/work-boot/" //本地
+const imgurl = "http://miss.it-ys.com:91/work-boot/" 
+// const imgurl = "http://192.168.1.250:8080/work-boot/" //本地
 // const imgurl = "http://192.168.1.233:8080/work-boot/" //本地
 // const imgurl = "http://192.168.1.235:8080/work-boot/" //本地
 const baiduAK = 'CauqHCxjKu4NcebB4UjlUYTbGqtRpEN5'
