@@ -69,19 +69,16 @@ Page({
   },
   getUserInfo: function () {
     var that = this
-    console.log(app.globalData.nextOpenid)
     if (app.globalData.nextOpenid.length > 0) {
       for (let i = 0; i < app.globalData.nextOpenid[0].length; i++) {
         wx.request({
           url: 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' + app.globalData.access_TokenOff + '&openid=' + app.globalData.nextOpenid[0][i] + '&lang=zh_CN',
           success: function (res) {
-            console.log('获取用户信息', res)
             var data = {
               openid: res.data.openid,
               unionid: res.data.unionid
             }
             qingqiu.get("addPublicUser", data, function (res) {
-              console.log(res)
             }, "post")
           }
         })
@@ -101,7 +98,6 @@ Page({
               var code = res.code
               var encryptedData = res.encryptedData
               var iv = res.iv
-              console.log(code)
               // qingqiu.get("getOpenIdbyjscode", {
               //   js_code: code
               // }, function (res) {
@@ -110,7 +106,6 @@ Page({
               wx.getUserInfo({
                 lang: 'zh_CN',
                 success(res) {
-                  console.log('微信用户信息', res)
                   if (res.userInfo == undefined) {
                     that.dialog.showDialog()
                   }
@@ -124,7 +119,6 @@ Page({
                     backup1: openid
                   }
                   qingqiu.get("getKeyInfo", data, function (re) {
-                    console.log('保存后的用户信息', re)
                     app.globalData.wxid = re.result.wxUser.id
                     if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
                       app.globalData.sqgl = 1
@@ -235,7 +229,6 @@ Page({
     var count = 0
     app.globalData.nextOpenid = []
     qingqiu.get("getPublicUserByIdDesc", null, function (res) {
-      console.log('最后一个公众号用户信息',res)
       if (res.result != null) {
         if(res.result.openid != ''){
           NEXT_OPENID = res.result.openid
@@ -245,7 +238,6 @@ Page({
         wx.request({
           url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
           success: function (re) {
-            console.log('公众号用户', re)
             if (re.data.next_openid != '') {
               if(NEXT_OPENID != re.data.next_openid){
                 app.globalData.nextOpenid.push(re.data.data.openid)
@@ -273,7 +265,6 @@ Page({
     this.pointList() //通知
     this.QueryoneArea() //一级区域
     this.QuerytwoArea() //二级区域
-    console.log(app.globalData.oneCity)
     if (app.globalData.oneCity == undefined || app.globalData.oneCity == "undefined") {
       // this.setData({weizhi:'全部'})
       this.setData({
@@ -367,10 +358,8 @@ Page({
       }
     }
     qingqiu.get("zuixinxq", data, function (re) {
-      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
-          console.log(re)
           that.xuqiulist = re.result.records
           for (var i = 0; i < that.xuqiulist.length; i++) {
             that.xuqiulist[i].publishTime = re.result.records[i].publishTime.split(" ")[0]
@@ -381,7 +370,6 @@ Page({
           that.setData({
             xuqiulist: re.result.records,
           })
-          console.log(that.data.xuqiulist)
         } else {
           qingqiu.tk('未查询到任何数据')
         }
@@ -502,7 +490,6 @@ Page({
     qingqiu.get("bannerlist", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
-          console.log('banner', re)
           that.data.bannerImg = re.result
           for (let obj of that.data.bannerImg) {
             obj.bannerUrl = that.data.viewUrl + obj.bannerUrl;
@@ -534,9 +521,13 @@ Page({
       size: 10
     }
     qingqiu.get("pointList", data, function (re) {
+      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           for (let obj of re.result.records) {
+            if(obj.name == ''|| obj.name == null){
+              obj.name = obj.shopName
+            }
             obj.name = util.formatName(obj.name)
             obj.name = "恭喜" + obj.name + "成功入驻";
           }
@@ -627,7 +618,6 @@ Page({
       id: obj1.id
     }
     qingqiu.get("updateYeedById", data, function (res) {
-      console.log(res)
       if (res.success == true) {
         var xqxq = JSON.stringify(obj1);
         wx.navigateTo({
@@ -757,9 +747,7 @@ Page({
     var data = {
       oneAreaId: that.data.id
     }
-    console.log(data)
     qingqiu.get("queryTwoArea", data, function (re) {
-      console.log('二级区域', re)
       if (re.success == true) {
         if (re.result != null) {
           var obj = {
