@@ -139,6 +139,32 @@ const nowTime = function () {
   return Y + "-" + M + "-" + D + " " + h + ":" + m + ":" + s
 }
 
+// 获取日期
+const newDate = function () {
+  var date = new Date();
+  //年
+  var Y = date.getFullYear();
+  //月
+  var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
+  //日
+  var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+  return Y + "-" + M + "-" + D
+}
+
+
+// 比较两个时间的大小
+const checkDate = function(startTime,endTime) {
+  //日期格式化
+  var start_date = new Date(startTime.replace(/-/g, "/"));
+  var end_date = new Date(endTime.replace(/-/g, "/"));
+  //转成毫秒数，两个日期相减
+  var ms = end_date.getTime() - start_date.getTime();
+  //转换成天数
+  var day = parseInt(ms / (1000 * 60 * 60 * 24));
+  //do something
+  console.log("day = ", day);
+}
+
 module.exports = {
   formatTime: formatTime,
   formatDate: formatDate,
@@ -150,5 +176,7 @@ module.exports = {
   numberReg: numberReg,
   floatReglist: floatReglist,
   numberReglist: numberReglist,
-  nowTime: nowTime
+  nowTime: nowTime,
+  newDate:newDate,
+  checkDate:checkDate
 }
