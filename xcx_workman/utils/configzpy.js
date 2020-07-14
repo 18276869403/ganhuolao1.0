@@ -79,7 +79,7 @@ module.exports = {
   queryTwoArea:queryTwoArea,
   CasePage:CasePage,
   //xqurl:xqurl,
-  userLikesp:userLikes,
+  userLikes:userLikes,
   caseMessageVoList:caseMessageVoList,
   insertCaseMessage:insertCaseMessage,
   zuixinxq:zuixinxq,
