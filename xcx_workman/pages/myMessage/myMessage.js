@@ -84,7 +84,6 @@ Page({
   mymessageList() {
     var that = this
     var data={
-
       wxId:app.globalData.wxid
     }
     qingqiu.get("myMessage", data, function(re) {
@@ -94,6 +93,7 @@ Page({
           that.data.isLastPage=true
           return
         }
+        var messageList = that.data.messageList
         for(let obj of re.result){
           if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
             obj.picIurl = ''
@@ -105,10 +105,10 @@ Page({
           }else{
             obj.name = obj.wxNc
           }
-          that.data.messageList.push(re.result[i])
+          messageList.push(obj)
         }
         that.setData ({
-          messageList :that.data.messageList
+          messageList:messageList
         })
         console.log(that.data.messageList)
       } else {
