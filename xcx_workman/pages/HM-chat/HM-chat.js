@@ -4,6 +4,7 @@ const AUDIO    = wx.createInnerAudioContext();
 
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const util = require('../../utils/util.js')
 // pages/HM-chat/HM-chat.js
 
 Page({
@@ -645,6 +646,51 @@ Page({
 					content  : JSON.stringify(content),
 					type : type
 				};
+				var obj = {
+					wxUserId:this.data.toUserId
+				}
+				console.log(this.data.toUserId)
+				debugger
+				qingqiu.get("getPublicUserById",obj,function(res){
+					console.log(res)
+					// var unionid = res.result.unionid
+					var openid = res.result.openid
+					var mesdata = {
+						first:{
+							value:"干活佬有人联系您啦！",
+							color:"#173177"
+						},
+						keyword1:{
+							value:"有人在线给你留言了，注意查看！",
+							color:"#173177"
+						},
+						keyword2:{
+							value:util.nowTime(),
+							color:"#173177"
+						},
+						remark:{
+							value:"干活佬,助力工人/商家接单！",
+							color:"#173177"
+						}
+					}
+					var objdata = {
+						touser:openid,
+						template_id:"JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+						miniprogram:{
+							appid:"wx14e076d27e942480"
+						},
+						url:"http://www.baidu.com/",
+						data:mesdata
+					}
+					wx.request({
+						url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+app.globalData.access_TokenOff,
+						data:objdata,
+						method:'POST',
+						success:function(res){
+							console.log(res)
+						}
+					})
+				})
 				wx.request({
 					url: api.im.imSend,
 					data : msg,
