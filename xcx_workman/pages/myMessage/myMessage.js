@@ -124,6 +124,7 @@ liuyan:function(e){
 
 // 删除我的留言
 deletemyLY: function(e) {
+  var that=this
   var lyid=e.currentTarget.dataset.lyid
   var data={
     fromWxId:lyid.userId,
@@ -136,6 +137,7 @@ deletemyLY: function(e) {
         icon:'none',
         duration:2000
       })
+      that.onLoad()
     }else{
       wx.showToast({
         title: '删除失败！',
@@ -144,6 +146,5 @@ deletemyLY: function(e) {
       })
     }
   },'delete')
-  this.onLoad()
 }
 })
