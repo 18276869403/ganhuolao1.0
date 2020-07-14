@@ -73,6 +73,9 @@ Page({
     that.setData({
       needsTypeid: id
     })
+    this.data.isLastPage=false
+    this.data.pageNo=1
+    this.data.messageList=[]
     this.getmyEmploy()
   },
   phonecall: function (e) {
