@@ -32,6 +32,18 @@ Page({
     this.setData({ pageNo: this.data.pageNo + 1 })
     this.getActivity()
   },
+  // 获取token值
+	getTokenValue() {
+		var that = this
+		// 公众号Token
+		qingqiu.getAccessTokenAccount(function () {
+		})
+		setTimeout(function () {
+			// 小程序Token
+			qingqiu.getAccessTokenApplets(function () {
+			})
+		}, 1000)
+	},
   // 弹窗
   signName: function (e) {
     console.log('报名人员姓名：', e.detail.value)
@@ -123,6 +135,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getTokenValue()
     this.getActivity()
     this.setData({
       wxUserId: app.globalData.wxid

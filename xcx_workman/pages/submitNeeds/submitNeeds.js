@@ -139,10 +139,18 @@ Page({
     yijiname1: ''
   },
 
-  // 获取Token
-  getAccessToken: function () {
-    qingqiu.getAccessTokenApplets(function () {})
-  },
+ // 获取token值
+ getTokenValue() {
+  var that = this
+  // 公众号Token
+  qingqiu.getAccessTokenAccount(function () {
+  })
+  setTimeout(function () {
+    // 小程序Token
+    qingqiu.getAccessTokenApplets(function () {
+    })
+  }, 1000)
+},
   /**
    * 生命周期函数--监听页面加载
    */

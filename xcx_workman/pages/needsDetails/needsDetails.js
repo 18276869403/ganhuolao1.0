@@ -54,7 +54,21 @@ Page({
     type:''
   },
 
+// 获取token值
+getTokenValue() {
+  var that = this
+  // 公众号Token
+  qingqiu.getAccessTokenAccount(function () {
+  })
+  setTimeout(function () {
+    // 小程序Token
+    qingqiu.getAccessTokenApplets(function () {
+    })
+  }, 1000)
+},
+
   onLoad: function (options) {
+    this.getTokenValue()
     wx.showShareMenu({
       withShareTicket: true
     })

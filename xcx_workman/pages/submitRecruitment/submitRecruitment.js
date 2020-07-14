@@ -65,10 +65,23 @@ Page({
       }
     })
   },
+  // 获取token值
+	getTokenValue() {
+		var that = this
+		// 公众号Token
+		qingqiu.getAccessTokenAccount(function () {
+		})
+		setTimeout(function () {
+			// 小程序Token
+			qingqiu.getAccessTokenApplets(function () {
+			})
+		}, 1000)
+	},
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getTokenValue()
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -201,6 +214,7 @@ Page({
         })
          // 公众号消息推送
          qingqiu.get("getPublicUser", null, function (res) {
+           console.log(res)
           for (let obj of res.result) {
             var openid = obj.openid
             var mesdata = {

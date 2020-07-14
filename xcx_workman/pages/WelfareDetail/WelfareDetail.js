@@ -11,23 +11,39 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl,
-    bannerImg:[
-      {id:1,bannerUrl:"http://miss.it-ys.com:91/work-boot/sys/common/view/static/image/huodong1.png"},
-      {id:2,bannerUrl:"http://miss.it-ys.com:91/work-boot/sys/common/view/static/image/huodong2.png"}
+    viewUrl: api.viewUrl,
+    bannerImg: [{
+        id: 1,
+        bannerUrl: "http://miss.it-ys.com:91/work-boot/sys/common/view/static/image/huodong1.png"
+      },
+      {
+        id: 2,
+        bannerUrl: "http://miss.it-ys.com:91/work-boot/sys/common/view/static/image/huodong2.png"
+      }
     ],
-    xqxqlist:[],
-    jiedanList:[],
-    tupianlist:[],
-    id:'',
-    wxUserid:'',
-    type:'',
+    xqxqlist: [],
+    jiedanList: [],
+    tupianlist: [],
+    id: '',
+    wxUserid: '',
+    type: '',
   },
 
-  aixinzhuanfa:function(e){
+  aixinzhuanfa: function (e) {
     this.onShareAppMessage()
   },
-
+  // 获取token值
+  getTokenValue() {
+    var that = this
+    // 公众号Token
+    qingqiu.getAccessTokenAccount(function () {
+    })
+    setTimeout(function () {
+      // 小程序Token
+      qingqiu.getAccessTokenApplets(function () {
+      })
+    }, 1000)
+  },
   onShareAppMessage: function (res) {
     return {
       title: '',
@@ -42,97 +58,97 @@ Page({
   },
 
   onLoad: function (options) {
+    this.getTokenValue()
     wx.showShareMenu({
       withShareTicket: true
     })
     var gongyilist = JSON.parse(options.obj)
-    gongyilist.createTime=gongyilist.createTime.split(' ')[0]
-    if(gongyilist.signNum==''||gongyilist.signNum==null){
-      gongyilist.signNum=0
+    gongyilist.createTime = gongyilist.createTime.split(' ')[0]
+    if (gongyilist.signNum == '' || gongyilist.signNum == null) {
+      gongyilist.signNum = 0
     }
-    if(gongyilist.name != '' || gongyilist.name != null){
+    if (gongyilist.name != '' || gongyilist.name != null) {
       gongyilist.name = gongyilist.name
-    }else if(gongyilist.shopName != '' || gongyilist.shopName != null){
+    } else if (gongyilist.shopName != '' || gongyilist.shopName != null) {
       gongyilist.name = gongyilist.shopName
-    }else{
+    } else {
       gongyilist.name = gongyilist.wxNc
     }
-    var piclist=[]
-    if(gongyilist.pic!=''&&gongyilist.pic!=null){
-      piclist=gongyilist.pic.split(',')
+    var piclist = []
+    if (gongyilist.pic != '' && gongyilist.pic != null) {
+      piclist = gongyilist.pic.split(',')
     }
-    var activityid=gongyilist.id
+    var activityid = gongyilist.id
     this.setData({
       gongyilist: gongyilist,
-      piclist:piclist,
-      activityid:activityid,
-      wxUserId:app.globalData.wxid
+      piclist: piclist,
+      activityid: activityid,
+      wxUserId: app.globalData.wxid
     })
     console.log(gongyilist)
     this.SelectjiedanList()
-  }, 
+  },
   // 接单人员
   SelectjiedanList() {
     var that = this
-    var data={
-      activityid:that.data.activityid
+    var data = {
+      activityid: that.data.activityid
     }
-    qingqiu.get("getActivitySign", data, function(re) {
+    qingqiu.get("getActivitySign", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
-          that.data.jiedanList=re.result
+          that.data.jiedanList = re.result
           that.setData({
-            jiedanList:that.data.jiedanList
+            jiedanList: that.data.jiedanList
           })
           console.log(that.data.jiedanList)
         } else {
           qingqiu.tk('未查询到任何数据')
         }
-      } 
+      }
     })
   },
- 
+
   // 活动人数人数+1
-  AddActivity(){
+  AddActivity() {
     var data = {
-      needId:that.data.id,
-      wxUserId:app.globalData.wxid
+      needId: that.data.id,
+      wxUserId: app.globalData.wxid
     }
-    qingqiu.get("updateActivity", data, function(re) {
-    },'put')
+    qingqiu.get("updateActivity", data, function (re) {}, 'put')
   },
   // 需求删除
   deleteActive() {
     var that = this
-    var data={
+    var data = {
       id: that.data.activityid
     }
     wx.showModal({
-      title:'提示',
-      content:'您确定删除吗？',
-      success:function(res){
-        if(res.confirm){
-          qingqiu.get("delActivity", data, function(re) {
+      title: '提示',
+      content: '您确定删除吗？',
+      success: function (res) {
+        if (res.confirm) {
+          qingqiu.get("delActivity", data, function (re) {
             if (re.success == true) {
-               wx.showToast({
-                 title: '删除成功',
-                 icon:'success',
-                 duration:2000
-               })
-               setTimeout(function(){
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 2000
+              })
+              setTimeout(function () {
                 wx.redirectTo({
                   url: '../Welfare/Welfare',
                 })
-               },1000)
-              } else {
-                wx.showToast({
-                  title: re.message,
-                  icon: 'none',
-                  duration: 2000
-                })
-              } 
-          },'delete')
-        }else{
+              }, 1000)
+            } else {
+              wx.showToast({
+                title: re.message,
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }, 'delete')
+        } else {
           return
         }
       }
@@ -140,49 +156,51 @@ Page({
   },
   // 活动报名
   signName: function (e) {
-    console.log('报名人员姓名：',e.detail.value)
+    console.log('报名人员姓名：', e.detail.value)
     this.setData({
       signName: e.detail.value
     })
   },
-  signPhone:function(e){
-    console.log('报名人员电话：',e.detail.value)
+  signPhone: function (e) {
+    console.log('报名人员电话：', e.detail.value)
     this.setData({
-      signPhone:e.detail.value
+      signPhone: e.detail.value
     })
   },
-  woyaobaoming(e){
+  woyaobaoming(e) {
     this.setData({
-      activityId:this.data.activityId,
-      isShowConfirm:true
+      activityId: this.data.activityId,
+      isShowConfirm: true
     })
   },
-  AddnameActive:function(){
+  AddnameActive: function () {
     var that = this
-    var data={
-      signName:that.data.signName,
-      signPhone:that.data.signPhone,
-      activityId:that.data.activityid,
-      wxUserId:app.globalData.wxid
+    var data = {
+      signName: that.data.signName,
+      signPhone: that.data.signPhone,
+      activityId: that.data.activityid,
+      wxUserId: app.globalData.wxid
     }
     console.log(data)
-    qingqiu.get("insertActivitySign",data,function(res){
+    qingqiu.get("insertActivitySign", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         wx.showToast({
           title: '报名成功',
           icon: 'none',
           duration: 2000
         })
-        qingqiu.get("updateActivity",{id:that.data.activityid},function(res){
+        qingqiu.get("updateActivity", {
+          id: that.data.activityid
+        }, function (res) {
           console.log(res)
           that.setData({
             isShowConfirm: false,
           })
-        },"PUT")
+        }, "PUT")
         // that.onLoad()
       }
-    },'post')
+    }, 'post')
     that.setData({
       isShowConfirm: false,
     })
@@ -193,14 +211,14 @@ Page({
       isShowConfirm: false,
     })
   },
-  
+
   // 图片放大
-  fangda:function(e){
+  fangda: function (e) {
     var currentUrl = e.currentTarget.dataset.src
     wx.previewImage({
       current: currentUrl, // 当前显示图片的http链接
       urls: [currentUrl] // 需要预览的图片http链接列表
     })
   },
-  
+
 })

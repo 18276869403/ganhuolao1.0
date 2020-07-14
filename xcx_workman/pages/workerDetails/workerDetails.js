@@ -163,6 +163,7 @@ Page({
       backup1:this.data.tian[this.data.day]
     }
     qingqiu.get("userWorkAdd",data,function(res){
+      console.log(res)
       if(res.success == true){
         wx.showToast({
           title: '雇佣成功',
@@ -172,7 +173,9 @@ Page({
         var obj = {
           wxUserId:that.data.workerDetail.id
         }
+        console.log(obj)
         qingqiu.get("getPublicUserById",obj,function(res){
+          console.log(res)
           var unionid = res.result.unionid
           var openid = res.result.openid
           var mesdata = {

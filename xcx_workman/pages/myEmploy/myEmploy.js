@@ -99,9 +99,7 @@ Page({
           duration: 2000
         })
         setTimeout(function () {
-          wx.redirectTo({
-            url: '../myEmploy/myEmploy',
-          })
+          that.onLoad()
         }, 1000)
       }
     }, 'delete')
@@ -210,9 +208,7 @@ Page({
           duration: 2000
         })
         setTimeout(function () {
-          wx.redirectTo({
-            url: '../myEmploy/myEmploy',
-          })
+          that.onLoad()
         }, 1000)
       } else {
         wx.showToast({
