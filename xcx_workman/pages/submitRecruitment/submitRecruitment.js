@@ -3,6 +3,7 @@ const app = getApp()
 
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const utils = require('../../utils/util.js')
 
 Page({
 
@@ -170,7 +171,7 @@ Page({
   // 提交申请
   fabuzhaogong: function () {
     var that = this
-    var s = qingqiu.yanzheng(that.data.needsname + ",请输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",请选择工作地|" + that.data.linkman + "请输入联系人|" + that.data.phone + ",输入联系电话|" + that.data.picIurl1 + ",未上传图片")
+    var s = qingqiu.yanzheng(that.data.needsname + ",请输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",请选择工作地|" + that.data.linkman + "请输入联系人|" + that.data.phone + ",输入联系电话|")
     if (s != 0) {
       wx.showToast({
         title: s,
@@ -198,8 +199,49 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        wx.redirectTo({
-          url: '../recruitment/recruitment',
+         // 公众号消息推送
+         qingqiu.get("getPublicUser", null, function (res) {
+          for (let obj of res.result) {
+            var openid = obj.openid
+            var mesdata = {
+              first: {
+                value: "干活佬又上新啦，赶紧去看看！",
+                color: "#173177"
+              },
+              keyword1: {
+                value: "有1条招工信息发布啦",
+                color: "#173177"
+              },
+              keyword2: {
+                value: utils.nowTime(),
+                color: "#173177"
+              },
+              remark: {
+                value: "请进入干活佬查看详情",
+                color: "#173177"
+              }
+            }
+            var objdata = {
+              touser: openid,
+              template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+              miniprogram: {
+                appid: "wx14e076d27e942480"
+              },
+              url: "http://www.baidu.com/",
+              data: mesdata
+            }
+            wx.request({
+              url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
+              data: objdata,
+              method: 'POST',
+              success: function (res) {
+                console.log(res)
+              }
+            })
+          }
+          wx.navigateTo({
+            url: '../recruitment/recruitment',
+          })
         })
       } else {
         wx.showToast({
