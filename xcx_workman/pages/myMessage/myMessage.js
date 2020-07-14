@@ -105,7 +105,7 @@ Page({
           }else{
             obj.name = obj.wxNc
           }
-          that.data.messageList.push(re.result[i])
+          that.data.messageList.push(obj)
         }
         that.setData ({
           messageList :that.data.messageList
@@ -127,7 +127,7 @@ givemymessageList() {
     console.log(res)
   if (res.success == true) {
     if (res.result != null) {
-      if(re.result==''){
+      if(res.result==''){
         that.data.isLastPage=true
         return
       }

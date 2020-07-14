@@ -18,6 +18,7 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function () {
+    debugger
     this.data.needsList=[]
     this.data.isLastPage=false
     this.data.pageNo=1
