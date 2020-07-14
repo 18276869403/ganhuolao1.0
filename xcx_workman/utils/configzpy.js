@@ -50,6 +50,8 @@ const twoClassList = baseUrl + "pc/hall/twoClassList"
 const insertCaseMessage = baseUrl + "pc/user/insertCaseMessage"
 //晒晒评论详情
 const caseMessageVoList = baseUrl + "pc/user/caseMessageVoList"
+//晒晒点赞
+const userLikes = baseUrl + "work/wxAPI/userLikes"
 // 本地招工
 const list = baseUrl + "work/loclahire/list"
 // 本地招工-通过ID
@@ -77,6 +79,7 @@ module.exports = {
   queryTwoArea:queryTwoArea,
   CasePage:CasePage,
   //xqurl:xqurl,
+  userLikesp:userLikes,
   caseMessageVoList:caseMessageVoList,
   insertCaseMessage:insertCaseMessage,
   zuixinxq:zuixinxq,
