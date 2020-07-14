@@ -176,6 +176,7 @@ page {
   -webkit-transition: all .15s linear;
   transition: all .15s linear;
   border-bottom: solid 1rpx #ddd;
+  padding-bottom: 40rpx;
 }
 .input-box.showLayer {
   -webkit-transform: translate3d(0, -42vw, 0);
@@ -425,7 +426,7 @@ page {
   padding: 0 2%;
   position: absolute;
   top: 0;
-  bottom: 100rpx;
+  bottom: 140rpx;
 }
 .content .msg-list .loading {
   display: -webkit-box;

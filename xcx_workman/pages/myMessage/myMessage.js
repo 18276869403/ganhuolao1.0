@@ -97,7 +97,7 @@ Page({
         for(let obj of re.result){
           if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
             obj.picIurl = ''
-          }
+          } 
           if(obj.name != null && obj.name != 'null'&& obj.name!=''){
             obj.name = obj.name
           }else if(obj.shopName!=null && obj.shopName!='null'&& obj.shopName!=''){
