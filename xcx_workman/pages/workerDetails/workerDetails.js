@@ -228,7 +228,7 @@ Page({
           })
         })
       }
-    },'post')
+    },'post') 
     this.setData({
       flag: true
     })
