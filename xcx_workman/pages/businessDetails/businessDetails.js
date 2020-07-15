@@ -182,4 +182,26 @@ Page({
       CheckItem: navid
     })
   },
+  // 晒晒点赞
+  dianzan:function(e){
+    var that=this
+    var shaid = e.currentTarget.dataset.shaid;
+    var data={
+      wxCaseId:shaid
+    }
+    qingqiu.get("userLikes",data,function(re) {
+      console.log(re)
+      if (re.success == true) {
+        for(let obj of that.data.showList){
+          if(obj.id==shaid){
+            obj.giveGood+=1
+            obj.backup1=1
+          }
+        }
+        that.setData({
+          showList:that.data.showList
+        })
+      } 
+    })
+  },
 })

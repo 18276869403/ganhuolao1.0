@@ -114,8 +114,11 @@
                 <view>{{item.messageSum}}</view>
               </view>
               <view class="hengxiang">
-                <view>
+                <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
                   <image src="../image/zan.png" class="pinglun-img"></image>
+                </view>
+                <view wx:if="{{item.backup1==1}}">
+                  <image src="../image/zan2.png" class="pinglun-img"></image>
                 </view>
                 <view>{{item.giveGood}}</view>
               </view>
