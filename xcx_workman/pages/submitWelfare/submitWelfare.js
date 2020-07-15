@@ -107,6 +107,10 @@ Page({
       })
       return
     }
+    var pic =''
+    for(let obj of that.data.piclist){
+      pic += obj+','
+    }
     var data = {
       wxUserId: app.globalData.wxid,
       title:that.data.activitynameinput,
@@ -115,7 +119,7 @@ Page({
       content:that.data.activitycontent,
       activityTime:that.data.startdate + " 00:00:00",
       endTime:that.data.enddate + " 00:00:00",
-      pic:that.data.picIurl1,
+      pic:pic,
     }
     
     console.log(data)

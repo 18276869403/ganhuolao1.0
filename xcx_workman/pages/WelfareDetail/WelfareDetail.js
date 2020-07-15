@@ -78,15 +78,34 @@ Page({
     if (gongyilist.pic != '' && gongyilist.pic != null) {
       piclist = gongyilist.pic.split(',')
     }
+    var piclist1 = []
+    var piclist2 = []
+    for(let obj of piclist){
+      if(obj!=''){
+        piclist1.push(obj)
+        piclist2.push(api.viewUrl+obj)
+      }
+    }
     var activityid = gongyilist.id
+    console.log(piclist1)
     this.setData({
       gongyilist: gongyilist,
-      piclist: piclist,
+      piclist: piclist1,
       activityid: activityid,
-      wxUserId: app.globalData.wxid
+      wxUserId: app.globalData.wxid,
+      piclist2:piclist2
     })
     console.log(gongyilist)
     this.SelectjiedanList()
+  },
+  // 图片点击放大
+  imgYu:function(event){
+    var that =this
+    var src = api.viewUrl+event.currentTarget.dataset.picid;
+    wx.previewImage({
+      current: src,
+      urls: that.data.piclist2
+    })
   },
   // 接单人员
   SelectjiedanList() {
