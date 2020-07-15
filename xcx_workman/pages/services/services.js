@@ -97,6 +97,10 @@ Page({
       }else{
         this.data.name=''
       }
+      this.data.workerlist=[]
+      this.setData({
+        workerlist:this.data.workerlist
+      })
       this.grneedlist()
     }else{
       this.data.businesslist.splice(0,this.data.businesslist.length)
@@ -105,6 +109,10 @@ Page({
       }else{
         this.data.shopName=''
       }
+      this.data.businesslist=[]
+      this.setData({
+        businesslist:this.data.businesslist
+      })
       this.sjneedlist()
     }
   },
@@ -404,58 +412,59 @@ Page({
     }
     console.log(data)
     qingqiu.get("wxUserPage", data, function(re) {
+      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           if(re.result.records==''){
             that.setData({
               isLastPage:true
             })
-            return
-          }
-          for(let obj of re.result.records){
-            if(obj.starClass == 0){
-              obj.shopName = "暂未评级"
-            }else if(obj.starClass == 1){
-              obj.shopName = "一级工匠"
-            }else if(obj.starClass == 2){
-              obj.shopName = "二级工匠"
-            }else if(obj.starClass == 3){
-              obj.shopName = "三级工匠"
-            }else if(obj.starClass == 4){
-              obj.shopName = "四级工匠"
-            }if(obj.starClass == 5){
-              obj.shopName = "五级工匠"
-            }
-            obj.dateBirth = util.ages(obj.dateBirth)
-            obj.picIurl = that.data.viewUrl + obj.picIurl
-            var onename = []
-            var twoname = []
-            if(obj.oneClassName != null){
-              if(obj.oneClassName.indexOf(',') != -1){
-                onename = obj.oneClassName.split(',')
-              }else{
-                onename[0] = obj.oneClassName
+          }else{
+            for(let obj of re.result.records){
+              if(obj.starClass == 0){
+                obj.shopName = "暂未评级"
+              }else if(obj.starClass == 1){
+                obj.shopName = "一级工匠"
+              }else if(obj.starClass == 2){
+                obj.shopName = "二级工匠"
+              }else if(obj.starClass == 3){
+                obj.shopName = "三级工匠"
+              }else if(obj.starClass == 4){
+                obj.shopName = "四级工匠"
+              }if(obj.starClass == 5){
+                obj.shopName = "五级工匠"
               }
-            }
-            if(obj.twoClassName != null){
-              if(obj.twoClassName.indexOf(',') != -1){
-                twoname = obj.twoClassName.split(',')
-              }else{
-                twoname[0] = obj.twoClassName
+              obj.dateBirth = util.ages(obj.dateBirth)
+              obj.picIurl = that.data.viewUrl + obj.picIurl
+              var onename = []
+              var twoname = []
+              if(obj.oneClassName != null){
+                if(obj.oneClassName.indexOf(',') != -1){
+                  onename = obj.oneClassName.split(',')
+                }else{
+                  onename[0] = obj.oneClassName
+                }
               }
+              if(obj.twoClassName != null){
+                if(obj.twoClassName.indexOf(',') != -1){
+                  twoname = obj.twoClassName.split(',')
+                }else{
+                  twoname[0] = obj.twoClassName
+                }
+              }
+              obj.oneClassName = onename[0] + ' | '+twoname[0]
+              if(onename.length > 1){
+                obj.twoClassName = onename[1] + ' | ' + twoname[1] 
+              }else{
+                obj.twoClassName = ''
+              }
+              that.data.workerlist.push(obj)
             }
-            obj.oneClassName = onename[0] + ' | '+twoname[0]
-            if(onename.length > 1){
-              obj.twoClassName = onename[1] + ' | ' + twoname[1] 
-            }else{
-              obj.twoClassName = ''
-            }
-            that.data.workerlist.push(obj)
+            that.setData({
+              workerlist:that.data.workerlist,
+              workerlist1:re.result.records
+            })
           }
-          that.setData({
-            workerlist:that.data.workerlist,
-            workerlist1:re.result.records
-          })
         } 
       } 
     })
@@ -489,38 +498,38 @@ Page({
             that.setData({
               isLastPage:true
             })
-            return
-          }
-          for(let obj of re.result.records){
-            obj.picIurl = that.data.viewUrl + obj.picIurl
-            // 重定义分类
-            var onename = []
-            var twoname = []
-            if(obj.oneClassName != null){
-              if(obj.oneClassName.indexOf(',') != -1){
-                onename = obj.oneClassName.split(',')
-              }else{
-                onename[0] = obj.oneClassName
+          }else{
+            for(let obj of re.result.records){
+              obj.picIurl = that.data.viewUrl + obj.picIurl
+              // 重定义分类
+              var onename = []
+              var twoname = []
+              if(obj.oneClassName != null){
+                if(obj.oneClassName.indexOf(',') != -1){
+                  onename = obj.oneClassName.split(',')
+                }else{
+                  onename[0] = obj.oneClassName
+                }
               }
-            }
-            if(obj.twoClassName != null){
-              if(obj.twoClassName.indexOf(',') != -1){
-                twoname = obj.twoClassName.split(',')
-              }else{
-                twoname[0] = obj.twoClassName
+              if(obj.twoClassName != null){
+                if(obj.twoClassName.indexOf(',') != -1){
+                  twoname = obj.twoClassName.split(',')
+                }else{
+                  twoname[0] = obj.twoClassName
+                }
               }
+              obj.oneClassName = onename[0] + ' | ' + twoname[0]
+              if(onename.length > 1){
+                obj.twoClassName = onename[1] + ' | ' + twoname[1]
+              }else{
+                obj.twoClassName = ''
+              }
+              that.data.businesslist.push(obj)
             }
-            obj.oneClassName = onename[0] + ' | ' + twoname[0]
-            if(onename.length > 1){
-              obj.twoClassName = onename[1] + ' | ' + twoname[1]
-            }else{
-              obj.twoClassName = ''
-            }
-            that.data.businesslist.push(obj)
+            that.setData({
+              businesslist:that.data.businesslist,
+            })
           }
-          that.setData({
-            businesslist:that.data.businesslist,
-          })
         } 
       } 
     })
