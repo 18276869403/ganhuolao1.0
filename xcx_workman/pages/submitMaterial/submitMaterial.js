@@ -250,6 +250,11 @@ Page({
     qingqiu.get("yneedBy", data, function (res) {
       if (res.success == true) {
         console.log(res)
+        for(let obj of res.result.backup1.split(',')){
+          if(obj!=''){
+            that.data.tupianlists.push(obj)
+          }
+        }
         that.setData({
           wxuserid: res.result.wxUserId,
           needsTypeid: res.result.needType,
@@ -259,6 +264,7 @@ Page({
           linkman: res.result.publishMan,
           phone: res.result.publishPhone,
           picIurl: that.data.viewUrl + res.result.backup1,
+          tupianlists:that.data.tupianlists,
           needstate: res.result.needState,
           cityId: res.result.oneAreaId,
           areaId: res.result.twoAreaId,
