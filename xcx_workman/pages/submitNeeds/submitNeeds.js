@@ -247,6 +247,11 @@ Page({
     qingqiu.get("yneedBy", data, function (res) {
       if (res.success == true) {
         console.log(res)
+        for(let obj of res.result.backup1.split(',')){
+          if(obj!=''){
+            that.data.tupianlists.push(obj)
+          }
+        }
         that.setData({
           wxuserid: res.result.wxUserId,
           needsTypeid: res.result.needType,
@@ -256,6 +261,7 @@ Page({
           linkman: res.result.publishMan,
           phone: res.result.publishPhone,
           picIurl: that.data.viewUrl + res.result.backup1,
+          tupianlists:that.data.tupianlists,
           needstate: res.result.needState,
           cityId: res.result.oneAreaId,
           areaId: res.result.twoAreaId,
@@ -268,11 +274,12 @@ Page({
   // 发布需求
   lijifabu() {
     var that = this
+    that.data.picIurl1=[]
     for (let obj of that.data.tupianlists) {
       that.data.picIurl1 += obj + ","
     }
     that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
-    var s = qingqiu.yanzheng(that.data.needsname + ",输入需求标题|" + that.data.cityId + ",选择所在区域|" + that.data.areaId + ",选择所在区域|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人|" + that.data.youhuijia + ",输入出价")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入需求标题|" + that.data.cityId + ",选择所在区域|" + that.data.areaId + ",选择所在区域|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人")
     if (s != 0) {
       wx.showToast({
         title: s,
