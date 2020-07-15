@@ -559,10 +559,18 @@ Page({
 	// 获取token值
 	getTokenValue() {
 		var that = this
-		// 公众号Token
-		qingqiu.getAccessTokenAccount(function () {
-			that.getUserOpenId()
-		})
+    // 公众号Token
+    qingqiu.get("getPublicAccessToken",null,function (res) {
+      if(res.success == true){
+        app.globalData.access_TokenOff = res.result.accessToken
+      }else{
+        wx.showToast({
+          title: '令牌获取失败',
+          icon:'none'
+        })
+        return
+      }
+    })
 		setTimeout(function () {
 			// 小程序Token
 			qingqiu.getAccessTokenApplets(function () {

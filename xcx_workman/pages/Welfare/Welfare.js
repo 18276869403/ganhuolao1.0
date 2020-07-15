@@ -16,7 +16,7 @@ Page({
     signPhone: '', //报名电话
     pageNo: 1,
     wxUserId: '',
-    isLastPage:false
+    isLastPage: false
   },
 
   // 上拉功能
@@ -24,26 +24,36 @@ Page({
     if (this.data.isLastPage) {
       wx.showToast({
         title: '没有更多了！',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
-        return
+      return
     }
-    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
     this.getActivity()
   },
   // 获取token值
-	getTokenValue() {
-		var that = this
-		// 公众号Token
-		qingqiu.getAccessTokenAccount(function () {
-		})
-		setTimeout(function () {
-			// 小程序Token
-			qingqiu.getAccessTokenApplets(function () {
-			})
-		}, 1000)
-	},
+  getTokenValue() {
+    var that = this
+    // 公众号Token
+    qingqiu.get("getPublicAccessToken", null, function (res) {
+      if (res.success == true) {
+        app.globalData.access_TokenOff = res.result.accessToken
+      } else {
+        wx.showToast({
+          title: '令牌获取失败',
+          icon: 'none'
+        })
+        return
+      }
+    })
+    setTimeout(function () {
+      // 小程序Token
+      qingqiu.getAccessTokenApplets(function () {})
+    }, 1000)
+  },
   // 弹窗
   signName: function (e) {
     console.log('报名人员姓名：', e.detail.value)
@@ -145,8 +155,8 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function () {
     this.setData({
-      pageNo:1,
-      gongyilist:[]
+      pageNo: 1,
+      gongyilist: []
     })
     this.onLoad()
     setTimeout(() => {
@@ -167,17 +177,17 @@ Page({
     qingqiu.get("getActivityList", data, function (res) {
       console.log('公益活动列表', res)
       if (res.success == true) {
-        if(res.result.records.length > 0){
+        if (res.result.records.length > 0) {
           var gongyilist = that.data.gongyilist
-          for(let obj of res.result.records){
+          for (let obj of res.result.records) {
             gongyilist.push(obj)
           }
           that.setData({
             gongyilist: gongyilist
           })
-        }else{
+        } else {
           that.setData({
-            isLastPage:true
+            isLastPage: true
           })
           return
         }

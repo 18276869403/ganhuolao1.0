@@ -36,12 +36,20 @@ Page({
   getTokenValue() {
     var that = this
     // 公众号Token
-    qingqiu.getAccessTokenAccount(function () {
+    qingqiu.get("getPublicAccessToken", null, function (res) {
+      if (res.success == true) {
+        app.globalData.access_TokenOff = res.result.accessToken
+      } else {
+        wx.showToast({
+          title: '令牌获取失败',
+          icon: 'none'
+        })
+        return
+      }
     })
     setTimeout(function () {
       // 小程序Token
-      qingqiu.getAccessTokenApplets(function () {
-      })
+      qingqiu.getAccessTokenApplets(function () {})
     }, 1000)
   },
   onShareAppMessage: function (res) {
@@ -80,10 +88,10 @@ Page({
     }
     var piclist1 = []
     var piclist2 = []
-    for(let obj of piclist){
-      if(obj!=''){
+    for (let obj of piclist) {
+      if (obj != '') {
         piclist1.push(obj)
-        piclist2.push(api.viewUrl+obj)
+        piclist2.push(api.viewUrl + obj)
       }
     }
     var activityid = gongyilist.id
@@ -93,15 +101,15 @@ Page({
       piclist: piclist1,
       activityid: activityid,
       wxUserId: app.globalData.wxid,
-      piclist2:piclist2
+      piclist2: piclist2
     })
     console.log(gongyilist)
     this.SelectjiedanList()
   },
   // 图片点击放大
-  imgYu:function(event){
-    var that =this
-    var src = api.viewUrl+event.currentTarget.dataset.picid;
+  imgYu: function (event) {
+    var that = this
+    var src = api.viewUrl + event.currentTarget.dataset.picid;
     wx.previewImage({
       current: src,
       urls: that.data.piclist2

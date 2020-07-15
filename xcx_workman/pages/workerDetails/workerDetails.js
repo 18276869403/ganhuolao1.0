@@ -23,7 +23,22 @@ Page({
     tian: ['天', '月', '季', '年']
   },
 
+  getTokenValue:function(){
+      // 公众号Token
+      qingqiu.get("getPublicAccessToken",null,function (res) {
+        if(res.success == true){
+          app.globalData.access_TokenOff = res.result.accessToken
+        }else{
+          wx.showToast({
+            title: '令牌获取失败',
+            icon:'none'
+          })
+          return
+        }
+      })
+  },
   onLoad: function (options) {
+    this.getTokenValue()
     wx.showShareMenu({
       withShareTicket: true
     })

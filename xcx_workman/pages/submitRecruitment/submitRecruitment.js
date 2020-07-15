@@ -33,8 +33,8 @@ Page({
     workareaname: '',
     city: [],
     area: [],
-    picIurl:'',
-    picIurl1:''
+    picIurl: '',
+    picIurl1: ''
   },
 
   // 获取一级区域
@@ -66,17 +66,25 @@ Page({
     })
   },
   // 获取token值
-	getTokenValue() {
-		var that = this
-		// 公众号Token
-		qingqiu.getAccessTokenAccount(function () {
-		})
-		setTimeout(function () {
-			// 小程序Token
-			qingqiu.getAccessTokenApplets(function () {
-			})
-		}, 1000)
-	},
+  getTokenValue() {
+    var that = this
+    // 公众号Token
+    qingqiu.get("getPublicAccessToken", null, function (res) {
+      if (res.success == true) {
+        app.globalData.access_TokenOff = res.result.accessToken
+      } else {
+        wx.showToast({
+          title: '令牌获取失败',
+          icon: 'none'
+        })
+        return
+      }
+    })
+    setTimeout(function () {
+      // 小程序Token
+      qingqiu.getAccessTokenApplets(function () {})
+    }, 1000)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -195,14 +203,14 @@ Page({
     }
     var data = {
       wxUserId: app.globalData.wxid,
-      hireTitle:that.data.needsname,
-      backup3:that.data.salary,
-      oneAreaId:that.data.typeid,
-      twoAreaId:that.data.areaId,
-      publishMan:that.data.linkman,
-      publishPhone:that.data.phone,
-      hireContent:that.data.needscontent,
-      backup4:that.data.picIurl1
+      hireTitle: that.data.needsname,
+      backup3: that.data.salary,
+      oneAreaId: that.data.typeid,
+      twoAreaId: that.data.areaId,
+      publishMan: that.data.linkman,
+      publishPhone: that.data.phone,
+      hireContent: that.data.needscontent,
+      backup4: that.data.picIurl1
     }
     qingqiu.get("localHireAdd", data, function (re) {
       console.log(re)
@@ -212,9 +220,9 @@ Page({
           icon: 'success',
           duration: 3000
         })
-         // 公众号消息推送
-         qingqiu.get("getPublicUser", null, function (res) {
-           console.log(res)
+        // 公众号消息推送
+        qingqiu.get("getPublicUser", null, function (res) {
+          console.log(res)
           for (let obj of res.result) {
             var openid = obj.openid
             var mesdata = {
@@ -277,7 +285,7 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        qingqiu.messageReg(tempFilePaths, 1, function(re) {
+        qingqiu.messageReg(tempFilePaths, 1, function (re) {
           var data = JSON.parse(re.data)
           if (data.errcode == 87014) {
             wx.showToast({

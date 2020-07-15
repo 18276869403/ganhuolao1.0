@@ -139,18 +139,26 @@ Page({
     yijiname1: ''
   },
 
- // 获取token值
- getTokenValue() {
-  var that = this
-  // 公众号Token
-  qingqiu.getAccessTokenAccount(function () {
-  })
-  setTimeout(function () {
-    // 小程序Token
-    qingqiu.getAccessTokenApplets(function () {
+  // 获取token值
+  getTokenValue() {
+    var that = this
+    // 公众号Token
+    qingqiu.get("getPublicAccessToken", null, function (res) {
+      if (res.success == true) {
+        app.globalData.access_TokenOff = res.result.accessToken
+      } else {
+        wx.showToast({
+          title: '令牌获取失败',
+          icon: 'none'
+        })
+        return
+      }
     })
-  }, 1000)
-},
+    setTimeout(function () {
+      // 小程序Token
+      qingqiu.getAccessTokenApplets(function () {})
+    }, 1000)
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -247,8 +255,8 @@ Page({
     qingqiu.get("yneedBy", data, function (res) {
       if (res.success == true) {
         console.log(res)
-        for(let obj of res.result.backup1.split(',')){
-          if(obj!=''){
+        for (let obj of res.result.backup1.split(',')) {
+          if (obj != '') {
             that.data.tupianlists.push(obj)
           }
         }
@@ -261,7 +269,7 @@ Page({
           linkman: res.result.publishMan,
           phone: res.result.publishPhone,
           picIurl: that.data.viewUrl + res.result.backup1,
-          tupianlists:that.data.tupianlists,
+          tupianlists: that.data.tupianlists,
           needstate: res.result.needState,
           cityId: res.result.oneAreaId,
           areaId: res.result.twoAreaId,
@@ -274,7 +282,7 @@ Page({
   // 发布需求
   lijifabu() {
     var that = this
-    that.data.picIurl1=[]
+    that.data.picIurl1 = []
     for (let obj of that.data.tupianlists) {
       that.data.picIurl1 += obj + ","
     }
