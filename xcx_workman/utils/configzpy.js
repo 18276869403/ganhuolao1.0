@@ -34,6 +34,8 @@ const editUserGood = baseUrl + "pc/user/editUserGood"
 const pcQueryUserPointPage = baseUrl + "pc/user/pcQueryUserPointPage"
 // 发布晒晒
 const insertCase = baseUrl + "pc/user/insertCase"
+// 删除我的晒晒
+const deletess = baseUrl + "pc/user/delete"
 // 晒晒详情
 const pcQueryWxCaseById = baseUrl + "pc/user/pcQueryWxCaseById"
 // 一级区域
@@ -92,6 +94,7 @@ module.exports = {
   pcQueryUserPointPage:pcQueryUserPointPage,
   deleteUserGood:deleteUserGood,
   deleteUserIm:deleteUserIm,
+  deletess:deletess,
   pcQueryMessagePageByUserID:pcQueryMessagePageByUserID,
   insertCase:insertCase,
   pcQueryWxCaseById:pcQueryWxCaseById,
