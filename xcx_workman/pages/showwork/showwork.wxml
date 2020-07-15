@@ -165,7 +165,7 @@
           </view>
           <view>照片</view>
         </view>
-        <view class="tanchuang-item-right zongxiang" bindtap="submitVideo" wx:if="{{item!=1}}">
+        <view class="tanchuang-item-right zongxiang" bindtap="submitVideo" wx:if="{{showList[0].backup1==1}}">
           <view>
             <image src="{{viewUrl}}static/image/shipin.png" class="tupian-img"></image>
           </view>
