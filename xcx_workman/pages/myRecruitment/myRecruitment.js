@@ -58,6 +58,7 @@ Page({
     var data = {
       pageNo: that.data.pageNo,
       pageSize: 10,
+      wxUserId:app.globalData.wxid
     }
     qingqiu.get("list", data, function (re) {
       console.log('请求数据', re)
