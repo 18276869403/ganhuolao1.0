@@ -51,6 +51,13 @@ Page({
       this.selectsp()
     }
   },
+  // 下拉刷新
+  onPullDownRefresh: function () {
+    this.onLoad()
+    setTimeout(() => {
+      wx.stopPullDownRefresh()
+    }, 1000);
+  },
   // 我要开店
   kaidian:function(e){
     var type = e.currentTarget.dataset.type
@@ -109,7 +116,7 @@ Page({
       size:10,
       backup1:1
     }
-    if(that.data.where != ''){ data.goodName = that.data.where }
+    if(that.data.where != ''){ data.goodName = that.data.erjiname }
     if(app.globalData.oneCity != undefined){ data.oneAreaId = app.globalData.oneCity.id }
     if(app.globalData.twoCity != undefined){ data.twoAreaId = app.globalData.oneCity.id }
     if(that.data.yijiid != ''){ data.oneClassId =  that.data.yijiid }
