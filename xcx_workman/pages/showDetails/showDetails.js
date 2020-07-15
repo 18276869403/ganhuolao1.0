@@ -115,7 +115,7 @@ Page({
     })
   },
   onShow: function() {
-    // this.pinglun()
+    this.pinglun()
   },
   fangda: function(e) {
     var img = e.currentTarget.dataset.img
