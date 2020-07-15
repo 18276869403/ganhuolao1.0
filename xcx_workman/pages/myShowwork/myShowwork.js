@@ -33,13 +33,13 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+    this.data.showList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
     this.getShowList()
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.data.showList=[]
-    this.data.isLastPage=false
-    this.data.pageNo=1
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
@@ -122,8 +122,7 @@ Page({
     var data = {
       id:e.currentTarget.dataset.shaid
     }
-    debugger
-    qingqiu.get("",data,function(res){
+    qingqiu.get("deletess",data,function(res){
       console.log(res)
       if(res.success == true){
         wx.showToast({
@@ -131,6 +130,7 @@ Page({
           icon:'success',
           duration:2000
         })
+        that.onLoad()
       }
     },'delete')
   },
