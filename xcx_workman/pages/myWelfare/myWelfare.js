@@ -61,6 +61,7 @@ Page({
   // 切换类型
   changetype: function (e) {
     var that = this;
+    that.data.gongyilist=[]
     var id = e.currentTarget.dataset.id
     that.setData({
       GyTypeid: id
