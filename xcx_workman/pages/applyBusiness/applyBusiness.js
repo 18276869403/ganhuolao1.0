@@ -294,40 +294,42 @@ Page({
         var index1 = []
         var flag = false
         var flag1 = false
-        if (re.result.oneClassName.indexOf(',') > -1 && re.result.oneClassIds.indexOf(',') > -1) {
+        if (re.result.oneClassName.indexOf(',') == -1 && re.result.oneClassIds.indexOf(',') == -1) {
           str = re.result.oneClassName.split(',')
           index = re.result.oneClassIds.split(',')
         } else {
           if (re.result.oneClassIds.indexOf(',') < 0 && re.result.twoClassIds.indexOf(',') > -1) {
             index[0] = re.result.oneClassIds
             index[1] = re.result.oneClassIds
-            str[0] = re.result.oneClassName
-            str[1] = re.result.oneClassName
+            str = re.result.oneClassName.split(',')
+            str = re.result.oneClassName.split(',')
           } else {
-            str = re.result.oneClassName
-            index = re.result.oneClassIds
+            str = re.result.oneClassName.split(',')
+            index = re.result.oneClassIds.split(',')
           }
         }
         if (re.result.twoClassName.indexOf(',') > -1) {
           str1 = re.result.twoClassName.split(',')
           index1 = re.result.twoClassIds.split(',')
         } else {
-          str1 = re.result.twoClassName
-          index1 = re.result.twoClassIds
+          str1 = re.result.twoClassName.split(',')
+          index1 = re.result.twoClassIds.split(',')
         }
         var temp = ''
-        if (str.length > 0 && str1.length > 0) {
+        if (str.length > 1 && str1.length > 1) {
           temp = str[0] + "|" + str1[0] + "," + str[1] + "|" + str1[1]
           flag = true
           flag1 = true
         } else {
-          temp = str[0] + "," + str1[0]
+          temp = str[0] + "|" + str1[0]
           flag = true
         }
         that.setData({
           needsTypeid: 1,
           tempClass: temp,
           yijiname: temp,
+          fenClass1:temp.split(',')[0],
+          fenClass2:temp.split(',')[1],
           [typeid]: index[0],
           [typeerji]: index1[0],
           [typestate]: flag,
@@ -770,6 +772,12 @@ Page({
         })
         return
       }
+      if(that.data.fenleitype1.yjid==''&&that.data.fenleitype2.yjid!=''){
+        that.data.fenleitype1.yjid=that.data.fenleitype2.yjid
+        that.data.fenleitype2.yjid=''
+        that.data.fenleitype1.erjiid=that.data.fenleitype2.erjiid
+        that.data.fenleitype2.erjiid=''
+      }
       var s = qingqiu.yanzheng(that.data.areaId + ",选择区域|" + that.data.fenleitype1.yjid + ",选择商家分类|" + that.data.needsname + ",输入商铺名称|" + that.data.linkman + "输入联系人|" + that.data.phone + ",输入联系电话|" + that.data.picIurl1 + ",上传门头照")
       if (s != 0) {
         wx.showToast({
@@ -778,6 +786,12 @@ Page({
           duration: 2000
         })
         return
+      }
+      if(that.data.fenleitype2.yjid==undefined){
+        that.data.fenleitype2.yjid=''
+      }
+      if(that.data.fenleitype2.erjiid==undefined){
+        that.data.fenleitype2.erjiid=''
       }
       data = {
         id: app.globalData.wxid,
