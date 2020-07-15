@@ -59,6 +59,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    this.setData({
+      isLastPage:false,
+      pageNo:1,
+      goodsLists:[]
+    })
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -66,11 +71,6 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.setData({
-      isLastPage:false,
-      pageNo:1,
-      goodsLists:[]
-    })
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
