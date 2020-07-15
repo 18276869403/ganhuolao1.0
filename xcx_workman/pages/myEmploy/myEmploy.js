@@ -137,12 +137,12 @@ Page({
         if (re.result != null) {
           if(re.result.records==''){
             that.data.isLastPage=true
-            return
-          }
-          for (let obj of re.result.records) {
-            obj.picIurl = api.viewUrl + obj.picIurl
-            obj.hiringTime = obj.hiringTime.split(' ')[0]
-            that.data.messageList.push(obj)
+          }else{
+            for (let obj of re.result.records) {
+              obj.picIurl = api.viewUrl + obj.picIurl
+              obj.hiringTime = obj.hiringTime.split(' ')[0]
+              that.data.messageList.push(obj)
+            }
           }
           that.setData({
             messageList: that.data.messageList
