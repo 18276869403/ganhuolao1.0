@@ -63,6 +63,29 @@ Page({
     qingqiu.get("queryWxUser",data,function(res){
       if(res.success==true){
         res.result.picIurl = that.data.viewUrl + res.result.picIurl
+          // 重定义分类
+          var onename = []
+          var twoname = []
+          if (res.result.oneClassName != null) {
+            if (res.result.oneClassName.indexOf(',') != -1) {
+              onename = res.result.oneClassName.split(',')
+            } else {
+              onename[0] = res.result.oneClassName
+            }
+          }
+          if (res.result.twoClassName != null) {
+            if (res.result.twoClassName.indexOf(',') != -1) {
+              twoname = res.result.twoClassName.split(',')
+            } else {
+              twoname[0] = res.result.twoClassName
+            }
+          }
+          res.result.oneClassName = onename[0] + ' | ' + twoname[0]
+          if (onename.length > 1) {
+            res.result.twoClassName = onename[1] + ' | ' + twoname[1]
+          } else {
+            res.result.twoClassName = ''
+          }
         var obj = JSON.stringify(res.result)
         wx.navigateTo({
           url: '../businessDetails/businessDetails?obj=' + obj,
