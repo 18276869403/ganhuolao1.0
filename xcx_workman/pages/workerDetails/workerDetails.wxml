@@ -119,6 +119,12 @@
                 </view>
                 <view>{{item.messageSum}}</view>
               </view>
+              <view class="hengxiang">
+                <view>
+                  <image src="../image/zan.png" class="pinglun-img"></image>
+                </view>
+                <view>{{item.giveGood}}</view>
+              </view>
             </view>
           </view>
         </view>
