@@ -102,10 +102,8 @@ Page({
       if (re.result != null) {
         if(re.result==''){
           that.data.isLastPage=true
-          return
-        }
-        var messageList = that.data.messageList
-        for(let obj of re.result){
+        }else{
+          for(let obj of re.result){
           if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
             obj.picIurl = ''
           } 
@@ -116,10 +114,11 @@ Page({
           }else{
             obj.name = obj.wxNc
           }
-          messageList.push(obj)
+          that.data.messageList.push(obj)
+        }
         }
         that.setData ({
-          messageList:messageList
+          messageList:that.data.messageList
         })
       } else {
         qingqiu.tk('未查询到任何数据')
@@ -139,20 +138,20 @@ givemymessageList() {
     if (res.result != null) {
       if(res.result==''){
         that.data.isLastPage=true
-        return
-      }
-      for(let obj of res.result){
-        if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
-          obj.picIurl = ''
+      }else{
+        for(let obj of res.result){
+          if(obj.picIurl == null || obj.picIurl == '' || obj.picIurl == 'null' || obj.picIurl == undefined){
+            obj.picIurl = ''
+          }
+          if(obj.name != null && obj.name != 'null' && obj.name!=''){
+            obj.name = obj.name
+          }else if(obj.shopName!=null && obj.shopName!='null' && obj.shopName!=''){
+            obj.name = obj.shopName
+          }else{
+            obj.name = obj.wxNc
+          }
+          that.data.formymessageList.push(obj)
         }
-        if(obj.name != null && obj.name != 'null' && obj.name!=''){
-          obj.name = obj.name
-        }else if(obj.shopName!=null && obj.shopName!='null' && obj.shopName!=''){
-          obj.name = obj.shopName
-        }else{
-          obj.name = obj.wxNc
-        }
-        that.data.formymessageList.push(obj)
       }
       that.setData ({
         formymessageList:that.data.formymessageList
