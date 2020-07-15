@@ -70,13 +70,14 @@ Page({
   changeType: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id
+    that.data.messageList=[]
     that.setData({
-      needsTypeid: id
+      needsTypeid: id,
+      messageList:that.data.messageList
     })
-    this.data.isLastPage=false
-    this.data.pageNo=1
-    this.data.messageList=[]
-    this.getmyEmploy()
+    that.data.isLastPage=false
+    that.data.pageNo=1
+    that.getmyEmploy()
   },
   phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
@@ -143,10 +144,10 @@ Page({
               obj.hiringTime = obj.hiringTime.split(' ')[0]
               that.data.messageList.push(obj)
             }
+            that.setData({
+              messageList: that.data.messageList
+            })
           }
-          that.setData({
-            messageList: that.data.messageList
-          })
         } else {
           wx.showToast({
             title: '未雇佣工人',
