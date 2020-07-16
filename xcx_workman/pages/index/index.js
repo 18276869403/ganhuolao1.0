@@ -133,7 +133,7 @@ Page({
                     wxNc: userInfo.nickName,
                   }
                   if(that.data.openid != ''){
-                    data.backup1 = that.data.openid
+                    data.backup1 = that.data.openid 
                   }
                   qingqiu.get("getKeyInfo", data, function (re) {
                     app.globalData.wxid = re.result.wxUser.id
