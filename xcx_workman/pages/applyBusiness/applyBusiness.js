@@ -454,8 +454,8 @@ Page({
   },
   needsnameblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
           needscontent: ''
         })
@@ -463,6 +463,15 @@ Page({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
@@ -476,9 +485,8 @@ Page({
   },
   needscontentblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      console.log('回调函数', res)
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
           needscontent: ''
         })
@@ -486,6 +494,15 @@ Page({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
@@ -501,16 +518,24 @@ Page({
   //商家联系人敏感词
   linkmanblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      console.log('回调函数', res)
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          linkman: ''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
@@ -545,16 +570,24 @@ Page({
   //工人名称敏感词
   workernameblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      console.log('回调函数', res)
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          workername: ''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
@@ -581,15 +614,24 @@ Page({
   //工人详细地址敏感词
   workeraddressblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          workeraddress: ''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
@@ -610,15 +652,24 @@ Page({
   // 工人技能介绍敏感词
   workerskillblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          workerskill: ''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
