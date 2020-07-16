@@ -22,7 +22,7 @@ Page({
     erjiname: '',
     cityname: '',
     areaname: '',
-    cityId: 1,
+    cityId: 0,
     areaId: '',
     needsname: '',
     needscontent: '',
@@ -179,7 +179,7 @@ Page({
       // this.oneClass()
       // this.twoClass()
       this.QueryoneArea()
-      // this.QuerytwoArea()
+      this.QuerytwoArea()
       this.needSignPage()
     } else {
       this.setData({
@@ -314,7 +314,7 @@ Page({
     //     icon:'none',
     //     duration:2000
     //   })
-    //   return
+    //   return 
     // }
     if (that.data.select == "circle") {
       wx.showToast({
@@ -504,7 +504,7 @@ Page({
   QuerytwoArea() {
     var that = this
     var data = {
-      oneAreaId: that.data.cityId
+      oneAreaId: that.data.cityId==0?'1':that.data.cityId
     }
     qingqiu.get("queryTwoArea", data, function (re) {
       if (re.success == true) {
