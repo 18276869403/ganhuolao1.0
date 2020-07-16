@@ -1063,7 +1063,7 @@ Page({
           },
           success: function (res) {
             console.log(res)
-            if (res.data == false) {
+            if (res.data =="false") {
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
@@ -1085,7 +1085,6 @@ Page({
                   var jj = JSON.parse(r);
                   var sj = that.data.viewUrl + jj.message
                   console.log(res)
-                  // res.data.data = ""
                   if (type == '1') {
                     that.setData({
                       picIurl: sj,
