@@ -192,7 +192,7 @@ Page({
     })
   },
   woyaobaoming(e) {
-    if(that.data.gongyilist.signNum==that.data.gongyilist.activityNum){
+    if(this.data.gongyilist.signNum==this.data.gongyilist.activityNum){
       wx.showToast({
         title: '报名人数已满！',
         icon: 'none',
