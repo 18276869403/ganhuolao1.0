@@ -80,10 +80,6 @@ Page({
         return
       }
     })
-    setTimeout(function () {
-      // 小程序Token
-      qingqiu.getAccessTokenApplets(function () {})
-    }, 1000)
   },
   /**
    * 生命周期函数--监听页面加载

@@ -47,10 +47,6 @@ Page({
         return
       }
     })
-    setTimeout(function () {
-      // 小程序Token
-      qingqiu.getAccessTokenApplets(function () {})
-    }, 1000)
   },
   onShareAppMessage: function (res) {
     return {

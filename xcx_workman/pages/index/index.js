@@ -57,23 +57,28 @@ Page({
   getTokenValue() {
     var that = this
     // 公众号Token
-    qingqiu.get("getPublicAccessToken",null,function (res) {
-      if(res.success == true){
+    qingqiu.get("getPublicAccessToken", null, function (res) {
+      if (res.success == true) {
         app.globalData.access_TokenOff = res.result.accessToken
-      }else{
+        that.getUserOpenId()
+      } else {
         wx.showToast({
           title: '令牌获取失败',
-          icon:'none'
+          icon: 'none'
         })
         return
       }
     })
     setTimeout(function () {
       // 小程序Token
-      qingqiu.getAccessTokenApplets(function () {
-        that.getUserInfo()
+      qingqiu.getAccessTokenApplets(function (res) {
+        console.log("小程序token", res)
+        if (res.statusCode == 200) {
+          app.globalData.access_Token = res.data.access_token
+        }
       })
-    }, 2000)
+      that.getUserInfo()
+    }, 1000)
   },
   getUserInfo: function () {
     var that = this
