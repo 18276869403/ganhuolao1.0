@@ -192,6 +192,14 @@ Page({
     })
   },
   woyaobaoming(e) {
+    if(that.data.gongyilist.signNum==that.data.gongyilist.activityNum){
+      wx.showToast({
+        title: '报名人数已满！',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
     for(let obj of this.data.jiedanList){
       if(obj.wxUserId==app.globalData.wxid){
         wx.showToast({
