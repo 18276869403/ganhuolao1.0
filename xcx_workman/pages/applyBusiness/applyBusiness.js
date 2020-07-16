@@ -208,29 +208,29 @@ Page({
       }
     })
   },
- // 获取token值
- getTokenValue() {
-  var that = this
-   // 公众号Token
-   qingqiu.get("getPublicAccessToken",null,function (res) {
-    if(res.success == true){
-      app.globalData.access_TokenOff = res.result.accessToken
-    }else{
-      wx.showToast({
-        title: '令牌获取失败',
-        icon:'none'
-      })
-      return
-    }
-  })
-  // 小程序Token
-  qingqiu.getAccessTokenApplets(function (res) {
-    console.log("小程序token", res)
-    if (res.statusCode == 200) {
-      app.globalData.access_Token = res.data.access_token
-    }
-  })
-},
+  // 获取token值
+  getTokenValue() {
+    var that = this
+    // 公众号Token
+    qingqiu.get("getPublicAccessToken", null, function (res) {
+      if (res.success == true) {
+        app.globalData.access_TokenOff = res.result.accessToken
+      } else {
+        wx.showToast({
+          title: '令牌获取失败',
+          icon: 'none'
+        })
+        return
+      }
+    })
+    // 小程序Token
+    qingqiu.getAccessTokenApplets(function (res) {
+      console.log("小程序token", res)
+      if (res.statusCode == 200) {
+        app.globalData.access_Token = res.data.access_token
+      }
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -339,8 +339,8 @@ Page({
           needsTypeid: 1,
           tempClass: temp,
           yijiname: temp,
-          fenClass1:temp.split(',')[0],
-          fenClass2:temp.split(',')[1],
+          fenClass1: temp.split(',')[0],
+          fenClass2: temp.split(',')[1],
           [typeid]: index[0],
           [typeerji]: index1[0],
           [typestate]: flag,
@@ -454,7 +454,9 @@ Page({
   },
   needsnameblur: function (e) {
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -465,10 +467,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -485,7 +487,9 @@ Page({
   },
   needscontentblur: function (e) {
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -496,10 +500,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -518,7 +522,9 @@ Page({
   //商家联系人敏感词
   linkmanblur: function (e) {
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -529,10 +535,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -570,7 +576,9 @@ Page({
   //工人名称敏感词
   workernameblur: function (e) {
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -581,10 +589,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -614,7 +622,9 @@ Page({
   //工人详细地址敏感词
   workeraddressblur: function (e) {
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -625,10 +635,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -652,7 +662,9 @@ Page({
   // 工人技能介绍敏感词
   workerskillblur: function (e) {
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -663,10 +675,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -834,11 +846,11 @@ Page({
         })
         return
       }
-      if(that.data.fenleitype1.yjid==''&&that.data.fenleitype2.yjid!=''){
-        that.data.fenleitype1.yjid=that.data.fenleitype2.yjid
-        that.data.fenleitype2.yjid=''
-        that.data.fenleitype1.erjiid=that.data.fenleitype2.erjiid
-        that.data.fenleitype2.erjiid=''
+      if (that.data.fenleitype1.yjid == '' && that.data.fenleitype2.yjid != '') {
+        that.data.fenleitype1.yjid = that.data.fenleitype2.yjid
+        that.data.fenleitype2.yjid = ''
+        that.data.fenleitype1.erjiid = that.data.fenleitype2.erjiid
+        that.data.fenleitype2.erjiid = ''
       }
       var s = qingqiu.yanzheng(that.data.areaId + ",选择区域|" + that.data.fenleitype1.yjid + ",选择商家分类|" + that.data.needsname + ",输入商铺名称|" + that.data.linkman + "输入联系人|" + that.data.phone + ",输入联系电话|" + that.data.picIurl1 + ",上传门头照")
       if (s != 0) {
@@ -849,11 +861,11 @@ Page({
         })
         return
       }
-      if(that.data.fenleitype2.yjid==undefined){
-        that.data.fenleitype2.yjid=''
+      if (that.data.fenleitype2.yjid == undefined) {
+        that.data.fenleitype2.yjid = ''
       }
-      if(that.data.fenleitype2.erjiid==undefined){
-        that.data.fenleitype2.erjiid=''
+      if (that.data.fenleitype2.erjiid == undefined) {
+        that.data.fenleitype2.erjiid = ''
       }
       data = {
         id: app.globalData.wxid,
@@ -915,90 +927,90 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          if(type==1){
+          if (type == 1) {
             // 公众号消息推送
-          qingqiu.get("getPublicUser", null, function (res) {
-            for (let obj of res.result) {
-              var openid = obj.openid
-              var mesdata = {
-                first: {
-                  value: "干活佬又上新啦，赶紧去看看！",
-                  color: "#173177"
-                },
-                keyword1: {
-                  value: "有1位商家入驻啦",
-                  color: "#173177"
-                },
-                keyword2: {
-                  value: utils.nowTime(),
-                  color: "#173177"
-                },
-                remark: {
-                  value: "请进入干活佬查看详情",
-                  color: "#173177"
+            qingqiu.get("getPublicUser", null, function (res) {
+              for (let obj of res.result) {
+                var openid = obj.openid
+                var mesdata = {
+                  first: {
+                    value: "干活佬又上新啦，赶紧去看看！",
+                    color: "#173177"
+                  },
+                  keyword1: {
+                    value: "有1位商家入驻啦",
+                    color: "#173177"
+                  },
+                  keyword2: {
+                    value: utils.nowTime(),
+                    color: "#173177"
+                  },
+                  remark: {
+                    value: "请进入干活佬查看详情",
+                    color: "#173177"
+                  }
                 }
-              }
-              var objdata = {
-                touser: openid,
-                template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
-                miniprogram: {
-                  appid: "wx14e076d27e942480"
-                },
-                url: "http://www.baidu.com/",
-                data: mesdata
-              }
-              wx.request({
-                url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
-                data: objdata,
-                method: 'POST',
-                success: function (res) {
-                  console.log(res)
+                var objdata = {
+                  touser: openid,
+                  template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+                  miniprogram: {
+                    appid: "wx14e076d27e942480"
+                  },
+                  url: "http://www.baidu.com/",
+                  data: mesdata
                 }
-              })
-            }
-          })
-          }else{
+                wx.request({
+                  url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
+                  data: objdata,
+                  method: 'POST',
+                  success: function (res) {
+                    console.log(res)
+                  }
+                })
+              }
+            })
+          } else {
             // 公众号消息推送
-          qingqiu.get("getPublicUser", null, function (res) {
-            for (let obj of res.result) {
-              var openid = obj.openid
-              var mesdata = {
-                first: {
-                  value: "干活佬又上新啦，赶紧去看看！",
-                  color: "#173177"
-                },
-                keyword1: {
-                  value: "有1位工人入驻啦",
-                  color: "#173177"
-                },
-                keyword2: {
-                  value: utils.nowTime(),
-                  color: "#173177"
-                },
-                remark: {
-                  value: "请进入干活佬查看详情",
-                  color: "#173177"
+            qingqiu.get("getPublicUser", null, function (res) {
+              for (let obj of res.result) {
+                var openid = obj.openid
+                var mesdata = {
+                  first: {
+                    value: "干活佬又上新啦，赶紧去看看！",
+                    color: "#173177"
+                  },
+                  keyword1: {
+                    value: "有1位工人入驻啦",
+                    color: "#173177"
+                  },
+                  keyword2: {
+                    value: utils.nowTime(),
+                    color: "#173177"
+                  },
+                  remark: {
+                    value: "请进入干活佬查看详情",
+                    color: "#173177"
+                  }
                 }
-              }
-              var objdata = {
-                touser: openid,
-                template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
-                miniprogram: {
-                  appid: "wx14e076d27e942480"
-                },
-                url: "http://www.baidu.com/",
-                data: mesdata
-              }
-              wx.request({
-                url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
-                data: objdata,
-                method: 'POST',
-                success: function (res) {
-                  console.log(res)
+                var objdata = {
+                  touser: openid,
+                  template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+                  miniprogram: {
+                    appid: "wx14e076d27e942480"
+                  },
+                  url: "http://www.baidu.com/",
+                  data: mesdata
                 }
-              })
-            }
-          })
+                wx.request({
+                  url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
+                  data: objdata,
+                  method: 'POST',
+                  success: function (res) {
+                    console.log(res)
+                  }
+                })
+              }
+            })
           }
           setTimeout(function () {
             wx.login({
@@ -1038,69 +1050,73 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        qingqiu.messageReg(tempFilePaths,1,function(res){
-          console.log(res)
-          var data = JSON.parse(res.data)
-          console.log(data)
-          if(data.errcode == 87014){
-            wx.showToast({
-              title: '内容含有违法违规内容',
-              icon:'none'
-            })
-            return
-          }else if(data.errcode != 0){
-            wx.showToast({
-              title: '令牌失效，请重新进入小程序',
-              icon:'none'
-            })
-            return
-          }else{
-            wx.uploadFile({
-              url: api.uploadurl,
-              filePath: tempFilePaths[0],
-              header: {
-                "Content-Type": "multipart/form-data"
-              },
-              formData: {
-                method: 'POST' //请求方式
-              },
-              name: 'file',
-              success(res) {
-                var r = res.data
-                var jj = JSON.parse(r);
-                var sj = that.data.viewUrl + jj.message
-                console.log(res)
-                // res.data.data = ""
-                if (type == '1') {
-                  that.setData({
-                    picIurl: sj,
-                    picIurl1: jj.message
-                  })
-                } else if (type == '2') {
-                  that.setData({
-                    picZz: sj,
-                    picZz1: jj.message
-                  })
-                } else if (type == '3') {
-                  that.setData({
-                    picPerson1: sj,
-                    picPerson3: jj.message
-                  })
-                } else if (type == '4') {
-                  that.setData({
-                    picPerson2: sj,
-                    picPerson4: jj.message
-                  })
-                } else if (type == '5') {
-                  that.setData({
-                    picIurl: sj,
-                    picIurl1: jj.message
-                  })
+        wx.uploadFile({
+          url: api.imgFilter,
+          name: 'file',
+          filePath: tempFilePaths[0],
+          formData: {
+            media: tempFilePaths[0]
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data == false) {
+              wx.showToast({
+                title: '内容含有违法违规内容',
+                icon: 'none'
+              })
+              return
+            } else {
+              wx.uploadFile({
+                url: api.uploadurl,
+                filePath: tempFilePaths[0],
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: {
+                  method: 'POST' //请求方式
+                },
+                name: 'file',
+                success(res) {
+                  var r = res.data
+                  var jj = JSON.parse(r);
+                  var sj = that.data.viewUrl + jj.message
+                  console.log(res)
+                  // res.data.data = ""
+                  if (type == '1') {
+                    that.setData({
+                      picIurl: sj,
+                      picIurl1: jj.message
+                    })
+                  } else if (type == '2') {
+                    that.setData({
+                      picZz: sj,
+                      picZz1: jj.message
+                    })
+                  } else if (type == '3') {
+                    that.setData({
+                      picPerson1: sj,
+                      picPerson3: jj.message
+                    })
+                  } else if (type == '4') {
+                    that.setData({
+                      picPerson2: sj,
+                      picPerson4: jj.message
+                    })
+                  } else if (type == '5') {
+                    that.setData({
+                      picIurl: sj,
+                      picIurl1: jj.message
+                    })
+                  }
                 }
-              }
-            })
+              })
+            }
           }
-        },'POST')
+        })
       },
     })
   },
