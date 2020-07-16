@@ -1078,20 +1078,28 @@ Page({
 	},
 	textMsgInputblur: function (e) {
 		var that = this
-		qingqiu.messageReg(e.detail.value, 0, function (res) {
-			console.log('回调函数', res)
-			if (res == 87014) {
-				that.setData({
-					textMsg: ''
-				})
-				wx.showToast({
-					title: '内容包含敏感词，请重新输入...',
-					icon: 'none',
-					duration: 2000
-				})
-				return
-			}
-		}, 'POST')
+		qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
+        that.setData({
+          needscontent: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
+        })
+        return
+      }
+    }, 'POST')
 	},
 	// 发送文字消息
 	sendText() {
@@ -1100,19 +1108,27 @@ Page({
 		if (!that.data.textMsg) {
 			return;
 		}
-		qingqiu.messageReg(that.data.textMsg, 0, function (res) {
-			console.log('回调函数', res)
-			if (res == 87014) {
-				that.setData({
-					textMsg: ''
-				})
-				wx.showToast({
-					title: '内容包含敏感词，请重新输入...',
-					icon: 'none',
-					duration: 2000
-				})
-				return
-			} else {
+		qingqiu.get("checkWords",{content:that.data.textMsg}, function (res) {
+      if (res == 1) {
+        that.setData({
+          needscontent: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
+        })
+        return
+      }else{
 				let content = that.replaceEmoji(that.data.textMsg);
 				let msg = {
 					text: content
@@ -1122,7 +1138,7 @@ Page({
 					textMsg: ""
 				});
 			}
-		}, 'POST')
+    }, 'POST')
 		// let content = this.replaceEmoji(this.data.textMsg);
 		// let msg = {text:content}
 		// this.sendMsg(msg,'text'); 

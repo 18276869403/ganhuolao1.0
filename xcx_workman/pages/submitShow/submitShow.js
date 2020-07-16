@@ -177,9 +177,8 @@ Page({
   },
   commentinputblur: function (e) {
     var that = this
-    qingqiu.messageReg(e.detail.value, 0, function (res) {
-      console.log('回调函数', res)
-      if (res == 87014) {
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
           needscontent: ''
         })
@@ -187,6 +186,15 @@ Page({
           title: '内容包含敏感词，请重新输入...',
           icon: 'none',
           duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
         })
         return
       }
@@ -320,51 +328,59 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     wx.chooseImage({
+      count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success: function (res) {
+        console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        qingqiu.messageReg(tempFilePaths, 1, function (res) {
-          var data = JSON.parse(res.data)
-          if (data.errcode == 87014) {
-            wx.showToast({
-              title: '内容含有违法违规内容',
-              icon: 'none'
-            })
-            return
-          } else if (data.errcode != 0) {
-            wx.showToast({
-              title: '令牌失效，请重新进入小程序',
-              icon: 'none'
-            })
-            return
-          } else {
-            wx.uploadFile({
-              url: api.uploadurl, //仅为示例，非真实的接口地址
-              filePath: tempFilePaths[0],
-              header: {
-                "Content-Type": "multipart/form-data"
-              },
-              formData: {
-                method: 'POST' //请求方式
-              },
-              name: 'file',
-              success(res) {
-                var r = res.data
-                var jj = JSON.parse(r);
-                var sj = api.viewUrl + jj.message
-                var tupianlists = that.data.tupianlists
-                tupianlists.push(jj.message)
-                that.setData({
-                  tupianlists: tupianlists,
-                  picimg1: sj,
-                  picimgs1: jj.message
-                })
-              }
-            })
+        wx.uploadFile({
+          url: api.imgFilter,
+          name: 'file',
+          filePath: tempFilePaths[0],
+          formData: {
+            media: tempFilePaths[0]
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data =="false") {
+              wx.showToast({
+                title: '内容含有违法违规内容',
+                icon: 'none'
+              })
+              return
+            } else {
+              wx.uploadFile({
+                url: api.uploadurl,
+                filePath: tempFilePaths[0],
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: {
+                  method: 'POST' //请求方式
+                },
+                name: 'file',
+                success(res) {
+                  var r = res.data
+                  var jj = JSON.parse(r);
+                  var sj = api.viewUrl + jj.message
+                  var tupianlists = that.data.tupianlists
+                  tupianlists.push(jj.message)
+                  that.setData({
+                    tupianlists: tupianlists,
+                    picimg1: sj,
+                    picimgs1: jj.message
+                  })
+                }
+              })
+            }
           }
         })
-      }
+      },
     })
   },
   // 删除图片

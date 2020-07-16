@@ -173,24 +173,28 @@ Page({
       })
       return
     }
-    qingqiu.messageReg(e.detail.value,0,function(res){
-      console.log('回调函数',res)
-      if(res == 87014){
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          activitynameinput:''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
         return
-      }else{
-        that.setData({
-          activitynameinput:e.detail.value
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
         })
+        that.setData({
+          needscontent: ''
+        })
+        return
       }
-    },'POST')
+    }, 'POST')
   },
   //获取主办单位
   activityCompanyinput: function (e) {
@@ -201,24 +205,28 @@ Page({
   // 主办单位失去焦点
   activityCompanyblur:function(e){
     var that=this
-    qingqiu.messageReg(e.detail.value,0,function(res){
-      console.log('回调函数',res)
-      if(res == 87014){
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          activityCompany:''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
         return
-      }else{
-        that.setData({
-          activityCompany:e.detail.value
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
         })
+        that.setData({
+          needscontent: ''
+        })
+        return
       }
-    },'POST')
+    }, 'POST')
   },
   //获取招募人数
   activityrenshu: function (e) {
@@ -235,24 +243,28 @@ Page({
   // 活动内容失去焦点
   activitycontentblur:function(e){
     var that=this
-    qingqiu.messageReg(e.detail.value,0,function(res){
-      console.log('回调函数',res)
-      if(res == 87014){
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
         that.setData({
-          activitycontent:''
+          needscontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
         return
-      }else{
-        that.setData({
-          activitycontent:e.detail.value
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
         })
+        that.setData({
+          needscontent: ''
+        })
+        return
       }
-    },'POST')
+    }, 'POST')
   },
    // 活动时间
    bindDateChange: function (e) {
@@ -270,6 +282,8 @@ Page({
   },
   // 图片上传（对接完成）
   upimg: function (e) {
+    var type = e.currentTarget.dataset.type
+    var index = e.currentTarget.dataset.number
     var that = this
     wx.chooseImage({
       count: 1,
@@ -278,44 +292,50 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        qingqiu.messageReg(tempFilePaths, 1, function(re) {
-          var data = JSON.parse(re.data)
-          if (data.errcode == 87014) {
-            wx.showToast({
-              title: '内容含有违法违规内容',
-              icon: 'none'
-            })
-            return
-          } else if (data.errcode != 0) {
-            wx.showToast({
-              title: '令牌失效，请重新进入小程序',
-              icon: 'none'
-            })
-            return
-          } else {
-            wx.uploadFile({
-              url: api.uploadurl,
-              filePath: tempFilePaths[0],
-              header: {
-                "Content-Type": "multipart/form-data"
-              },
-              formData: {
-                method: 'POST' //请求方式
-              },
-              name: 'file',
-              success(res) {
-                var r = res.data
-                var jj = JSON.parse(r);
-                var sj = that.data.viewUrl + jj.message
-                console.log(res)
-                that.data.piclist.push(jj.message)
-                that.setData({
-                  picIurl: sj,
-                  picIurl1: jj.message,
-                  piclist:that.data.piclist
-                })
-              }
-            })
+        wx.uploadFile({
+          url: api.imgFilter,
+          name: 'file',
+          filePath: tempFilePaths[0],
+          formData: {
+            media: tempFilePaths[0]
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data =="false") {
+              wx.showToast({
+                title: '内容含有违法违规内容',
+                icon: 'none'
+              })
+              return
+            } else {
+              wx.uploadFile({
+                url: api.uploadurl,
+                filePath: tempFilePaths[0],
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: {
+                  method: 'POST' //请求方式
+                },
+                name: 'file',
+                success(res) {
+                  var r = res.data
+                  var jj = JSON.parse(r);
+                  var sj = that.data.viewUrl + jj.message
+                  console.log(res)
+                  that.data.piclist.push(jj.message)
+                  that.setData({
+                    picIurl: sj,
+                    picIurl1: jj.message,
+                    piclist:that.data.piclist
+                  })
+                }
+              })
+            }
           }
         })
       },

@@ -166,66 +166,74 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     wx.chooseImage({
+      count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success: function (res) {
+        console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        qingqiu.messageReg(tempFilePaths, 1, function (res) {
-          var data = JSON.parse(res.data)
-          if (data.errcode == 87014) {
-            wx.showToast({
-              title: '内容含有违法违规内容',
-              icon: 'none'
-            })
-            return
-          } else if (data.errcode != 0) {
-            wx.showToast({
-              title: '令牌失效，请重新进入小程序',
-              icon: 'none'
-            })
-            return
-          } else {
-            wx.uploadFile({
-              url: api.uploadurl, //仅为示例，非真实的接口地址
-              filePath: tempFilePaths[0],
-              header: {
-                "Content-Type": "multipart/form-data"
-              },
-              formData: {
-                method: 'POST' //请求方式
-              },
-              name: 'file',
-              success(re) {
-                var r = re.data
-                var jj = JSON.parse(r);
-                var sj = api.viewUrl + jj.message
-                console.log(re)
-                if (type == '1') {
-                  that.setData({
-                    picIurl: sj,
-                    picIurl1: jj.message
-                  })
-                } else if (type == '2') {
-                  that.setData({
-                    picIurltwo: sj,
-                    picIurltwo1: jj.message
-                  })
-                } else if (type == '3') {
-                  that.setData({
-                    picDetail: sj,
-                    picDetail1: jj.message
-                  })
-                } else if (type == '4') {
-                  that.setData({
-                    picDetailtwo: sj,
-                    picDetailtwo1: jj.message
-                  })
+        wx.uploadFile({
+          url: api.imgFilter,
+          name: 'file',
+          filePath: tempFilePaths[0],
+          formData: {
+            media: tempFilePaths[0]
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data =="false") {
+              wx.showToast({
+                title: '内容含有违法违规内容',
+                icon: 'none'
+              })
+              return
+            } else {
+              wx.uploadFile({
+                url: api.uploadurl,
+                filePath: tempFilePaths[0],
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: {
+                  method: 'POST' //请求方式
+                },
+                name: 'file',
+                success(re) {
+                  var r = re.data
+                  var jj = JSON.parse(r);
+                  var sj = api.viewUrl + jj.message
+                  console.log(re)
+                  if (type == '1') {
+                    that.setData({
+                      picIurl: sj,
+                      picIurl1: jj.message
+                    })
+                  } else if (type == '2') {
+                    that.setData({
+                      picIurltwo: sj,
+                      picIurltwo1: jj.message
+                    })
+                  } else if (type == '3') {
+                    that.setData({
+                      picDetail: sj,
+                      picDetail1: jj.message
+                    })
+                  } else if (type == '4') {
+                    that.setData({
+                      picDetailtwo: sj,
+                      picDetailtwo1: jj.message
+                    })
+                  }
                 }
-              }
-            })
+              })
+            }
           }
         })
-      }
+      },
     })
   },
   // 删除图片
