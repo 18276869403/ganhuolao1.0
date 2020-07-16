@@ -120,6 +120,7 @@ Page({
     if(app.globalData.oneCity != undefined){ data.oneAreaId = app.globalData.oneCity.id }
     if(app.globalData.twoCity != undefined){ data.twoAreaId = app.globalData.oneCity.id }
     if(that.data.yijiid != ''){ data.oneClassId =  that.data.yijiid }
+    if(that.data.erjiid != ''){ data.twoClassId =  that.data.erjiid }
     if(app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined"){
       if(app.globalData.twoCity.id != 0) {
         data.twoClassId =  app.globalData.twoCity.id 
@@ -462,8 +463,8 @@ Page({
         erjiid:'',
         yijiname:'',
         erjiname:'',
-        pageNo:1,
-        goodslist:[]
+        goodslist:[],
+        pageNo:1
       })
       that.selectsp()
     }
