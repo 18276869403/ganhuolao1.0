@@ -110,17 +110,19 @@ Page({
       })
       return
     }
-    if(that.data.picIurl1==''){
-      wx.showToast({
-        title: '请上传图片',
-        icon: 'none',
-        duration: 3000
-      })
-      return
-    }
-    var pic =''
-    for(let obj of that.data.piclist){
-      pic += obj+','
+    // if(that.data.picIurl1==''){
+    //   wx.showToast({
+    //     title: '请上传图片',
+    //     icon: 'none',
+    //     duration: 3000
+    //   })
+    //   return
+    // }
+    if(that.data.picIurl1!=''){
+      var pic = ''
+      for(let obj of that.data.piclist){
+        pic += obj+','
+      }
     }
     var data = {
       wxUserId: app.globalData.wxid,
