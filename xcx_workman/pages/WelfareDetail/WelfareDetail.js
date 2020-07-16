@@ -250,7 +250,7 @@ Page({
               color: "#173177"
             },
             keyword2: {
-              value: util.nowTime(),
+              value: utils.nowTime(),
               color: "#173177"
             },
             remark: {
