@@ -72,6 +72,8 @@ const getPublicUserById = baseUrl + "pc/hall/getPublicUserById"
 const getPublicUser = baseUrl + "pc/hall/getPublicUser"
 // 招工删除
 const workdelete = baseUrl + "work/loclahire/delete"
+// 获取公众号令牌
+const getPublicAccessToken = baseUrl + "pc/hall/getPublicAccessToken"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -107,5 +109,6 @@ module.exports = {
   getPublicUserById:getPublicUserById,
   getPublicUserByIdDesc:getPublicUserByIdDesc,
   getPublicUser:getPublicUser,
-  workdelete:workdelete
+  workdelete:workdelete,
+  getPublicAccessToken:getPublicAccessToken
 };
