@@ -223,6 +223,13 @@ Page({
       return
     }
   })
+  // 小程序Token
+  qingqiu.getAccessTokenApplets(function (res) {
+    console.log("小程序token", res)
+    if (res.statusCode == 200) {
+      app.globalData.access_Token = res.data.access_token
+    }
+  })
 },
 
   /**
