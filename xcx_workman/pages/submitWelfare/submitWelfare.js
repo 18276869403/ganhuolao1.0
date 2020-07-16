@@ -30,21 +30,10 @@ Page({
     workareaname:''
   },
 
-  // 获取Token
-  getAccessToken: function () {
-    // 小程序Token
-    qingqiu.getAccessTokenApplets(function (res) {
-      console.log("小程序token", res)
-      if (res.statusCode == 200) {
-        app.globalData.access_Token = res.data.access_token
-      }
-    })
-  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getAccessToken()
     wx.showShareMenu({
       withShareTicket: true
     })

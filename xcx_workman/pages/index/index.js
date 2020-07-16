@@ -35,6 +35,7 @@ Page({
     yijiAddress: '',
     isAuto: 0,
     erjiAddress: '',
+    userdata:[]
   },
   // 搜索框
   shurukuang: function (e) {
@@ -62,7 +63,12 @@ Page({
       console.log(res)
       if (res.success == true) {
         app.globalData.access_TokenOff = res.result.accessToken
-        that.getUserOpenId()
+        var data = {
+          access_token:res.result.accessToken,
+        }
+       qingqiu.get("getPulicUserAdd",data,function(res){
+         console.log('公众号用户添加结果',res)
+       })
       } else {
         wx.showToast({
           title: '令牌获取失败',
@@ -71,35 +77,6 @@ Page({
         return
       }
     })
-    setTimeout(function () {
-      // 小程序Token
-      qingqiu.getAccessTokenApplets(function (res) {
-        console.log("小程序token", res)
-        if (res.statusCode == 200) {
-          app.globalData.access_Token = res.data.access_token
-        }
-      })
-      that.getUserInfo()
-    }, 1000)
-  },
-  getUserInfo: function () {
-    var that = this
-    if (app.globalData.nextOpenid.length > 0) {
-      for (let i = 0; i < app.globalData.nextOpenid[0].length; i++) {
-        wx.request({
-          url: 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' + app.globalData.access_TokenOff + '&openid=' + app.globalData.nextOpenid[0][i] + '&lang=zh_CN',
-          success: function (res) {
-            var data = {
-              openid: res.data.openid,
-              unionid: res.data.unionid
-            }
-            qingqiu.get("addPublicUser", data, function (res) {
-              console.log(res)
-            }, "post")
-          }
-        })
-      }
-    }
   },
   // 授权
   chushishouquan() {
@@ -129,7 +106,6 @@ Page({
                   var data = {
                     code: code,
                     picUrl: userInfo.avatarUrl,
-                    // sex: userInfo.gender,
                     wxNc: userInfo.nickName,
                   }
                   if(that.data.openid != ''){
@@ -240,29 +216,7 @@ Page({
       }
     })
   },
-  // 获取公众号下的微信openid
-  getUserOpenId: function () {
-    var NEXT_OPENID = ''
-    var total = 0
-    var count = 0
-    app.globalData.nextOpenid = []
-    do {
-      wx.request({
-        url: 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' + app.globalData.access_TokenOff + '&next_openid=' + NEXT_OPENID,
-        success: function (re) {
-          console.log(re)
-          if (re.data.next_openid != '') {
-            if (NEXT_OPENID != re.data.next_openid) {
-              app.globalData.nextOpenid.push(re.data.data.openid)
-            }
-            NEXT_OPENID = re.data.next_openid
-            total = re.data.total
-            count = re.data.count + count
-          }
-        }
-      })
-    } while (count < total);
-  },
+  
   onShow: function () {
     this.getTokenValue()
     wx.showShareMenu({
@@ -270,7 +224,7 @@ Page({
     })
     //获得dialog组件
     this.dialog = this.selectComponent("#dialog");
-
+    this.getUserOpenId()
     // this.getAddress() // 获取位置信息
     this.firstbanner() //banner
     this.pointList() //通知

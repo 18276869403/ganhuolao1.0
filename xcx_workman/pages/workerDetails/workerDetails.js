@@ -188,46 +188,30 @@ Page({
         var obj = {
           wxUserId:that.data.workerDetail.id
         }
-        console.log(obj)
         qingqiu.get("getPublicUserById",obj,function(res){
-          console.log(res)
-          var unionid = res.result.unionid
-          var openid = res.result.openid
-          var mesdata = {
-            first:{
-              value:"干活佬有人联系您啦！",
-              color:"#173177"
-            },
-            keyword1:{
-              value:"有人雇佣你啦！",
-              color:"#173177"
-            },
-            keyword2:{
-              value:util.nowTime(),
-              color:"#173177"
-            },
-            remark:{
-              value:"干活佬,助力工人/商家接单！",
-              color:"#173177"
-            }
-          }
           var objdata = {
-            touser:openid,
-            template_id:"JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
-            miniprogram:{
-              appid:"wx14e076d27e942480"
-            },
-            url:"http://www.baidu.com/",
-            data:mesdata
+            openId: res.result.openid,
+            access_token:app.globalData.access_TokenOff,
+            firstValue:"干活佬有人联系你啦！",
+            firstColor:'#173177',
+            keyword1Value:"有人雇用你啦！",
+            keyword1Color:'#173177',
+            keyword2Value:util.newDate(),
+            keyword2Color:'#173177',
+            remarkValue:'干活佬，助力工人/商家接单！',
+            remarkColor:'#173177',
+            MiniUrl:''
           }
-          wx.request({
-            url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='+app.globalData.access_TokenOff,
-            data:objdata,
-            method:'POST',
-            success:function(res){
-              console.log(res)
-            }
-          })
+         qingqiu.get("SendWxMsg",objdata,function(re){
+           console.log(re)
+           if(re.errcode != 0){
+             wx.showToast({
+               title: '消息推送失败(用户尚未关注公众号或者用户拒接接收推送)',
+               icon:'none',
+             })
+             return
+           }
+         })
         })
         setTimeout(function(){
           wx.navigateTo({
