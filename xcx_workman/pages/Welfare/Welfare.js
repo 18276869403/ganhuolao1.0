@@ -110,7 +110,6 @@ Page({
         var obj = {
           wxUserId: that.data.wid
         }
-        debugger
         console.log(that.data.wid)
         qingqiu.get("getPublicUserById", obj, function (res) {
           console.log(res)

@@ -41,6 +41,10 @@ Page({
     this.data.workList.splice(0, this.data.workList.length)
     this.data.pageNo = 1
     this.data.isLastPage = false
+    this.data.workList=[]
+    this.setData({
+      workList:this.data.workList
+    })
     if (this.data.sousuotext != "") {
       this.data.needTitle = this.data.sousuotext
     } else {
@@ -153,21 +157,21 @@ Page({
         if (re.result != null) {
           if(re.result.records==''){
             that.data.isLastPage=true
-            return
-          }
-          for (var i = 0; i < re.result.records.length; i++) {
-            re.result.records[i].createTime = re.result.records[i].createTime.substring(0,16)
-            if (re.result.records[i].backup1 != null && re.result.records[i].backup1.length > 0) {
-              re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
+          }else{
+            for (var i = 0; i < re.result.records.length; i++) {
+              re.result.records[i].createTime = re.result.records[i].createTime.substring(0,16)
+              if (re.result.records[i].backup1 != null && re.result.records[i].backup1.length > 0) {
+                re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
+              }
+              if(re.result.records[i].backup3 == null){
+                re.result.records[i].backup3 = 0
+              }
+              that.data.workList.push(re.result.records[i])
             }
-            if(re.result.records[i].backup3 == null){
-              re.result.records[i].backup3 = 0
-            }
-            that.data.workList.push(re.result.records[i])
+            that.setData({
+              workList: that.data.workList
+            })
           }
-          that.setData({
-            workList: that.data.workList
-          })
         } else {
           wx.showToast({
             title: '暂无数据',
