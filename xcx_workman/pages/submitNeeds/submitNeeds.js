@@ -314,7 +314,7 @@ Page({
     //     icon:'none',
     //     duration:2000
     //   })
-    //   return
+    //   return 
     // }
     if (that.data.select == "circle") {
       wx.showToast({
