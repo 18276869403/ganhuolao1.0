@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-	<dialog id='dialog' title='微信授权登录' content='获取你的公开信息（昵称、头像等）' confirmText='发起授权' bind:confirmEvent='bindGetUserInfo'>
+	<dialog id='dialog' title='微信授权登录' content='获取你的公开信息（昵称、头像等）' confirmText='发起授权' bind:confirmEvent='bindGetUserInfo' bind:cancelEvent='cancelEvent'>
 	</dialog>
 	<view class="hengxian"></view>
 	<view class="top zongxiang">

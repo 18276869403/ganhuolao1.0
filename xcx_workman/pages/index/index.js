@@ -58,6 +58,7 @@ Page({
     var that = this
     // 公众号Token
     qingqiu.get("getPublicAccessToken", null, function (res) {
+      console.log(res)
       if (res.success == true) {
         app.globalData.access_TokenOff = res.result.accessToken
         that.getUserOpenId()
@@ -269,7 +270,6 @@ Page({
     this.dialog = this.selectComponent("#dialog");
 
     // this.getAddress() // 获取位置信息
-    this.chushishouquan()
     this.firstbanner() //banner
     this.pointList() //通知
     this.QueryoneArea() //一级区域
@@ -334,19 +334,33 @@ Page({
   },
   onLoad: function (options) {
     // 获取二维码参数
-    if (options.scene != undefined) {
-      var scene = decodeURIComponent(options.scene);
-      if (scene != undefined) {
-        wx.setStorageSync('openid', scene)
-      } else {
-        wx.setStorageSync('openid', '')
+    if(options != undefined){
+      if (options.scene != undefined) {
+        var scene = decodeURIComponent(options.scene);
+        if (scene != undefined) {
+          wx.setStorageSync('openid', scene)
+        } else {
+          wx.setStorageSync('openid', '')
+        }
       }
     }
+    this.chushishouquan()
   },
-  // onLoad: function(options) {
-  //   this.QueryoneArea() //一级区域
-  //   this.QuerytwoArea() //二级区域
-  // },
+
+  // 取消授权
+  cancelEvent:function(){
+    var that = this
+    wx.showModal({
+      title: '温馨提示',
+      content:'取消授权会影响部分功能的使用，您确定取消吗？',
+      success(res){
+        if(res.confirm){
+          that.dialog.hideDialog();
+        }
+      }
+    })
+  },
+
   // 下拉刷新
   onPullDownRefresh: function () {
     this.onShow()
