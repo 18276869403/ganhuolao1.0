@@ -11,6 +11,7 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     showModalStatus1: true,
+    openid:'',
     sousuotext: '',
     gongren: '2',
     shangjia: '1',
@@ -125,13 +126,14 @@ Page({
                     that.dialog.showDialog()
                   }
                   const userInfo = res.userInfo
-                  var openid = wx.getStorageSync('openid')
                   var data = {
                     code: code,
                     picUrl: userInfo.avatarUrl,
                     // sex: userInfo.gender,
                     wxNc: userInfo.nickName,
-                    backup1: openid
+                  }
+                  if(that.data.openid != ''){
+                    data.backup1 = that.data.openid
                   }
                   qingqiu.get("getKeyInfo", data, function (re) {
                     app.globalData.wxid = re.result.wxUser.id
@@ -338,9 +340,9 @@ Page({
       if (options.scene != undefined) {
         var scene = decodeURIComponent(options.scene);
         if (scene != undefined) {
-          wx.setStorageSync('openid', scene)
+          this.data.openid = scene
         } else {
-          wx.setStorageSync('openid', '')
+          this.data.openid = ''
         }
       }
     }
