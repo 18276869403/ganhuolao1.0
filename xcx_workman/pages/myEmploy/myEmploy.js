@@ -81,6 +81,14 @@ Page({
   },
   phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
+    if(phone==''||phone==null){
+      wx.showToast({
+        title: '该用户暂未留电话号码',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
     wx.makePhoneCall({
       phoneNumber: phone
     })

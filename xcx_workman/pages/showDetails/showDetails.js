@@ -127,7 +127,7 @@ Page({
   //跳转到添加评论页面
   comment: function() {
     wx.navigateTo({
-      url: '../comment/comment?id=' + this.data.caseMsgList.id,
+      url: '../comment/comment?id=' + this.data.caseMsgList.id+'&wid='+this.data.caseMsgList.wxUserId,
     })
   },
   lianxita: function(e) {

@@ -96,6 +96,7 @@ Page({
       gongyilist: gongyilist,
       piclist: piclist1,
       activityid: activityid,
+      wxId:gongyilist.wxId,
       wxUserId: app.globalData.wxid,
       piclist2: piclist2
     })
@@ -213,6 +214,50 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        var obj = {
+          wxUserId: that.data.wxId
+        }
+        console.log(that.data.wxId)
+        qingqiu.get("getPublicUserById", obj, function (res) {
+          console.log(res)
+          // var unionid = res.result.unionid
+          var openid = res.result.openid
+          var mesdata = {
+            first: {
+              value: "干活佬有人联系您啦！",
+              color: "#173177"
+            },
+            keyword1: {
+              value: "您的活动有人报名了！",
+              color: "#173177"
+            },
+            keyword2: {
+              value: util.nowTime(),
+              color: "#173177"
+            },
+            remark: {
+              value: "干活佬,助力工人/商家接单！",
+              color: "#173177"
+            }
+          }
+          var objdata = {
+            touser: openid,
+            template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
+            miniprogram: {
+              appid: "wx14e076d27e942480"
+            },
+            url: "http://www.baidu.com/",
+            data: mesdata
+          }
+          wx.request({
+            url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
+            data: objdata,
+            method: 'POST',
+            success: function (res) {
+              console.log(res)
+            }
+          })
+        })
         qingqiu.get("updateActivity", {
           id: that.data.activityid
         }, function (res) {
@@ -243,5 +288,19 @@ Page({
       urls: [currentUrl] // 需要预览的图片http链接列表
     })
   },
-
+  // 联系他
+  phonecell:function(e){
+    var phone = e.currentTarget.dataset.phone
+    if(phone==''||phone==null||phone=='null'){
+      wx.showToast({
+        title: '联系电话为空',
+        icon:'none',
+        duration:2000
+      })
+      return
+    }
+    wx.makePhoneCall({
+      phoneNumber: phone,
+    })
+  },
 })

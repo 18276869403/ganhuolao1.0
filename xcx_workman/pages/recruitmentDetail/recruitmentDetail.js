@@ -233,6 +233,14 @@ Page({
   // 打电话
   zaixianlianxi:function(e){
     var phone = e.currentTarget.dataset.phone
+    if(phone==''||phone==null||phone=='null'){
+      wx.showToast({
+        title: '联系电话为空',
+        icon: 'none',
+        duration: 2000
+      })
+      return
+    }
     wx.makePhoneCall({
       phoneNumber: phone, 
     })
