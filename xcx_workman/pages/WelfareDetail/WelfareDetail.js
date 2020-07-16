@@ -192,6 +192,16 @@ Page({
     })
   },
   woyaobaoming(e) {
+    for(let obj of this.data.jiedanList){
+      if(obj.wxUserId==app.globalData.wxid){
+        wx.showToast({
+          title: '您已报过名了',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+    }
     this.setData({
       activityId: this.data.activityId,
       isShowConfirm: true
@@ -267,6 +277,7 @@ Page({
           })
         }, "PUT")
         // that.onLoad()
+        that.SelectjiedanList()
       }
     }, 'post')
     that.setData({
