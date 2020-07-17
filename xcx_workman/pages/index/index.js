@@ -224,7 +224,6 @@ Page({
     })
     //获得dialog组件
     this.dialog = this.selectComponent("#dialog");
-    this.getUserOpenId()
     // this.getAddress() // 获取位置信息
     this.firstbanner() //banner
     this.pointList() //通知
