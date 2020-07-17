@@ -51,51 +51,8 @@ const yanzheng = function(str){
 	}
 	return 0
 }
-// str/敏感词 type/类别(0/文字,1/图片,2/视频)
-const messageReg = function(str,type,huidiao, method = 'POST'){
-	if(type == 0){
-		wx.request({
-			url:'https://api.weixin.qq.com/wxa/msg_sec_check?access_token=' + app.globalData.access_Token,
-			method:method,
-			data:{content:str},
-			success:function(res){
-				console.log('敏感词信息',res)
-				huidiao(res.data.errcode) 
-			}
-		})
-	}else if(type ==1){
-		wx.uploadFile({
-			url:'https://api.weixin.qq.com/wxa/img_sec_check?access_token=' + app.globalData.access_Token,
-			name: 'file',
-			filePath: str[0],
-			formData:{
-				media:str[0]
-			},
-			method:method,
-			header:{
-				"Content-Type": "multipart/form-data" 
-			},
-			success:function(res){
-				huidiao(res)
-			}
-		})
-	}else{
-
-	}
-}
-// 小程序Token
-const getAccessTokenApplets = function(huidiao){
-	wx.request({
-		url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx14e076d27e942480&secret=fb16e928e1a41fa0e8f21b2f50aa89d5',
-		success: function (res) {
-			huidiao(res)
-		}
-	})
-}
 
 module.exports = {
 	get: Get,
 	yanzheng:yanzheng, // 简单数据为空验证
-	messageReg:messageReg, // 敏感词过滤
-	getAccessTokenApplets:getAccessTokenApplets, // 小程序Token
 }

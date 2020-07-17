@@ -1,6 +1,6 @@
 var api = require('./config.js')
-// const baseUrl = "https://miss.it-ys.com:91/work-boot/"  
-const baseUrl = "http://192.168.1.250:8080/work-boot/"  
+const baseUrl = "https://www.it-ys.com:81/work-boot/"  
+// const baseUrl = "http://192.168.1.250:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.233:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.235:8080/work-boot/"   
 
@@ -76,7 +76,10 @@ const workdelete = baseUrl + "work/loclahire/delete"
 const getPublicAccessToken = baseUrl + "pc/hall/getPublicAccessToken"
 // 小程序敏感词过滤
 const checkWords = baseUrl + "pc/hall/checkWords"
-
+// 公众号消息推送
+const SendWxMsg = baseUrl + "pc/hall/SendWxMsg"
+// 获取公众号下所有用户
+const getPulicUserAdd = baseUrl + "pc/hall/getPulicUserAdd"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -115,4 +118,6 @@ module.exports = {
   workdelete:workdelete,
   getPublicAccessToken:getPublicAccessToken,
   checkWords:checkWords,
+  SendWxMsg:SendWxMsg,
+  getPulicUserAdd:getPulicUserAdd
 };
