@@ -111,7 +111,7 @@
 						wx:for-item="em"  
 						data-em="{{em}}"
 						bindtap="addEmoji">
-						<image class="emoji-image"   src="http://miss.it-ys.com:9123/work-boot/sys/common/view/static{{'/img/emoji/'+em.url}}"></image>
+						<image class="emoji-image"   src="https://www.it-ys.com:81/work-boot/sys/common/view/static{{'/img/emoji/'+em.url}}"></image>
 					</view>
 				</swiper-item> 
 			</swiper>
@@ -134,9 +134,9 @@
 		<view class="input-box {{popupLayerClass}}" >
 			<!-- H5下不能录音，输入栏布局改动一下 -->
 			<!-- #ifndef H5 -->
-			<view class="voice">
+			<!-- <view class="voice">
 				<view class="icon {{isVoice?'jianpan':'yuyin'}}" bindtap="switchVoice"></view>
-			</view>
+			</view> -->
 			<!-- #endif -->
 			<!-- #ifdef H5 
 			<view class="more" bindtap="showMore">

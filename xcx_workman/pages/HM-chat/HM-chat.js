@@ -571,12 +571,6 @@ Page({
         return
       }
     })
-		setTimeout(function () {
-			// 小程序Token
-			qingqiu.getAccessTokenApplets(function () {
-				that.getUserInfo()
-			})
-		}, 2000)
 	},
 	/**
 	 * 生命周期函数--监听页面加载
@@ -1105,6 +1099,9 @@ Page({
 	sendText() {
 		var that = this
 		that.hideDrawer(); //隐藏抽屉
+		if(that.data.textMsg == ""){
+			return;
+		}
 		if (!that.data.textMsg) {
 			return;
 		}
@@ -1158,7 +1155,7 @@ Page({
 						//在线表情路径，图文混排必须使用网络路径，请上传一份表情到你的服务器后再替换此路径 
 						//比如你上传服务器后，你的100.gif路径为https://www.xxx.com/emoji/100.gif 则替换onlinePath填写为https://www.xxx.com/emoji/
 						// let onlinePath = 'http://192.168.1.235:8080/work-boot/sys/common/view/static/img/emoji/'
-						let onlinePath = 'http://miss.it-ys.com:9123/work-boot/sys/common/view/static/img/emoji/'
+						let onlinePath = 'https://www.it-ys.com:81/work-boot/sys/common/view/static/img/emoji/'
 						// let imgstr = '<img src="'+onlinePath+this.data.onlineEmoji[EM.url]+'">';
 						let imgstr = '<img src="' + onlinePath + EM.url + '">';
 						console.log("imgstr: " + imgstr);
@@ -1172,6 +1169,9 @@ Page({
 
 	// 发送消息
 	sendMsg(content, type) {
+		if(content == "" || content == null || content == undefined){
+			return;
+		}
 		// 发送：消息内容
 		var msg = {
 			toUserId: this.data.toUserId,
@@ -1184,43 +1184,22 @@ Page({
 		}
 		qingqiu.get("getPublicUserById", obj, function (res) {
 			console.log(res)
-			// var unionid = res.result.unionid
-			var openid = res.result.openid
-			var mesdata = {
-				first: {
-					value: "干活佬有人联系您啦！",
-					color: "#173177"
-				},
-				keyword1: {
-					value: "有人在线给你留言了，注意查看！",
-					color: "#173177"
-				},
-				keyword2: {
-					value: util.nowTime(),
-					color: "#173177"
-				},
-				remark: {
-					value: "干活佬,助力工人/商家接单！",
-					color: "#173177"
-				}
-			}
 			var objdata = {
-				touser: openid,
-				template_id: "JOX1BcyAiT8BbZdmlB3fAfwzOT5Ud25Tl_WjTDM1ycY",
-				miniprogram: {
-					appid: "wx14e076d27e942480"
-				},
-				url: "http://www.baidu.com/",
-				data: mesdata
+				openId: res.result.openid,
+				access_token:app.globalData.access_TokenOff,
+				firstValue:"干活佬有人联系你啦！",
+				firstColor:'#173177',
+				keyword1Value:"有人给你发消息啦！",
+				keyword1Color:'#173177',
+				keyword2Value:util.newDate(),
+				keyword2Color:'#173177',
+				remarkValue:'干活佬，助力工人/商家接单！',
+				remarkColor:'#173177',
+				MiniUrl:''
 			}
-			wx.request({
-				url: 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=' + app.globalData.access_TokenOff,
-				data: objdata,
-				method: 'POST',
-				success: function (res) {
-					console.log(res)
-				}
-			})
+		 qingqiu.get("SendWxMsg",objdata,function(re){
+			 console.log(re)
+		 })
 		})
 		wx.request({
 			url: api.im.imSend,

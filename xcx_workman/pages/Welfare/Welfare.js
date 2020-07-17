@@ -128,13 +128,6 @@ Page({
           }
          qingqiu.get("SendWxMsg",objdata,function(re){
            console.log(re)
-           if(re.errcode != 0){
-             wx.showToast({
-               title: '消息推送失败(用户尚未关注公众号或者用户拒接接收推送)',
-               icon:'none',
-             })
-             return
-           }
          })
         })
         qingqiu.get("updateActivity", {

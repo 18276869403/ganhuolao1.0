@@ -9,14 +9,14 @@ const bmap = require('../../utils/bmap-wx.min.js')
 Page({
   data: {
     viewUrl: api.viewUrl,
-    workList:[],
+    workList: [],
     pageNo: 1,
     oneClassId: '',
     twoClassId: '',
     weizhi: '',
-    id:'',
-    name:'',
-    needTitle:'',
+    id: '',
+    name: '',
+    needTitle: '',
   },
   // 搜索框
   shurukuang: function (e) {
@@ -41,9 +41,9 @@ Page({
     this.data.workList.splice(0, this.data.workList.length)
     this.data.pageNo = 1
     this.data.isLastPage = false
-    this.data.workList=[]
+    this.data.workList = []
     this.setData({
-      workList:this.data.workList
+      workList: this.data.workList
     })
     if (this.data.sousuotext != "") {
       this.data.needTitle = this.data.sousuotext
@@ -55,9 +55,9 @@ Page({
   // 下拉刷新
   onPullDownRefresh: function () {
     this.setData({
-      pageNo:1,
-      isLastPage:false,
-      workList:[]
+      pageNo: 1,
+      isLastPage: false,
+      workList: []
     })
     this.onLoad()
     setTimeout(() => {
@@ -78,38 +78,40 @@ Page({
     })
   },
 
-  onLoad() {
+  onLoad:function() {
     wx.showShareMenu({
       withShareTicket: true
     })
-    if(app.globalData.needRefresh != 0){
-      this.chushishouquan()
-      // if(app.globalData.xuqiuid == 0){
-      //   this.data.mid=app.globalData.wxid
-      // }else{
-      //   this.data.mid=''
-      // }
-      // this.oneClass()
-      // this.twoClass()
-      this.QueryoneArea()
-      this.QuerytwoArea()
-      if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
-        this.setData({
-          workList:[],
-          weizhi:app.globalData.oneCity.name + app.globalData.twoCity.name,
-          pageNo:1
-        })
-        this.FindWorklist()
-      }else{
-        this.setData({
-          cityId: this.data.id,
-          cityname1: this.data.name,
-          workList:[],
-          weizhi:'全部',
-          areaId:0
-        })
-        this.FindWorklist()
-      }
+    if (app.globalData.needRefresh != undefined) {
+      if (app.globalData.needRefresh != 0) {
+        this.chushishouquan()
+        // if(app.globalData.xuqiuid == 0){
+        //   this.data.mid=app.globalData.wxid
+        // }else{
+        //   this.data.mid=''
+        // }
+        // this.oneClass()
+        // this.twoClass()
+        this.QueryoneArea()
+        this.QuerytwoArea()
+        if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
+          this.setData({
+            workList: [],
+            weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
+            pageNo: 1
+          })
+          this.FindWorklist()
+        }
+      } 
+    }else {
+      this.setData({
+        cityId: this.data.id,
+        cityname1: this.data.name,
+        workList: [],
+        weizhi: '全部',
+        areaId: 0
+      })
+      this.FindWorklist()
     }
   },
 
@@ -142,8 +144,8 @@ Page({
       pageNo: that.data.pageNo,
       pageSize: 10,
     }
-    if(that.data.needTitle != '' || that.data.needTitle!= null || that.data.needTitle != undefined){
-     data.hireTitle = that.data.needTitle
+    if (that.data.needTitle != '' || that.data.needTitle != null || that.data.needTitle != undefined) {
+      data.hireTitle = that.data.needTitle
     }
     if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
       data.oneAreaId = app.globalData.oneCity.id
@@ -155,15 +157,15 @@ Page({
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
-          if(re.result.records==''){
-            that.data.isLastPage=true
-          }else{
+          if (re.result.records == '') {
+            that.data.isLastPage = true
+          } else {
             for (var i = 0; i < re.result.records.length; i++) {
-              re.result.records[i].createTime = re.result.records[i].createTime.substring(0,16)
+              re.result.records[i].createTime = re.result.records[i].createTime.substring(0, 16)
               if (re.result.records[i].backup1 != null && re.result.records[i].backup1.length > 0) {
                 re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
               }
-              if(re.result.records[i].backup3 == null){
+              if (re.result.records[i].backup3 == null) {
                 re.result.records[i].backup3 = 0
               }
               that.data.workList.push(re.result.records[i])
@@ -251,10 +253,10 @@ Page({
   },
   // 跳转到需求详情页面
   recruitmentDetail: function (e) {
-    var list=e.currentTarget.dataset.list
+    var list = e.currentTarget.dataset.list
     var list1 = JSON.stringify(list)
     wx.navigateTo({
-      url: '../recruitmentDetail/recruitmentDetail?obj='+list1,
+      url: '../recruitmentDetail/recruitmentDetail?obj=' + list1,
     })
   },
   // 跳转到提交需求页面
@@ -508,7 +510,7 @@ Page({
       pageSize: 3,
       oneAreaId: app.globalData.oneCity.id,
       twoAreaId: id
-    }) 
+    })
     that.FindWorklist()
   },
 })
