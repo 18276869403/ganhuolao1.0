@@ -168,8 +168,11 @@ Page({
                  duration:2000
                })
                setTimeout(function(){
-                wx.redirectTo({
-                  url: '../myMaterial/myMaterial',
+                // wx.redirectTo({
+                //   url: '../myMaterial/myMaterial',
+                // })
+                wx.navigateBack({
+                  delta: 1
                 })
                },1000)
               } else {

@@ -23,7 +23,7 @@ Page({
       isLastPage: false,
       needsList: []
     })
-    this.onLoad()
+    this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -47,12 +47,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
-    this.xqneedlist()
-  },
+  // onLoad: function () {
+  //   this.setData({
+  //     needsList: []
+  //   })
+  //   wx.showShareMenu({
+  //     withShareTicket: true
+  //   })
+  //   this.xqneedlist()
+  // },
   // 需求列表
   xqneedlist() {
     var that = this
@@ -134,7 +137,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      pageNo: 1,
+      isLastPage: false,
+      needsList: []
+    })
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+    this.xqneedlist()
   },
 
   /**

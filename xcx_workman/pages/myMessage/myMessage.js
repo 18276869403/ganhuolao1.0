@@ -117,6 +117,7 @@ Page({
           that.data.messageList.push(obj)
         }
         }
+        console.log(that.data.messageList)
         that.setData ({
           messageList:that.data.messageList
         })

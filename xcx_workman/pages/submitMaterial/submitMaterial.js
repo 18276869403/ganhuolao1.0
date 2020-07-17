@@ -362,8 +362,11 @@ Page({
             duration: 2000
           })
           setTimeout(function () {
-            wx.switchTab({
-              url: '../Material/Material',
+            // wx.switchTab({
+            //   url: '../Material/Material',
+            // })
+            wx.navigateBack({
+              delta: 2
             })
           }, 1000)
         } else {
