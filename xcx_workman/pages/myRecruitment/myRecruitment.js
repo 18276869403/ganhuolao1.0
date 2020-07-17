@@ -23,7 +23,7 @@ Page({
       isLastPage:false,
       workList:[]
     })
-    this.onLoad()
+    this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -46,12 +46,17 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
-    this.FindWorklist()
-  },
+  // onLoad: function () {
+  //   this.setData({
+  //     pageNo:1,
+  //     isLastPage:false,
+  //     workList:[]
+  //   })
+  //   wx.showShareMenu({
+  //     withShareTicket: true
+  //   })
+  //   this.FindWorklist()
+  // },
   // 获取招工信息列表
   FindWorklist() {
     var that = this
@@ -109,7 +114,15 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+      this.setData({
+        pageNo:1,
+        isLastPage:false,
+        workList:[]
+      })
+      wx.showShareMenu({
+        withShareTicket: true
+      })
+      this.FindWorklist()
   },
 
   /**

@@ -160,8 +160,11 @@ Page({
                 duration: 2000
               })
               setTimeout(function () {
-                wx.redirectTo({
-                  url: '../Welfare/Welfare',
+                // wx.redirectTo({
+                //   url: '../Welfare/Welfare',
+                // })
+                wx.navigateBack({
+                  delta: 1
                 })
               }, 1000)
             } else {

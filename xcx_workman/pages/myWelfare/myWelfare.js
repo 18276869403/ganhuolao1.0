@@ -32,7 +32,7 @@ Page({
       isLastPage: false,
       gongyilist: []
     })
-    this.onLoad()
+    this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -55,7 +55,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow: function (options) {
     this.getActivity()
   },
   // 切换类型

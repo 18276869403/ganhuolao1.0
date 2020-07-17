@@ -163,8 +163,11 @@ Page({
                  duration:2000
                })
                setTimeout(function(){
-                wx.switchTab({
-                  url: '../mine/mine',
+                // wx.navigateTo({
+                //   url: '../myRecruitment/myRecruitment',
+                // })
+                wx.navigateBack({
+                  delta: 1
                 })
                },1000)
               } else {
