@@ -1078,6 +1078,9 @@ Page({
                 },
                 name: 'file',
                 success(res) {
+                  that.setData({
+                    btnFlag:false
+                  })
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = that.data.viewUrl + jj.message
@@ -1108,15 +1111,15 @@ Page({
                       picIurl1: jj.message
                     })
                   }
-                  that.setData({
-                    btnFlag:false
-                  })
                 }
               })
             }
           }
         })
       },
+    })
+    that.setData({
+      btnFlag:false
     })
   },
   cityyiji: function () {
