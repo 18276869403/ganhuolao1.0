@@ -58,6 +58,7 @@
 				<view class="sortImg" bindtap="applyBusiness" data-typeid="1">
 					<image src="{{viewUrl}}static/image/gongrenruzhu.png" class="sort-img"></image>
 				</view>
+				 <!-- wx:if="{{storeList[0].backup5 == 1}}" -->
 				<view class="sortImg" bindtap="applyBusiness" data-typeid="2">
 					<image src="{{viewUrl}}static/image/shangjiaruzhu.png" class="sort-img"></image>
 				</view>
@@ -72,6 +73,7 @@
 				<view class="sort-text">
 					工人入驻
 				</view>
+				 <!-- wx:if="{{storeList[0].backup5 == 1}}" -->
 				<view class="sort-text">
 					商家入驻
 				</view>

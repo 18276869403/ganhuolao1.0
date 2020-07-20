@@ -79,9 +79,6 @@ Page({
   },
 
   onLoad:function() {
-    wx.showShareMenu({
-      withShareTicket: true
-    })
     if (app.globalData.needRefresh != undefined) {
       if (app.globalData.needRefresh != 0) {
         this.chushishouquan()
@@ -113,6 +110,9 @@ Page({
       })
       this.FindWorklist()
     }
+    wx.showShareMenu({
+      withShareTicket: true
+    })
   },
 
   // 上拉功能
@@ -144,7 +144,7 @@ Page({
       pageNo: that.data.pageNo,
       pageSize: 10,
     }
-    if (that.data.needTitle != '' || that.data.needTitle != null || that.data.needTitle != undefined) {
+    if (that.data.needTitle != '' && that.data.needTitle != null && that.data.needTitle != undefined) {
       data.hireTitle = that.data.needTitle
     }
     if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
@@ -153,6 +153,7 @@ Page({
     if (app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined") {
       data.twoAreaId = app.globalData.twoCity.id
     }
+    console.log(data)
     qingqiu.get("list", data, function (re) {
       console.log(re)
       if (re.success == true) {

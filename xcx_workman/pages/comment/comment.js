@@ -101,5 +101,32 @@ Page({
       needscontent: e.detail.value
     })
   },
+  commentinput:function(e){
+    var that = this
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
+      if (res == 1) {
+        that.setData({
+          comment: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      } else if (res == 2) {
+        wx.showToast({
+          title: '校验失败',
+          icon: 'none'
+        })
+        that.setData({
+          comment: ''
+        })
+        return
+      }
+    }, 'POST')
+  }
 
 })
