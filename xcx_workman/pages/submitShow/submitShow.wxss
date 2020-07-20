@@ -2,7 +2,7 @@
 
 .content {
   width: 100%;
-} 
+}
 
 .content-item {
   width: 690rpx;
@@ -19,15 +19,17 @@
   margin-top: 32rpx;
   font-size: 14px;
 }
-.content-item-title{
-  margin-left: 30rpx; 
+
+.content-item-title {
+  margin-left: 30rpx;
   margin-right: 30rpx;
   margin-top: 26rpx;
   line-height: 72rpx;
   height: 72rpx;
   border: 2rpx solid rgba(240, 240, 240, 1);
 }
-.content-item-text{
+
+.content-item-text {
   width: 70%;
   padding-top: 2%;
   padding-right: 3%;
@@ -37,7 +39,7 @@
   color: #999;
 }
 
-.content-item-value{
+.content-item-value {
   width: 30%;
   text-align: center;
 }
@@ -68,6 +70,7 @@
   line-height: 98rpx;
   /* margin-bottom: 80rpx; */
 }
+
 .content-item {
   width: 690rpx;
   margin-left: 30rpx;
@@ -296,6 +299,7 @@
   color: #999;
   float: left;
 }
+
 .fabu-item1 {
   width: 334rpx;
   height: 228rpx;
@@ -322,4 +326,13 @@
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
-  }
+}
+
+/* 图片描述 */
+.show-photo-text {
+  padding: 10rpx 0rpx;
+  margin-left: 4%;
+  text-align: left;
+  font-size: 28rpx;
+  color: #666;
+}

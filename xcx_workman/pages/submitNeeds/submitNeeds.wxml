@@ -60,6 +60,7 @@
 	<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
 		<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 	</view>
+	<view class="need-photo-text">需求描述图片(可以上传多张，可以不上传)</view>
 	<view class='content-icon hengxiang'>
 		<icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
 

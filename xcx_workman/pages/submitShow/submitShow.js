@@ -136,10 +136,21 @@ Page({
       })
       return
     }
-    for (let obj of that.data.tupianlists) {
-      that.data.picIurl1 += obj + ','
+    if(that.data.tupianlists.length > 0){
+      for (let obj of that.data.tupianlists) {
+        that.data.picIurl1 += obj + ','
+      }
+      that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
+    }else{
+      wx.showToast({
+        title: '至少上传一张图片',
+        icon:'none'
+      })
+      that.setData({
+        btnFlag:false
+      })
+      return
     }
-    that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
     console.log(app.globalData.wxid)
     var data = {
       wxUserId: app.globalData.wxid,
@@ -165,9 +176,11 @@ Page({
         // wx.switchTab({
         //   url: '../showwork/showwork',
         // })
-        wx.navigateBack({
-          delta: 1
-        })
+        setTimeout(function(){
+          wx.navigateBack({
+            delta: 1
+          })
+        },1000)
       }
     }, 'post')
   },

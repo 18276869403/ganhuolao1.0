@@ -751,3 +751,10 @@ width: 100%;
 .disabled {
   pointer-events: none;
   }
+/* 图片描述 */
+.need-photo-text{
+  margin-left: 4%;
+  text-align: left;
+  font-size: 28rpx;
+  color: #666;
+}
