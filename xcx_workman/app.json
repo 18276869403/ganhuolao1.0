@@ -21,6 +21,7 @@
     "pages/addEditGoods/addEditGoods",
     "pages/myRecommend/myRecommend",
     "pages/activity/activity",
+    "pages/activityPublic/activityPublic",
     "pages/myGoods/myGoods",
     "pages/activity02/activity02",
     "pages/calculate/calculate",
