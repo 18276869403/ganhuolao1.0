@@ -337,6 +337,9 @@ Page({
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success: function (res) {
+        that.setData({
+          btnFlag:false
+        })
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
         wx.uploadFile({
@@ -392,6 +395,9 @@ Page({
           }
         })
       },
+    })
+    that.setData({
+      btnFlag:false
     })
   },
   // 删除图片
