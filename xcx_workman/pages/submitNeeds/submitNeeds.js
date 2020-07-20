@@ -418,7 +418,7 @@ Page({
         })
         if (re.success == true) {
           wx.showToast({
-            title: '提交成功,等待后台审核...',
+            title: '提交成功',
             icon: 'none',
             duration: 2000
           })
@@ -432,7 +432,7 @@ Page({
                 firstColor: '#173177',
                 keyword1Value: "有1条需求发布啦！",
                 keyword1Color: '#173177',
-                keyword2Value: utils.nowTime(),
+                keyword2Value: util.nowTime(),
                 keyword2Color: '#173177',
                 remarkValue: '请进入干活佬查看详情',
                 remarkColor: '#173177',
