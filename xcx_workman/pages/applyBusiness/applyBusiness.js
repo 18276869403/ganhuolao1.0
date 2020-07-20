@@ -946,7 +946,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
-          if (type == 1) {
+          if (that.data.type == 1) {
             // 公众号消息推送
             qingqiu.get("getPublicUser", null, function (res) {
               for (let obj of res.result) {
