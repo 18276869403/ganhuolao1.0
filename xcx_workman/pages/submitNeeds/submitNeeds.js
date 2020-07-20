@@ -189,6 +189,7 @@ Page({
   needsnameblur: function (e) {
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      console.log(res)
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -214,6 +215,7 @@ Page({
   needscontentblur: function (e) {
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      console.log(res)
       if (res == 1) {
         that.setData({
           needscontent: ''
