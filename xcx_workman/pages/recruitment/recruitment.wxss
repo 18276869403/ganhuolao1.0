@@ -199,6 +199,7 @@ page {
   height: 110rpx;
   position: absolute;
   bottom: 145rpx;
+  right: 0rpx;
 }
 
 .kefubtn {

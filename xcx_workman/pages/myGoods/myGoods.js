@@ -53,7 +53,7 @@ Page({
     spxx:'',
     pageNo:1,
     isLastPage:false,
-    btnFlag:true,
+    btnFlag:false,
     type:0
   },
   /**
@@ -124,6 +124,7 @@ Page({
 },
   // 添加商品
   addEditGoods:function(e){
+    this.setData({btnFlag:false})
     wx.navigateTo({
       url: '../addEditGoods/addEditGoods?obj='+ app.globalData.wxid, 
     })

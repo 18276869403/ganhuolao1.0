@@ -310,10 +310,13 @@ Page({
       btnFlag:true
     })
     that.data.picIurl1 = []
-    for (let obj of that.data.tupianlists) {
-      that.data.picIurl1 += obj + ","
+    if(that.data.tupianlists.length > 0){
+      for (let obj of that.data.tupianlists) {
+        that.data.picIurl1 += obj + ","
+      }
+      that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
     }
-    that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
+    
     var s = qingqiu.yanzheng(that.data.needsname + ",输入需求标题|" + that.data.cityId + ",选择所在区域|" + that.data.areaId + ",选择所在区域|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人")
     if (s != 0) {
       wx.showToast({

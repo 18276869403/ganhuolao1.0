@@ -111,8 +111,28 @@ Page({
     })
     that.imglunbo = that.data.picIurl1 + ',' + that.data.picIurltwo1
     that.imgDetail = that.data.picDetail1 + ',' + that.data.picDetailtwo1
+    if(that.data.goodsname == ""){
+      wx.showToast({
+        title: '商品名字不能为空',
+        icon:'none'
+      })
+      that.setData({
+        btnFlag:false
+      })
+      return
+    }
+    if(that.data.originalPrice == ""){
+      wx.showToast({
+        title: '商品原价不能为空',
+        icon:'none'
+      })
+      that.setData({
+        btnFlag:false
+      })
+      return
+    }
     var data = {
-      userId: app.globalData.wxid,
+      userId: app.globalData.wxid, 
       goodName: that.data.goodsname,
       oldPrice: that.data.originalPrice,
       newPrice: that.data.salesPrice,

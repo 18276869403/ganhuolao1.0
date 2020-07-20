@@ -40,7 +40,7 @@
 }
 
 .shurukuang {
-  width: 80%;
+  width: 80%; 
   margin-right: 3%;
   height: 72rpx;
   line-height: 72rpx;

@@ -11,7 +11,7 @@
       <input type="digit" placeholder="输入商品原价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.oldPrice}}' name="originalPrice" bindinput='originalPriceinput'>{{spxglist.oldPrice}}</input>
     </view>
 
-    <view class="content-item hengxiang">
+    <view class="content-item hengxiang"> 
       <view class="content-title">优惠价</view>
       <input type="digit" placeholder="输入优惠价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.newPrice}}' name="salesPrice" bindinput='salesPriceinput'>{{spxglist.newPrice}}</input>
     </view>
