@@ -1,0 +1,68 @@
+/* pages/activity/activity.wxss */
+page{
+  height: 100%;
+}
+.view-main{
+  height: 100%;
+  width: 100%;
+}
+.bg {
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.bg-img {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.erweima {
+  width: 100%;
+  text-align: center;
+}
+
+.erweima-img {
+  position: absolute;
+  width: 100%;
+  height: 84rpx;
+  bottom: 0rpx;
+}
+
+/* 海报 */
+.content {
+  /* width: 92%;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-top: 48rpx;
+  height: 892rpx; */
+  position: relative; 
+}
+.haibao-img {
+  width: 100%;
+  height: 667px;
+} 
+/* .erweima{
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  color: brown;
+} */
+.code-img {
+  width: 100%;
+  height: 90rpx;
+}
+
+.sharebutton{
+  position: absolute;
+  bottom: 169rpx;
+  right: 226rpx;
+  width: 439rpx;
+  height: 90rpx;
+  padding: 0 0;
+  margin-left: 0;
+  margin-right: 0;
+  overflow: visible;
+  background-color: rgba(143,143,143, 0);
+}
