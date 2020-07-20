@@ -55,29 +55,6 @@ Page({
     }
     this.xqneedlist(obj)
   },
-  // 获取token值
-  getTokenValue() {
-    var that = this
-    // 公众号Token
-    qingqiu.get("getPublicAccessToken", null, function (res) {
-      console.log(res)
-      if (res.success == true) {
-        app.globalData.access_TokenOff = res.result.accessToken
-        var data = {
-          access_token: res.result.accessToken,
-        }
-        qingqiu.get("getPulicUserAdd", data, function (res) {
-          console.log('公众号用户添加结果', res)
-        })
-      } else {
-        wx.showToast({
-          title: '令牌获取失败',
-          icon: 'none'
-        })
-        return
-      }
-    })
-  },
   // 授权
   chushishouquan() {
     var that = this
@@ -218,7 +195,6 @@ Page({
   },
 
   onShow: function () {
-    this.getTokenValue()
     wx.showShareMenu({
       withShareTicket: true
     })
