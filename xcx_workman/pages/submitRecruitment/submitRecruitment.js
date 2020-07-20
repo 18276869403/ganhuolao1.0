@@ -352,6 +352,9 @@ upimg: function (e) {
       })
     },
   })
+  that.setData({
+    btnFlag:false
+  })
 },
   
   //地址 显示弹窗样式

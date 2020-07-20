@@ -253,6 +253,9 @@ Page({
         })
       },
     })
+    that.setData({
+      btnFlag:false
+    })
   },
   // 删除图片
   shanchu1: function (e) {

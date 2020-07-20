@@ -46,10 +46,12 @@
     <view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
       <image src="{{viewUrl}}{{item}}" class="show-img"></image>
       <image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+      <text>剩料图片</text>
     </view>
   </view>
   <view class="fabu  {{btnFlag == true ? 'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
     <image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+    <text style="margin-left:30%;color: rgba(102, 102, 102, 1);">剩料图片</text>
   </view>
   <view class='content-icon hengxiang'>
     <icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />

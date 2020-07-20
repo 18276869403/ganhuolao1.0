@@ -51,9 +51,11 @@
 			<view class="fabu" wx:for="{{piclist}}" wx:for-index="index" wx:key="{{item.id}}">
 				<image src="{{viewUrl}}{{item}}" class="fabu-item"></image>
 				<image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+				<text>活动描述图片</text>
 			</view>
 			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" wx:if="{{piclist.length<4}}">
 				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+				<text>活动描述图片</text>
 			</view>
 		</view>
 	</view>

@@ -33,6 +33,7 @@
 			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0">
 			  <image src="{{picIurl}}" class="fabu-item" wx:if="{{picIurl!=''}}"></image>
 				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
+				<text>招工描述图片</text>
 			</view>
 		</view>
 	</view>
