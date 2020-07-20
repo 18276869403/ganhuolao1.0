@@ -26,7 +26,7 @@ Page({
     spxglist: [],
     yhid: '',
     spid: '',
-
+    btnFlag:false,
     picIurl: '',
     picIurl1: '',
     picIurltwo: '',
@@ -38,16 +38,10 @@ Page({
     wxuserid: ''
   },
 
-  // 获取Token
-  getAccessToken: function () {
-    qingqiu.getAccessTokenApplets(function () {})
-  },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.getAccessToken()
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -77,6 +71,9 @@ Page({
   // 修改商品
   xugaispxx() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     that.imglunbo = that.data.picIurl1 + ',' + that.data.picIurltwo1
     that.imgDetail = that.data.picDetail1 + ',' + that.data.picDetailtwo1
     var data = {
@@ -90,6 +87,9 @@ Page({
       goodPic2: that.imgDetail != "," ? that.imglunbo : that.data.spxglist.goodPic2[0] + ',' + that.data.spxglist.goodPic2[1],
     }
     qingqiu.get("editUserGood", data, function (re) {
+      that.setData({
+        btnFlag:false
+      })
       if (re.success == true) {
         wx.showToast({
           title: '修改成功！',
@@ -106,6 +106,9 @@ Page({
   // 添加商品
   lijifabu() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     that.imglunbo = that.data.picIurl1 + ',' + that.data.picIurltwo1
     that.imgDetail = that.data.picDetail1 + ',' + that.data.picDetailtwo1
     var data = {
@@ -118,6 +121,9 @@ Page({
       goodPic2: that.imgDetail
     }
     qingqiu.get("addUserGood", data, function (re) {
+      that.setData({
+        btnFlag:false
+      })
       if (re.success == true) {
         wx.showToast({
           title: '添加成功！',
@@ -165,6 +171,9 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -190,6 +199,9 @@ Page({
                 title: '内容含有违法违规内容',
                 icon: 'none'
               })
+              that.setData({
+                btnFlag:false
+              })
               return
             } else {
               wx.uploadFile({
@@ -203,6 +215,9 @@ Page({
                 },
                 name: 'file',
                 success(re) {
+                  that.setData({
+                    btnFlag:false
+                  })
                   var r = re.data
                   var jj = JSON.parse(r);
                   var sj = api.viewUrl + jj.message
@@ -228,6 +243,9 @@ Page({
                       picDetailtwo1: jj.message
                     })
                   }
+                  that.setData({
+                    btnFlag:false
+                  })
                 }
               })
             }
