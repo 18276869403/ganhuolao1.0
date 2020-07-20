@@ -217,7 +217,7 @@ Page({
     that.setData({
       btnFlag:true
     })
-    var s = qingqiu.yanzheng(that.data.needsname + ",输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",选择工作地|" + that.data.linkman + "输入联系人|" + that.data.phone + ",输入联系电话")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",选择工作地|" + that.data.linkman + ",输入联系人|" + that.data.phone + ",输入联系电话")
     if (s != 0) {
       wx.showToast({
         title: s,
