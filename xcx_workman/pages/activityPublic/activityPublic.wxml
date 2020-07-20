@@ -1,7 +1,7 @@
 <!--pages/activity/activity.wxml-->
 <view class="container">
 	<view class="content">
-		<image src="../image/thePublic.png" mode="widthFix" show-menu-by-longpress class="haibao-img"></image>
+		<image src="{{viewUrl}}static/image/thePublic.png" mode="widthFix" show-menu-by-longpress class="haibao-img"></image>
 		<view class="erweima-img">
 			<official-account></official-account>
 		</view>
