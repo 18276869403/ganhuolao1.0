@@ -314,7 +314,7 @@ Page({
       that.data.picIurl1 += obj + ","
     }
     that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
-    var s = qingqiu.yanzheng(that.data.needsname + ",输入标题|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人|" + that.data.cityId + ",请选择一级区域|" + that.data.areaId + ",请选择二级区域")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入标题|" + that.data.cityId + ",请选择一级区域|" + that.data.areaId + ",请选择二级区域|"+ that.data.linkman + ",输入联系人|"+ that.data.phone + ",输入联系电话")
     if (s != 0) {
       wx.showToast({
         title: s,
