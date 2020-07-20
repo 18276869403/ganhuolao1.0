@@ -53,7 +53,7 @@
 					<view class="complete-button" style="width:155rpx;" bindtap="zaixianlianxi" data-phone="{{zhaogong.publishPhone}}" wx:if="{{zhaogong.wxUserId!=wxUserid}}">
 						联系TA
 					</view>
-					<view class="delete-button" style="width:155rpx;" bindtap="delete" wx:if="{{zhaogong.wxUserId==wxUserid}}">
+					<view class="delete-button {{btnFlag == true?'disabled':''}}" style="width:155rpx;" bindtap="delete" wx:if="{{zhaogong.wxUserId==wxUserid}}">
 						删除
 					</view>
 				</view>

@@ -16,6 +16,7 @@ Page({
     date: '1970-01-01',
     name: '',
     phone: '',
+    btnFlag:false,
     wxUser:[]
   },
 
@@ -34,12 +35,13 @@ Page({
       id:id
     }
     qingqiu.get("queryWxUser",data,function(re){
+      console.log(re)
       if(re.success == true){
-        if(re.result.name == "" || re.result.name == null || re.result.name == "null"){
-          re.result.name = '请输入姓名'
+        if((re.result.name == "" || re.result.name == null || re.result.name == "null") && (re.result.shopName == "" || re.result.shopName == null || re.result.shopName == "null")){
+          re.result.name = ''
         }
         if(re.result.phone == "" || re.result.phone == null || re.result.phone == null){
-          re.result.phone = '请输入手机号'
+          re.result.phone = ''
         }
         if(re.result.dateBirth == null || re.result.dateBirth == "" || re.result.dateBirth == "null"){
           re.result.dateBirth = '1970-01-01'
@@ -64,6 +66,9 @@ Page({
   // 保存
   UpdateUserInfo:function(){
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       id:that.data.wxUser.id,
       name:that.data.wxUser.name,
@@ -77,6 +82,9 @@ Page({
         title: s,
         icon:'none'
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     qingqiu.get("editWxUser",data,function(re){
@@ -86,12 +94,18 @@ Page({
           icon:'none',
           duration:1000
         })
+        that.setData({
+          btnFlag:false
+        })
         setTimeout(function(){
           wx.switchTab({
             url: '../mine/mine'
           })
         },1000)
       } else{
+        that.setData({
+          btnFlag:false
+        })
         wx.showToast({
           title: re.message,
           icon:'none',

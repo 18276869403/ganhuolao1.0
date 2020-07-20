@@ -53,6 +53,7 @@ Page({
     spxx:'',
     pageNo:1,
     isLastPage:false,
+    btnFlag:true,
     type:0
   },
   /**
@@ -130,6 +131,7 @@ Page({
   //置顶
   onemyGood:function(e){
     var  that=this
+    that.setData({btnFlag:true})
     var spid =e.currentTarget.dataset.myspid;
     that.data.spid=spid
     var data={
@@ -142,7 +144,10 @@ Page({
         icon:'none',
         duration:2000
       })
+      that.setData({btnFlag:false})
       that.onLoad()
+    }else{
+      that.setData({btnFlag:false})
     }
   },'put')
   },
@@ -158,6 +163,7 @@ Page({
   //删除我的商品
   DeletemyGood: function(e) {
     var that = this
+    that.setData({btnFlag:true})
     var spid =e.currentTarget.dataset.myspid;
     var data={
       id: spid 
@@ -175,9 +181,14 @@ Page({
                 icon:'none',
                 duration:2000
               })
+              that.setData({btnFlag:false})
               that.onLoad()
-            }},"delete")
+            }else{
+              that.setData({btnFlag:false})
+            }
+          },"delete")
         } else if (res.cancel) {
+          that.setData({btnFlag:false})
           wx.showToast({
             title: '取消删除！',
             icon:'none',

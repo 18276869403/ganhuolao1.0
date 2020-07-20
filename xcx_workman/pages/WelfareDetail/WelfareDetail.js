@@ -24,6 +24,7 @@ Page({
     xqxqlist: [],
     jiedanList: [],
     tupianlist: [],
+    btnFlag:false,
     id: '',
     wxUserid: '',
     type: '',
@@ -144,6 +145,9 @@ Page({
   // 需求删除
   deleteActive() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       id: that.data.activityid
     }
@@ -153,6 +157,9 @@ Page({
       success: function (res) {
         if (res.confirm) {
           qingqiu.get("delActivity", data, function (re) {
+            that.setData({
+              btnFlag:false
+            })
             if (re.success == true) {
               wx.showToast({
                 title: '删除成功',
@@ -176,6 +183,9 @@ Page({
             }
           }, 'delete')
         } else {
+          that.setData({
+            btnFlag:false
+          })
           return
         }
       }
@@ -220,6 +230,9 @@ Page({
   },
   AddnameActive: function () {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       signName: that.data.signName,
       signPhone: that.data.signPhone,
@@ -228,6 +241,9 @@ Page({
     }
     console.log(data)
     qingqiu.get("insertActivitySign", data, function (res) {
+      that.setData({
+        btnFlag:false
+      })
       console.log(res)
       if (res.success == true) {
         wx.showToast({

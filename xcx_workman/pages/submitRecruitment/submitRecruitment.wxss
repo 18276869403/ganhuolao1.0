@@ -790,3 +790,7 @@ width: 100%;
   height: 40rpx;
   margin-top: 14rpx;
 }
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

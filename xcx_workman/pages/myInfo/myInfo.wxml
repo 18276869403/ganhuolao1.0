@@ -39,5 +39,5 @@
       </view>
     </view>
   </view>
-  <view class='button' style='margin-top:136rpx;' bindtap='UpdateUserInfo'>保存</view>
+  <view class='button {{btnFlag == true?"disabled":""}}' style='margin-top:136rpx;' bindtap='UpdateUserInfo'>保存</view>
 </view>

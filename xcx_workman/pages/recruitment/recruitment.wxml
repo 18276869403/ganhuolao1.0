@@ -38,7 +38,7 @@
 								<image src="{{viewUrl}}static/image/zhaogongstate.png" class="shalou-img"></image>
 							</view>
 							<view class="list-top-status">进行中</view> -->
-							<view class="list-top-price">薪资：{{item.backup3}}元</view>
+							<view class="list-top-price">薪资：{{item.backup5}}</view>
 						</view>
 					</view>
 					<view class="list-top-henxian"></view>
@@ -69,7 +69,7 @@
 						<view class="content-text1 text-jiequ" style="width:38%;">
 							<text>{{item.oneAreaName}}{{item.twoAreaName}}</text>
 						</view>
-						<view class="complete-button" style="width:135rpx;" bindtap="zaixianlianxi" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}">
+						<view class="complete-button" style="width:135rpx;" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}">
 						联系TA
 					</view>
 					</view>

@@ -35,6 +35,7 @@ Page({
     picIurl: '',
     picimg: '', 
     num: 1,
+    btnFlag:false,
     tupianlists: [],
     addresslist: []
   },
@@ -107,11 +108,17 @@ Page({
   // 发布晒晒
   lijifabu() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     if (that.data.needscontent == "") {
       wx.showToast({
         title: '晒晒详情不能为空！',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -123,6 +130,9 @@ Page({
         title: '请选择所在区域！',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -143,6 +153,9 @@ Page({
     console.log(data)
     qingqiu.get("insertCase", data, function (re) {
       console.log(re)
+      that.setData({
+        btnFlag:false
+      })
       if (re.success == true) {
         wx.showToast({
           title: '发布成功！',
@@ -316,6 +329,9 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -337,6 +353,9 @@ Page({
           success: function (res) {
             console.log(res)
             if (res.data =="false") {
+              that.setData({
+                btnFlag:false
+              })
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
@@ -354,6 +373,9 @@ Page({
                 },
                 name: 'file',
                 success(res) {
+                  that.setData({
+                    btnFlag:false
+                  })
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = api.viewUrl + jj.message

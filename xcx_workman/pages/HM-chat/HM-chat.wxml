@@ -165,7 +165,7 @@
 				<view class="icon add"></view>
 			</view>
 			<!-- #endif -->
-			<view class="send {{isVoice?'hidden':''}}" bindtap="sendText">
+			<view class="send {{isVoice?'hidden':''}} {{btnFlag == true ? 'disabled':''}}" bindtap="sendText">
 				<view class="btn">发送</view>
 			</view>
 		</view>

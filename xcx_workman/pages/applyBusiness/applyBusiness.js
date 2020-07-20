@@ -12,6 +12,7 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     type: 2,
+    btnFlag:false,
     // 获取分类
     fenleitype1: {
       yjid: '',
@@ -285,6 +286,7 @@ Page({
     }
     var that = this
     qingqiu.get('queryWxUser', data, function (re) {
+      console.log(re)
       var typeid = "fenleitype1.yjid"
       var typeerji = "fenleitype1.erjiid"
       var typestate = "fenleitype1.typestate"
@@ -357,7 +359,7 @@ Page({
           picIurl1: re.result.picIurl,
           picPerson1: api.viewUrl + re.result.picPerson1,
           picZz: api.viewUrl + re.result.picZz,
-          picZz1: api.viewUrl + re.result.picZz,
+          picZz1: re.result.picZz,
           picPerson2: api.viewUrl + re.result.picPerson,
           wxState: re.result.wxState,
           needsTypeid: 2,
@@ -786,12 +788,18 @@ Page({
   // 提交申请
   tijiaoshenqing: function () {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {}
     if (that.data.select != 'success') {
       wx.showToast({
         title: '未勾选注册协议',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -802,6 +810,9 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        that.setData({
+          btnFlag:false
+        })
         return
       }
       var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码")
@@ -810,6 +821,9 @@ Page({
           title: s,
           icon: 'none',
           duration: 2000
+        })
+        that.setData({
+          btnFlag:false
         })
         return
       }
@@ -837,6 +851,9 @@ Page({
           icon: 'none',
           duration: 2000
         })
+        that.setData({
+          btnFlag:false
+        })
         return
       }
       if (that.data.fenleitype1.yjid == '' && that.data.fenleitype2.yjid != '') {
@@ -851,6 +868,9 @@ Page({
           title: s,
           icon: 'none',
           duration: 2000
+        })
+        that.setData({
+          btnFlag:false
         })
         return
       }
@@ -895,6 +915,9 @@ Page({
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
+                  that.setData({
+                    btnFlag:false
+                  })
                   wx.switchTab({
                     url: '../mine/mine',
                   })
@@ -903,6 +926,9 @@ Page({
             })
           }, 1000)
         } else {
+          that.setData({
+            btnFlag:false
+          })
           wx.showToast({
             title: re.message,
             icon: 'none',
@@ -939,6 +965,9 @@ Page({
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)
+                  that.setData({
+                    btnFlag:false
+                  })
                 })
               }
             })
@@ -961,6 +990,9 @@ Page({
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)
+                  that.setData({
+                    btnFlag:false
+                  })
                 })
               }
             })
@@ -971,17 +1003,23 @@ Page({
                 qingqiu.get("getKeyInfo", {
                   code: res.code
                 }, function (re) {
+                  that.setData({
+                    btnFlag:false
+                  })
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
-                  wx.switchTab({
-                    url: '../thePublic/thePublic',
+                  wx.navigateTo({
+                    url: '../activityPublic/activityPublic',
                   })
                 }, "POST")
               }
             })
           }, 1000)
         } else {
+          that.setData({
+            btnFlag:false
+          })
           wx.showToast({
             title: re.message,
             icon: 'none',
@@ -996,6 +1034,9 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -1020,6 +1061,9 @@ Page({
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
+              })
+              that.setData({
+                btnFlag:false
               })
               return
             } else {
@@ -1064,6 +1108,9 @@ Page({
                       picIurl1: jj.message
                     })
                   }
+                  that.setData({
+                    btnFlag:false
+                  })
                 }
               })
             }

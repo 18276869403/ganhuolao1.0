@@ -33,6 +33,7 @@ Page({
     workareaname: '',
     city: [],
     area: [],
+    btnFlag:false,
     picIurl: '',
     picIurl1: ''
   },
@@ -213,12 +214,18 @@ Page({
   // 提交申请
   fabuzhaogong: function () {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var s = qingqiu.yanzheng(that.data.needsname + ",输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",选择工作地|" + that.data.linkman + "输入联系人|" + that.data.phone + ",输入联系电话")
     if (s != 0) {
       wx.showToast({
         title: s,
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -234,6 +241,9 @@ Page({
       backup4: that.data.picIurl1
     }
     qingqiu.get("localHireAdd", data, function (re) {
+      that.setData({
+        btnFlag:false
+      })
       console.log(re)
       if (re.success == true) {
         wx.showToast({
@@ -280,6 +290,9 @@ upimg: function (e) {
   var type = e.currentTarget.dataset.type
   var index = e.currentTarget.dataset.number
   var that = this
+  that.setData({
+    btnFlag:true
+  })
   wx.chooseImage({
     count: 1,
     sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -301,6 +314,9 @@ upimg: function (e) {
         success: function (res) {
           console.log(res)
           if (res.data =="false") {
+            that.setData({
+              btnFlag:false
+            })
             wx.showToast({
               title: '内容含有违法违规内容',
               icon: 'none'
@@ -318,6 +334,9 @@ upimg: function (e) {
               },
               name: 'file',
               success(res) {
+                that.setData({
+                  btnFlag:false
+                })
                 var r = res.data
                 var jj = JSON.parse(r);
                 var sj = that.data.viewUrl + jj.message

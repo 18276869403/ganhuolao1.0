@@ -46,7 +46,7 @@
           <view class="look-button">查看留言</view> 
         </view>
         <view class="list-top-delete">
-          <image src="{{viewUrl}}static/image/delete.png" class="delete-img" bindtap="deletemyLY" data-lyid="{{item}}"></image>
+          <image src="{{viewUrl}}static/image/delete.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="deletemyLY" data-lyid="{{item}}"></image>
         </view>
       </view>
     </view>

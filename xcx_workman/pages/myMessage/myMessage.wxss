@@ -179,3 +179,8 @@ page {
 .message-show{
   color: red;
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

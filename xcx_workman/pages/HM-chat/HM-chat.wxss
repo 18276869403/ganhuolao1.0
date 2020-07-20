@@ -860,3 +860,7 @@ page {
   color: #f8d757;
 }
 
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

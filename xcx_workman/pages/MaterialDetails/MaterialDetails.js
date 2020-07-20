@@ -16,7 +16,8 @@ Page({
     jiedanList:[],
     tupianlist:[],
     id:'',
-    wxUserid:''
+    wxUserid:'',
+    btnFlag:false
   },
 
   onLoad: function (options) {
@@ -124,6 +125,9 @@ Page({
   // 需求完成
   lianxita() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data={
       id: that.data.xqxqlist.id,
       needState: 1
@@ -135,12 +139,18 @@ Page({
           icon: 'success',
           duration: 3000
         })
+        that.setData({
+          btnFlag:false
+        })
         setTimeout(function(){
           wx.redirectTo({
             url: '../myMaterial/myMaterial',
           })
         },1000)
       } else{
+        that.setData({
+          btnFlag:false
+        })
         wx.showToast({
           title: re.message,
           icon: 'none',
@@ -152,6 +162,9 @@ Page({
   // 需求删除
   shancuoxuqiu() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data={
       id: that.data.id
     }
@@ -167,6 +180,9 @@ Page({
                  icon:'success',
                  duration:2000
                })
+               that.setData({
+                btnFlag:false
+              })
                setTimeout(function(){
                 // wx.redirectTo({
                 //   url: '../myMaterial/myMaterial',
@@ -176,6 +192,9 @@ Page({
                 })
                },1000)
               } else {
+                that.setData({
+                  btnFlag:false
+                })
                 wx.showToast({
                   title: re.message,
                   icon: 'none',
@@ -184,6 +203,9 @@ Page({
               } 
           },'delete')
         }else{
+          that.setData({
+            btnFlag:false
+          })
           return
         }
       }

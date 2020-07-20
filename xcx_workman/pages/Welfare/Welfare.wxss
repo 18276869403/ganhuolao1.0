@@ -596,3 +596,8 @@ page {
   font-size: 30rpx;
   text-align: right;
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

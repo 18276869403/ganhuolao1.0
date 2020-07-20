@@ -9,9 +9,9 @@
         <view class="goods-name">{{item.goodName}}</view>
         <view class="goods-price">¥{{item.newPrice}}</view>
         <view class="hengxiang goods-button">
-          <view class="shanchu-button" catchtap="DeletemyGood" data-myspid="{{item.id}}">删除</view>
-          <view class="xiugai-button" catchtap="addEditGoods2" data-spxx="{{item}}">修改</view>
-          <view class="zhiding-bu tton" catchtap="onemyGood" data-myspid="{{item.id}}">置顶</view>
+          <view class="shanchu-button {{btnFlag == true?'disabled':''}}" catchtap="DeletemyGood" data-myspid="{{item.id}}">删除</view>
+          <view class="xiugai-button {{btnFlag == true?'disabled':''}}" catchtap="addEditGoods2" data-spxx="{{item}}">修改</view>
+          <view class="zhiding-bu tton {{btnFlag == true?'disabled':''}}" catchtap="onemyGood" data-myspid="{{item.id}}">置顶</view>
         </view>
       </view>
     </view>

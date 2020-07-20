@@ -51,6 +51,7 @@ Page({
     tupianlist: [],
     id: '',
     wxUserid: '',
+    btnFlag:false,
     type: ''
   },
 
@@ -167,6 +168,9 @@ Page({
   // 需求报名
   baoming() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       needId: that.data.id,
       wxUserId: app.globalData.wxid
@@ -181,6 +185,9 @@ Page({
           console.log(data)
           qingqiu.get("insertNeedSign", data, function (res) {
             if (res.success == true) {
+              that.setData({
+                btnFlag:false
+              })
               wx.showToast({
                 title: '报名成功',
                 icon: 'success',
@@ -192,6 +199,9 @@ Page({
               console.log(that.data.xid)
               qingqiu.get("getPublicUserById", obj, function (res) {
                 console.log(res)
+                if(res.result.openid == "" || res.result.openid == null){
+                  return
+                }
                 var objdata = {
                   openId: res.result.openid,
                   access_token:app.globalData.access_TokenOff,
@@ -218,6 +228,9 @@ Page({
               })
               that.SelectjiedanList()
             } else {
+              that.setData({
+                btnFlag:false
+              })
               wx.showToast({
                 title: res.message,
                 icon: 'none',
@@ -226,6 +239,9 @@ Page({
             }
           }, 'post')
         } else {
+          that.setData({
+            btnFlag:false
+          })
           return
         }
       }
@@ -234,6 +250,9 @@ Page({
   // 需求删除
   shancuoxuqiu() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       id: that.data.id
     }
@@ -244,6 +263,9 @@ Page({
         if (res.confirm) {
           qingqiu.get("delYneedAndNeedSign", data, function (re) {
             if (re.success == true) {
+              that.setData({
+                btnFlag:false
+              })
               wx.showToast({
                 title: '删除成功',
                 icon: 'success',
@@ -255,6 +277,9 @@ Page({
                 })
               }, 1000)
             } else {
+              that.setData({
+                btnFlag:false
+              })
               wx.showToast({
                 title: re.message,
                 icon: 'none',
@@ -263,6 +288,9 @@ Page({
             }
           }, 'delete')
         } else {
+          that.setData({
+            btnFlag:false
+          })
           return
         }
       }
@@ -271,18 +299,27 @@ Page({
   // 需求完成
   lianxita() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       id: that.id,
       needState: 1
     }
     qingqiu.get("needUpdateStateById", data, function (re) {
       if (re.success == true) {
+        that.setData({
+          btnFlag:false
+        })
         wx.showToast({
           title: '需求已完成',
           icon: 'success',
           duration: 3000
         })
       } else {
+        that.setData({
+          btnFlag:false
+        })
         wx.showToast({
           title: re.message,
           icon: 'none',

@@ -23,7 +23,7 @@ Page({
 		msgList: [],
 		msgImgList: [],
 		myuid: 0,
-
+		btnFlag: false,
 		//录音相关参数
 		// #ifndef H5
 		//H5不能录音 
@@ -559,18 +559,18 @@ Page({
 	// 获取token值
 	getTokenValue() {
 		var that = this
-    // 公众号Token
-    qingqiu.get("getPublicAccessToken",null,function (res) {
-      if(res.success == true){
-        app.globalData.access_TokenOff = res.result.accessToken
-      }else{
-        wx.showToast({
-          title: '令牌获取失败',
-          icon:'none'
-        })
-        return
-      }
-    })
+		// 公众号Token
+		qingqiu.get("getPublicAccessToken", null, function (res) {
+			if (res.success == true) {
+				app.globalData.access_TokenOff = res.result.accessToken
+			} else {
+				wx.showToast({
+					title: '令牌获取失败',
+					icon: 'none'
+				})
+				return
+			}
+		})
 	},
 	/**
 	 * 生命周期函数--监听页面加载
@@ -1072,70 +1072,80 @@ Page({
 	},
 	textMsgInputblur: function (e) {
 		var that = this
-		qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
-      if (res == 1) {
-        that.setData({
-          needscontent: ''
-        })
-        wx.showToast({
-          title: '内容包含敏感词，请重新输入...',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }else if(res == 2){
-        wx.showToast({
-          title: '校验失败',
-          icon:'none'
-        })
-        that.setData({
-          needscontent: ''
-        })
-        return
-      }
-    }, 'POST')
+		qingqiu.get("checkWords", {
+			content: e.detail.value
+		}, function (res) {
+			if (res == 1) {
+				that.setData({
+					needscontent: ''
+				})
+				wx.showToast({
+					title: '内容包含敏感词，请重新输入...',
+					icon: 'none',
+					duration: 2000
+				})
+				return
+			} else if (res == 2) {
+				wx.showToast({
+					title: '校验失败',
+					icon: 'none'
+				})
+				that.setData({
+					needscontent: ''
+				})
+				return
+			}
+		}, 'POST')
 	},
 	// 发送文字消息
 	sendText() {
 		var that = this
+		that.setData({
+			btnFlag: true
+		})
 		that.hideDrawer(); //隐藏抽屉
-		if(that.data.textMsg == ""){
-			return;
-		}
 		if (!that.data.textMsg) {
 			return;
 		}
-		qingqiu.get("checkWords",{content:that.data.textMsg}, function (res) {
-      if (res == 1) {
-        that.setData({
-          needscontent: ''
-        })
-        wx.showToast({
-          title: '内容包含敏感词，请重新输入...',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }else if(res == 2){
-        wx.showToast({
-          title: '校验失败',
-          icon:'none'
-        })
-        that.setData({
-          needscontent: ''
-        })
-        return
-      }else{
+		qingqiu.get("checkWords", {
+			content: that.data.textMsg
+		}, function (res) {
+			if (res == 1) {
+				that.setData({
+					needscontent: ''
+				})
+				wx.showToast({
+					title: '内容包含敏感词，请重新输入...',
+					icon: 'none',
+					duration: 2000
+				})
+				that.setData({
+					btnFlag: false
+				})
+				return
+			} else if (res == 2) {
+				wx.showToast({
+					title: '校验失败',
+					icon: 'none'
+				})
+				that.setData({
+					needscontent: ''
+				})
+				that.setData({
+					btnFlag: false
+				})
+				return
+			} else {
 				let content = that.replaceEmoji(that.data.textMsg);
 				let msg = {
 					text: content
 				}
 				that.sendMsg(msg, 'text');
 				that.setData({
-					textMsg: ""
+					textMsg: "",
 				});
 			}
-    }, 'POST')
+		}, 'POST')
 		// let content = this.replaceEmoji(this.data.textMsg);
 		// let msg = {text:content}
 		// this.sendMsg(msg,'text'); 
@@ -1169,38 +1179,23 @@ Page({
 
 	// 发送消息
 	sendMsg(content, type) {
-		if(content == "" || content == null || content == undefined){
+		var that = this
+		if (content == "" || content == null || content == undefined) {
+			that.setData({
+				btnFlag: false
+			})
 			return;
 		}
 		// 发送：消息内容
 		var msg = {
-			toUserId: this.data.toUserId,
-			userId: this.data.user.id,
+			toUserId: that.data.toUserId,
+			userId: that.data.user.id,
 			content: JSON.stringify(content),
 			type: type
 		};
 		var obj = {
-			wxUserId: this.data.toUserId
+			wxUserId: that.data.toUserId
 		}
-		qingqiu.get("getPublicUserById", obj, function (res) {
-			console.log(res)
-			var objdata = {
-				openId: res.result.openid,
-				access_token:app.globalData.access_TokenOff,
-				firstValue:"干活佬有人联系你啦！",
-				firstColor:'#173177',
-				keyword1Value:"有人给你发消息啦！",
-				keyword1Color:'#173177',
-				keyword2Value:util.newDate(),
-				keyword2Color:'#173177',
-				remarkValue:'干活佬，助力工人/商家接单！',
-				remarkColor:'#173177',
-				MiniUrl:''
-			}
-		 qingqiu.get("SendWxMsg",objdata,function(re){
-			 console.log(re)
-		 })
-		})
 		wx.request({
 			url: api.im.imSend,
 			data: msg,
@@ -1208,7 +1203,32 @@ Page({
 			success: res => {
 				var recMsg = res.data.result;
 				recMsg.content = JSON.parse(recMsg.content);
-				this.screenMsg(recMsg);
+				that.screenMsg(recMsg);
+				that.setData({
+					btnFlag: false
+				})
+				qingqiu.get("getPublicUserById", obj, function (res) {
+					console.log(res)
+					var objdata = {
+						openId: res.result.openid,
+						access_token: app.globalData.access_TokenOff,
+						firstValue: "干活佬有人联系你啦！",
+						firstColor: '#173177',
+						keyword1Value: "有人给你发消息啦！",
+						keyword1Color: '#173177',
+						keyword2Value: util.newDate(),
+						keyword2Color: '#173177',
+						remarkValue: '干活佬，助力工人/商家接单！',
+						remarkColor: '#173177',
+						MiniUrl: ''
+					}
+					qingqiu.get("SendWxMsg", objdata, function (re) {
+						console.log(re)
+						that.setData({
+							btnFlag: false
+						})
+					})
+				})
 			}
 		});
 	},

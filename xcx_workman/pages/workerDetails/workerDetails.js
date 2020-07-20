@@ -16,6 +16,7 @@ Page({
     price:'',
     istrue:0,
     flag: true,
+    btnFlag:false,
     index: 0,
     day: 0,
     predict:'',
@@ -165,6 +166,9 @@ Page({
   // 确认雇佣
   bindCon: function() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     if(app.globalData.wxid == ""||app.globalData.wxid == null){
       this.onUser()
     }
@@ -179,6 +183,9 @@ Page({
     }
     qingqiu.get("userWorkAdd",data,function(res){
       console.log(res)
+      that.setData({
+        btnFlag:false
+      })
       if(res.success == true){
         wx.showToast({
           title: '雇佣成功',

@@ -30,6 +30,7 @@ Page({
     linkman: '',
     phone: '',
     show: false,
+    btnFlag:false,
     needsTypeList: [{
         id: 0,
         name: '普通需求'
@@ -305,6 +306,9 @@ Page({
   // 发布需求
   lijifabu() {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     that.data.picIurl1 = []
     for (let obj of that.data.tupianlists) {
       that.data.picIurl1 += obj + ","
@@ -317,6 +321,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     var shuzi = util.numberReg(that.data.phone)
@@ -325,6 +332,9 @@ Page({
         title: shuzi,
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -341,6 +351,9 @@ Page({
         title: '请勾选同意协议！',
         icon: 'none',
         duration: 2000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -361,6 +374,7 @@ Page({
       }
       console.log(data)
       qingqiu.get("needUpdateStateById", data, function (re) {
+        that.setData({btnFlag:false})
         if (re.success == true) {
           wx.showToast({
             title: '修改成功',
@@ -396,6 +410,9 @@ Page({
       }
       console.log(data)
       qingqiu.get("insertYneed", data, function (re) {
+        that.setData({
+          btnFlag:false
+        })
         if (re.success == true) {
           wx.showToast({
             title: '提交成功,等待后台审核...',
@@ -974,6 +991,9 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -994,6 +1014,9 @@ Page({
           },
           success: function (res) {
             console.log(res)
+            that.setData({
+              btnFlag:false
+            })
             if (res.data =="false") {
               wx.showToast({
                 title: '内容含有违法违规内容',
@@ -1012,6 +1035,9 @@ Page({
                 },
                 name: 'file',
                 success(res) {
+                  that.setData({
+                    btnFlag:false
+                  })
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = api.viewUrl + jj.message

@@ -57,7 +57,7 @@
 			<image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 		</view>
 	</view>
-	<view class="fabu" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
+	<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
 		<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 	</view>
 	<view class='content-icon hengxiang'>
@@ -71,8 +71,7 @@
 		<!-- <view class="bottom-left">
       <text style="font-size:14px;">¥</text> 0 元
     </view> -->
-		<view class="bottom-right" bindtap="lijifabu">立即发布</view>
-		
+		<view class="bottom-right {{btnFlag == true?'disabled':''}}" bindtap="lijifabu">立即发布</view>
 	</view>
 </view>
 

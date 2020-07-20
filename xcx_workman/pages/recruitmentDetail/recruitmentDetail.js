@@ -17,7 +17,8 @@ Page({
     tupianlist:[],
     id:'',
     wxUserid:'',
-    type:''
+    type:'',
+    btnFlag:false
   },
 
   onLoad: function (options) {
@@ -110,6 +111,7 @@ Page({
   // 需求报名
   baoming(){
     var that = this
+    that.setData({btnFlag:true})
     var data = {
       needId:that.data.id,
       wxUserId:app.globalData.wxid
@@ -124,6 +126,7 @@ Page({
           console.log(data)
           qingqiu.get("insertNeedSign",data,function(res){
             if(res.success == true){
+              that.setData({btnFlag:false})
               wx.showToast({
                 title: '报名成功',
                 icon:'success',
@@ -131,6 +134,7 @@ Page({
               })
               that.SelectjiedanList()
             }else{
+              that.setData({btnFlag:false})
               wx.showToast({
                 title: res.message,
                 icon:'none',
@@ -139,6 +143,7 @@ Page({
             }
           },'post')
         }else{
+          that.setData({btnFlag:false})
           return
         }
       }
@@ -147,6 +152,7 @@ Page({
   // 需求删除
   delete() {
     var that = this
+    that.setData({btnFlag:true})
     var data={
       id: that.data.zhaogong.id
     }
@@ -156,6 +162,7 @@ Page({
       success:function(res){
         if(res.confirm){
           qingqiu.get("workdelete", data, function(re) {
+            that.setData({btnFlag:false})
             if (re.success == true) {
                wx.showToast({
                  title: '删除成功',
@@ -179,33 +186,11 @@ Page({
               } 
           },'delete')
         }else{
+          that.setData({btnFlag:false})
           return
         }
       }
     })
-  },
-  // 需求完成
-  lianxita() {
-    var that = this
-    var data={
-      id: that.id,
-      needState: 1
-    }
-    qingqiu.get("needUpdateStateById", data, function(re) {
-      if (re.success == true) {
-        wx.showToast({
-          title: '需求已完成',
-          icon: 'success',
-          duration: 3000
-        })
-      } else{
-        wx.showToast({
-          title: re.message,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    },"put")
   },
   // 图片放大
   fangda:function(e){

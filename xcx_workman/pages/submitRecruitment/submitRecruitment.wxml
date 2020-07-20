@@ -30,13 +30,13 @@
 		</view>
 
 		<view class="hengxiang fabu-list1">
-			<view class="fabu" bindtap='upimg' data-number="0">
+			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0">
 			  <image src="{{picIurl}}" class="fabu-item" wx:if="{{picIurl!=''}}"></image>
 				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
 			</view>
 		</view>
 	</view>
-	<view class="bottom" bindtap="fabuzhaogong">
+	<view class="bottom {{btnFlag == true?'disabled':''}}" bindtap="fabuzhaogong">
 		发布
 	</view>
 </view>

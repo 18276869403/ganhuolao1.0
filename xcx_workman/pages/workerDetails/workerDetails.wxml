@@ -172,7 +172,7 @@
       <!-- 按钮 -->
       <view class="but hengxiang">
         <view class="but_close" bindtap="bindClose">关闭</view>
-        <view class="but_con" bindtap="bindCon">确认雇佣</view>
+        <view class="but_con {{btnFlag == true?'disabled':''}}" bindtap="bindCon">确认雇佣</view>
       </view> 
     </view>
   </view>

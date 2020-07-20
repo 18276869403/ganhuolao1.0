@@ -20,7 +20,7 @@
     
     <!-- 上传 -->
      <view class="fabu" wx-if="{{tupianlists.length<7}}">
-      <view class="fabu-item zongxiang" bindtap='upimg' data-number="0" data-type="{{num}}">
+      <view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
         <view>
           <image src="{{viewUrl}}static/image/jiahao.png" class="fabu-img"></image>
         </view>
@@ -29,7 +29,7 @@
         </view>
       </view>
     </view>
-    <view class="content-button" bindtap="lijifabu">
+    <view class="content-button {{btnFlag == true?'disabled':''}}" bindtap="lijifabu">
       立即发布
     </view>
     <!-- <view class="content-button" bindtap="fanhui" style=" margin-top: 11rpx;background: #bec2c6;">

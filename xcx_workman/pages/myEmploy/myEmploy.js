@@ -22,6 +22,7 @@ Page({
         name: '雇佣我的'
       }
     ],
+    btnFlag:false,
     price: '',
     istrue: 0,
     flag: true,
@@ -97,6 +98,9 @@ Page({
   // 删除我的雇佣
   delEmploy: function (e) {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       id: e.currentTarget.dataset.id
     }
@@ -109,8 +113,13 @@ Page({
           duration: 2000
         })
         setTimeout(function () {
+          that.setData({
+            btnFlag:false
+          })
           that.onLoad()
         }, 1000)
+      }else{
+        that.setData({btnFlag:false})
       }
     }, 'delete')
   },
@@ -200,13 +209,15 @@ Page({
   },
   // 修改雇佣
   bindCon: function () {
+    var that = this
+    that.setData({btnFlag:true})
     var data = {
-      id: this.data.xqlist.id,
-      estimatedCost: this.data.price + this.data.array[this.data.index],
-      employmentMatters: this.data.workerskill == undefined ? this.data.xqlist.employmentMatters : this.data.workerskill,
+      id: that.data.xqlist.id,
+      estimatedCost: that.data.price + that.data.array[that.data.index],
+      employmentMatters: that.data.workerskill == undefined ? that.data.xqlist.employmentMatters : that.data.workerskill,
       hiringTime: util.formatDate(new Date()),
-      predict: this.data.predict,
-      backup1: this.data.tian[this.data.day]
+      predict: that.data.predict,
+      backup1: that.data.tian[that.data.day]
     }
     console.log(data)
     qingqiu.get("userWorkUpdateById", data, function (res) {
@@ -218,9 +229,11 @@ Page({
           duration: 2000
         })
         setTimeout(function () {
+          that.setData({btnFlag:false})
           that.onLoad()
         }, 1000)
       } else {
+        that.setData({btnFlag:false})
         wx.showToast({
           title: '修改失败',
           icon: 'none',

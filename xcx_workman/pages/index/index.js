@@ -11,7 +11,7 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     showModalStatus1: true,
-    openid:'',
+    openid: '',
     sousuotext: '',
     gongren: '2',
     shangjia: '1',
@@ -35,7 +35,7 @@ Page({
     yijiAddress: '',
     isAuto: 0,
     erjiAddress: '',
-    userdata:[]
+    userdata: []
   },
   // 搜索框
   shurukuang: function (e) {
@@ -64,11 +64,11 @@ Page({
       if (res.success == true) {
         app.globalData.access_TokenOff = res.result.accessToken
         var data = {
-          access_token:res.result.accessToken,
+          access_token: res.result.accessToken,
         }
-       qingqiu.get("getPulicUserAdd",data,function(res){
-         console.log('公众号用户添加结果',res)
-       })
+        qingqiu.get("getPulicUserAdd", data, function (res) {
+          console.log('公众号用户添加结果', res)
+        })
       } else {
         wx.showToast({
           title: '令牌获取失败',
@@ -108,8 +108,8 @@ Page({
                     picUrl: userInfo.avatarUrl,
                     wxNc: userInfo.nickName,
                   }
-                  if(that.data.openid != ''){
-                    data.backup1 = that.data.openid 
+                  if (that.data.openid != '') {
+                    data.backup1 = that.data.openid
                   }
                   qingqiu.get("getKeyInfo", data, function (re) {
                     app.globalData.wxid = re.result.wxUser.id
@@ -216,7 +216,7 @@ Page({
       }
     })
   },
-  
+
   onShow: function () {
     this.getTokenValue()
     wx.showShareMenu({
@@ -289,7 +289,7 @@ Page({
   },
   onLoad: function (options) {
     // 获取二维码参数
-    if(options != undefined){
+    if (options != undefined) {
       if (options.scene != undefined) {
         var scene = decodeURIComponent(options.scene);
         if (scene != undefined) {
@@ -303,13 +303,13 @@ Page({
   },
 
   // 取消授权
-  cancelEvent:function(){
+  cancelEvent: function () {
     var that = this
     wx.showModal({
       title: '温馨提示',
-      content:'取消授权会影响部分功能的使用，您确定取消吗？',
-      success(res){
-        if(res.confirm){
+      content: '取消授权会影响部分功能的使用，您确定取消吗？',
+      success(res) {
+        if (res.confirm) {
           that.dialog.hideDialog();
         }
       }
@@ -480,16 +480,16 @@ Page({
     })
   },
 
-  // banner点击事件
-  goBaidu: function (event) {
-    var data = (event.currentTarget.dataset)
-    wx.navigateTo({
-      url: '../outurl/outurl?goBaidu=' + data.url, //
-      success: function () {}, //成功后的回调；
-      fail: function () {}, //失败后的回调；
-      complete: function () {}, //结束后的回调(成功，失败都会执行)
-    })
-  },
+  // // banner点击事件
+  // goBaidu: function (event) {
+  //   var data = (event.currentTarget.dataset)
+  //   wx.navigateTo({
+  //     url: '../outurl/outurl?goBaidu=' + data.url, //
+  //     success: function () {}, //成功后的回调；
+  //     fail: function () {}, //失败后的回调；
+  //     complete: function () {}, //结束后的回调(成功，失败都会执行)
+  //   })
+  // },
 
   // 通知
   pointList: function () {
@@ -521,62 +521,37 @@ Page({
   applyBusiness: function (e) {
     var that = this
     var obj = e.currentTarget.dataset.typeid
-    qingqiu.get("getPublicUser", null, function (re) {
-      console.log(re)
-      if (re.success == true) {
-        if (re.result != null && re.result != '') {
-          var s = ''
-          for (let obj of re.result) {
-            if (obj.unionid == app.globalData.unionid) {
-              s = 1
-            }
-          }
-          if (s != 1) {
-            wx.showToast({
-              title: '请先关注公众号！',
-              icon: 'none',
-              duration: 2000
-            })
-            wx.navigateTo({
-              url: '../thePublic/thePublic'
-            })
-            return
-          } else {
-            if (obj == 1) {
-              if (app.globalData.wxState == 0) {
-                wx.showToast({
-                  title: '您已入驻商家,同一微信不能入驻两种类型',
-                  icon: 'none',
-                  duration: 2000
-                })
-                return
-              } else {
-                wx.navigateTo({
-                  url: '../applyBusiness/applyBusiness?typeid=' + obj
-                })
-              }
-            } else if (obj == 2) {
-              if (app.globalData.wxState == 1) {
-                wx.showToast({
-                  title: '您已入驻工人,同一微信不能入驻两种类型',
-                  icon: 'none',
-                  duration: 2000
-                })
-                return
-              } else {
-                wx.navigateTo({
-                  url: '../applyBusiness/applyBusiness?typeid=' + obj
-                })
-              }
-            } else {
-              wx.navigateTo({
-                url: '../applyBusiness/applyBusiness?typeid=' + obj
-              })
-            }
-          }
-        }
+    if (obj == 1) {
+      if (app.globalData.wxState == 0) {
+        wx.showToast({
+          title: '您已入驻商家,同一微信不能入驻两种类型',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      } else {
+        wx.navigateTo({
+          url: '../applyBusiness/applyBusiness?typeid=' + obj
+        })
       }
-    })
+    } else if (obj == 2) {
+      if (app.globalData.wxState == 1) {
+        wx.showToast({
+          title: '您已入驻工人,同一微信不能入驻两种类型',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      } else {
+        wx.navigateTo({
+          url: '../applyBusiness/applyBusiness?typeid=' + obj
+        })
+      }
+    } else {
+      wx.navigateTo({
+        url: '../applyBusiness/applyBusiness?typeid=' + obj
+      })
+    }
   },
   // 商家促销
   cuxiao: function () {

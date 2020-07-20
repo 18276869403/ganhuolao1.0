@@ -563,8 +563,8 @@ page {
 }
 
 .kefu-img {
-  width: 110rpx;
-  height: 164rpx;
+  width: 165rpx;
+  height: 112rpx;
 }
 
 ::-webkit-scrollbar {

@@ -15,6 +15,7 @@ Page({
     needsTypeid: 1,
     price:'',
     istrue:0,
+    btnFlag:false,
     flag: true,
     index: 0,
     day: 0,
@@ -119,18 +120,28 @@ Page({
   // 删除我的晒晒
   deletess(e){
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       id:e.currentTarget.dataset.shaid
     }
     qingqiu.get("deletess",data,function(res){
       console.log(res)
       if(res.success == true){
+        that.setData({
+          btnFlag:true
+        })
         wx.showToast({
           title: '删除成功',
           icon:'success',
           duration:2000
         })
         that.onLoad()
+      }else{
+        that.setData({
+          btnFlag:true
+        })
       }
     },'delete')
   },

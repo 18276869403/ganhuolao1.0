@@ -372,3 +372,8 @@ page {
   margin-top: 172rpx;
   margin-bottom: 58rpx;
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

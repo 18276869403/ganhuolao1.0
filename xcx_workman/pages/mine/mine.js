@@ -276,7 +276,7 @@ Page({
   //关注公众号
   thePublic:function(){
     wx.navigateTo({
-      url: '../thePublic/thePublic',
+      url: '../activityPublic/activityPublic',
     })
   }
 })

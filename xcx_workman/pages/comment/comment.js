@@ -13,6 +13,7 @@ Page({
     needsname: '',
     needscontent: '',
     picUrl:'',
+    btnFlag:false,
     id: 0
   },
   /**
@@ -30,12 +31,18 @@ Page({
   // 发布评论
   pinglun(){
     var that=this
+    that.setData({
+      btnFlag:true
+    })
     var data={
       wxId:app.globalData.wxid,
       wxCaseId:that.data.id,
       content:that.data.needscontent
     }
     qingqiu.get("insertCaseMessage", data, function(re) {
+      that.setData({
+        btnFlag:false
+      })
       if (re.success == true) {
         wx.showToast({
           title: '提交成功！',
@@ -68,6 +75,9 @@ Page({
           }
          qingqiu.get("SendWxMsg",objdata,function(re){
            console.log(re)
+           that.setData({
+            btnFlag:false
+          })
          })
           wx.navigateBack({
             delta: 1

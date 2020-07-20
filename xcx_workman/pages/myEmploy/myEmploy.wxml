@@ -28,7 +28,7 @@
           <image src="{{viewUrl}}static/image/edit.png" class="delete-img" bindtap="bintapDetails" data-item="{{item}}"></image>
         </view>
         <view class="list-top-delete">
-          <image src="{{viewUrl}}static/image/delete.png" class="delete-img" bindtap="delEmploy" data-id="{{item.id}}"></image>
+          <image src="{{viewUrl}}static/image/delete.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="delEmploy" data-id="{{item.id}}"></image>
         </view>
       </view>
       <view class="content-list-content zongxiang">
@@ -93,7 +93,7 @@
       <!-- 按钮 -->
       <view class="but hengxiang">
         <view class="but_close" bindtap="bindClose">关闭</view>
-        <view class="but_con" bindtap="bindCon">确认雇佣</view>
+        <view class="but_con {{btnFlag == true?'disabled':''}}" bindtap="bindCon">确认雇佣</view>
       </view>
     </view>
   </view>

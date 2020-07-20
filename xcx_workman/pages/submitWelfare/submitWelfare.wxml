@@ -52,12 +52,12 @@
 				<image src="{{viewUrl}}{{item}}" class="fabu-item"></image>
 				<image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 			</view>
-			<view class="fabu" bindtap='upimg' data-number="0" wx:if="{{piclist.length<4}}">
+			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" wx:if="{{piclist.length<4}}">
 				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 			</view>
 		</view>
 	</view>
-	<view class="bottom" bindtap="fabugongyi">
+	<view class="bottom {{btnFlag == true?'disabled':''}}" bindtap="fabugongyi">
 		立即发布
 	</view>
 </view>

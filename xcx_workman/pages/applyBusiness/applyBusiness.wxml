@@ -63,13 +63,13 @@
     <view class="content-item-textarea">
       <textarea class="textarea" placeholder="输入商铺介绍" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
     </view>
-    <view class="hengxiang fabu-list1">
+    <view class="hengxiang {{btnFlag == true ? 'disabled' : ''}} fabu-list1">
       <view class="fabu" bindtap='upimg' data-number="0" data-type='5'>
         <image src="{{viewUrl}}static/image/sctouxiang.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
         <image src="{{picIurl}}" class="fabu1-img" wx:if="{{picIurl!=''}}"></image>
         <text>店铺照片</text>
       </view>
-      <view class="fabu zongxiang" bindtap='upimg' data-number="0" data-type='2'>
+      <view class="fabu {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='2'>
         <view>
           <image src="{{viewUrl}}static/image/yingyezhizhao.jpg" class="fabu-item" wx:if="{{picZz==''}}"></image>
           <image src="{{picZz}}" class="fabu1-img" wx:if="{{picZz!=''}}"></image>
@@ -151,7 +151,7 @@
         </view>
       </view> -->
       <view class="fabu1">
-        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='1'>
+        <view class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='1'>
           <view wx:if="{{picIurl==''||picIurl==null}}">
             <image src="{{viewUrl}}static/image/sctouxiang.png" class="fabu-item1"></image>
           </view>
@@ -161,7 +161,7 @@
         </view>
       </view>
       <view class="fabu1">
-        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='3'>
+        <view class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='3'>
           <view wx:if="{{picPerson1==''||picPerson1==null}}">
             <image src="{{viewUrl}}static/image/zhengmian.png" class="fabu-item1"></image>
           </view>
@@ -173,7 +173,7 @@
       <view class="fabu2"><view class="fabu-item2">工作照</view></view>
       <view class="fabu2"><view class="fabu-item2">身份证正面照</view></view>
       <view class="fabu1">
-        <view class="fabu-item1 zongxiang" bindtap='upimg' data-number="0" data-type='4'>
+        <view class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='4'>
           <view wx:if="{{picPerson2==''||picPerson2==null}}">
             <image src="{{viewUrl}}static/image/fanmian.png" class="fabu-item1"></image>
           </view>
@@ -191,7 +191,7 @@
     <view class='icon-leftText' bindtap='showModal1'>提交前请仔细阅读</view>
     <view class='icon-righText' bindtap='showModal1'> 《干活佬使用协议》 </view>
   </view>
-  <view class="bottom" bindtap="tijiaoshenqing">
+  <view class="bottom {{btnFlag == true ? 'disabled' : ''}}" bindtap="tijiaoshenqing">
     提交申请
   </view>
 </view>

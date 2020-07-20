@@ -307,7 +307,8 @@
 
 	<view class="bottom">
 		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
-			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+			<!-- <image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image> -->
+			<image src="../image/kefu.png" class="kefu-img"></image>
 		</button>
 	</view>
 </view>

@@ -30,6 +30,7 @@ Page({
     linkman: '',
     phone: '',
     show: false,
+    btnFlag:false,
     needsTypeList: [{
         id: 0,
         name: '普通'
@@ -308,6 +309,7 @@ Page({
   // 发布需求
   lijifabu() {
     var that = this
+    that.setData({btnFlag:true})
     for (let obj of that.data.tupianlists) {
       that.data.picIurl1 += obj + ","
     }
@@ -319,6 +321,7 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({btnFlag:false})
       return
     }
     var shuzi = util.numberReg(that.data.phone)
@@ -328,6 +331,7 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({btnFlag:false})
       return
     }
     if (that.data.select == "circle") {
@@ -336,6 +340,7 @@ Page({
         icon: 'none',
         duration: 2000
       })
+      that.setData({btnFlag:false})
       return
     }
     if (that.data.type == 1) {
@@ -356,6 +361,7 @@ Page({
       console.log(data)
       qingqiu.get("needUpdateStateById", data, function (re) {
         if (re.success == true) {
+          that.setData({btnFlag:false})
           wx.showToast({
             title: '修改成功',
             icon: 'success',
@@ -370,6 +376,7 @@ Page({
             })
           }, 1000)
         } else {
+          that.setData({btnFlag:false})
           wx.showToast({
             title: re.message,
             icon: 'none',
@@ -397,6 +404,7 @@ Page({
       qingqiu.get("insertYneed", data, function (re) {
         console.log(re)
         if (re.success == true) {
+          that.setData({btnFlag:false})
           wx.showToast({
             title: '发布成功',
             icon: 'none',
@@ -430,6 +438,7 @@ Page({
             })
           }, 1000)
         } else {
+          that.setData({btnFlag:false})
           wx.showToast({
             title: re.message,
             icon: 'none',
@@ -978,6 +987,7 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    that.setData({btnFlag:true})
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -999,6 +1009,7 @@ Page({
           success: function (res) {
             console.log(res)
             if (res.data =="false") {
+              that.setData({btnFlag:false})
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
@@ -1016,6 +1027,7 @@ Page({
                 },
                 name: 'file',
                 success(res) {
+                  that.setData({btnFlag:false})
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = api.viewUrl + jj.message

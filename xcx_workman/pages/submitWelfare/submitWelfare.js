@@ -26,6 +26,7 @@ Page({
     picIurl1:'',
     picIurl:'',
     piclist:[],
+    btnFlag:false,
     workcityname:'',
     workareaname:''
   },
@@ -45,11 +46,17 @@ Page({
   // 发布活动
   fabugongyi(){
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     if(that.data.activitynameinput==''){
       wx.showToast({
         title: '请输入活动名称',
         icon: 'none',
         duration: 3000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -57,6 +64,9 @@ Page({
       wx.showToast({
         title: '活动标题不能超过15个字',
         icon:'none'
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -66,6 +76,9 @@ Page({
         icon: 'none',
         duration: 3000
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     if(that.data.activityrenshu==''){
@@ -73,6 +86,9 @@ Page({
         title: '请输入招募人数',
         icon: 'none',
         duration: 3000
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -82,6 +98,9 @@ Page({
         icon: 'none',
         duration: 3000
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     if(that.data.enddate=='选择截止时间'){
@@ -90,12 +109,18 @@ Page({
         icon: 'none',
         duration: 3000
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     if(utils.checkDate(that.data.enddate,that.data.startdate) < 1){
       wx.showToast({
         title: '报名时间不能大于活动截止时间哦',
         icon:'none'
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -123,10 +148,12 @@ Page({
       endTime:that.data.enddate + " 00:00:00",
       pic:pic,
     }
-    
     console.log(data)
     qingqiu.get("addActivity", data, function (re) {
       console.log(re)
+      that.setData({
+        btnFlag:false
+      })
       if (re.success == true) {
         wx.showToast({
           title: '发布成功',
@@ -274,6 +301,9 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -295,6 +325,9 @@ Page({
           success: function (res) {
             console.log(res)
             if (res.data =="false") {
+              that.setData({
+                btnFlag:false
+              })
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
@@ -312,6 +345,9 @@ Page({
                 },
                 name: 'file',
                 success(res) {
+                  that.setData({
+                    btnFlag:false
+                  })
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = that.data.viewUrl + jj.message

@@ -318,3 +318,8 @@
   width: 44rpx;
   height: 44rpx;
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

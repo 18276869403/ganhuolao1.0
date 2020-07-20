@@ -166,7 +166,11 @@ Page({
                 re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
               }
               if (re.result.records[i].backup3 == null) {
-                re.result.records[i].backup3 = 0
+                re.result.records[i].backup5 = 0
+              }else if(re.result.records[i].backup3.length > 4){
+                re.result.records[i].backup5 = re.result.records[i].backup3.substr(0,4) + ".."
+              }else{
+                re.result.records[i].backup5 = re.result.records[i].backup3 + "元"
               }
               that.data.workList.push(re.result.records[i])
             }

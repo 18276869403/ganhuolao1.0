@@ -52,7 +52,7 @@
 		</view>
 		<!-- 按钮 -->
 		<view class="content-sign hengxiang">
-			<view class="sign-view" wx:if="{{wxUserId==gongyilist.wxId}}" bindtap="deleteActive">
+			<view class="sign-view {{btnFlag == true?'disabled':''}}" wx:if="{{wxUserId==gongyilist.wxId}}" bindtap="deleteActive">
 				<image src="{{viewUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view" wx:if="{{wxUserId!=gongyilist.wxId}}" bindtap="woyaobaoming">
@@ -109,7 +109,7 @@
 					</view>
 				</view>
 				<view class='toast-button'>
-					<view class='button1'>
+					<view class='button1 {{btnFlag == true?"disabled":""}}'>
 						<view catchtap='AddnameActive'>
 							<image src="{{viewUrl}}static/image/querenbaoming.png" class="button-img"></image>
 						</view>

@@ -453,3 +453,8 @@ page {
   font-weight:500;
   color:rgba(255,255,255,1);
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

@@ -43,3 +43,8 @@
   text-align: center;
   line-height: 98rpx;
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

@@ -79,7 +79,7 @@
 					</view>
 				</view>
 				<view class='toast-button'>
-					<view class='button1'>
+					<view class='button1 {{btnFlag == true ? "disabled":""}}'>
 						<view catchtap='confirmAcceptance'>
 							<image src="{{viewUrl}}static/image/querenbaoming.png" class="button-img"></image>
 						</view>

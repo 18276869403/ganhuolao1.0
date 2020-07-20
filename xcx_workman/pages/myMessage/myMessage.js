@@ -11,6 +11,7 @@ Page({
   data: {
     viewUrl:api.viewUrl,
     needsTypeid: 1,
+    btnFlag:false,
     needsTypeList: [{
         id: 1,
         name: '我发起的留言'
@@ -176,6 +177,9 @@ liuyan:function(e){
 // 删除我的留言
 deletemyLY: function(e) {
   var that=this
+  that.setData({
+    btnFlag:true
+  })
   var lyid=e.currentTarget.dataset.lyid
   var data={
     fromWxId:lyid.userId,
@@ -188,8 +192,14 @@ deletemyLY: function(e) {
         icon:'none',
         duration:2000
       })
+      that.setData({
+        btnFlag:false
+      })
       that.onLoad()
     }else{
+      that.setData({
+        btnFlag:false
+      })
       wx.showToast({
         title: '删除失败！',
         icon:'none',

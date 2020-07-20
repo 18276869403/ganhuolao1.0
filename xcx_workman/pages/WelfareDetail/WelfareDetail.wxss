@@ -626,3 +626,8 @@ text-align: left
   font-size: 26rpx;
   text-align: right;
 }
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+  }

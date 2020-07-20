@@ -16,6 +16,7 @@ Page({
     signPhone: '', //报名电话
     pageNo: 1,
     wxUserId: '',
+    btnFlag:false,
     isLastPage: false
   },
 
@@ -69,8 +70,12 @@ Page({
       isShowConfirm: false,
     })
   },
+  // 提交报名
   confirmAcceptance: function () {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     var data = {
       signName: that.data.signName,
       signPhone: that.data.signPhone,
@@ -82,12 +87,18 @@ Page({
         title: '请输入姓名',
         icon: 'none'
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     if (data.signPhone == "" || data.signPhone == undefined) {
       wx.showToast({
         title: '请输入联系电话',
         icon: 'none'
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
@@ -96,11 +107,17 @@ Page({
         title: '请输入11位数的联系电话',
         icon: 'none'
       })
+      that.setData({
+        btnFlag:false
+      })
       return
     }
     console.log(data)
     qingqiu.get("insertActivitySign", data, function (res) {
       console.log(res)
+      that.setData({
+        btnFlag:false
+      })
       if (res.success == true) {
         wx.showToast({
           title: '报名成功',
