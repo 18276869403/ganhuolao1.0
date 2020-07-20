@@ -30,7 +30,7 @@ page {
   position: relative;
   width: 44rpx;
   height: 44rpx;
-  left: 225rpx;
+  left: 222rpx;
   top:-234rpx;
 }
 
