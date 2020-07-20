@@ -3,11 +3,11 @@
   <view class="hengxian"></view>
   <view class="content zongxiang">
     <view class="content-item hengxiang">
-      <view class="content-title">商品名字</view>
+      <view class="content-title">商品名字<text style="color:red">*</text></view>
       <input type="text" placeholder="输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.goodName}}' name="goodsname" bindinput='goodsnameinput'>{{spxglist.goodName}}</input>
     </view>
     <view class="content-item hengxiang">
-      <view class="content-title">商品原价</view>
+      <view class="content-title">商品原价<text style="color:red">*</text></view>
       <input type="digit" placeholder="输入商品原价" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.oldPrice}}' name="originalPrice" bindinput='originalPriceinput'>{{spxglist.oldPrice}}</input>
     </view>
 
