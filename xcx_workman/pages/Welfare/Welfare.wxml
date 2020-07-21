@@ -58,6 +58,12 @@
 		</view>
 
 	</view>
+	<view class="bottom zongxiang">
+		<image src="{{viewUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
+			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+		</button>
+	</view>
 </view>
 
 
@@ -75,7 +81,7 @@
 				<view class='toast-main'>
 					<view class='toast-input hengxiang'>
 						<view class="key-class">电话</view>
-						<view class="value-class"><input type='text' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}' class="input-class"></input></view>
+						<view class="value-class"><input type='number' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}' class="input-class"></input></view>
 					</view>
 				</view>
 				<view class='toast-button'>

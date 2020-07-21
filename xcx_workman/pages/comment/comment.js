@@ -11,7 +11,7 @@ Page({
   data: {
     viewUrl:api.viewUrl,
     needsname: '',
-    needscontent: '',
+    comment: '',
     picUrl:'',
     btnFlag:false,
     id: 0
@@ -34,10 +34,17 @@ Page({
     that.setData({
       btnFlag:true
     })
+    if(that.data.comment == ""){
+      wx.showToast({
+        title: '输入评论信息',
+        icon:'none'
+      })
+      return
+    }
     var data={
       wxId:app.globalData.wxid,
       wxCaseId:that.data.id,
-      content:that.data.needscontent
+      content:that.data.comment
     }
     qingqiu.get("insertCaseMessage", data, function(re) {
       that.setData({
@@ -98,7 +105,7 @@ Page({
   //获取输入的评论内容
   commentinput: function (e) {
     this.setData({
-      needscontent: e.detail.value
+      comment: e.detail.value
     })
   },
   commentinput:function(e){
@@ -111,7 +118,7 @@ Page({
     }, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          comment: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -125,7 +132,7 @@ Page({
           icon: 'none'
         })
         that.setData({
-          needscontent: ''
+          comment: ''
         })
         return
       }

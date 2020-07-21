@@ -105,7 +105,7 @@
 				<view class='toast-main'>
 					<view class='toast-input hengxiang'>
 						<view class="key-class">电话</view>
-						<view class="value-class"><input type='text' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}'></input></view>
+						<view class="value-class"><input type='number' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}'></input></view>
 					</view>
 				</view>
 				<view class='toast-button'>

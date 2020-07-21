@@ -960,7 +960,7 @@ Page({
         console.log(re)
         if (re.success == true) {
           wx.showToast({
-            title: '申请成功,等待后台审核...',
+            title: '入驻成功',
             icon: 'success',
             duration: 3000
           })

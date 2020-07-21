@@ -8,8 +8,10 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    current:0,
     spxqlist:[],
     tupian:[],
+    imgheights:[],
     tupian2:[]
   },
 
@@ -22,6 +24,7 @@ Page({
     })
     // this.spxiangqinglist()
     var splist = JSON.parse(options.obj)
+    console.log(splist)
     for(var i=0;i<splist.goodPic1.length;i++){
       this.data.tupian.push(api.viewUrl+splist.goodPic1[i])
     }
@@ -32,6 +35,29 @@ Page({
       splist: splist
     })
   },
+
+  imageLoad:function(e){
+    //获取图片真实宽度
+    var imgwidth = e.detail.width,
+      imgheight = e.detail.height,
+      //宽高比
+      ratio = imgwidth / imgheight;
+    //计算的高度值
+    var viewHeight = 750 / ratio;
+    var imgheight = viewHeight
+    var imgheights = this.data.imgheights
+    //把每一张图片的高度记录到数组里
+    imgheights[e.target.dataset['index']] = imgheight;// 改了这里 赋值给当前 index
+    this.setData({
+      imgheights: imgheights,
+    })
+  },
+  bindchange: function (e) {
+    this.setData({
+      current: e.detail.current
+    })
+  },
+
   tupian:function(e){
     var current = api.viewUrl+e.currentTarget.dataset.src
     wx.previewImage({

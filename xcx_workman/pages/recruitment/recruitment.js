@@ -78,17 +78,13 @@ Page({
     })
   },
 
+  onShow:function(){
+    this.onLoad()
+  },
   onLoad:function() {
     if (app.globalData.needRefresh != undefined) {
       if (app.globalData.needRefresh != 0) {
         this.chushishouquan()
-        // if(app.globalData.xuqiuid == 0){
-        //   this.data.mid=app.globalData.wxid
-        // }else{
-        //   this.data.mid=''
-        // }
-        // this.oneClass()
-        // this.twoClass()
         this.QueryoneArea()
         this.QuerytwoArea()
         if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
@@ -101,13 +97,17 @@ Page({
         }
       } 
     }else {
+      this.chushishouquan()
       this.setData({
         cityId: this.data.id,
         cityname1: this.data.name,
         workList: [],
         weizhi: '全部',
-        areaId: 0
+        areaId: 0,
+        pageNo: 1
       })
+      this.QueryoneArea()
+      this.QuerytwoArea()
       this.FindWorklist()
     }
     wx.showShareMenu({

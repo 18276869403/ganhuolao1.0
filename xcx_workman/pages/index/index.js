@@ -338,7 +338,8 @@ Page({
         data.twoAreaId = app.globalData.twoCity.id
       }
     }
-    qingqiu.get("wxUserPage", data, function (re) {
+    qingqiu.get("wxIndexUserPage", data, function (re) {
+      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           for (let obj of re.result.records) {
@@ -375,10 +376,15 @@ Page({
                 twoname[0] = obj.twoClassName
               }
             }
-            obj.oneClassName = onename[0] + ' | ' + twoname[0]
-            if (onename.length > 1) {
-              obj.twoClassName = onename[1] + ' | ' + twoname[1]
-            } else {
+            if (onename[0] != undefined) {
+              obj.oneClassName = onename[0] + ' | ' + twoname[0]
+              if (onename.length > 1) {
+                obj.twoClassName = onename[1] + ' | ' + twoname[1]
+              } else {
+                obj.twoClassName = ''
+              }
+            }else{
+              obj.oneClassName = ''
               obj.twoClassName = ''
             }
           }
@@ -397,7 +403,8 @@ Page({
         data.twoAreaId = app.globalData.twoCity.id
       }
     }
-    qingqiu.get("wxUserPage", data, function (re) {
+    qingqiu.get("wxIndexUserPage", data, function (re) {
+      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           for (let obj of re.result.records) {
@@ -419,10 +426,15 @@ Page({
                 twoname[0] = obj.twoClassName
               }
             }
-            obj.oneClassName = onename[0] + ' | ' + twoname[0]
-            if (onename.length > 1) {
-              obj.twoClassName = onename[1] + ' | ' + twoname[1]
-            } else {
+            if (onename != undefined) {
+              obj.oneClassName = onename[0] + ' | ' + twoname[0]
+              if (onename.length > 1) {
+                obj.twoClassName = onename[1] + ' | ' + twoname[1]
+              } else {
+                obj.twoClassName = ''
+              }
+            }else{
+              obj.oneClassName = ''
               obj.twoClassName = ''
             }
           }
@@ -636,7 +648,8 @@ Page({
         data.twoAreaId = app.globalData.twoCity.id
       }
     }
-    qingqiu.get("tjsp", data, function (re) {
+    qingqiu.get("wxUserGoodPage", data, function (re) {
+      console.log('推荐商品', re)
       if (re.success == true) {
         if (re.result.records != null) {
           that.goodsList = re.result.records
@@ -644,6 +657,9 @@ Page({
             if (obj.shopName == null) {
               obj.userId = 0
               obj.shopName = '敬请期待'
+            }
+            if (obj.newPrice == '' || obj.newPrice == null || obj.newPrice == "null") {
+              obj.newPrice = "面议"
             }
             obj.goodPic1 = obj.goodPic1.split(',')
             obj.goodPic2 = obj.goodPic2.split(',')

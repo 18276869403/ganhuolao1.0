@@ -284,4 +284,24 @@ Page({
       url: '../submitWelfare/submitWelfare',
     })
   },
+  // 置顶
+  goTop: function (e) {
+    if (wx.pageScrollTo) {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 300
+      })
+    } else {
+      wx.showModal({
+        title: '提示',
+        cancelColor: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重新',
+      })
+    }
+  },
+  // 客服
+  handleContact(e) {
+    console.log(e)
+    console.log(e.detail.path)
+    console.log(e.detail.query)
+  },
 })
