@@ -9,8 +9,8 @@ const baiduAK = 'CauqHCxjKu4NcebB4UjlUYTbGqtRpEN5'
 
 // url
 // const viewUrl = 'http://www.it-ys.com:91/work-boot/sys/common/view/'
-const viewUrl = imgurl
-// const viewUrl = imgurl+ 'sys/common/view/'
+// const viewUrl = imgurl
+const viewUrl = imgurl+ 'sys/common/view/'
 const Download = imgurl + 'sys/common/download' 
 const Uploadurl2 = imgurl + 'sys/common/upload2' 
 const Uploadurl = imgurl + 'sys/common/upload' // 文件上传
