@@ -1115,7 +1115,7 @@ Page({
 		}, function (res) {
 			if (res == 1) {
 				that.setData({
-					needscontent: ''
+					textMsg: ''
 				})
 				wx.showToast({
 					title: '内容包含敏感词，请重新输入...',
@@ -1132,7 +1132,7 @@ Page({
 					icon: 'none'
 				})
 				that.setData({
-					needscontent: ''
+					textMsg: ''
 				})
 				that.setData({
 					btnFlag: false

@@ -107,7 +107,7 @@ Page({
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          needsname: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -121,7 +121,7 @@ Page({
           icon:'none'
         })
         that.setData({
-          needscontent: ''
+          needsname: ''
         })
         return
       }
@@ -183,7 +183,7 @@ Page({
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          linkman: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -197,7 +197,7 @@ Page({
           icon:'none'
         })
         that.setData({
-          needscontent: ''
+          linkman: ''
         })
         return
       }

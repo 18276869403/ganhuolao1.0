@@ -171,7 +171,7 @@ Page({
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
         that.setData({
-          signName: ''
+          workerskill: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -185,7 +185,7 @@ Page({
           icon:'none'
         })
         that.setData({
-          signName: ''
+          workerskill: ''
         })
         return
       }

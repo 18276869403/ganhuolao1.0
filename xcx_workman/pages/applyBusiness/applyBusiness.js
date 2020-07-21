@@ -457,7 +457,7 @@ Page({
     }, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          needsname: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -471,7 +471,7 @@ Page({
           icon: 'none'
         })
         that.setData({
-          needscontent: ''
+          needsname: ''
         })
         return
       }
@@ -531,7 +531,7 @@ Page({
     }, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          linkman: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -545,7 +545,7 @@ Page({
           icon: 'none'
         })
         that.setData({
-          needscontent: ''
+          linkman: ''
         })
         return
       }
@@ -588,7 +588,7 @@ Page({
     }, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          workername: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -602,7 +602,7 @@ Page({
           icon: 'none'
         })
         that.setData({
-          needscontent: ''
+          workername: ''
         })
         return
       }
@@ -637,7 +637,7 @@ Page({
     }, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          workeraddress: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -651,7 +651,7 @@ Page({
           icon: 'none'
         })
         that.setData({
-          needscontent: ''
+          workeraddress: ''
         })
         return
       }
@@ -680,7 +680,7 @@ Page({
     }, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          workerskill: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -694,7 +694,7 @@ Page({
           icon: 'none'
         })
         that.setData({
-          needscontent: ''
+          workerskill: ''
         })
         return
       }

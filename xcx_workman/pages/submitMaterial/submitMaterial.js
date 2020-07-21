@@ -187,91 +187,6 @@ Page({
       this.QuerytwoArea()
     }
   },
-  // 过滤
-  needsnameblur: function (e) {
-    if(e.detail.value == ''){
-      return;
-    }
-    var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
-      if (res == 1) {
-        that.setData({
-          needscontent: ''
-        })
-        wx.showToast({
-          title: '内容包含敏感词，请重新输入...',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }else if(res == 2){
-        wx.showToast({
-          title: '校验失败',
-          icon:'none'
-        })
-        that.setData({
-          needscontent: ''
-        })
-        return
-      }
-    }, 'POST')
-  },
-  needscontentblur: function (e) {
-    if(e.detail.value == ''){
-      return
-    }
-    var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
-      if (res == 1) {
-        that.setData({
-          needscontent: ''
-        })
-        wx.showToast({
-          title: '内容包含敏感词，请重新输入...',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }else if(res == 2){
-        wx.showToast({
-          title: '校验失败',
-          icon:'none'
-        })
-        that.setData({
-          needscontent: ''
-        })
-        return
-      }
-    }, 'POST')
-  },
-  linkmanblur: function (e) {
-    if(e.detail.value == ''){
-      return
-    }
-    var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
-      if (res == 1) {
-        that.setData({
-          needscontent: ''
-        })
-        wx.showToast({
-          title: '内容包含敏感词，请重新输入...',
-          icon: 'none',
-          duration: 2000
-        })
-        return
-      }else if(res == 2){
-        wx.showToast({
-          title: '校验失败',
-          icon:'none'
-        })
-        that.setData({
-          needscontent: ''
-        })
-        return
-      }
-    }, 'POST')
-  },
 
   // 获取需求
   needSignPage() {
@@ -647,6 +562,94 @@ Page({
       youhuijia: e.detail.value
     })
   },
+
+  // 过滤
+  needsnameblur: function (e) {
+    if(e.detail.value == ''){
+      return;
+    }
+    var that = this
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
+        that.setData({
+          needsname: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needsname: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
+  needscontentblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
+    var that = this
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
+        that.setData({
+          needscontent: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          needscontent: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
+  linkmanblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
+    var that = this
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
+        that.setData({
+          linkman: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          linkman: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
+
+
   changeType: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id

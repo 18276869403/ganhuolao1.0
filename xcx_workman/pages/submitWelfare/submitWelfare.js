@@ -17,7 +17,6 @@ Page({
     newDate:'',
     // 添加参数
     activityname:'',
-    activitynameinput:'',
     activityCompany:'',
     activityrenshu:'',
     activitycontent:'',
@@ -49,7 +48,7 @@ Page({
     that.setData({
       btnFlag:true
     })
-    if(that.data.activitynameinput==''){
+    if(that.data.activityname==''){
       wx.showToast({
         title: '请输入活动名称',
         icon: 'none',
@@ -60,7 +59,7 @@ Page({
       })
       return
     }
-    if(that.data.activitynameinput.length > 15){
+    if(that.data.activityname.length > 15){
       wx.showToast({
         title: '活动标题不能超过15个字',
         icon:'none'
@@ -140,7 +139,7 @@ Page({
     }
     var data = {
       wxUserId: app.globalData.wxid,
-      title:that.data.activitynameinput,
+      title:that.data.activityname,
       company:that.data.activityCompany,
       activityNum:that.data.activityrenshu,
       content:that.data.activitycontent,
@@ -176,7 +175,7 @@ Page({
   activitynameinput: function (e) {
     console.log(e.detail.value)
     this.setData({
-      activitynameinput: e.detail.value
+      activityname: e.detail.value
     })
   },
   // 活动名称失去焦点
@@ -195,7 +194,7 @@ Page({
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          activityname: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -209,7 +208,7 @@ Page({
           icon:'none'
         })
         that.setData({
-          needscontent: ''
+          activityname: ''
         })
         return
       }
@@ -230,7 +229,7 @@ Page({
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          activityCompany: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -244,7 +243,7 @@ Page({
           icon:'none'
         })
         that.setData({
-          needscontent: ''
+          activityCompany: ''
         })
         return
       }
@@ -271,7 +270,7 @@ Page({
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
         that.setData({
-          needscontent: ''
+          activitycontent: ''
         })
         wx.showToast({
           title: '内容包含敏感词，请重新输入...',
@@ -285,7 +284,7 @@ Page({
           icon:'none'
         })
         that.setData({
-          needscontent: ''
+          activitycontent: ''
         })
         return
       }
