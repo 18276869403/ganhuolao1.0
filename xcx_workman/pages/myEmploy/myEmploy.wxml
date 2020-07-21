@@ -60,7 +60,7 @@
     <view class="boxinfo">
       <view class="fymate hengxiang">
         <view class="fy_name">费用预计</view>
-        <input class="fy_inp" bindchange="bindPrice" placeholder="" type="number" value="{{xqlist.estimatedCost}}">
+        <input class="fy_inp" bindchange="bindPrice" placeholder="" type="number" value="{{price}}">
         </input>
         <view class="fy_drop">
           <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
@@ -74,11 +74,11 @@
         </view>
       </view>
       <view class="gy">
-        <textarea class="gy_inp" placeholder="请输入雇佣事项" maxlength="-1" type="text"  bindinput='guyongshiinput' value="{{xqlist.employmentMatters}}"></textarea>
+        <textarea class="gy_inp" placeholder="请输入雇佣事项" maxlength="-1" type="text"  bindinput='guyongshiinput' bindblur="guyongshiblur" value="{{workerskill}}"></textarea>
       </view>
       <view class="yj hengxiang">
         <view class="fy_name">预计工期</view>
-        <input class="fy_inp" type="number" bindchange="bindDate" value="{{xqlist.predict}}"></input>
+        <input class="fy_inp" type="number" bindchange="bindDate" value="{{predict}}"></input>
         <view class="fy_drop">
           <picker bindchange="bindPickerDay" value="{{day}}" range="{{tian}}">
             <view class="time hengxiang">

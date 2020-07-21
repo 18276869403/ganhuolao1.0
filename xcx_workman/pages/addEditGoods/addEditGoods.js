@@ -26,7 +26,7 @@ Page({
     spxglist: [],
     yhid: '',
     spid: '',
-    btnFlag:false,
+    btnFlag: false,
     picIurl: '',
     picIurl1: '',
     picIurltwo: '',
@@ -72,7 +72,7 @@ Page({
   xugaispxx() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     that.imglunbo = that.data.picIurl1 + ',' + that.data.picIurltwo1
     that.imgDetail = that.data.picDetail1 + ',' + that.data.picDetailtwo1
@@ -88,7 +88,7 @@ Page({
     }
     qingqiu.get("editUserGood", data, function (re) {
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       if (re.success == true) {
         wx.showToast({
@@ -107,32 +107,32 @@ Page({
   lijifabu() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     that.imglunbo = that.data.picIurl1 + ',' + that.data.picIurltwo1
     that.imgDetail = that.data.picDetail1 + ',' + that.data.picDetailtwo1
-    if(that.data.goodsname == ""){
+    if (that.data.goodsname == "") {
       wx.showToast({
         title: '商品名字不能为空',
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.originalPrice == ""){
+    if (that.data.originalPrice == "") {
       wx.showToast({
         title: '商品原价不能为空',
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
     var data = {
-      userId: app.globalData.wxid, 
+      userId: app.globalData.wxid,
       goodName: that.data.goodsname,
       oldPrice: that.data.originalPrice,
       newPrice: that.data.salesPrice,
@@ -142,7 +142,7 @@ Page({
     }
     qingqiu.get("addUserGood", data, function (re) {
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       if (re.success == true) {
         wx.showToast({
@@ -168,6 +168,36 @@ Page({
       goodsname: e.detail.value
     })
   },
+  // 敏感词过滤
+  goodsnameblur: function (e) {
+    var that = this
+    if(e.detail.value == ''){
+      return
+    }
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
+      if (res == 1) {
+        that.setData({
+          goodsname: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+        })
+        return
+      } else if (res == 2) {
+        wx.showToast({
+          title: '校验失败',
+          icon: 'none'
+        })
+        that.setData({
+          goodsname: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
   //获取输入的原价
   originalPriceinput: function (e) {
     this.setData({
@@ -186,13 +216,44 @@ Page({
       detailscontent: e.detail.value
     })
   },
+  //敏感词
+  detailscontentblur: function (e) {
+    var that = this
+    if(e.detail.value == ''){
+      return
+    }
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
+      if (res == 1) {
+        that.setData({
+          detailscontent: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+        })
+        return
+      } else if (res == 2) {
+        wx.showToast({
+          title: '校验失败',
+          icon: 'none'
+        })
+        that.setData({
+          detailscontent: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
+
   // 图片上传（对接完成）
   upimg: function (e) {
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     wx.chooseImage({
       count: 1,
@@ -214,13 +275,13 @@ Page({
           },
           success: function (res) {
             console.log(res)
-            if (res.data =="false") {
+            if (res.data == "false") {
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
               })
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               return
             } else {
@@ -236,7 +297,7 @@ Page({
                 name: 'file',
                 success(re) {
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                   var r = re.data
                   var jj = JSON.parse(r);
@@ -264,7 +325,7 @@ Page({
                     })
                   }
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                 }
               })
@@ -274,7 +335,7 @@ Page({
       },
     })
     that.setData({
-      btnFlag:false
+      btnFlag: false
     })
   },
   // 删除图片

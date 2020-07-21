@@ -153,7 +153,7 @@
         </view>
       </view>
       <view class="gy">
-        <textarea class="gy_inp" placeholder="输入雇佣事项" maxlength="-1" type="text"  bindinput='guyongshiinput'></textarea>
+        <textarea class="gy_inp" placeholder="输入雇佣事项" maxlength="-1" type="text"  bindinput='guyongshiinput' bindblur="guyongshiblur"></textarea>
       </view>
       <view class="yj hengxiang">
         <view class="fy_name">预计工期</view>

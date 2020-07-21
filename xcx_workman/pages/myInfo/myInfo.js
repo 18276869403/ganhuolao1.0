@@ -148,6 +148,38 @@ Page({
       [name]: e.detail.value
     })
   },
+
+  nameblur:function(e){
+    var that = this
+    if(e.detail.value == ''){
+      return
+    }
+    var name = "wxUser.name"
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
+      if (res == 1) {
+        that.setData({
+          [name]: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+        })
+        return
+      } else if (res == 2) {
+        wx.showToast({
+          title: '校验失败',
+          icon: 'none'
+        })
+        that.setData({
+          [name]: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
+
   //获取输入的手机号
   phoneinput: function (e) {
     var phone = "wxUser.phone"

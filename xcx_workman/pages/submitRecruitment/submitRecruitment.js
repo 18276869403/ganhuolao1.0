@@ -100,6 +100,9 @@ Page({
     })
   },
   needsnameblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
@@ -137,6 +140,9 @@ Page({
     })
   },
   needscontentblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
@@ -170,6 +176,9 @@ Page({
   },
   //商家联系人敏感词
   linkmanblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {

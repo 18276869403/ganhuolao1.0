@@ -13,6 +13,7 @@ Page({
     xqlist: {},
     id: '',
     needsTypeid: 1,
+    workerskill:'',
     needsTypeList: [{
         id: 1,
         name: '我的雇佣'
@@ -201,10 +202,12 @@ Page({
     // console.log(1)
     var xqlist = e.currentTarget.dataset.item
     xqlist.estimatedCost = xqlist.estimatedCost.replace('天/元', '')
-    console.log(xqlist)
     this.setData({
       flag: false,
-      xqlist: xqlist
+      xqlist: xqlist,
+      price:xqlist.estimatedCost,
+      predict:xqlist.predict,
+      workerskill:xqlist.employmentMatters
     })
   },
   // 修改雇佣
@@ -214,7 +217,7 @@ Page({
     var data = {
       id: that.data.xqlist.id,
       estimatedCost: that.data.price + that.data.array[that.data.index],
-      employmentMatters: that.data.workerskill == undefined ? that.data.xqlist.employmentMatters : that.data.workerskill,
+      employmentMatters: that.data.workerskill,
       hiringTime: util.formatDate(new Date()),
       predict: that.data.predict,
       backup1: that.data.tian[that.data.day]
@@ -245,6 +248,8 @@ Page({
       flag: true
     })
   },
+
+  
   bindClose: function () {
     this.setData({
       flag: true
@@ -255,5 +260,35 @@ Page({
     this.setData({
       workerskill: e.detail.value
     })
+  },
+  // 敏感词
+  guyongshiblur:function(e){
+    var that = this
+    if(e.detail.value == ''){
+      return
+    }
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
+      if (res == 1) {
+        that.setData({
+          workerskill: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+        })
+        return
+      } else if (res == 2) {
+        wx.showToast({
+          title: '校验失败',
+          icon: 'none'
+        })
+        that.setData({
+          workerskill: ''
+        })
+        return
+      }
+    }, 'POST')
   },
 })

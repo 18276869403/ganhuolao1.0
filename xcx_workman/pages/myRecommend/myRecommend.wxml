@@ -15,7 +15,7 @@
         </view> 
       </view>
       <view class="content-list-right ">
-        +{{item.backup2}}
+        +{{item.backup1}}
         <text class="jifen">积分</text>
       </view>
     </view>

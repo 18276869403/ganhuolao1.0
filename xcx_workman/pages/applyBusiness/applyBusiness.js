@@ -449,6 +449,9 @@ Page({
   },
   needsnameblur: function (e) {
     var that = this
+    if(e.detail.value == ''){
+      return
+    }
     qingqiu.get("checkWords", {
       content: e.detail.value
     }, function (res) {
@@ -481,6 +484,9 @@ Page({
     })
   },
   needscontentblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords", {
       content: e.detail.value
@@ -516,6 +522,9 @@ Page({
   },
   //商家联系人敏感词
   linkmanblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords", {
       content: e.detail.value
@@ -570,6 +579,9 @@ Page({
   },
   //工人名称敏感词
   workernameblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords", {
       content: e.detail.value
@@ -616,6 +628,9 @@ Page({
   },
   //工人详细地址敏感词
   workeraddressblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords", {
       content: e.detail.value
@@ -656,6 +671,9 @@ Page({
   },
   // 工人技能介绍敏感词
   workerskillblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords", {
       content: e.detail.value

@@ -4,7 +4,7 @@
   <view class="content zongxiang">
     <view class="content-item hengxiang">
       <view class="content-title">商品名字<text style="color:red">*</text></view>
-      <input type="text" placeholder="输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.goodName}}' name="goodsname" bindinput='goodsnameinput'>{{spxglist.goodName}}</input>
+      <input type="text" placeholder="输入商品名字" class="shurukuang" placeholder-class="placeholder" value='{{spxglist.goodName}}' name="goodsname" bindinput='goodsnameinput' bindblur="goodsnameblur">{{spxglist.goodName}}</input>
     </view>
     <view class="content-item hengxiang">
       <view class="content-title">商品原价<text style="color:red">*</text></view>
@@ -17,7 +17,7 @@
     </view>
 
     <view class="content-item-textarea">
-      <textarea class="textarea" placeholder="输入商品描述" placeholder-class="placeholder1" maxlength='-1' value='{{spxglist.goodMemo}}' name="detailscontent" bindinput='detailscontentinput' wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+      <textarea class="textarea" placeholder="输入商品描述" placeholder-class="placeholder1" maxlength='-1' value='{{spxglist.goodMemo}}' name="detailscontent" bindinput='detailscontentinput'  bindblur="detailscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
     </view>
   </view>
 

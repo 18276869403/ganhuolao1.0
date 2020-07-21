@@ -5,7 +5,7 @@
       <view class='list hengxiang'>
         <view class='list-left'>姓名：</view>
         <view class='list-right'>
-          <input type='text' placeholder='输入名字' class='shurukuang' placeholder-class='placeholder' value='{{wxUser.name}}' name="name" bindinput='nameinput'></input>
+          <input type='text' placeholder='输入名字' class='shurukuang' placeholder-class='placeholder' value='{{wxUser.name}}' name="name" bindinput='nameinput' bindblur='nameblur'></input>
         </view>
       </view>
     </view>

@@ -69,7 +69,7 @@
 				<view class="toast-main-class">
 					<view class='toast-input hengxiang'>
 						<view class="key-class">姓名</view>
-						<view class="value-class"><input type='text' placeholder='输入姓名' bindinput='signName' value="{{signName}}" class="input-class"></input></view>
+						<view class="value-class"><input type='text' placeholder='输入姓名' bindinput='signName' bindblur="signNameblur" value="{{signName}}" class="input-class"></input></view>
 					</view>
 				</view>
 				<view class='toast-main'>

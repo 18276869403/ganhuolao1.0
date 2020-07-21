@@ -162,6 +162,35 @@ Page({
       workerskill: e.detail.value
     })
   },
+  // 敏感词
+  guyongshiblur:function(e){
+    if(e.detail.value == ''){
+      return
+    }
+    var that = this
+    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+      if (res == 1) {
+        that.setData({
+          signName: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }else if(res == 2){
+        wx.showToast({
+          title: '校验失败',
+          icon:'none'
+        })
+        that.setData({
+          signName: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
 
   // 确认雇佣
   bindCon: function() {

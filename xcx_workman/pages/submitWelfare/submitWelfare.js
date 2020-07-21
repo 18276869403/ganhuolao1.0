@@ -181,6 +181,9 @@ Page({
   },
   // 活动名称失去焦点
   activitynameblur:function(e){
+    if(e.detail.value == ''){
+      return
+    }
     var that=this
     if(e.detail.value.length > 15){
       wx.showToast({
@@ -220,6 +223,9 @@ Page({
   },
   // 主办单位失去焦点
   activityCompanyblur:function(e){
+    if(e.detail.value == ''){
+      return
+    }
     var that=this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
@@ -258,6 +264,9 @@ Page({
   },
   // 活动内容失去焦点
   activitycontentblur:function(e){
+    if(e.detail.value == ''){
+      return
+    }
     var that=this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {

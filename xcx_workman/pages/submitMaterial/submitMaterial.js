@@ -189,6 +189,9 @@ Page({
   },
   // 过滤
   needsnameblur: function (e) {
+    if(e.detail.value == ''){
+      return;
+    }
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
@@ -214,6 +217,9 @@ Page({
     }, 'POST')
   },
   needscontentblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {
@@ -239,6 +245,9 @@ Page({
     }, 'POST')
   },
   linkmanblur: function (e) {
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
       if (res == 1) {

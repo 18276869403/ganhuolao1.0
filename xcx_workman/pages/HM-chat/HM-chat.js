@@ -1107,6 +1107,9 @@ Page({
 		if (!that.data.textMsg) {
 			return;
 		}
+		if(that.data.textMsg == ''){
+      return;
+    }
 		qingqiu.get("checkWords", {
 			content: that.data.textMsg
 		}, function (res) {

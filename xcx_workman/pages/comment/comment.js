@@ -102,6 +102,9 @@ Page({
     })
   },
   commentinput:function(e){
+    if(e.detail.value == ''){
+      return
+    }
     var that = this
     qingqiu.get("checkWords", {
       content: e.detail.value
@@ -128,5 +131,4 @@ Page({
       }
     }, 'POST')
   }
-
 })
