@@ -1070,33 +1070,36 @@ Page({
 			textMsg: e.detail.value
 		})
 	},
-	textMsgInputblur: function (e) {
-		var that = this
-		qingqiu.get("checkWords", {
-			content: e.detail.value
-		}, function (res) {
-			if (res == 1) {
-				that.setData({
-					needscontent: ''
-				})
-				wx.showToast({
-					title: '内容包含敏感词，请重新输入...',
-					icon: 'none',
-					duration: 2000
-				})
-				return
-			} else if (res == 2) {
-				wx.showToast({
-					title: '校验失败',
-					icon: 'none'
-				})
-				that.setData({
-					needscontent: ''
-				})
-				return
-			}
-		}, 'POST')
-	},
+	// textMsgInputblur: function (e) {
+	// 	var that = this
+	// 	if(e.detail.value == ""){
+	// 		return
+	// 	}
+	// 	qingqiu.get("checkWords", {
+	// 		content: e.detail.value
+	// 	}, function (res) {
+	// 		if (res == 1) {
+	// 			that.setData({
+	// 				textMsg: ''
+	// 			})
+	// 			wx.showToast({
+	// 				title: '内容包含敏感词，请重新输入...',
+	// 				icon: 'none',
+	// 				duration: 2000
+	// 			})
+	// 			return
+	// 		} else if (res == 2) {
+	// 			wx.showToast({
+	// 				title: '校验失败',
+	// 				icon: 'none'
+	// 			})
+	// 			that.setData({
+	// 				textMsg: ''
+	// 			})
+	// 			return
+	// 		}
+	// 	}, 'POST')
+	// },
 	// 发送文字消息
 	sendText() {
 		var that = this
@@ -1107,7 +1110,7 @@ Page({
 		if (!that.data.textMsg) {
 			return;
 		}
-		if(that.data.textMsg == ''){
+		if(that.data.textMsg == '' || that.data.textMsg == null){
       return;
     }
 		qingqiu.get("checkWords", {

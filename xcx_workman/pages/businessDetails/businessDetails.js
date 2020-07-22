@@ -69,6 +69,9 @@ Page({
     })
     var obj = JSON.parse(options.obj)
     console.log(obj)
+    if(obj.wxNc == null){
+      obj.wxNc = ""
+    }
     this.setData({
       goodsList:obj
     })

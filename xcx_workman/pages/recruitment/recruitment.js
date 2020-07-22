@@ -54,12 +54,13 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
+    app.globalData.needRefresh = 0
     this.setData({
       pageNo: 1,
       isLastPage: false,
       workList: []
     })
-    this.onLoad()
+    this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -78,10 +79,8 @@ Page({
     })
   },
 
-  onShow:function(){
-    this.onLoad()
-  },
-  onLoad:function() {
+  onShow: function () {
+    debugger
     if (app.globalData.needRefresh != undefined) {
       if (app.globalData.needRefresh != 0) {
         this.chushishouquan()
@@ -95,17 +94,38 @@ Page({
           })
           this.FindWorklist()
         }
-      } 
-    }else {
+      } else {
+        this.chushishouquan()
+        this.setData({
+          cityId: this.data.id,
+          cityname1: this.data.name,
+          workList: [],
+          weizhi: '全部',
+          areaId: 0,
+          pageNo: 1
+        })
+        this.QueryoneArea()
+        this.QuerytwoArea()
+        this.FindWorklist()
+      }
+    } else {
       this.chushishouquan()
-      this.setData({
-        cityId: this.data.id,
-        cityname1: this.data.name,
-        workList: [],
-        weizhi: '全部',
-        areaId: 0,
-        pageNo: 1
-      })
+      if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
+        this.setData({
+          workList: [],
+          weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
+          pageNo: 1
+        })
+      }else{
+        this.setData({
+          cityId: this.data.id,
+          cityname1: this.data.name,
+          workList: [],
+          weizhi: '全部',
+          areaId: 0,
+          pageNo: 1
+        })
+      }
       this.QueryoneArea()
       this.QuerytwoArea()
       this.FindWorklist()
@@ -114,6 +134,9 @@ Page({
       withShareTicket: true
     })
   },
+  // onLoad:function() {
+
+  // },
 
   // 上拉功能
   onReachBottom: function () {
@@ -168,9 +191,9 @@ Page({
               }
               if (re.result.records[i].backup3 == null) {
                 re.result.records[i].backup5 = 0
-              }else if(re.result.records[i].backup3.length > 4){
-                re.result.records[i].backup5 = re.result.records[i].backup3.substr(0,4) + ".."
-              }else{
+              } else if (re.result.records[i].backup3.length > 4) {
+                re.result.records[i].backup5 = re.result.records[i].backup3.substr(0, 4) + ".."
+              } else {
                 re.result.records[i].backup5 = re.result.records[i].backup3 + "元"
               }
               that.data.workList.push(re.result.records[i])

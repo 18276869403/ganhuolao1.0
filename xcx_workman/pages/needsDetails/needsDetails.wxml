@@ -47,7 +47,7 @@
           <view class="delete-button {{btnFlag == true?'disabled':''}}" bindtap="baoming" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
             报名
           </view>
-          <view class="complete-button" style="width:155rpx;" bindtap="liuyan" data-wxid="{{xqxqlist.wxUserId}}" data-shopName="{{xqxqlist.shopName}}" data-name="{{xqxqlist.name}}" data-wxNc="{{xqxqlist.wxNc}}" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
+          <view class="complete-button" style="width:155rpx;" bindtap="liuyan" data-wxid="{{xqxqlist.wxUserId}}" data-shopName="{{xqxqlist.shopName}}" data-name="{{xqxqlist.name}}" data-wxNc="{{xqxqlist.wxNC}}" wx:if="{{xqxqlist.wxUserId!=wxUserid}}">
             在线联系
           </view>
           <view class="update-button" bindtap="xiugaigunali" wx:if="{{xqxqlist.wxUserId===wxUserid}}">

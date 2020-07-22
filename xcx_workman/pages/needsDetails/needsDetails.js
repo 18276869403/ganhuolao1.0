@@ -85,8 +85,7 @@ Page({
       xid: xqxqlist.wxUserId,
       wxUserid: app.globalData.wxid
     })
-    console.log(this.data.wxUserid)
-    console.log(xqxqlist)
+    console.log(this.data.xqxqlist)
     this.SelectjiedanList()
     // this.SelecttupianList()
   },
@@ -340,9 +339,10 @@ Page({
   liuyan: function (e) {
     var wxid = e.currentTarget.dataset.wxid
     var name = e.currentTarget.dataset.name
-    var shopName = e.currentTarget.dataset.shopName
-    var wxNc = e.currentTarget.dataset.wxNc
+    var shopName = e.currentTarget.dataset.shopname
+    var wxNc = e.currentTarget.dataset.wxnc
     var nameV = ''
+    
     if (name != '' && name != "null" && name != null && name != undefined) {
       nameV = name
     } else if (shopName != '' && shopName != "null" && shopName != null && shopName != undefined) {

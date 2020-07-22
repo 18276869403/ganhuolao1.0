@@ -39,6 +39,9 @@ Page({
         title: '输入评论信息',
         icon:'none'
       })
+      that.setData({
+        btnFlag:true
+      })
       return
     }
     var data={
@@ -104,11 +107,12 @@ Page({
   },
   //获取输入的评论内容
   commentinput: function (e) {
+    console.log(e.detail.value)
     this.setData({
       comment: e.detail.value
     })
   },
-  commentinput:function(e){
+  commentblur:function(e){
     if(e.detail.value == ''){
       return
     }

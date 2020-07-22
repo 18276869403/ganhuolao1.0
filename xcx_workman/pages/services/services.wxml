@@ -31,7 +31,7 @@
 					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
-					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入昵称/店铺名称" class="shurukuang"></input>
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入昵称/店铺名称" class="shurukuang" wx:if="{{!showModalStatus&&!show}}"></input>
 				</view>
 				<view class="top-title-right-sousuo">
 					<view class="sousuo-button" bindtap="btnsearch">搜索</view>

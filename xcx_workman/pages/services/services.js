@@ -52,6 +52,7 @@ Page({
     pageNo:1,
     oneClassId:'',
     twoClassId:'',
+    show:false,
     name:'',
     shopName:'',
     weizhi:''
@@ -904,8 +905,6 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 200)
-
-
   },
   //隐藏弹窗样式 地址
   hideModal: function() {
@@ -962,6 +961,7 @@ Page({
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name.replace(' ','')
     that.setData({
+      show:true,
       cityId: id,
       cityname1: name,
       weizhi:name,
@@ -981,6 +981,7 @@ Page({
         cityname1: that.data.sname,
         areaId:0,
         showModalStatus: false,
+        show:true
       })
     }else{
       var data ={
@@ -1025,6 +1026,7 @@ Page({
       weizhi:that.data.cityname1 + name,
       areaId: id,
       //curIndex: index,
+      show:false,
       areaname: name,
       workerlist:[],
       businesslist:[],
