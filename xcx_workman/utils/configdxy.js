@@ -80,6 +80,10 @@ const checkWords = baseUrl + "pc/hall/checkWords"
 const SendWxMsg = baseUrl + "pc/hall/SendWxMsg"
 // 获取公众号下所有用户
 const getPulicUserAdd = baseUrl + "pc/hall/getPulicUserAdd"
+// 首页推荐工人/商家，仅首页可用
+const wxIndexUserPage = baseUrl + "pc/hall/wxIndexUserPage"
+// 首页推荐商品，仅首页可用
+const wxUserGoodPage = baseUrl + "pc/hall/wxUserGoodPage"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -119,5 +123,8 @@ module.exports = {
   getPublicAccessToken:getPublicAccessToken,
   checkWords:checkWords,
   SendWxMsg:SendWxMsg,
-  getPulicUserAdd:getPulicUserAdd
+  getPulicUserAdd:getPulicUserAdd,
+  wxIndexUserPage:wxIndexUserPage,
+  wxUserGoodPage:wxUserGoodPage
+
 };
