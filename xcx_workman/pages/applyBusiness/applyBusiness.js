@@ -924,6 +924,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
+          app.globalData.serverRefresh = 1
           setTimeout(function () {
             wx.login({
               success: function (res) {
@@ -964,6 +965,7 @@ Page({
             icon: 'success',
             duration: 3000
           })
+          app.globalData.serverRefresh = 1
           if (that.data.type == 1) {
             // 公众号消息推送
             qingqiu.get("getPublicUser", null, function (res) {

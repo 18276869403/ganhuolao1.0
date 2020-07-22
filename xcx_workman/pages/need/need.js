@@ -218,9 +218,6 @@ Page({
     }
   },
 
-  // onLoad: function() {
-  // },
-
   // 一级分类
   oneClass(){
     var that =this

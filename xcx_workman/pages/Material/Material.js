@@ -162,8 +162,8 @@ Page({
     // this.data.needsList.splice(0,this.data.needsList.length)
     this.data.pageNo=1
     this.data.isLastPage=false
-    app.globalData.needRefresh = 1
-    this.onLoad()
+    app.globalData.materialRefresh = 1
+    this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -182,7 +182,7 @@ Page({
     })
   },
 
-  onLoad(){
+  onShow(){
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -365,7 +365,7 @@ Page({
       console.log(res)
       if(res.success == true){
         var xqxq = JSON.stringify(obj1);
-        app.globalData.needRefresh = 0
+        app.globalData.materialRefresh = 0
         wx.navigateTo({
           url: '../MaterialDetails/MaterialDetails?obj1=' + xqxq,
         })
@@ -380,7 +380,7 @@ Page({
   },
   // 跳转到提交需求页面
   submitNeeds: function() {
-    app.globalData.needRefresh = 0
+    app.globalData.materialRefresh = 0
     wx.navigateTo({
       url: '../submitMaterial/submitMaterial',
     })

@@ -54,7 +54,7 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
-    app.globalData.needRefresh = 0
+    app.globalData.recruitRefresh = 0
     this.setData({
       pageNo: 1,
       isLastPage: false,
@@ -80,9 +80,8 @@ Page({
   },
 
   onShow: function () {
-    debugger
-    if (app.globalData.needRefresh != undefined) {
-      if (app.globalData.needRefresh != 0) {
+    if (app.globalData.recruitRefresh != undefined) {
+      if (app.globalData.recruitRefresh != 0) {
         this.chushishouquan()
         this.QueryoneArea()
         this.QuerytwoArea()
@@ -283,12 +282,14 @@ Page({
   recruitmentDetail: function (e) {
     var list = e.currentTarget.dataset.list
     var list1 = JSON.stringify(list)
+    app.globalData.recruitRefresh=1
     wx.navigateTo({
       url: '../recruitmentDetail/recruitmentDetail?obj=' + list1,
     })
   },
   // 跳转到提交需求页面
   submitRecruitment: function (e) {
+    app.globalData.recruitRefresh=0
     wx.redirectTo({
       url: '../submitRecruitment/submitRecruitment',
     })

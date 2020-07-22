@@ -97,9 +97,9 @@ Page({
   onShow: function () {
 
   },
-  lijifabu: function () {
+  // lijifabu: function () {
 
-  },
+  // },
   fanhui: function () {
     wx.switchTab({
       url: '../showwork/showwork',
@@ -173,6 +173,7 @@ Page({
           icon: 'success',
           duration: 2000
         })
+        app.globalData.showworkRefresh = 1
         // wx.switchTab({
         //   url: '../showwork/showwork',
         // })

@@ -169,6 +169,7 @@ Page({
                  icon:'success',
                  duration:2000
                })
+               app.globalData.recruitRefresh=0
                setTimeout(function(){
                 // wx.navigateTo({
                 //   url: '../myRecruitment/myRecruitment',

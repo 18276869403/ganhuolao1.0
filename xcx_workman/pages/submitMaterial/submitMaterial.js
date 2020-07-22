@@ -291,6 +291,7 @@ Page({
             icon: 'success',
             duration: 2000
           })
+          app.globalData.materialRefresh = 1
           setTimeout(function () {
             // wx.switchTab({
             //   url: '../Material/Material',

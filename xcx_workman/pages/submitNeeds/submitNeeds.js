@@ -310,6 +310,7 @@ Page({
             icon: 'success',
             duration: 2000
           })
+          app.globalData.needRefresh=1
           setTimeout(function () {
             wx.switchTab({
               url: '../need/need',
@@ -368,6 +369,7 @@ Page({
                 console.log(re)
               })
             }
+            app.globalData.needRefresh=1
             wx.switchTab({
               url: '../need/need',
             })

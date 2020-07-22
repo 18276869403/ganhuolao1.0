@@ -183,6 +183,7 @@ Page({
                that.setData({
                 btnFlag:false
               })
+              app.globalData.materialRefresh = 1
                setTimeout(function(){
                 // wx.redirectTo({
                 //   url: '../myMaterial/myMaterial',
