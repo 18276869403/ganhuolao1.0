@@ -19,9 +19,9 @@
   <!-- 顶部详情 -->
   <view class="top hengxiang">
     <view class="top-left">
-      <image src="{{viewUrl}}{{caseMsgList.piciurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl != null || caseMsgList.piciurl != ''}}"></image>
-      <image src="{{caseMsgList.wximgurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl == null || caseMsgList.piciurl == ''}}"></image>
-      <image src="{{viewUrl}}{{caseMsgList.picOne[0]}}" class="avator-img" wx:if="{{caseMsgList.piciurl == null && caseMsgList.piciurl == ''}}"></image>
+      <image src="{{viewUrl}}{{caseMsgList.piciurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl != null && caseMsgList.piciurl != ''}}"></image>
+      <image src="{{caseMsgList.wximgurl}}" class="avator-img" wx:if="{{(caseMsgList.wximgurl != null && caseMsgList.wximgurl != '')&&(caseMsgList.piciurl == null || caseMsgList.piciurl == '')}}"></image>
+      <image src="{{viewUrl}}{{caseMsgList.picOne[0]}}" class="avator-img" wx:if="{{(caseMsgList.piciurl == null || caseMsgList.piciurl == '')&&(caseMsgList.wximgurl == null || caseMsgList.wximgurl == '')}}"></image>
     </view>
     <view class="top-content zongxiang">
       <view class="top-content-top">{{caseMsgList.name}}</view>

@@ -47,6 +47,9 @@ Page({
         }else{
           re.result.name = re.result.wxnc
         }
+        if(re.result.name == null || re.result.name == "null"){
+          re.result.name = ''
+        }
         that.caseMsgList = re.result
         that.imgList = that.caseMsgList.picOne.split(',')
         that.caseMsgList.picOne = that.caseMsgList.picOne.split(',')
@@ -76,9 +79,7 @@ Page({
       pages: 1,
       size: 100
     }
-    console.log(data)
     qingqiu.get("caseMessageVoList", data, function(re) {
-      console.log(re)
     if (re.success == true) {
       if (re.result != null) {
         that.data.pinglunList = re.result.records

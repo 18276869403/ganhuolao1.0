@@ -958,6 +958,7 @@ Page({
       }, 'put')
     } else {
       qingqiu.get("wxUserAdd", data, function (re) {
+        debugger
         console.log(re)
         if (re.success == true) {
           wx.showToast({
@@ -966,7 +967,7 @@ Page({
             duration: 3000
           })
           app.globalData.serverRefresh = 1
-          if (that.data.type == 1) {
+          if (that.data.needsTypeid != 1) {
             // 公众号消息推送
             qingqiu.get("getPublicUser", null, function (res) {
               for (let obj of res.result) {
@@ -1029,7 +1030,7 @@ Page({
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
-                  wx.navigateTo({
+                  wx.redirectTo({
                     url: '../activityPublic/activityPublic',
                   })
                 }, "POST")
