@@ -426,7 +426,7 @@ Page({
                 twoname[0] = obj.twoClassName
               }
             }
-            if (onename != undefined) {
+            if (onename.length > 0) {
               obj.oneClassName = onename[0] + ' | ' + twoname[0]
               if (onename.length > 1) {
                 obj.twoClassName = onename[1] + ' | ' + twoname[1]
