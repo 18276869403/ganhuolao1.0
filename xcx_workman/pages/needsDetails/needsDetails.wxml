@@ -92,8 +92,8 @@
           <view class="jiedan-top-right" wx-if="{{xqxqlist.wxUserId==wxUserid}}">
             <image src="{{viewUrl}}static/image/liuyan.png" class="img" bindtap="liuyan" data-wxid="{{item.wxUserId}}" data-name="{{item.name}}" data-shopName="{{item.shopName}}" data-wxNc="{{item.wxNc}}"></image>
           </view>
-          <view class="jiedan-top-right1" wx-if="{{xqxqlist.wxUserId==wxUserid}}">
-            <image src="{{viewUrl}}static/image/dianhua.png" bindtap="phonecell" class="img"></image>
+          <view class="jiedan-top-right1" wx-if="{{xqxqlist.wxUserId==wxUserid}}" bindtap="phonecell" data-phone="{{item.phone}}">
+            <image src="{{viewUrl}}static/image/dianhua.png" class="img"></image>
           </view>
         </view>
         <!-- <view class="content-bottom">
