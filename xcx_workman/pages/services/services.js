@@ -453,10 +453,15 @@ Page({
                   twoname[0] = obj.twoClassName
                 }
               }
-              obj.oneClassName = onename[0] + ' | '+twoname[0]
-              if(onename.length > 1){
-                obj.twoClassName = onename[1] + ' | ' + twoname[1] 
+              if(onename.length > 0){
+                obj.oneClassName = onename[0] + ' | '+twoname[0]
+                if(onename.length > 1){
+                  obj.twoClassName = onename[1] + ' | ' + twoname[1] 
+                }else{
+                  obj.twoClassName = ''
+                }
               }else{
+                obj.oneClassName = ''
                 obj.twoClassName = ''
               }
               that.data.workerlist.push(obj)
@@ -519,10 +524,15 @@ Page({
                   twoname[0] = obj.twoClassName
                 }
               }
-              obj.oneClassName = onename[0] + ' | ' + twoname[0]
-              if(onename.length > 1){
-                obj.twoClassName = onename[1] + ' | ' + twoname[1]
+              if(onename.length > 0){
+                obj.oneClassName = onename[0] + ' | ' + twoname[0]
+                if(onename.length > 1){
+                  obj.twoClassName = onename[1] + ' | ' + twoname[1]
+                }else{
+                  obj.twoClassName = ''
+                }
               }else{
+                obj.oneClassName = ''
                 obj.twoClassName = ''
               }
               that.data.businesslist.push(obj)

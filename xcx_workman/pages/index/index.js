@@ -383,7 +383,7 @@ Page({
               } else {
                 obj.twoClassName = ''
               }
-            }else{
+            } else {
               obj.oneClassName = ''
               obj.twoClassName = ''
             }
@@ -433,7 +433,7 @@ Page({
               } else {
                 obj.twoClassName = ''
               }
-            }else{
+            } else {
               obj.oneClassName = ''
               obj.twoClassName = ''
             }
@@ -549,18 +549,21 @@ Page({
   },
   // 剩料交易
   ershou: function () {
+    app.globalData.materialRefresh = 1
     wx.navigateTo({
       url: '../Material/Material',
     })
   },
   // 本地招工
   bendi: function () {
+    app.globalData.recruitRefresh = 0
     wx.navigateTo({
       url: '../recruitment/recruitment',
     })
   },
   // 公益活动
   gongyi: function () {
+    app.globalData.welfareRefresh = 1
     wx.navigateTo({
       url: '../Welfare/Welfare',
     })
@@ -587,6 +590,7 @@ Page({
     qingqiu.get("updateYeedById", data, function (res) {
       if (res.success == true) {
         var xqxq = JSON.stringify(obj1);
+        app.globalData.needRefresh = 1
         wx.navigateTo({
           url: '../needsDetails/needsDetails?obj1=' + xqxq,
         })
@@ -622,6 +626,7 @@ Page({
   workerDetails: function (e) {
     var obj = e.currentTarget.dataset.vals;
     obj = JSON.stringify(obj);
+    app.globalData.serverRefresh = 0
     wx.navigateTo({
       url: '../workerDetails/workerDetails?obj=' + obj,
     })
@@ -630,12 +635,14 @@ Page({
   businessDetails: function (e) {
     var obj = e.currentTarget.dataset.vals
     obj = JSON.stringify(obj)
+    app.globalData.serverRefresh = 0
     wx.navigateTo({
       url: '../businessDetails/businessDetails?obj=' + obj,
     })
   },
   // 跳转到商品列表页面
   goodsList: function () {
+    app.globalData.goodsRefresh = 1
     wx.navigateTo({
       url: '../goodsList/goodsList',
     })

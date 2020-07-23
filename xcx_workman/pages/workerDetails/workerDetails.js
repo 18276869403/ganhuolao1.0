@@ -104,7 +104,7 @@ Page({
     qingqiu.get("updateWxCase",{id:ssid},function(re){
       console.log(re)
       if(re.success == true){
-        app.globalData.showworkRefresh = 0
+        app.globalData.showworkRefresh = 1
         wx.navigateTo({
           url: '../showDetails/showDetails?obj='+ssid,
         })

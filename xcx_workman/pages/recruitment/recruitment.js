@@ -189,7 +189,7 @@ Page({
                 re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
               }
               if (re.result.records[i].backup3 == null) {
-                re.result.records[i].backup5 = 0
+                re.result.records[i].backup5 = '面议'
               } else if (re.result.records[i].backup3.length > 4) {
                 re.result.records[i].backup5 = re.result.records[i].backup3.substr(0, 4) + ".."
               } else {
@@ -290,7 +290,7 @@ Page({
   // 跳转到提交需求页面
   submitRecruitment: function (e) {
     app.globalData.recruitRefresh=0
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../submitRecruitment/submitRecruitment',
     })
   },

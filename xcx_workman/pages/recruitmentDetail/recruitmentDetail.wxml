@@ -21,9 +21,13 @@
           {{xqxqlist.oneClassName}} | {{xqxqlist.twoClassName}}
         </view>
       </view> -->
-			<view class="content-list-title-price">
+			<view class="content-list-title-price" wx:if="{{zhaogong.backup3 != 0 && zhaogong.backup3 != null}}">
 				￥{{zhaogong.backup3}} 月薪
 			</view>
+				<view class="content-list-title-price" wx:if="{{zhaogong.backup3 == 0 || zhaogong.backup3 == null}}">
+				￥{{zhaogong.backup5}}
+			</view>
+		
 			<view class="hengxiang content-list-type">
 				<view>
 					<image src="{{viewUrl}}static/image/zhaogongname.png" class="leixing-img"></image>

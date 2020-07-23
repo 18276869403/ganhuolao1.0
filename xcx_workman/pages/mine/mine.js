@@ -125,12 +125,17 @@ Page({
               twoname[0] = re.result.twoClassName
             }
           }
-          re.result.oneClassName = onename[0] + ' | ' + twoname[0]
-          if(onename.length > 1){
-            re.result.twoClassName = onename[1] + ' | ' + twoname[1]
+          if(onename.length > 0){
+            re.result.oneClassName = onename[0] + ' | ' + twoname[0]
+            if(onename.length > 1){
+              re.result.twoClassName = onename[1] + ' | ' + twoname[1]
+            }else{
+              re.result.twoClassName = ''
+            } 
           }else{
+            re.result.oneClassName = ''
             re.result.twoClassName = ''
-          } 
+          }
           that.setData({
             wxUser:re.result,
             userType:re.result.wxState

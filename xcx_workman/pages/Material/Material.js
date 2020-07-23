@@ -8,85 +8,86 @@ const bmap = require('../../utils/bmap-wx.min.js')
 
 Page({
   data: {
-    viewUrl:api.viewUrl,
-    animationData:'',
-    showModalStatus:'',
-    animationData:'',
-    navRightItems:'',
-    isLastPage:false,
-    onecityName:'',
-    hasMask:'',
-    sousuotext:'',
-    needsListfy:[],
-    needsList:[],
-    oneclass:[],
-    twoclass:[],
-    city:[],
-    firstId:'',
-    firstname:'',
-    firstnamewhere:'',
-    secondId:'',
-    secondname:'',
-    secondnamewhere:'',
+    viewUrl: api.viewUrl,
+    animationData: '',
+    showModalStatus: '',
+    animationData: '',
+    navRightItems: '',
+    isLastPage: false,
+    onecityName: '',
+    hasMask: '',
+    sousuotext: '',
+    needsListfy: [],
+    needsList: [],
+    oneclass: [],
+    twoclass: [],
+    city: [],
+    firstId: '',
+    firstname: '',
+    firstnamewhere: '',
+    secondId: '',
+    secondname: '',
+    secondnamewhere: '',
     gongzhong: [{
       id: 1,
       oneclass: '',
-      twoclasslist:[{
-        id:1,
-        twoclass:'erji'
-      },
-      {
-        id:2,
-        twoclass:'erji111'
-      }]
+      twoclasslist: [{
+          id: 1,
+          twoclass: 'erji'
+        },
+        {
+          id: 2,
+          twoclass: 'erji111'
+        }
+      ]
     }],
-    flerjiid:'',
-    yijiid:'',
-    yijiname:'',
-    erjiid:'',
-    erjiname:'',
-    pageNo:1,
-    pageSize:10,
-    jihe:[],
-    id:1,
-    mid:'',
-    needTitle:'',
-    oneClassId:'',
-    twoClassId:'',
-    weizhi:''
+    flerjiid: '',
+    yijiid: '',
+    yijiname: '',
+    erjiid: '',
+    erjiname: '',
+    pageNo: 1,
+    pageSize: 10,
+    jihe: [],
+    id: 1,
+    mid: '',
+    needTitle: '',
+    oneClassId: '',
+    twoClassId: '',
+    weizhi: ''
   },
-   // 搜索框
-   shurukuang:function(e){
+  // 搜索框
+  shurukuang: function (e) {
     this.setData({
-      sousuotext:e.detail.value
+      sousuotext: e.detail.value
     })
   },
   // 全部
-  quanbu:function(){
-     var that = this
-     that.data.firstId=''
-     that.data.secondId=''
-     that.data.firstname=''
-     that.setData({
-        showModalStatus: false,
-        firstname:that.data.firstname
-      })
+  quanbu: function () {
+    var that = this
+    that.data.firstId = ''
+    that.data.secondId = ''
+    that.data.firstname = ''
+    that.setData({
+      showModalStatus: false,
+      firstname: that.data.firstname
+    })
   },
 
   // 获取地理位置信息 
-  getAddress(){
+  getAddress() {
     var that = this
     /* 获取地理位置 */
     var BMap = new bmap.BMapWX({
-      ak:api.baiduAK
+      ak: api.baiduAK
     })
-    var fail = function(data){
+    var fail = function (data) {
       console.log(data)
     }
     // 发起regeocoding检索请求   
     BMap.regeocoding({
       fail: fail,
-      success: function(data){
+      success: function (data) {
         var address = data.originalData.result.addressComponent
         // 返回数据内，已经包含经纬度
         that.setData({
@@ -94,38 +95,43 @@ Page({
           yijiAddress: address.district,
         })
         var data = {
-          one:address.city,
-          two:address.district
+          one: address.city,
+          two: address.district
         }
-        qingqiu.get("queryAreaByName",data,function(res){
+        qingqiu.get("queryAreaByName", data, function (res) {
           console.log(res)
-          if(res.success == true){
-            var obj ={};
+          if (res.success == true) {
+            var obj = {};
             var erjiname = ''
             var yijiname = ''
-            if(res.result.two!=null){
+            if (res.result.two != null) {
               erjiname = address.district
               obj.cityId = res.result.one
               obj.id = res.result.one
-            }else{
+            } else {
               obj.cityId = null
             }
-            if(res.result.one != null){
+            if (res.result.one != null) {
               yijiname = address.city
-              obj.areaId =res.result.two
-            }else{
+              obj.areaId = res.result.two
+            } else {
               obj.areaId = null
             }
             obj.weizhi = yijiname + erjiname
             that.setData(obj)
             that.QueryoneArea() //一级区域
             that.QuerytwoArea() //二级区域
-            that.xqneedlist({pageNo:1,pageSize:3,oneAreaId: obj.cityId,twoAreaId:obj.areaId}) //需求
-          }else{
+            that.xqneedlist({
+              pageNo: 1,
+              pageSize: 3,
+              oneAreaId: obj.cityId,
+              twoAreaId: obj.areaId
+            }) //需求
+          } else {
             wx.showToast({
               title: res.message,
-              icon:'none',
-              duration:1000
+              icon: 'none',
+              duration: 1000
             })
           }
         })
@@ -134,25 +140,24 @@ Page({
   },
 
   // 搜索按钮
-  btnsearch:function(){
-    this.data.needsList.splice(0,this.data.needsList.length)
-    this.data.pageNo=1
-    this.data.isLastPage=false
-    if(this.data.sousuotext != "" && this.data.yijiid != "undefined" && this.data.yijiid != null){
+  btnsearch: function () {
+    this.data.needsList.splice(0, this.data.needsList.length)
+    this.data.pageNo = 1
+    this.data.isLastPage = false
+    if (this.data.sousuotext != "" && this.data.yijiid != "undefined" && this.data.yijiid != null) {
       this.data.needTitle = this.data.sousuotext
+    } else {
+      this.data.needTitle = ''
     }
-    else{
-      this.data.needTitle =''
-    }
-    if(this.data.yijiid != "" && this.data.yijiid != "undefined" && this.data.yijiid != null){
+    if (this.data.yijiid != "" && this.data.yijiid != "undefined" && this.data.yijiid != null) {
       this.data.oneClassId = this.data.yijiid
-    }else{
-      this.data.oneClassId =''
+    } else {
+      this.data.oneClassId = ''
     }
-    if(this.data.flerjiid != "" && this.data.flerjiid != "undefined" && this.data.yijiid != null){
+    if (this.data.flerjiid != "" && this.data.flerjiid != "undefined" && this.data.yijiid != null) {
       this.data.twoClassId = this.data.flerjiid
-    }else{
-      this.data.twoClassId =''
+    } else {
+      this.data.twoClassId = ''
     }
     this.xqneedlist()
   },
@@ -160,8 +165,8 @@ Page({
   onPullDownRefresh: function () {
     app.globalData.xuqiuid = 1
     // this.data.needsList.splice(0,this.data.needsList.length)
-    this.data.pageNo=1
-    this.data.isLastPage=false
+    this.data.pageNo = 1
+    this.data.isLastPage = false
     app.globalData.materialRefresh = 1
     this.onShow()
     setTimeout(() => {
@@ -182,62 +187,71 @@ Page({
     })
   },
 
-  onShow(){
+  onShow() {
     wx.showShareMenu({
       withShareTicket: true
     })
-    if(app.globalData.materialRefresh != 0){
+    if (app.globalData.materialRefresh != 0) {
       this.chushishouquan()
-      if(app.globalData.xuqiuid == 0){
-        this.data.mid=app.globalData.wxid
-      }else{
-        this.data.mid=''
+      if (app.globalData.xuqiuid == 0) {
+        this.data.mid = app.globalData.wxid
+      } else {
+        this.data.mid = ''
       }
       this.QueryoneArea()
       this.QuerytwoArea()
-      if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
+      if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
         var twoname = ''
-        if(app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined"){
+        if (app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined") {
           twoname = app.globalData.twoCity.name
         }
         this.setData({
           cityId: this.data.id,
-          needsList:[],
-          weizhi:app.globalData.oneCity.name + twoname,
-          pageNo:1
+          needsList: [],
+          weizhi: app.globalData.oneCity.name + twoname,
+          pageNo: 1
         })
         this.xqneedlist()
-      }else{
-        this.setData({needsList:[],weizhi:'全部',pageNo:1, cityId: this.data.id})
+      } else {
+        this.QueryoneArea()
+        this.QuerytwoArea()
+        this.setData({
+          needsList: [],
+          weizhi: '全部',
+          pageNo: 1,
+          cityId: this.data.id
+        })
         this.xqneedlist()
       }
     }
   },
 
   // 在线联系
-  phonecall:function(e){
+  phonecall: function (e) {
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     wx.navigateTo({
-      url: '../HM-chat/HM-chat?id='+id+'&name='+name,
+      url: '../HM-chat/HM-chat?id=' + id + '&name=' + name,
     })
   },
-  
+
   // 上拉功能
   onReachBottom: function () {
     if (this.data.isLastPage) {
       wx.showToast({
         title: '没有更多了！',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
-        return
+      return
     }
-    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
     this.xqneedlist()
   },
   //置顶
-  goTop(){
+  goTop() {
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 300
@@ -246,45 +260,45 @@ Page({
   // 剩料列表
   xqneedlist() {
     var that = this
-    var data={
-      pageNo:that.data.pageNo,
-      pageSize:10,
-      wxUserId:that.data.mid,
-      needTitle:that.data.needTitle,
-      backup5:1
+    var data = {
+      pageNo: that.data.pageNo,
+      pageSize: 10,
+      wxUserId: that.data.mid,
+      needTitle: that.data.needTitle,
+      backup5: 1
     }
-    if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
+    if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
       data.oneAreaId = app.globalData.oneCity.id
     }
-    if(app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined"){
-      if(app.globalData.twoCity.id != 0){
+    if (app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined") {
+      if (app.globalData.twoCity.id != 0) {
         data.twoAreaId = app.globalData.twoCity.id
       }
     }
-    qingqiu.get("zuixinxq", data, function(re) {
+    qingqiu.get("zuixinxq", data, function (re) {
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           that.needsList = re.result.records
-          for(var i= 0 ; i < that.needsList.length; i++){
+          for (var i = 0; i < that.needsList.length; i++) {
             re.result.records[i].publishTime = re.result.records[i].publishTime.split(' ')[0]
-            if(re.result.records[i].backup1!= null&&re.result.records[i].backup1.length>0){
+            if (re.result.records[i].backup1 != null && re.result.records[i].backup1.length > 0) {
               re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
             }
             that.data.needsList.push(re.result.records[i])
           }
-          that.setData ({
-            needsList : that.data.needsList,
-            needsListfy : re.result.records
+          that.setData({
+            needsList: that.data.needsList,
+            needsListfy: re.result.records
           })
         } else {
           wx.showToast({
             title: '暂无数据',
-            icon:'none',
-            duration:2000
+            icon: 'none',
+            duration: 2000
           })
         }
-      } 
+      }
     })
   },
   //显示弹窗样式
@@ -355,32 +369,32 @@ Page({
     }.bind(this), 200)
   },
   // 跳转到需求详情页面
-  needsDetails: function(e) {
+  needsDetails: function (e) {
     var that = this
-    var obj1 =e.currentTarget.dataset.vall;
+    var obj1 = e.currentTarget.dataset.vall;
     var data = {
-      id:obj1.id
+      id: obj1.id
     }
-    qingqiu.get("updateYeedById",data,function(res){
+    qingqiu.get("updateYeedById", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         var xqxq = JSON.stringify(obj1);
         app.globalData.materialRefresh = 0
         wx.navigateTo({
           url: '../MaterialDetails/MaterialDetails?obj1=' + xqxq,
         })
-      }else{
+      } else {
         wx.showToast({
           title: res.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
-    },'put')
+    }, 'put')
   },
   // 跳转到提交需求页面
-  submitNeeds: function() {
-    app.globalData.materialRefresh = 0
+  submitNeeds: function () {
+    app.globalData.materialRefresh = 1
     wx.navigateTo({
       url: '../submitMaterial/submitMaterial',
     })
@@ -398,7 +412,7 @@ Page({
     this.animation = animation
     animation.opacity(0).rotateX(-100).step();
     this.setData({
-      animationData: animation.export(), 
+      animationData: animation.export(),
       showModalStatus: true
     })
     setTimeout(function () {
@@ -409,13 +423,13 @@ Page({
     }.bind(this), 200)
   },
   // 置顶
-  goTop:function(e){
-    if(wx.pageScrollTo){
+  goTop: function (e) {
+    if (wx.pageScrollTo) {
       wx.pageScrollTo({
         scrollTop: 0,
         duration: 300
       })
-    }else{
+    } else {
       wx.showModal({
         title: '提示',
         cancelColor: '当前微信版本过低，无法使用该功能，请升级到最新微信版本后重新',
@@ -423,7 +437,7 @@ Page({
     }
   },
   // 客服
-  handleContact (e) {
+  handleContact(e) {
     console.log(e)
     console.log(e.detail.path)
     console.log(e.detail.query)
@@ -472,7 +486,7 @@ Page({
     }.bind(this), 200)
   },
   // 业务分类
-  showModallist: function() {
+  showModallist: function () {
     this.typefenleiyj()
     this.setData({
       hasMask: true
@@ -487,9 +501,9 @@ Page({
     this.setData({
       animationData: animation.export(),
       showModalStatuslist: true,
-      showModalStatus6:true
+      showModalStatus6: true
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.opacity(1).rotateX(0).step();
       this.setData({
         animationData: animation.export()
@@ -497,17 +511,17 @@ Page({
     }.bind(this), 200)
   },
   //选择业务页面关闭
-  hideModallist: function(e) {
-    var that=this
+  hideModallist: function (e) {
+    var that = this
     var flag = e.currentTarget.dataset.return
-    if(flag=="false"){
+    if (flag == "false") {
       that.setData({
-        yijiid:'',
-        erjiid:'',
-        yijiname:'',
-        erjiname:'',
-        pageNo:1,
-        needsList:[]
+        yijiid: '',
+        erjiid: '',
+        yijiname: '',
+        erjiname: '',
+        pageNo: 1,
+        needsList: []
       })
       that.xqneedlist()
     }
@@ -524,61 +538,63 @@ Page({
       animationData2: animation.export(),
       hasMask: false
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.translateY(0).step()
       this.setData({
         animationData2: animation.export(),
         showModalStatuslist: false,
-        showModalStatus6:false
+        showModalStatus6: false
       })
     }.bind(this), 200)
   },
   // 获取分类
-  typefenleiyj: function() {
+  typefenleiyj: function () {
     var that = this
     var data = {
-      type:4
+      type: 4
     }
-    qingqiu.get("oneClassList", data, function(re) {
+    qingqiu.get("oneClassList", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
-          for(let i=0;i<re.result.length;i++){
-            var gongzhongclass = 'gongzhong[' + i +'].oneclass'
+          for (let i = 0; i < re.result.length; i++) {
+            var gongzhongclass = 'gongzhong[' + i + '].oneclass'
             var gongzhongid = 'gongzhong[' + i + '].id'
             that.setData({
-              [gongzhongid]:re.result[i].id,
-              [gongzhongclass]:re.result[i].className
+              [gongzhongid]: re.result[i].id,
+              [gongzhongclass]: re.result[i].className
             })
             console.log(re.result[i].className)
-            var onedata = { oneClassId:re.result[i].id }
-            qingqiu.get("twoClassList",onedata,function(re){
-              if (re.success == true){
+            var onedata = {
+              oneClassId: re.result[i].id
+            }
+            qingqiu.get("twoClassList", onedata, function (re) {
+              if (re.success == true) {
                 if (re.result != null) {
-                  var gongzhongclass2 = 'gongzhong[' + i +'].twoclasslist'
+                  var gongzhongclass2 = 'gongzhong[' + i + '].twoclasslist'
                   that.setData({
-                    [gongzhongclass2]:re.result
+                    [gongzhongclass2]: re.result
                   })
                 }
               }
             })
           }
-        } 
-      } 
+        }
+      }
     })
   },
-  typefenleiej: function() {
+  typefenleiej: function () {
     var data = {
       oneClassId: this.data.typeyj
     }
     var that = this
-    qingqiu.get("twoClassService", data, function(re) {
+    qingqiu.get("twoClassService", data, function (re) {
       that.setData({
         typeejlist: re.data.result
       })
     })
   },
   // 选项卡点击事件获取分类
-  fenlei: function(e) {
+  fenlei: function (e) {
     var that = this;
     var id = 1
     var litype = 0
@@ -594,14 +610,14 @@ Page({
     var typeerji1 = "fenleitype2.erjiid"
     var typestate1 = "fenleitype2.typestate"
     that.setData({
-      [typeid]:'',
-      [typeerji]:'',
-      [typestate]:false,
-      [typeid1]:'',
-      [typeerji1]:'',
-      [typestate1]:false,
-      fenClass1:'',
-      fenClass2:'',
+      [typeid]: '',
+      [typeerji]: '',
+      [typestate]: false,
+      [typeid1]: '',
+      [typeerji1]: '',
+      [typestate1]: false,
+      fenClass1: '',
+      fenClass2: '',
       needsTypeid: id,
       litype: litype,
       yijiname: '',
@@ -618,91 +634,98 @@ Page({
     var yijiname = e.currentTarget.dataset.yijiname
     var erjiname = e.currentTarget.dataset.erjiname
     this.setData({
-      erjiid:erjiid,
-      yijiid:yijiid,
-      yijiname:yijiname,
-      erjiname:erjiname,
-      needsList:[],
-      pageNo:1
+      erjiid: erjiid,
+      yijiid: yijiid,
+      yijiname: yijiname,
+      erjiname: erjiname,
+      needsList: [],
+      pageNo: 1
     })
     this.xqneedlist()
   },
   // 一级区域
-  QueryoneArea(){
+  QueryoneArea() {
     var that = this
-    qingqiu.get("queryOneArea", null, function(re) {
-    if (re.success == true) {
-      if (re.result != null) {
-        var obj = {id:0,areaName:'全部'}
-        var city=[]
-        city.push(obj)
-        city.push(re.result[0])
-        that.setData({
-          city:city,
-          cityId:re.result[0].id,
-          cityname1:re.result[0].areaName
-        })
-      }else {
-        qingqiu.tk('未查询到任何数据')
+    qingqiu.get("queryOneArea", null, function (re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          var obj = {
+            id: 0,
+            areaName: '全部'
+          }
+          var city = []
+          city.push(obj)
+          city.push(re.result[0])
+          that.setData({
+            city: city,
+            cityId: re.result[0].id,
+            cityname1: re.result[0].areaName
+          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
+        }
       }
-    } 
-  })
+    })
   },
   // 二级区域
-  QuerytwoArea(){
+  QuerytwoArea() {
     var that = this
-    var data ={
-      oneAreaId:that.data.id
+    var data = {
+      oneAreaId: that.data.id
     }
-    qingqiu.get("queryTwoArea", data, function(re) {
-    if (re.success == true) {
-      if (re.result != null) {
-        var obj = {id:0,oneAreaId:0,areaName:'全部'}
-        var area = []
-        area.push(obj)
-        for(let obj of re.result){
+    qingqiu.get("queryTwoArea", data, function (re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          var obj = {
+            id: 0,
+            oneAreaId: 0,
+            areaName: '全部'
+          }
+          var area = []
           area.push(obj)
+          for (let obj of re.result) {
+            area.push(obj)
+          }
+          that.setData({
+            area: area
+          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
         }
-        that.setData({
-          area:area
-        })
-      }else {
-        qingqiu.tk('未查询到任何数据')
       }
-    } 
-  })
+    })
   },
 
-// 分类全部
-typeQuan:function(e){
-  var type = e.currentTarget.dataset.id
-  if(type == -1){
-    if (this.data.chooseworker == 1) {
-      this.setData({
-        workerlist:[],
-        yijiid:'',
-        erjiid:'',
-        fenleilx:1,
-        yijiname:'',
-        pageNo:1
-      })
-      this.grneedlist()
-    } else {
-      this.setData({
-        businesslist:[],
-        fenleilx:2,
-        yijiid:'',
-        erjiid:'',
-        yijiname:'',
-        pageNo:1
-      }) 
-      this.sjneedlist()
+  // 分类全部
+  typeQuan: function (e) {
+    var type = e.currentTarget.dataset.id
+    if (type == -1) {
+      if (this.data.chooseworker == 1) {
+        this.setData({
+          workerlist: [],
+          yijiid: '',
+          erjiid: '',
+          fenleilx: 1,
+          yijiname: '',
+          pageNo: 1
+        })
+        this.grneedlist()
+      } else {
+        this.setData({
+          businesslist: [],
+          fenleilx: 2,
+          yijiid: '',
+          erjiid: '',
+          yijiname: '',
+          pageNo: 1
+        })
+        this.sjneedlist()
       }
     }
   },
 
   //地址 显示弹窗样式
-  showModal: function(e) {
+  showModal: function (e) {
     this.setData({
       hasMask: true
     })
@@ -717,7 +740,7 @@ typeQuan:function(e){
       animationData: animation.export(),
       showModalStatus: true
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.opacity(1).rotateX(0).step();
       this.setData({
         animationData: animation.export()
@@ -727,7 +750,7 @@ typeQuan:function(e){
 
   },
   //隐藏弹窗样式 地址
-  hideModal: function() {
+  hideModal: function () {
     var that = this;
     var animation = wx.createAnimation({
       duration: 200,
@@ -740,7 +763,7 @@ typeQuan:function(e){
       animationData: animation.export(),
       hasMask: false
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.translateY(0).step()
       this.setData({
         animationData: animation.export(),
@@ -748,9 +771,9 @@ typeQuan:function(e){
       })
     }.bind(this), 200)
   },
-  cityyiji: function() {
+  cityyiji: function () {
     var that = this
-    qingqiu.get("oneAreaService", {}, function(re) {
+    qingqiu.get("oneAreaService", {}, function (re) {
       if (re.data.result.length > 0) {
         that.setData({
           cityId: re.data.result[0].id,
@@ -763,97 +786,105 @@ typeQuan:function(e){
       that.cityerji()
     })
   },
-  cityerji: function() {
+  cityerji: function () {
     var that = this
     var data = {
       oneAreaId: that.data.cityId
     }
-    qingqiu.get("getAllTwoArea", data, function(re) {
+    qingqiu.get("getAllTwoArea", data, function (re) {
       that.setData({
         area: re.data.result
       })
     })
   },
   // 左侧按钮
-  cityleft: function(e) {
+  cityleft: function (e) {
     var that = this;
     // var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
-    var name = e.currentTarget.dataset.name.replace(' ','')
+    var name = e.currentTarget.dataset.name.replace(' ', '')
     that.setData({
       cityId: id,
-      weizhi:name,
+      weizhi: name,
       cityname1: name,
-      needsList:[],
+      needsList: [],
     })
-    if(id == 0){
+    if (id == 0) {
       app.globalData.oneCity = undefined
       app.globalData.twoCity = undefined
       that.xqneedlist() //需求
       that.setData({
-        area:[],
+        area: [],
         showModalStatus: false,
-        onecityName:'全部'
+        onecityName: '全部'
       })
-    }else{
-      var data ={
-        oneAreaId:id
+    } else {
+      var data = {
+        oneAreaId: id
       }
-      app.globalData.oneCity = {id:id,name:name}
+      app.globalData.oneCity = {
+        id: id,
+        name: name
+      }
       that.xqneedlist() //需求
-      qingqiu.get("queryTwoArea", data, function(re) {
+      qingqiu.get("queryTwoArea", data, function (re) {
         if (re.success == true) {
           if (re.result != null) {
-            that.area=re.result
+            that.area = re.result
             that.setData({
-              area:that.area
+              area: that.area
             })
-          }else {
+          } else {
             qingqiu.tk('未查询到任何数据')
           }
-        } 
+        }
       })
     }
   },
   // 右侧单选点击
-  arearight: function(e) {
+  arearight: function (e) {
     var that = this;
-    if(that.data.cityname1==undefined)
-    {
+    if (that.data.cityname1 == undefined) {
       wx.showToast({
         title: '请先选择城市',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
       return
     }
-    if(that.data.onecityName != '全部'){
-      app.globalData.oneCity={id:1,name:'万载县'}
+    if (that.data.onecityName != '全部') {
+      app.globalData.oneCity = {
+        id: 1,
+        name: '万载县'
+      }
     }
     //var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
-    app.globalData.twoCity={id:id,name:name}
-    if(that.data.weizhi == undefined || that.data.weizhi == ""){
+    app.globalData.twoCity = {
+      id: id,
+      name: name
+    }
+    if (that.data.weizhi == undefined || that.data.weizhi == "") {
       wx.showToast({
         title: '请选择城市',
-        icon:'none',
-        duration:1000
+        icon: 'none',
+        duration: 1000
       })
       return
     }
     that.setData({
-      weizhi:that.data.cityname1 + name,
+      weizhi: that.data.cityname1 + name,
       areaId: id,
       //curIndex: index,
       areaname: name,
       showModalStatus: false,
-      needsList:[],
+      needsList: [],
       cityname: this.data.cityname1
     })
-    if(id == 0){
+    if (id == 0) {
       that.xqneedlist() //需求
-    }else{
+    } else {
       that.xqneedlist() //需求
     }
   },

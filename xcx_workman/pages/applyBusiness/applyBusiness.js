@@ -958,8 +958,6 @@ Page({
       }, 'put')
     } else {
       qingqiu.get("wxUserAdd", data, function (re) {
-        debugger
-        console.log(re)
         if (re.success == true) {
           wx.showToast({
             title: '入驻成功',

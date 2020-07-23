@@ -281,8 +281,8 @@ Page({
               console.log(re)
             })
           }
-          wx.redirectTo({
-            url: '../recruitment/recruitment',
+          wx.navigateBack({
+            delta:1
           })
         })
       } else {

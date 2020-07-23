@@ -132,4 +132,3 @@
     </scroll-view>
   </view>
 </view>
-<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

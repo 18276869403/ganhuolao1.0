@@ -31,24 +31,26 @@ Page({
     area:[]
   },
 
-  onLoad: function() {
+  onShow: function() {
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.oneClass()
-    this.twoClass()
-    this.QueryoneArea()
-    this.QuerytwoArea()
-    if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
-      this.setData({
-        goodslist:[],
-        weizhi:app.globalData.oneCity.name + app.globalData.twoCity.name,
-        pageNo:1
-      })
-      this.selectsp()
-    }else{
-      this.setData({goodslist:[],weizhi:'全部',pageNo:1})
-      this.selectsp()
+    if(app.globalData.goodsRefresh != 0){
+      this.oneClass()
+      this.twoClass()
+      this.QueryoneArea()
+      this.QuerytwoArea()
+      if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
+        this.setData({
+          goodslist:[],
+          weizhi:app.globalData.oneCity.name + app.globalData.twoCity.name,
+          pageNo:1
+        })
+        this.selectsp()
+      }else{
+        this.setData({goodslist:[],weizhi:'全部',pageNo:1})
+        this.selectsp()
+      }
     }
   },
   // 下拉刷新
@@ -173,6 +175,7 @@ Page({
     var obj =e.currentTarget.dataset.vals;
     var shopxq = JSON.stringify(obj);
     // debugger
+    app.globalData.goodsRefresh = 0
     wx.navigateTo({
       url: '../goodsDetails/goodsDetails?obj=' + shopxq,
     })

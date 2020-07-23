@@ -159,8 +159,8 @@ Page({
           icon: 'success',
           duration: 3000
         })
-        wx.redirectTo({
-          url: '../Welfare/Welfare',
+        wx.navigateBack({
+          delta:1
         })
       } else { 
         wx.showToast({

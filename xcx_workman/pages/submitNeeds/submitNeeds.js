@@ -310,10 +310,9 @@ Page({
             icon: 'success',
             duration: 2000
           })
-          app.globalData.needRefresh=1
           setTimeout(function () {
-            wx.switchTab({
-              url: '../need/need',
+            wx.navigateBack({
+              delta:1
             })
           }, 1000)
         } else {
@@ -369,9 +368,8 @@ Page({
                 console.log(re)
               })
             }
-            app.globalData.needRefresh=1
-            wx.switchTab({
-              url: '../need/need',
+            wx.navigateBack({
+              delta:1
             })
           })
         } else {

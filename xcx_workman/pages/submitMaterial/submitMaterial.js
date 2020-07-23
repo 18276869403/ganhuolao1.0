@@ -358,8 +358,8 @@ Page({
           })
           setTimeout(function () {
             app.globalData.materialRefresh = 1
-            wx.redirectTo({
-              url: '../Material/Material',
+            wx.navigateBack({
+              delta: 1
             })
           }, 1000)
         } else {

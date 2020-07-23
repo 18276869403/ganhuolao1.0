@@ -454,7 +454,7 @@ Page({
   },
   // 跳转到提交需求页面
   submitNeeds: function() {
-    app.globalData.needRefresh = 0
+    app.globalData.needRefresh = 1
     wx.navigateTo({
       url: '../submitNeeds/submitNeeds?type=0&id=0',
     })

@@ -226,7 +226,7 @@ Page({
   },
   // 发布晒晒页面
   submitShow: function() {
-    app.globalData.showworkRefresh = 0
+    app.globalData.showworkRefresh = 1
     wx.navigateTo({
       url: '../submitShow/submitShow',
     })

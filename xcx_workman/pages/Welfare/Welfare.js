@@ -211,12 +211,15 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onShow() {
     this.getTokenValue()
-    this.getActivity()
-    this.setData({
-      wxUserId: app.globalData.wxid
-    })
+    if(app.globalData.welfareRefresh != 0){
+      this.setData({
+        gongyilist: [],
+        wxUserId: app.globalData.wxid
+      })
+      this.getActivity()
+    }
   },
 
   // 下拉刷新
@@ -225,7 +228,7 @@ Page({
       pageNo: 1,
       gongyilist: []
     })
-    this.onLoad()
+    this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -233,6 +236,7 @@ Page({
 
   // 获取公益活动列表
   getActivity: function () {
+    console.log('我执行了吗？')
     var that = this
     var data = {
       pageNo: that.data.pageNo,
@@ -265,6 +269,7 @@ Page({
   WelfareDetail: function (e) {
     var list = e.currentTarget.dataset.list
     var list1 = JSON.stringify(list)
+    app.globalData.welfareRefresh = 0
     wx.navigateTo({
       url: '../WelfareDetail/WelfareDetail?obj=' + list1,
     })
@@ -280,6 +285,7 @@ Page({
   },
   // 发布工艺活动
   submitWelfare: function () {
+    app.globalData.welfareRefresh = 1
     wx.navigateTo({
       url: '../submitWelfare/submitWelfare',
     })

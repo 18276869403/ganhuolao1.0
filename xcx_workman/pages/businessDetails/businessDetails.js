@@ -98,7 +98,7 @@ Page({
     qingqiu.get("updateWxCase",{id:ssid},function(re){
       console.log(re)
       if(re.success == true){
-        app.globalData.showworkRefresh = 0
+        app.globalData.showworkRefresh = 1
         wx.navigateTo({
           url: '../showDetails/showDetails?obj='+ssid,
         })
@@ -141,6 +141,7 @@ Page({
   // 跳转商品详情
   goGoodsDetails:function(e){
     var obj = JSON.stringify(e.currentTarget.dataset.vals)
+    app.globalData.goodsRefresh = 1
     wx.navigateTo({
       url: '../goodsDetails/goodsDetails?obj=' + obj
     })
