@@ -207,9 +207,10 @@ page {
 .content-icon {
   margin-left: 3%;
   /* margin-top: 32rpx; */
-  height: 140rpx;
+  /* height: 140rpx; */
   line-height: 40rpx;
-  margin-bottom: 42rpx;
+  margin-top: 20rpx;
+  /* margin-bottom: 42rpx; */
 }
 
 .icon-leftText {
@@ -229,7 +230,6 @@ page {
 /* 底部 */
 
 .bottom {
-  margin-top: 20rpx;
   text-align: center;
   background: #e02323;
   font-size: 16px;

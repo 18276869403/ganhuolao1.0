@@ -59,6 +59,13 @@
 			</view>
 		</view>
 	</view>
+
+	<view class='content-icon hengxiang'>
+		<icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
+		<view class='icon-leftText' bindtap='showModal1'>提交前请仔细阅读</view>
+		<view class='icon-righText' bindtap='showModal1'> 《干活佬使用协议》 </view>
+	</view>
+
 	<view class="bottom {{btnFlag == true?'disabled':''}}" bindtap="fabugongyi">
 		立即发布
 	</view>

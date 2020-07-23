@@ -33,7 +33,7 @@ Page({
     workareaname: '',
     city: [],
     area: [],
-    btnFlag:false,
+    btnFlag: false,
     picIurl: '',
     picIurl1: '',
     mianzhe: '欢迎您使用干活佬的服务！本平台仅提供同城信息共享，发布桥梁，信息发布、接单均不收取用户任何费用。\
@@ -178,11 +178,13 @@ Page({
     })
   },
   needsnameblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needsname: ''
@@ -193,10 +195,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needsname: ''
@@ -218,11 +220,13 @@ Page({
     })
   },
   needscontentblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -233,10 +237,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -254,11 +258,13 @@ Page({
   },
   //商家联系人敏感词
   linkmanblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           linkman: ''
@@ -269,10 +275,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           linkman: ''
@@ -302,7 +308,7 @@ Page({
   fabuzhaogong: function () {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var s = qingqiu.yanzheng(that.data.needsname + ",输入职位标题|" + that.data.salary + ",选择输入薪资|" + that.data.workcityname + ",选择工作地|" + that.data.linkman + ",输入联系人|" + that.data.phone + ",输入联系电话")
     if (s != 0) {
@@ -312,7 +318,18 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
+      })
+      return
+    }
+    if (that.data.select == "circle") {
+      wx.showToast({
+        title: '请勾选同意协议！',
+        icon: 'none',
+        duration: 2000
+      })
+      that.setData({
+        btnFlag: false
       })
       return
     }
@@ -329,7 +346,7 @@ Page({
     }
     qingqiu.get("localHireAdd", data, function (re) {
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       console.log(re)
       if (re.success == true) {
@@ -360,7 +377,7 @@ Page({
             })
           }
           wx.navigateBack({
-            delta:1
+            delta: 1
           })
         })
       } else {
@@ -372,78 +389,95 @@ Page({
       }
     }, 'post')
   },
-// 图片上传（对接完成）
-upimg: function (e) {
-  var type = e.currentTarget.dataset.type
-  var index = e.currentTarget.dataset.number
-  var that = this
-  that.setData({
-    btnFlag:true
-  })
-  wx.chooseImage({
-    count: 1,
-    sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
-    sourceType: ['album', 'camera'],
-    success: function (res) {
-      console.log(res)
-      const tempFilePaths = res.tempFilePaths;
-      wx.uploadFile({
-        url: api.imgFilter,
-        name: 'file',
-        filePath: tempFilePaths[0],
-        formData: {
-          media: tempFilePaths[0]
-        },
-        method: 'POST',
-        header: {
-          "Content-Type": "multipart/form-data"
-        },
-        success: function (res) {
-          console.log(res)
-          if (res.data =="false") {
-            that.setData({
-              btnFlag:false
-            })
-            wx.showToast({
-              title: '内容含有违法违规内容',
-              icon: 'none'
-            })
-            return
-          } else {
-            wx.uploadFile({
-              url: api.uploadurl,
-              filePath: tempFilePaths[0],
-              header: {
-                "Content-Type": "multipart/form-data"
-              },
-              formData: {
-                method: 'POST' //请求方式
-              },
-              name: 'file',
-              success(res) {
-                that.setData({
-                  btnFlag:false
-                })
-                var r = res.data
-                var jj = JSON.parse(r);
-                var sj = that.data.viewUrl + jj.message
-                console.log(res)
-                that.setData({
-                  picIurl: sj,
-                  picIurl1: jj.message
-                })
-              }
-            })
+  // 图片上传（对接完成）
+  upimg: function (e) {
+    var type = e.currentTarget.dataset.type
+    var index = e.currentTarget.dataset.number
+    var that = this
+    that.setData({
+      btnFlag: true
+    })
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        console.log(res)
+        const tempFilePaths = res.tempFilePaths;
+        wx.uploadFile({
+          url: api.imgFilter,
+          name: 'file',
+          filePath: tempFilePaths[0],
+          formData: {
+            media: tempFilePaths[0]
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data == "false") {
+              that.setData({
+                btnFlag: false
+              })
+              wx.showToast({
+                title: '内容含有违法违规内容',
+                icon: 'none'
+              })
+              return
+            } else {
+              wx.uploadFile({
+                url: api.uploadurl,
+                filePath: tempFilePaths[0],
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: {
+                  method: 'POST' //请求方式
+                },
+                name: 'file',
+                success(res) {
+                  that.setData({
+                    btnFlag: false
+                  })
+                  var r = res.data
+                  var jj = JSON.parse(r);
+                  var sj = that.data.viewUrl + jj.message
+                  console.log(res)
+                  that.setData({
+                    picIurl: sj,
+                    picIurl1: jj.message
+                  })
+                }
+              })
+            }
           }
-        }
-      })
-    },
-  })
-  that.setData({
-    btnFlag:false
-  })
-},
-  
+        })
+      },
+    })
+    that.setData({
+      btnFlag: false
+    })
+  },
+
+  //改变选框状态(免责协议)
+  change: function (e) {
+    var that = this
+    //得到选中状态
+    var select = e.currentTarget.dataset.select
+    if (select == "circle") {
+      var stype = "success"
+
+    } else {
+      var stype = "circle"
+    }
+    //赋值
+    that.setData({
+      select: stype
+    })
+  },
+
   //地址 显示弹窗样式
   showModal: function (e) {
     this.setData({
