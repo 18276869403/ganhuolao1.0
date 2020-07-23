@@ -33,7 +33,7 @@
             </view>
             <view class="hengxiang">
               <view catchtap="deletess" class="{{btnFlag == true?'disabled':''}}" data-shaid="{{item.id}}">
-                <image src="{{iconUrl}}static/image/shanchu.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/delete.png" class="pinglun-img"></image>
               </view>
             </view>
           </view>
@@ -70,7 +70,7 @@
             </view>
             <view class="hengxiang">
               <view catchtap="deletess" class="{{btnFlag == true?'disabled':''}}" data-shaid="{{item.id}}">
-                <image src="{{iconUrl}}static/image/shanchu.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/delete.png" class="pinglun-img"></image>
               </view>
             </view>
           </view>
