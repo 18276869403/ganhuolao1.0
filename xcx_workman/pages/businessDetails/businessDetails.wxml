@@ -11,12 +11,12 @@
       <view class="content-list-name">{{goodsList.shopName}}</view>
       <view class="hengxiang content-lianxi">
         <view class="hengxiang" wx:for="{{5}}">
-          <image src='{{viewUrl}}static/image/starhui.png' class='star-img' wx:if="{{goodsList.starClass<=index}}"></image>
-          <image src='{{viewUrl}}static/image/starhuang.png' class='star-img' wx:if="{{goodsList.starClass>index}}"></image>
+          <image src='{{iconUrl}}static/image/starhui.png' class='star-img' wx:if="{{goodsList.starClass<=index}}"></image>
+          <image src='{{iconUrl}}static/image/starhuang.png' class='star-img' wx:if="{{goodsList.starClass>index}}"></image>
         </view>
         <view class="hengxiang shiming">
           <view>
-            <image src="{{viewUrl}}static/image/shiming.png" class="shiming-img"></image>
+            <image src="{{iconUrl}}static/image/shiming.png" class="shiming-img"></image>
           </view>
           <view>实名认证</view>
         </view>
@@ -46,25 +46,25 @@
       <view class="content-basic-list zongxiang">
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/xingming.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/xingming.png" class="basic-img"></image>
           </view>
           <view class="basic-text">{{goodsList.wxNc}}</view>
         </view>
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/diqu.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/diqu.png" class="basic-img"></image>
           </view>
           <view class="basic-text">{{goodsList.oneAreaName}} | {{goodsList.twoAreaName}}</view>
         </view>
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/jiedao.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/jiedao.png" class="basic-img"></image>
           </view>
           <view class="basic-text">{{goodsList.shopAddress}}</view>
         </view>
         <view class="basic-list-item1 hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/jianjie.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/jianjie.png" class="basic-img"></image>
           </view>
           <view class="basic-text">{{goodsList.content}}</view>
         </view>
@@ -102,34 +102,30 @@
             <view class="show-item-bottom hengxiang">
               <view class="hengxiang">
                 <view>
-                  <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                  <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
                 </view>
                  <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
                  <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
               </view>
               <view class="hengxiang">
                 <view>
-                  <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                  <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
                 </view>
                 <view>{{item.messageSum}}</view>
               </view>
               <view class="hengxiang">
                 <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
-                  <image src="../image/zan.png" class="pinglun-img"></image>
+                  <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
                 </view>
                 <view wx:if="{{item.backup1==1}}">
-                  <image src="../image/zan2.png" class="pinglun-img"></image>
+                  <image src="{{iconUrl}}static/image/zan2.png" class="pinglun-img"></image>
                 </view>
                 <view>{{item.giveGood}}</view>
               </view>
             </view>
           </view>
         </view>
-
       </view>
-
     </view>
   </view>
-
-
 </view>

@@ -11,23 +11,24 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     startdate: '选择活动时间',
     enddate: '选择截止时间',
-    endDate:'',
-    newDate:'',
+    endDate: '',
+    newDate: '',
     // 添加参数
-    activityname:'',
-    activityCompany:'',
-    activityrenshu:'',
-    activitycontent:'',
+    activityname: '',
+    activityCompany: '',
+    activityrenshu: '',
+    activitycontent: '',
     // startdate:'',
     // enddate:'',
-    picIurl1:'',
-    picIurl:'',
-    piclist:[],
-    btnFlag:false,
-    workcityname:'',
-    workareaname:''
+    picIurl1: '',
+    picIurl: '',
+    piclist: [],
+    btnFlag: false,
+    workcityname: '',
+    workareaname: ''
   },
 
   /**
@@ -38,88 +39,88 @@ Page({
       withShareTicket: true
     })
     this.setData({
-      newDate:utils.newDate(),
-      endDate:utils.newDate()
+      newDate: utils.newDate(),
+      endDate: utils.newDate()
     })
   },
   // 发布活动
-  fabugongyi(){
+  fabugongyi() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
-    if(that.data.activityname==''){
+    if (that.data.activityname == '') {
       wx.showToast({
         title: '请输入活动名称',
         icon: 'none',
         duration: 3000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.activityname.length > 15){
+    if (that.data.activityname.length > 15) {
       wx.showToast({
         title: '活动标题不能超过15个字',
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.activityCompany==''){
+    if (that.data.activityCompany == '') {
       wx.showToast({
         title: '请输入主办单位',
         icon: 'none',
         duration: 3000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.activityrenshu==''){
+    if (that.data.activityrenshu == '') {
       wx.showToast({
         title: '请输入招募人数',
         icon: 'none',
         duration: 3000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.startdate=='选择活动时间'){
+    if (that.data.startdate == '选择活动时间') {
       wx.showToast({
         title: '请输入活动时间',
         icon: 'none',
         duration: 3000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.enddate=='选择截止时间'){
+    if (that.data.enddate == '选择截止时间') {
       wx.showToast({
         title: '请输入截止时间',
         icon: 'none',
         duration: 3000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(utils.checkDate(that.data.enddate,that.data.startdate) < 1){
+    if (utils.checkDate(that.data.enddate, that.data.startdate) < 1) {
       wx.showToast({
         title: '报名时间不能大于活动截止时间哦',
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -131,27 +132,27 @@ Page({
     //   })
     //   return
     // }
-    if(that.data.picIurl1!=''){
+    if (that.data.picIurl1 != '') {
       var pic = ''
-      for(let obj of that.data.piclist){
-        pic += obj+','
+      for (let obj of that.data.piclist) {
+        pic += obj + ','
       }
     }
     var data = {
       wxUserId: app.globalData.wxid,
-      title:that.data.activityname,
-      company:that.data.activityCompany,
-      activityNum:that.data.activityrenshu,
-      content:that.data.activitycontent,
-      activityTime:that.data.startdate + " 00:00:00",
-      endTime:that.data.enddate + " 00:00:00",
-      pic:pic,
+      title: that.data.activityname,
+      company: that.data.activityCompany,
+      activityNum: that.data.activityrenshu,
+      content: that.data.activitycontent,
+      activityTime: that.data.startdate + " 00:00:00",
+      endTime: that.data.enddate + " 00:00:00",
+      pic: pic,
     }
     console.log(data)
     qingqiu.get("addActivity", data, function (re) {
       console.log(re)
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       if (re.success == true) {
         wx.showToast({
@@ -160,9 +161,9 @@ Page({
           duration: 3000
         })
         wx.navigateBack({
-          delta:1
+          delta: 1
         })
-      } else { 
+      } else {
         wx.showToast({
           title: re.message,
           icon: 'none',
@@ -179,19 +180,21 @@ Page({
     })
   },
   // 活动名称失去焦点
-  activitynameblur:function(e){
-    if(e.detail.value == ''){
+  activitynameblur: function (e) {
+    if (e.detail.value == '') {
       return
     }
-    var that=this
-    if(e.detail.value.length > 15){
+    var that = this
+    if (e.detail.value.length > 15) {
       wx.showToast({
         title: '活动标题不能超过15个字',
-        icon:'none'
+        icon: 'none'
       })
       return
     }
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           activityname: ''
@@ -202,10 +205,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           activityname: ''
@@ -221,12 +224,14 @@ Page({
     })
   },
   // 主办单位失去焦点
-  activityCompanyblur:function(e){
-    if(e.detail.value == ''){
+  activityCompanyblur: function (e) {
+    if (e.detail.value == '') {
       return
     }
-    var that=this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    var that = this
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           activityCompany: ''
@@ -237,10 +242,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           activityCompany: ''
@@ -262,12 +267,14 @@ Page({
     })
   },
   // 活动内容失去焦点
-  activitycontentblur:function(e){
-    if(e.detail.value == ''){
+  activitycontentblur: function (e) {
+    if (e.detail.value == '') {
       return
     }
-    var that=this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    var that = this
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           activitycontent: ''
@@ -278,10 +285,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           activitycontent: ''
@@ -290,8 +297,8 @@ Page({
       }
     }, 'POST')
   },
-   // 活动时间
-   bindDateChange: function (e) {
+  // 活动时间
+  bindDateChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       startdate: e.detail.value
@@ -310,7 +317,7 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     wx.chooseImage({
       count: 1,
@@ -332,9 +339,9 @@ Page({
           },
           success: function (res) {
             console.log(res)
-            if (res.data =="false") {
+            if (res.data == "false") {
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               wx.showToast({
                 title: '内容含有违法违规内容',
@@ -354,7 +361,7 @@ Page({
                 name: 'file',
                 success(res) {
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
@@ -364,7 +371,7 @@ Page({
                   that.setData({
                     picIurl: sj,
                     picIurl1: jj.message,
-                    piclist:that.data.piclist
+                    piclist: that.data.piclist
                   })
                 }
               })
@@ -374,7 +381,7 @@ Page({
       },
     })
     that.setData({
-      btnFlag:false
+      btnFlag: false
     })
   },
   // 删除图片

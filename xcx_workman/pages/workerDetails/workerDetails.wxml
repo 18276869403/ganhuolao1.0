@@ -16,19 +16,19 @@
 
             <view class="right-content-item hengxiang">
               <view class="">
-                <image src="{{viewUrl}}static/image/dengji.png" class="dengji-img"></image>
+                <image src="{{iconUrl}}static/image/dengji.png" class="dengji-img"></image>
               </view>
               <view>{{workerDetail.shopName}}</view>
             </view>
             <view class="right-content-item hengxiang">
               <view class="">
-                <image src="{{viewUrl}}static/image/shiming.png" class="dengji-img"></image>
+                <image src="{{iconUrl}}static/image/shiming.png" class="dengji-img"></image>
               </view>
               <view>实名认证</view>
             </view>
             <view class="right-content-item hengxiang">
               <view class="">
-                <image src="{{viewUrl}}static/image/shengri.png" class="dengji-img"></image>
+                <image src="{{iconUrl}}static/image/shengri.png" class="dengji-img"></image>
               </view>
               <view>{{workerDetail.dateBirth}}岁</view>
             </view>
@@ -64,21 +64,21 @@
       <view class="content-basic-list zongxiang">
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/jingyan.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/jingyan.png" class="basic-img"></image>
           </view>
           <view class="basic-tips">经验：</view>
           <view class="basic-text">{{workerDetail.employ}}年</view>
         </view>
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/diqu.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/diqu.png" class="basic-img"></image>
           </view>
           <view class="basic-tips">地区：</view>
           <view class="basic-text">{{workerDetail.oneAreaName}} | {{workerDetail.twoAreaName}}</view>
         </view>
         <view class="basic-list-item hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/phone.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/phone.png" class="basic-img"></image>
           </view>
           <view class="basic-tips">电话：</view>
           <view class="basic-text1" wx:if="{{istrue==1}}">{{workerDetail.phone}}</view>
@@ -89,7 +89,7 @@
         </view>
         <view class="basic-list-item1 hengxiang">
           <view class="basicImg">
-            <image src="{{viewUrl}}static/image/jieshao.png" class="basic-img"></image>
+            <image src="{{iconUrl}}static/image/jieshao.png" class="basic-img"></image>
           </view>
           <view class="basic-tips">介绍：</view>
           <view class="basic-text">{{workerDetail.content}}</view>
@@ -109,22 +109,22 @@
             <view class="show-item-bottom hengxiang">
               <view class="hengxiang">
                 <view>
-                  <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                  <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
                 </view>
                 <view>{{item.giveGood}}</view>
               </view>
               <view class="hengxiang">
                 <view>
-                  <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                  <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
                 </view>
                 <view>{{item.messageSum}}</view>
               </view>
               <view class="hengxiang">
                 <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
-                  <image src="../image/zan.png" class="pinglun-img"></image>
+                  <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
                 </view>
                 <view wx:if="{{item.backup1==1}}">
-                  <image src="../image/zan2.png" class="pinglun-img"></image>
+                  <image src="{{iconUrl}}static/image/zan2.png" class="pinglun-img"></image>
                 </view>
                 <view>{{item.giveGood}}</view>
               </view>
@@ -146,7 +146,7 @@
             <view class="time hengxiang">
               <view class="time_day">{{array[index]}}</view>
               <view class="time_img">
-                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+                <image src="{{iconUrl}}static/image/sanjiao.png"></image>
               </view>
             </view>
           </picker>
@@ -163,7 +163,7 @@
             <view class="time hengxiang">
               <view class="time_dy">{{tian[day]}}</view>
               <view class="time_ig">
-                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+                <image src="{{iconUrl}}static/image/sanjiao.png"></image>
               </view>
             </view>
           </picker>

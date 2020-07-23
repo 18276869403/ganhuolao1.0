@@ -14,6 +14,7 @@ Page({
   data: {
     // 0 普通用户，1工人，2商家
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     userType: 0,
     star: 4,
     chushihua: '1',

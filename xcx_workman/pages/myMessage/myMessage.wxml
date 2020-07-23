@@ -28,7 +28,7 @@
           <view class="look-button">查看留言</view>
         </view>
         <view class="list-top-delete">
-          <image src="{{viewUrl}}static/image/delete.png" class="delete-img" bindtap="deletemyLY" data-lyid="{{item}}"></image>
+          <image src="{{iconUrl}}static/image/delete.png" class="delete-img" bindtap="deletemyLY" data-lyid="{{item}}"></image>
         </view>
       </view>
     </view>
@@ -46,18 +46,18 @@
           <view class="look-button">查看留言</view> 
         </view>
         <view class="list-top-delete">
-          <image src="{{viewUrl}}static/image/delete.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="deletemyLY" data-lyid="{{item}}"></image>
+          <image src="{{iconUrl}}static/image/delete.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="deletemyLY" data-lyid="{{item}}"></image>
         </view>
       </view>
     </view>
   </view>
 </view>
 <!-- <view class="shuju" wx:if="{{messageList.length==0&&needsTypeid==1&&formymessageList.length==0}}">
-  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <image src="{{iconUrl}}static/image/noshuju.png" class="shuju_img"></image>
   <view>暂无数据</view>
 </view>
 <view class="shuju" wx:if="{{formymessageList.length==0&&needsTypeid==2&&messageList.length==0}}">
-  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <image src="{{iconUrl}}static/image/noshuju.png" class="shuju_img"></image>
   <view>暂无数据</view>
-</view> -->
-
+</view>
+ -->

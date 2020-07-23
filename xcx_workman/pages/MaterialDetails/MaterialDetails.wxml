@@ -20,7 +20,7 @@
       </view> -->
 			<view class="hengxiang content-list-type">
 				<view>
-					<image src="{{viewUrl}}static/image/dizhi.png" class="leixing-img"></image>
+					<image src="{{iconUrl}}static/image/dizhi.png" class="leixing-img"></image>
 				</view>
 				<view>
 					{{xqxqlist.oneAreaName}} | {{xqxqlist.twoAreaName}}
@@ -28,7 +28,7 @@
 			</view>
 			<view class="hengxiang content-list-type">
 				<view>
-					<image src="{{viewUrl}}static/image/lianxiren.png" class="leixing-img"></image>
+					<image src="{{iconUrl}}static/image/lianxiren.png" class="leixing-img"></image>
 				</view>
 				<view>
 					{{xqxqlist.publishMan}}
@@ -36,7 +36,7 @@
 			</view>
 			<view class="hengxiang content-list-type">
 				<view>
-					<image src="{{viewUrl}}static/image/baoming2.png" class="leixing-img"></image>
+					<image src="{{iconUrl}}static/image/baoming2.png" class="leixing-img"></image>
 				</view>
 
 				<view>
@@ -75,7 +75,7 @@
 				</view>
 			</view>
 			<view class="zhanshi" wx:if="{{xqxqlist.backup1 == null}}">
-				<image src="{{viewUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
+				<image src="{{iconUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
 			</view>
 		</view>
 	</view>

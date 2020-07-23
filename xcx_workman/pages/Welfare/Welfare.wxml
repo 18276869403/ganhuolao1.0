@@ -6,7 +6,7 @@
 		<view class="top-title hengxiang">
 			<view class="top-title-right hengxiang">
 				<view class="top-title-right-img">
-					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
 					<input type="text" placeholder="输入活动标题搜索" bindinput="getText" value="{{titleText}}" class="shurukuang"></input>
@@ -16,11 +16,11 @@
 				</view>
 			</view>
 			<view class="top-search-fabu">
-				<image src="{{viewUrl}}static/image/fabuhuodong.png" bindtap="submitWelfare" data-type="2" class="fabu-img"></image>
+				<image src="{{iconUrl}}static/image/fabuhuodong.png" bindtap="submitWelfare" data-type="2" class="fabu-img"></image>
 			</view>
 		</view>
 		<view class="top-img">
-			<image src="{{viewUrl}}static/image/gongyi.png" class="bg-img"></image>
+			<image src="{{iconUrl}}static/image/gongyi.png" class="bg-img"></image>
 		</view>
 	</view>
 	<view class="content zongxiang">
@@ -35,7 +35,7 @@
 					<view class="list-top list-top-margin hangxiang">
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text">
@@ -45,7 +45,7 @@
 					<view class="list-top list-top-margin hangxiang">
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/shijian.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/shijian.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text1 text-jiequ" style="width:68%;">
@@ -59,9 +59,9 @@
 
 	</view>
 	<view class="bottom zongxiang">
-		<image src="{{viewUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
 		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
-			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+			<image src="{{iconUrl}}static/image/kefu.png" class="kefu-img"></image>
 		</button>
 	</view>
 </view>
@@ -87,12 +87,12 @@
 				<view class='toast-button'>
 					<view class='button1 {{btnFlag == true ? "disabled":""}}'>
 						<view catchtap='confirmAcceptance'>
-							<image src="{{viewUrl}}static/image/querenbaoming.png" class="button-img"></image>
+							<image src="{{iconUrl}}static/image/querenbaoming.png" class="button-img"></image>
 						</view>
 					</view>
 					<view class='button2'>
 						<view catchtap='cancel'>
-							<image src="{{viewUrl}}static/image/guanbibaoming.png" class="button-img"></image>
+							<image src="{{iconUrl}}static/image/guanbibaoming.png" class="button-img"></image>
 						</view>
 					</view>
 				</view>

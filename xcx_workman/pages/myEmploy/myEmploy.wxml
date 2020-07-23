@@ -25,10 +25,10 @@
           雇主：{{item.name}}
         </view>
         <view class="list-top-edit">
-          <image src="{{viewUrl}}static/image/edit.png" class="delete-img" bindtap="bintapDetails" data-item="{{item}}"></image>
+          <image src="{{iconUrl}}static/image/edit.png" class="delete-img" bindtap="bintapDetails" data-item="{{item}}"></image>
         </view>
         <view class="list-top-delete">
-          <image src="{{viewUrl}}static/image/delete.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="delEmploy" data-id="{{item.id}}"></image>
+          <image src="{{iconUrl}}static/image/delete.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="delEmploy" data-id="{{item.id}}"></image>
         </view>
       </view>
       <view class="content-list-content zongxiang">
@@ -67,7 +67,7 @@
             <view class="time hengxiang">
               <view class="time_day">{{array[index]}}</view>
               <view class="time_img">
-                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+                <image src="{{iconUrl}}static/image/sanjiao.png"></image>
               </view>
             </view>
           </picker>
@@ -84,7 +84,7 @@
             <view class="time hengxiang">
               <view class="time_dy">{{tian[day]}}</view>
               <view class="time_ig">
-                <image src="{{viewUrl}}static/image/sanjiao.png"></image>
+                <image src="{{iconUrl}}static/image/sanjiao.png"></image>
               </view>
             </view>
           </picker>
@@ -100,6 +100,6 @@
 </view>
 
 <view class="shuju" wx:if="{{messageList.length==0}}">
-  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <image src="{{iconUrl}}static/image/noshuju.png" class="shuju_img"></image>
   <view>暂无数据</view>
 </view>

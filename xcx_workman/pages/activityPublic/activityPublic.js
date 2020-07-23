@@ -10,6 +10,7 @@ Page({
     codew:'',
     codeh:'',
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     imgurl:'',
     imageurl:''
   },

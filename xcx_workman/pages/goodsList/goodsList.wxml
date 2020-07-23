@@ -7,12 +7,12 @@
         <view class="top-title-left-name" wx-if="{{weizhi==undefined}}">{{weizhi}}</view>
         <view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
         <view class="top-title-left-enter">
-          <image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+          <image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
         </view>
       </view>
       <view class="top-title-sort hengxiang" bindtap="showModallist">
         <view class="sort-fenzu">
-          <image class="fenzu-img" src="{{viewUrl}}static/image/fenzu.png"></image>
+          <image class="fenzu-img" src="{{iconUrl}}static/image/fenzu.png"></image>
         </view>
         <view class="sort-text" wx-if="{{yijiname==''}}">
           按分类
@@ -21,17 +21,17 @@
           {{yijiname}}-{{erjiname}}
         </view>
         <view class="sort-fenzu">
-          <image class="xiamian-img" src="{{viewUrl}}static/image/xiamian.png"></image>
+          <image class="xiamian-img" src="{{iconUrl}}static/image/xiamian.png"></image>
         </view>
       </view>
     </view>
     <view class="top-img">
-      <image src="{{viewUrl}}static/image/shopping.png" class="bg-img"></image>
+      <image src="{{iconUrl}}static/image/shopping.png" class="bg-img"></image>
     </view>
     <view class="hengxiang top-search">
       <view class="top-title-right hengxiang">
         <view class="top-title-right-img">
-          <image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+          <image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
         </view>
         <view class="top-title-right-shuru">
           <input type="text" placeholder="输入商品名称搜索" bindinput="getText" class="shurukuang"></input>
@@ -41,7 +41,7 @@
         </view>
       </view>
       <view class="top-search-fabu">
-        <image src="{{viewUrl}}static/image/kaidian.png" bindtap="kaidian" data-type="2" class="fabu-img"></image>
+        <image src="{{iconUrl}}static/image/kaidian.png" bindtap="kaidian" data-type="2" class="fabu-img"></image>
       </view>
     </view> 
   </view>
@@ -55,7 +55,7 @@
         <view class="goods-price">¥{{item.newPrice}}</view>
         <view class="goods-store hengxiang">
         <view class="goods-store-img">
-        <image src="{{viewUrl}}static/image/store.png" class="store-img"></image>
+        <image src="{{iconUrl}}static/image/store.png" class="store-img"></image>
         </view>
         <view class="goods-store-text">
         {{item.goodMemo}}
@@ -114,7 +114,7 @@
           <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
             <view class="list-two-item-left">{{item.className}}</view>
             <view class="list-two-item-right" wx:if="{{erjiid==item.id}}">
-              <image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+              <image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
             </view>
           </view>
         </view>

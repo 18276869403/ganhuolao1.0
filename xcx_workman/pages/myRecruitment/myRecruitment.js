@@ -11,6 +11,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     workList: [],
     isLastPage:false,
     pageNo: 1

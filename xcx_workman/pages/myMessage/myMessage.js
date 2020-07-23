@@ -10,6 +10,7 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     needsTypeid: 1,
     btnFlag:false,
     needsTypeList: [{

@@ -10,6 +10,7 @@ const bmap = require('../../utils/bmap-wx.min.js')
 Page({
   data: {
     viewUrl: api.viewUrl,
+    iconUrl:api.iconUrl,
     showModalStatus1: true,
     openid: '',
     sousuotext: '',

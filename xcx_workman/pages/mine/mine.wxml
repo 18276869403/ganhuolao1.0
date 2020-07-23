@@ -3,7 +3,7 @@
 
   <!-- 上方详情块  工人,商家-->
   <view class="content zongxiang">
-    <image src="{{viewUrl}}static/image/minebg.png" class="minebg-img"></image>
+    <image src="{{iconUrl}}static/image/minebg.png" class="minebg-img"></image>
     <view class="content-top hengxiang">
       <view class="content-top-left zongxiang">
         <view class="hengxiang top-left-details">
@@ -15,13 +15,13 @@
         <view class="top-left-type hengxiang">
           <view class="hengxiang top-left-sort">
             <view>
-              <image src="{{viewUrl}}static/image/gongjiang.png" class="sort-img"></image>
+              <image src="{{iconUrl}}static/image/gongjiang.png" class="sort-img"></image>
             </view>
             <view style="width:110rpx;">{{wxUser.starClass}}</view>
           </view>
           <view class="hengxiang top-left-sort">
             <view>
-              <image src="{{viewUrl}}static/image/shimingrenzheng.png" class="sort-img"></image>
+              <image src="{{iconUrl}}static/image/shimingrenzheng.png" class="sort-img"></image>
             </view>
             <view>{{wxUser.backup4}}</view>
           </view>
@@ -43,14 +43,14 @@
       <view class="content-list-item-worker hengxiang">
         <view class="content-worker-left hengxiang">
           <view>
-            <image src="{{viewUrl}}static/image/tuijianruzhu.png" class="worker-img"></image>
+            <image src="{{iconUrl}}static/image/tuijianruzhu.png" class="worker-img"></image>
           </view>
           <view>推荐入驻</view>
           <view class="ziti">{{wxUser.userPoint}}</view>
         </view>
         <view class="content-worker-right hengxiang">
           <view>
-            <image src="{{viewUrl}}static/image/jifen.png" class="worker-img"></image>
+            <image src="{{iconUrl}}static/image/jifen.png" class="worker-img"></image>
           </view>
           <view>推荐入驻</view>
           <view class="ziti">{{wxUser.backup2}}</view>
@@ -62,16 +62,16 @@
   <view class="content-item1 zongxiang">
     <view class="content-item-img hengxiang">
       <view class="content-item-img-block">
-        <image src="{{viewUrl}}static/image/wodeguyong.png" class="logo-img" bindtap="myEmploy"></image>
+        <image src="{{iconUrl}}static/image/wodeguyong.png" class="logo-img" bindtap="myEmploy"></image>
       </view>
       <view class="content-item-img-block">
-        <image src="{{viewUrl}}static/image/wodexuqiu.png" class="logo-img" bindtap="myNeeds"></image>
+        <image src="{{iconUrl}}static/image/wodexuqiu.png" class="logo-img" bindtap="myNeeds"></image>
       </view> 
       <view class="content-item-img-block">
-        <image src="{{viewUrl}}static/image/wodeshaishai.png" class="logo-img" bindtap="showwork"></image>
+        <image src="{{iconUrl}}static/image/wodeshaishai.png" class="logo-img" bindtap="showwork"></image>
       </view>
       <view class="content-item-img-block">
-        <image src="{{viewUrl}}static/image/wodeliuyan.png" class="logo-img" bindtap="myMessage"></image>
+        <image src="{{iconUrl}}static/image/wodeliuyan.png" class="logo-img" bindtap="myMessage"></image>
       </view>
     </view>
     <view class="content-item-text hengxiang">
@@ -85,90 +85,90 @@
   <view class="bottom zongxiang">
     <view class="bottom-list hengxiang" bindtap="myInfo">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/wodeziliao.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/wodeziliao.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         我的资料
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
      <view class="bottom-list hengxiang" bindtap="myMaterial" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/myshengliao.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/myshengliao.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         我的剩料 
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="bottom-list hengxiang" bindtap="myRecruitment" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/myzhaogong.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/myzhaogong.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         我的招工
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="bottom-list hengxiang" bindtap="myWelfare" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/mygongyi.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/mygongyi.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         我的公益
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="bottom-list hengxiang" bindtap="myGoods" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/wodeshangpin.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/wodeshangpin.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         我的商品
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="bottom-list hengxiang" bindtap="myRecommend" data-spid="{{wxUser}}">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/wodetuijian.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/wodetuijian.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         我的推荐
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="bottom-list hengxiang" bindtap="thePublic">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/guanzhu.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/guanzhu.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         关注公众号
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="bottom-list hengxiang" bindtap="phonecall">
       <view class="bottom-list-left">
-        <image src="{{viewUrl}}static/image/lianxiwomen.png" class="ziliao-img"></image>
+        <image src="{{iconUrl}}static/image/lianxiwomen.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
         联系我们
       </view>
       <view class="bottom-list-right">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
   </view>

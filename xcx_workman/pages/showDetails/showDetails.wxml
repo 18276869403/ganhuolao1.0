@@ -27,13 +27,13 @@
       <view class="top-content-top">{{caseMsgList.name}}</view>
       <view class="top-content-bottom hengxiang">
         <view class="top-content-bottom-item hengxiang">
-          <image src="{{viewUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+          <image src="{{iconUrl}}static/image/dingwei.png" class="dingwei-img"></image>
           <view class="top-dingwei" wx-if="{{caseMsgList.oneAreaName==null}}"></view>
           <view class="top-dingwei" wx-if="{{caseMsgList.oneAreaName!=null}}">{{caseMsgList.oneAreaName}} | {{caseMsgList.twoAreaName}}</view>
         </view>
         <view class="hengxiang top-content-bottom-item1">
           <view>
-            <image src="{{viewUrl}}static/image/shijian.png" class="time-img"></image>
+            <image src="{{iconUrl}}static/image/shijian.png" class="time-img"></image>
           </view> 
           <view class="top-time">
             {{caseMsgList.addTime}}
@@ -67,7 +67,7 @@
         <view class="top-content-top1">{{item.name}}</view>
         <view class="hengxiang bottom-time">
           <view>
-            <image src="{{viewUrl}}static/image/shijian.png" class="time-img1"></image>
+            <image src="{{iconUrl}}static/image/shijian.png" class="time-img1"></image>
           </view>
           <view class="bottom-time-text">
             {{item.createTime}}

@@ -11,6 +11,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     id: '',
     needsTypeid: 0,
     select: 'circle',
@@ -30,7 +31,7 @@ Page({
     linkman: '',
     phone: '',
     show: false,
-    btnFlag:false,
+    btnFlag: false,
     needsTypeList: [{
         id: 0,
         name: '普通需求'
@@ -186,7 +187,7 @@ Page({
       this.QuerytwoArea()
     }
   },
- 
+
   // 获取需求
   needSignPage() {
     var that = this
@@ -233,16 +234,16 @@ Page({
   lijifabu() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     that.data.picIurl1 = []
-    if(that.data.tupianlists.length > 0){
+    if (that.data.tupianlists.length > 0) {
       for (let obj of that.data.tupianlists) {
         that.data.picIurl1 += obj + ","
       }
       that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
     }
-    
+
     var s = qingqiu.yanzheng(that.data.needsname + ",输入需求标题|" + that.data.cityId + ",选择所在区域|" + that.data.areaId + ",选择所在区域|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人")
     if (s != 0) {
       wx.showToast({
@@ -251,7 +252,7 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -263,7 +264,7 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -282,7 +283,7 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -303,7 +304,9 @@ Page({
       }
       console.log(data)
       qingqiu.get("needUpdateStateById", data, function (re) {
-        that.setData({btnFlag:false})
+        that.setData({
+          btnFlag: false
+        })
         if (re.success == true) {
           wx.showToast({
             title: '修改成功',
@@ -312,7 +315,7 @@ Page({
           })
           setTimeout(function () {
             wx.navigateBack({
-              delta:1
+              delta: 1
             })
           }, 1000)
         } else {
@@ -340,7 +343,7 @@ Page({
       console.log(data)
       qingqiu.get("insertYneed", data, function (re) {
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         if (re.success == true) {
           wx.showToast({
@@ -369,7 +372,7 @@ Page({
               })
             }
             wx.navigateBack({
-              delta:1
+              delta: 1
             })
           })
         } else {
@@ -450,7 +453,7 @@ Page({
   QuerytwoArea() {
     var that = this
     var data = {
-      oneAreaId: that.data.cityId==0?'1':that.data.cityId
+      oneAreaId: that.data.cityId == 0 ? '1' : that.data.cityId
     }
     qingqiu.get("queryTwoArea", data, function (re) {
       if (re.success == true) {
@@ -574,11 +577,13 @@ Page({
   },
 
   needsnameblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       console.log(res)
       if (res == 1) {
         that.setData({
@@ -590,10 +595,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needsname: ''
@@ -603,11 +608,13 @@ Page({
     }, 'POST')
   },
   needscontentblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       console.log(res)
       if (res == 1) {
         that.setData({
@@ -619,10 +626,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -632,11 +639,13 @@ Page({
     }, 'POST')
   },
   linkmanblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           linkman: ''
@@ -647,10 +656,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           linkman: ''
@@ -1009,7 +1018,7 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     wx.chooseImage({
       count: 1,
@@ -1032,9 +1041,9 @@ Page({
           success: function (res) {
             console.log(res)
             that.setData({
-              btnFlag:false
+              btnFlag: false
             })
-            if (res.data =="false") {
+            if (res.data == "false") {
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
@@ -1053,7 +1062,7 @@ Page({
                 name: 'file',
                 success(res) {
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
@@ -1072,7 +1081,7 @@ Page({
       },
     })
     that.setData({
-      btnFlag:false
+      btnFlag: false
     })
   },
   // 删除图片

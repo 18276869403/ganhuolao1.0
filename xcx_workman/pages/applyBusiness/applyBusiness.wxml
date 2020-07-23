@@ -25,7 +25,7 @@
       <view class="content-text" wx:if="{{yijiname==''}}" style="color:#999999;">选择商家分类</view>
       <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
       <view class="enter">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang" wx:if="{{id!=0}}">
@@ -33,7 +33,7 @@
       <view class="content-text" wx:if="{{yijiname==''}}" style="color:#999999;">选择商家分类</view>
       <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
       <view class="enter">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang">
@@ -53,7 +53,7 @@
       <view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999;">选择区域</view>
       <view class='content-text2' wx:if="{{workcityname!=''}}" style="color:#999999">{{workcityname}} - {{workareaname}}</view>
       <view class="enter">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang"> 
@@ -65,13 +65,13 @@
     </view>
     <view class="hengxiang {{btnFlag == true ? 'disabled' : ''}} fabu-list1">
       <view class="fabu" bindtap='upimg' data-number="0" data-type='5'>
-        <image src="{{viewUrl}}static/image/sctouxiang.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
+        <image src="{{iconUrl}}static/image/sctouxiang.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
         <image src="{{picIurl}}" class="fabu1-img" wx:if="{{picIurl!=''}}"></image>
         <text>店铺照片</text>
       </view>
       <view class="fabu {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='2'>
         <view>
-          <image src="{{viewUrl}}static/image/yingyezhizhao.jpg" class="fabu-item" wx:if="{{picZz==''}}"></image>
+          <image src="{{iconUrl}}static/image/yingyezhizhao.jpg" class="fabu-item" wx:if="{{picZz==''}}"></image>
           <image src="{{picZz}}" class="fabu1-img" wx:if="{{picZz!=''}}"></image>
           <text>营业执照</text>
         </view>
@@ -85,7 +85,7 @@
       <view class="content-text-gongzhong" wx:if="{{yijiname==''}}" style="color:#999999">选择工种分类</view>
       <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
       <view class="enter">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang" wx:if="{{id!=0}}">
@@ -93,7 +93,7 @@
       <view class="content-text-gongzhong" wx:if="{{yijiname==''}}" style="color:#999999">选择工种分类</view>
       <view class='content-text1' wx:if="{{yijiname!=''}}" style="color:#999999;">{{tempClass}}</view>
       <view class="enter">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view> 
     </view>
     <view class="content-item hengxiang">
@@ -125,7 +125,7 @@
       <view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999">选择区域</view>
       <view class='content-text1' wx:if="{{workcityname!=''}}" style="color:#999999">{{workcityname}} - {{workareaname}}</view>
       <view class="enter">
-        <image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
     <view class="content-item hengxiang">
@@ -153,7 +153,7 @@
       <view class="fabu1">
         <view class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='1'>
           <view wx:if="{{picIurl==''||picIurl==null}}">
-            <image src="{{viewUrl}}static/image/sctouxiang.png" class="fabu-item1"></image>
+            <image src="{{iconUrl}}static/image/sctouxiang.png" class="fabu-item1"></image>
           </view>
           <view wx:if="{{picIurl!=''&&picIurl!=null}}">
             <image src="{{picIurl}}" class="fabu1-img"></image>
@@ -163,7 +163,7 @@
       <view class="fabu1">
         <view class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='3'>
           <view wx:if="{{picPerson1==''||picPerson1==null}}">
-            <image src="{{viewUrl}}static/image/zhengmian.png" class="fabu-item1"></image>
+            <image src="{{iconUrl}}static/image/zhengmian.png" class="fabu-item1"></image>
           </view>
           <view wx:if="{{picPerson1!=''&&picPerson1!=null}}">
             <image src="{{picPerson1}}" class="fabu1-img"></image>
@@ -175,7 +175,7 @@
       <view class="fabu1">
         <view class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='4'>
           <view wx:if="{{picPerson2==''||picPerson2==null}}">
-            <image src="{{viewUrl}}static/image/fanmian.png" class="fabu-item1"></image>
+            <image src="{{iconUrl}}static/image/fanmian.png" class="fabu-item1"></image>
           </view>
           <view wx:if="{{picPerson2!=''&&picPerson2!=null}}">
             <image src="{{picPerson2}}" class="fabu1-img"></image>
@@ -292,10 +292,10 @@
           <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
             <view class="list-two-item-left">{{item.className}}</view>
             <view class="list-two-item-right" wx:if="{{fenleitype1.typestate==true&&fenleitype1.erjiid==item.id}}">
-              <image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+              <image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
             </view>
             <view class="list-two-item-right" wx:if="{{fenleitype2.typestate==true&&fenleitype2.erjiid==item.id}}">
-              <image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+              <image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
             </view>
           </view>
         </view>
@@ -322,10 +322,10 @@
           <view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
             <view class="list-two-item-left">{{item.className}}</view>
             <view class="list-two-item-right" wx:if="{{fenleitype1.typestate==true&&fenleitype1.erjiid==item.id}}">
-              <image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+              <image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
             </view>
             <view class="list-two-item-right" wx:if="{{fenleitype2.typestate==true&&fenleitype2.erjiid==item.id}}">
-              <image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+              <image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
             </view>
           </view>
         </view>
@@ -333,5 +333,3 @@
     </scroll-view>
   </view>
 </view>
-
-<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

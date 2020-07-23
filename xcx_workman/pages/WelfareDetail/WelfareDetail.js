@@ -12,6 +12,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     bannerImg: [{
         id: 1,
         bannerUrl: "http://miss.it-ys.com:91/work-boot/sys/common/view/static/image/huodong1.png"
@@ -24,7 +25,7 @@ Page({
     xqxqlist: [],
     jiedanList: [],
     tupianlist: [],
-    btnFlag:false,
+    btnFlag: false,
     id: '',
     wxUserid: '',
     type: '',
@@ -97,7 +98,7 @@ Page({
       gongyilist: gongyilist,
       piclist: piclist1,
       activityid: activityid,
-      wxId:gongyilist.wxId,
+      wxId: gongyilist.wxId,
       wxUserId: app.globalData.wxid,
       piclist2: piclist2
     })
@@ -146,7 +147,7 @@ Page({
   deleteActive() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       id: that.data.activityid
@@ -158,7 +159,7 @@ Page({
         if (res.confirm) {
           qingqiu.get("delActivity", data, function (re) {
             that.setData({
-              btnFlag:false
+              btnFlag: false
             })
             if (re.success == true) {
               wx.showToast({
@@ -184,7 +185,7 @@ Page({
           }, 'delete')
         } else {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           return
         }
@@ -199,12 +200,14 @@ Page({
     })
   },
   // 敏感词
-  signNameblur:function(e){
-    if(e.detail.value == ''){
+  signNameblur: function (e) {
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           signName: ''
@@ -215,10 +218,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           signName: ''
@@ -234,7 +237,7 @@ Page({
     })
   },
   woyaobaoming(e) {
-    if(this.data.gongyilist.signNum==this.data.gongyilist.activityNum){
+    if (this.data.gongyilist.signNum == this.data.gongyilist.activityNum) {
       wx.showToast({
         title: '报名人数已满！',
         icon: 'none',
@@ -242,8 +245,8 @@ Page({
       })
       return
     }
-    for(let obj of this.data.jiedanList){
-      if(obj.wxUserId==app.globalData.wxid){
+    for (let obj of this.data.jiedanList) {
+      if (obj.wxUserId == app.globalData.wxid) {
         wx.showToast({
           title: '您已报过名了',
           icon: 'none',
@@ -260,7 +263,7 @@ Page({
   AddnameActive: function () {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       signName: that.data.signName,
@@ -271,7 +274,7 @@ Page({
     console.log(data)
     qingqiu.get("insertActivitySign", data, function (res) {
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       console.log(res)
       if (res.success == true) {
@@ -288,20 +291,20 @@ Page({
           console.log(res)
           var objdata = {
             openId: res.result.openid,
-            access_token:app.globalData.access_TokenOff,
-            firstValue:"干活佬有人联系你啦！",
-            firstColor:'#173177',
-            keyword1Value:"有人报名你的活动啦！",
-            keyword1Color:'#173177',
-            keyword2Value:utils.newDate(),
-            keyword2Color:'#173177',
-            remarkValue:'干活佬，助力工人/商家接单！',
-            remarkColor:'#173177',
-            MiniUrl:''
+            access_token: app.globalData.access_TokenOff,
+            firstValue: "干活佬有人联系你啦！",
+            firstColor: '#173177',
+            keyword1Value: "有人报名你的活动啦！",
+            keyword1Color: '#173177',
+            keyword2Value: utils.newDate(),
+            keyword2Color: '#173177',
+            remarkValue: '干活佬，助力工人/商家接单！',
+            remarkColor: '#173177',
+            MiniUrl: ''
           }
-         qingqiu.get("SendWxMsg",objdata,function(re){
-           console.log(re)
-         })
+          qingqiu.get("SendWxMsg", objdata, function (re) {
+            console.log(re)
+          })
         })
         qingqiu.get("updateActivity", {
           id: that.data.activityid
@@ -335,13 +338,13 @@ Page({
     })
   },
   // 联系他
-  phonecell:function(e){
+  phonecell: function (e) {
     var phone = e.currentTarget.dataset.phone
-    if(phone==''||phone==null||phone=='null'){
+    if (phone == '' || phone == null || phone == 'null') {
       wx.showToast({
         title: '联系电话为空',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
       return
     }

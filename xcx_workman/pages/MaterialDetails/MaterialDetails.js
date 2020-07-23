@@ -12,6 +12,7 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     xqxqlist:[],
     jiedanList:[],
     tupianlist:[],

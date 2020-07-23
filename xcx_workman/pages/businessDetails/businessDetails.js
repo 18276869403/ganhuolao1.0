@@ -9,7 +9,7 @@ Page({
   data: {
     viewUrl:api.viewUrl,
     goodsList:[],
-    viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     score: 3,
     CheckItem: 0,
     goodsList:[],

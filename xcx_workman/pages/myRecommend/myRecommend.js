@@ -10,6 +10,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     // jointype为0，入驻商家，为1，入驻工人
     recommendList: [{
         id: 1,

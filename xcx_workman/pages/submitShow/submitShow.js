@@ -9,6 +9,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     needscontent: '',
     cityname: '',
     areaname: '',
@@ -33,9 +34,9 @@ Page({
     cityname1: '',
     picIurl1: [],
     picIurl: '',
-    picimg: '', 
+    picimg: '',
     num: 1,
-    btnFlag:false,
+    btnFlag: false,
     tupianlists: [],
     addresslist: []
   },
@@ -109,7 +110,7 @@ Page({
   lijifabu() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     if (that.data.needscontent == "") {
       wx.showToast({
@@ -118,7 +119,7 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -132,22 +133,22 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    if(that.data.tupianlists.length > 0){
+    if (that.data.tupianlists.length > 0) {
       for (let obj of that.data.tupianlists) {
         that.data.picIurl1 += obj + ','
       }
       that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
-    }else{
+    } else {
       wx.showToast({
         title: '至少上传一张图片',
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -165,7 +166,7 @@ Page({
     qingqiu.get("insertCase", data, function (re) {
       console.log(re)
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       if (re.success == true) {
         wx.showToast({
@@ -177,11 +178,11 @@ Page({
         // wx.switchTab({
         //   url: '../showwork/showwork',
         // })
-        setTimeout(function(){
+        setTimeout(function () {
           wx.navigateBack({
             delta: 1
           })
-        },1000)
+        }, 1000)
       }
     }, 'post')
   },
@@ -192,11 +193,13 @@ Page({
     })
   },
   commentinputblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -207,10 +210,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -347,7 +350,7 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     wx.chooseImage({
       count: 1,
@@ -355,7 +358,7 @@ Page({
       sourceType: ['album', 'camera'],
       success: function (res) {
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
@@ -372,9 +375,9 @@ Page({
           },
           success: function (res) {
             console.log(res)
-            if (res.data =="false") {
+            if (res.data == "false") {
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               wx.showToast({
                 title: '内容含有违法违规内容',
@@ -394,7 +397,7 @@ Page({
                 name: 'file',
                 success(res) {
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
@@ -414,7 +417,7 @@ Page({
       },
     })
     that.setData({
-      btnFlag:false
+      btnFlag: false
     })
   },
   // 删除图片

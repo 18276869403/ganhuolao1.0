@@ -9,6 +9,7 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     goodsList: [
       // {
       //   id: 1,

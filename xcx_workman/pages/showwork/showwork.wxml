@@ -7,12 +7,12 @@
         <view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
         <view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
         <view class="top-title-left-enter">
-          <image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+          <image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
         </view>
       </view>
       <view class="top-title-right hengxiang">
         <view class="top-title-right-img">
-          <image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+          <image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
         </view>
         <view class="top-title-right-shuru">
           <input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入晒晒标题" class="shurukuang"></input>
@@ -85,23 +85,23 @@
           <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
               <view>
-                <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
               </view>
               <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
               <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
             </view>
             <view class="hengxiang">
               <view>
-                <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
               </view>
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
               <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
-                <image src="../image/zan.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
               </view>
               <view wx:if="{{item.backup1==1}}">
-                <image src="../image/zan2.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/zan2.png" class="pinglun-img"></image>
               </view>
               <view>{{item.giveGood}}</view>
             </view>
@@ -120,23 +120,23 @@
           <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
               <view>
-                <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
               </view>
               <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
               <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
             </view>
             <view class="hengxiang">
               <view>
-                <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
               </view>
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
               <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
-                <image src="../image/zan.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
               </view>
               <view wx:if="{{item.backup1==1}}">
-                <image src="../image/zan2.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/zan2.png" class="pinglun-img"></image>
               </view>
               <view>{{item.giveGood}}</view>
             </view>
@@ -147,7 +147,7 @@
   </view>
 
   <view class="fabu-button">
-    <image src="{{viewUrl}}static/image/fabubutton.png" class="fabu-img" bindtap="showModal1"></image>
+    <image src="{{iconUrl}}static/image/fabubutton.png" class="fabu-img" bindtap="showModal1"></image>
   </view>
 </view>
 
@@ -155,25 +155,25 @@
 <view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
 <view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
   <view class='tanchuang'>
-    <image src="{{viewUrl}}static/image/showbg.png" class="tanchuang-img"></image>
+    <image src="{{iconUrl}}static/image/showbg.png" class="tanchuang-img"></image>
     <view class="tanchuang-block zongxiang">
       <view class="tanchuang-title">您可以发布</view>
       <view class="hengxiang tanchuang-item">
         <view class="tanchuang-item-left zongxiang">
           <view>
-            <image src="{{viewUrl}}static/image/tupian.png" class="tupian-img" bindtap="submitShow"></image>
+            <image src="{{iconUrl}}static/image/tupian.png" class="tupian-img" bindtap="submitShow"></image>
           </view>
           <view>照片</view>
         </view>
         <view class="tanchuang-item-right zongxiang" bindtap="submitVideo" wx:if="{{showList[0].backup1==1}}">
           <view>
-            <image src="{{viewUrl}}static/image/shipin.png" class="tupian-img"></image>
+            <image src="{{iconUrl}}static/image/shipin.png" class="tupian-img"></image>
           </view>
           <view>视频</view>
         </view>
       </view>
       <view class="tanchuang-close">
-        <image src="{{viewUrl}}static/image/showclose.png" class="close-img" bindtap="hideModal1"></image>
+        <image src="{{iconUrl}}static/image/showclose.png" class="close-img" bindtap="hideModal1"></image>
       </view>
     </view>
   </view>

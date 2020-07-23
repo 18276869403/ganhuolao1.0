@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl
+    viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl
   }, 
    // 跳转到涂料用量
   yyyy: function () {

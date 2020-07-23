@@ -7,12 +7,12 @@
 				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
 				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
 				<view class="top-title-left-enter">
-					<image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+					<image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
 				</view>
 			</view>
 			<view class="top-title-right hengxiang">
 				<view class="top-title-right-img">
-					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
 					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="搜索职位" class="shurukuang"></input>
@@ -21,7 +21,7 @@
 					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
 				</view>
 				<view class="top-search-fabu">
-					<image src="{{viewUrl}}static/image/fabuMaterial.png" class="fabu-img" bindtap="submitRecruitment"></image>
+					<image src="{{iconUrl}}static/image/fabuMaterial.png" class="fabu-img" bindtap="submitRecruitment"></image>
 				</view>
 			</view>
 		</view>
@@ -45,7 +45,7 @@
 					<view class="list-top list-top-margin hangxiang">
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text">
@@ -55,7 +55,7 @@
 					<view class="list-top list-top-margin hangxiang">
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/zhaogongname.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/zhaogongname.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text1 text-jiequ">
@@ -63,7 +63,7 @@
 						</view>
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/zhaogongdizhi.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/zhaogongdizhi.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text1 text-jiequ" style="width:38%;">
@@ -80,9 +80,9 @@
 	</view>
 
 	<view class="bottom zongxiang">
-		<image src="{{viewUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
 		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
-			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+			<image src="{{iconUrl}}static/image/kefu.png" class="kefu-img"></image>
 		</button>
 	</view>
 </view>

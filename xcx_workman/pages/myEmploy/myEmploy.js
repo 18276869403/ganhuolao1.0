@@ -10,10 +10,11 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     xqlist: {},
     id: '',
     needsTypeid: 1,
-    workerskill:'',
+    workerskill: '',
     needsTypeList: [{
         id: 1,
         name: '我的雇佣'
@@ -23,7 +24,7 @@ Page({
         name: '雇佣我的'
       }
     ],
-    btnFlag:false,
+    btnFlag: false,
     price: '',
     istrue: 0,
     flag: true,
@@ -33,38 +34,40 @@ Page({
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年'],
     messageList: [],
-    isLastPage:false,
-    pageNo:1
+    isLastPage: false,
+    pageNo: 1
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.data.messageList=[]
-    this.data.isLastPage=false
-    this.data.pageNo=1
+    this.data.messageList = []
+    this.data.isLastPage = false
+    this.data.pageNo = 1
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
   },
-   // 上拉功能
-   onReachBottom: function () {
+  // 上拉功能
+  onReachBottom: function () {
     if (this.data.isLastPage) {
       wx.showToast({
         title: '没有更多了！',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
-        return
+      return
     }
-    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
     this.getmyEmploy()
   },
   /**
    * 生命周期函数--监听页面加载 
    */
   onLoad: function () {
-    this.data.messageList=[]
+    this.data.messageList = []
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -73,22 +76,22 @@ Page({
   changeType: function (e) {
     var that = this;
     var id = e.currentTarget.dataset.id
-    that.data.messageList=[]
+    that.data.messageList = []
     that.setData({
       needsTypeid: id,
-      messageList:that.data.messageList
+      messageList: that.data.messageList
     })
-    that.data.isLastPage=false
-    that.data.pageNo=1
+    that.data.isLastPage = false
+    that.data.pageNo = 1
     that.getmyEmploy()
   },
   phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
-    if(phone==''||phone==null){
+    if (phone == '' || phone == null) {
       wx.showToast({
         title: '该用户暂未留电话号码',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
       return
     }
@@ -100,7 +103,7 @@ Page({
   delEmploy: function (e) {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       id: e.currentTarget.dataset.id
@@ -115,12 +118,14 @@ Page({
         })
         setTimeout(function () {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           that.onLoad()
         }, 1000)
-      }else{
-        that.setData({btnFlag:false})
+      } else {
+        that.setData({
+          btnFlag: false
+        })
       }
     }, 'delete')
   },
@@ -140,14 +145,14 @@ Page({
     var data = ""
     if (that.data.needsTypeid == 1) {
       data = {
-        pageNo:that.data.pageNo,
-        pageSize:10,
+        pageNo: that.data.pageNo,
+        pageSize: 10,
         wxCaseId: app.globalData.wxid
       }
     } else {
       data = {
-        pageNo:that.data.pageNo,
-        pageSize:10,
+        pageNo: that.data.pageNo,
+        pageSize: 10,
         wxCaseId2: app.globalData.wxid
       }
     }
@@ -155,9 +160,9 @@ Page({
       console.log(re)
       if (re.success == true) {
         if (re.result != null) {
-          if(re.result.records==''){
-            that.data.isLastPage=true
-          }else{
+          if (re.result.records == '') {
+            that.data.isLastPage = true
+          } else {
             for (let obj of re.result.records) {
               obj.picIurl = api.viewUrl + obj.picIurl
               obj.hiringTime = obj.hiringTime.split(' ')[0]
@@ -205,15 +210,17 @@ Page({
     this.setData({
       flag: false,
       xqlist: xqlist,
-      price:xqlist.estimatedCost,
-      predict:xqlist.predict,
-      workerskill:xqlist.employmentMatters
+      price: xqlist.estimatedCost,
+      predict: xqlist.predict,
+      workerskill: xqlist.employmentMatters
     })
   },
   // 修改雇佣
   bindCon: function () {
     var that = this
-    that.setData({btnFlag:true})
+    that.setData({
+      btnFlag: true
+    })
     var data = {
       id: that.data.xqlist.id,
       estimatedCost: that.data.price + that.data.array[that.data.index],
@@ -232,11 +239,15 @@ Page({
           duration: 2000
         })
         setTimeout(function () {
-          that.setData({btnFlag:false})
+          that.setData({
+            btnFlag: false
+          })
           that.onLoad()
         }, 1000)
       } else {
-        that.setData({btnFlag:false})
+        that.setData({
+          btnFlag: false
+        })
         wx.showToast({
           title: '修改失败',
           icon: 'none',
@@ -249,7 +260,7 @@ Page({
     })
   },
 
-  
+
   bindClose: function () {
     this.setData({
       flag: true
@@ -262,9 +273,9 @@ Page({
     })
   },
   // 敏感词
-  guyongshiblur:function(e){
+  guyongshiblur: function (e) {
     var that = this
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     qingqiu.get("checkWords", {

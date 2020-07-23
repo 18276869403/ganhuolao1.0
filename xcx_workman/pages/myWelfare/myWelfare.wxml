@@ -2,16 +2,16 @@
 <!-- <text>pages/Welfare/Welfare.wxml</text> -->
 <view class="container">
 	<view class="hengxian"></view>
-  <view class="top hengxiangs">
-    <view wx:for="{{type}}" wx:key="key" bindtap="changetype" data-id="{{item.tid}}" class="xuanzhong">
-      <view wx:if="{{GyTypeid==item.tid}}" class="top-item-checked">
-        <text class="bian">{{item.name}}</text>
-      </view>
-      <view wx:if="{{GyTypeid!=item.tid}}" class="top-item-normal">
-        <text class="">{{item.name}}</text>
-      </view>
-    </view>
-  </view> 
+	<view class="top hengxiangs">
+		<view wx:for="{{type}}" wx:key="key" bindtap="changetype" data-id="{{item.tid}}" class="xuanzhong">
+			<view wx:if="{{GyTypeid==item.tid}}" class="top-item-checked">
+				<text class="bian">{{item.name}}</text>
+			</view>
+			<view wx:if="{{GyTypeid!=item.tid}}" class="top-item-normal">
+				<text class="">{{item.name}}</text>
+			</view>
+		</view>
+	</view>
 	<view class="content zongxiang">
 		<!-- 公益活动模块 -->
 		<view class="recruitment-need">
@@ -24,7 +24,7 @@
 					<view class="list-top list-top-margin hangxiang">
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/zhaogongjs.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text">
@@ -34,7 +34,7 @@
 					<view class="list-top list-top-margin hangxiang">
 						<view class="content-left-img zongxiang">
 							<view>
-								<image src="{{viewUrl}}static/image/shijian.png" class="content-shalou-img"></image>
+								<image src="{{iconUrl}}static/image/shijian.png" class="content-shalou-img"></image>
 							</view>
 						</view>
 						<view class="content-text1 text-jiequ" style="width:68%;">

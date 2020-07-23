@@ -14,26 +14,26 @@
           <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
               <view>
-                <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
               </view>
               <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
               <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
             </view>
             <view class="hengxiang">
               <view>
-                <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
               </view>
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
               <view>
-                <image src="../image/zan.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
               </view>
               <view>{{item.giveGood}}</view>
             </view>
             <view class="hengxiang">
               <view catchtap="deletess" class="{{btnFlag == true?'disabled':''}}" data-shaid="{{item.id}}">
-                <image src="../image/shanchu.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/shanchu.png" class="pinglun-img"></image>
               </view>
             </view>
           </view>
@@ -51,26 +51,26 @@
           <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
             <view class="hengxiang" >
               <view>
-                <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
+                <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
               </view>
               <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
               <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
             </view>
             <view class="hengxiang">
               <view>
-                <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
               </view>
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
               <view>
-                <image src="../image/zan.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
               </view>
               <view>{{item.giveGood}}</view>
             </view>
             <view class="hengxiang">
               <view catchtap="deletess" class="{{btnFlag == true?'disabled':''}}" data-shaid="{{item.id}}">
-                <image src="../image/shanchu.png" class="pinglun-img"></image>
+                <image src="{{iconUrl}}static/image/shanchu.png" class="pinglun-img"></image>
               </view>
             </view>
           </view>
@@ -80,6 +80,6 @@
   </view>
 </view>
 <view class="shuju" wx:if="{{showList.length==0}}">
-  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <image src="{{iconUrl}}static/image/noshuju.png" class="shuju_img"></image>
   <view>暂无数据</view>
 </view>

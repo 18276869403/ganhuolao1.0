@@ -10,6 +10,7 @@ Page({
     codew:'',
     codeh:'',
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     imgurl:'',
     imageurl:''
   },
@@ -35,6 +36,7 @@ Page({
       that.setData({
         imgurl:res.twoCodeUrl
       })
+      console.log(that.data.imgurl)
       that.getImg()
     })
   },

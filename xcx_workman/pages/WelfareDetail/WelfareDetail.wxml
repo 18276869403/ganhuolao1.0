@@ -8,7 +8,7 @@
 					</view>
 					<view class="title-time hengxiang">
 						<view>
-							<image src="{{viewUrl}}static/image/huodongtime.png" class="time-icon"></image>
+							<image src="{{iconUrl}}static/image/huodongtime.png" class="time-icon"></image>
 						</view>
 						<view class="title-time-text">{{gongyilist.createTime}}</view>
 					</view>
@@ -30,7 +30,7 @@
 		<view class="content-content zongxiang">
 			<view class="content-content-title hengxiang">
 				<view>
-					<image src="{{viewUrl}}static/image/huodongcontext.png" class="activity-icon"></image>
+					<image src="{{iconUrl}}static/image/huodongcontext.png" class="activity-icon"></image>
 				</view>
 				<view>活动描述</view>
 			</view>
@@ -53,14 +53,14 @@
 		<!-- 按钮 -->
 		<view class="content-sign hengxiang">
 			<view class="sign-view {{btnFlag == true?'disabled':''}}" wx:if="{{wxUserId==gongyilist.wxId}}" bindtap="deleteActive">
-				<image src="{{viewUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
+				<image src="{{iconUrl}}static/image/shanchuhuodong.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view" wx:if="{{wxUserId!=gongyilist.wxId}}" bindtap="woyaobaoming">
-				<image src="{{viewUrl}}static/image/woyaosign.png" class="sign-img"></image>
+				<image src="{{iconUrl}}static/image/woyaosign.png" class="sign-img"></image>
 			</view>
 			<view class="sign-view">
 				<button open-type="share" class="sharebutton">
-					<image src="{{viewUrl}}static/image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image> 
+					<image src="{{iconUrl}}static/image/aixinzhuanfa.png" bindtap="aixinzhuanfa" class="sign-img"></image> 
 				</button>
 			</view> 
 		</view>
@@ -111,12 +111,12 @@
 				<view class='toast-button'>
 					<view class='button1 {{btnFlag == true?"disabled":""}}'>
 						<view catchtap='AddnameActive'>
-							<image src="{{viewUrl}}static/image/querenbaoming.png" class="button-img"></image>
+							<image src="{{iconUrl}}static/image/querenbaoming.png" class="button-img"></image>
 						</view>
 					</view>
 					<view class='button2'>
 						<view catchtap='cancel'>
-							<image src="{{viewUrl}}static/image/guanbibaoming.png" class="button-img"></image>
+							<image src="{{iconUrl}}static/image/guanbibaoming.png" class="button-img"></image>
 						</view>
 					</view>
 				</view>

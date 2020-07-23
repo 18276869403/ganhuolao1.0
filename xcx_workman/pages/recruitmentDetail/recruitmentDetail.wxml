@@ -5,7 +5,7 @@
 			<view class="content-list-item hengxiang">
 				<view class="content-list-time hengxiang">
 					<view class="list-time-shalou">
-						<image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+						<image src="{{iconUrl}}static/image/shalou.png" class="shalou-img"></image>
 					</view>
 					<view class="list-time-text">进行中</view>
 					<view class="list-time-text" wx:if="{{xqxqlist.needState==1}}">已完成</view>
@@ -30,7 +30,7 @@
 		
 			<view class="hengxiang content-list-type">
 				<view>
-					<image src="{{viewUrl}}static/image/zhaogongname.png" class="leixing-img"></image>
+					<image src="{{iconUrl}}static/image/zhaogongname.png" class="leixing-img"></image>
 				</view>
 				<view>
 					联系人：{{zhaogong.publishMan}}
@@ -38,7 +38,7 @@
 			</view>
 			<view class="hengxiang content-list-type">
 				<view>
-					<image src="{{viewUrl}}static/image/zhaogongdizhi.png" class="leixing-img"></image>
+					<image src="{{iconUrl}}static/image/zhaogongdizhi.png" class="leixing-img"></image>
 				</view>
 				<view>
 					{{zhaogong.oneAreaName}}|{{zhaogong.twoAreaName}}
@@ -46,7 +46,7 @@
 			</view>
 			<view class="hengxiang content-list-type">
 				<view>
-					<image src="{{viewUrl}}static/image/huodongshijian.png" class="leixing-img"></image>
+					<image src="{{iconUrl}}static/image/huodongshijian.png" class="leixing-img"></image>
 				</view>
 				<view>
 					{{zhaogong.createTime}}
@@ -77,7 +77,7 @@
 				</view>
 			</view>
 			<view class="zhanshi" wx:if="{{zhaogong.backup4 == null}}">
-				<image src="{{viewUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
+				<image src="{{iconUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
 			</view>
 		</view>
 	</view>

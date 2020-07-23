@@ -11,6 +11,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     pageNo: 1,
     isLastPage: false,
     needsList: []

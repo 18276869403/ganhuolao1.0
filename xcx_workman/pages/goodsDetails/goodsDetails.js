@@ -8,6 +8,7 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     current:0,
     spxqlist:[],
     tupian:[],

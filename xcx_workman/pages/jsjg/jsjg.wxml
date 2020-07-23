@@ -2,7 +2,7 @@
 
 <view>
   <view class="top-class">
-  <image src="http://111.231.51.198:91/work-boot/sys/common/view/static/image/jisuanResult.png" class="jieguo-img-class"></image>
+  <image src="{{iconUrl}}static/image/jisuanResult.png" class="jieguo-img-class"></image>
     <view class="jieguo-class">{{jieguo}}</view>
   </view>
   <view class="xinq">

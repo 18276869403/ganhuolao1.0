@@ -1,7 +1,7 @@
 // pages/myInfo/myInfo.js
 var app = getApp()
 var qingqiu = require('../../utils/request.js')
-var api = require('../../utils/config.js') 
+var api = require('../../utils/config.js')
 var utils = require('../../utils/util.js')
 Page({
 
@@ -9,15 +9,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl,
+    viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     birth: "2019-01-02",
     sex: '0',
     itemList: ['男', '女'],
     date: '1970-01-01',
     name: '',
     phone: '',
-    btnFlag:false,
-    wxUser:[]
+    btnFlag: false,
+    wxUser: []
   },
 
   /**
@@ -27,93 +28,93 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.getUserInfo(options.id)  
+    this.getUserInfo(options.id)
   },
-  getUserInfo:function(id){
+  getUserInfo: function (id) {
     var that = this
     var data = {
-      id:id
+      id: id
     }
-    qingqiu.get("queryWxUser",data,function(re){
+    qingqiu.get("queryWxUser", data, function (re) {
       console.log(re)
-      if(re.success == true){
-        if((re.result.name == "" || re.result.name == null || re.result.name == "null") && (re.result.shopName == "" || re.result.shopName == null || re.result.shopName == "null")){
+      if (re.success == true) {
+        if ((re.result.name == "" || re.result.name == null || re.result.name == "null") && (re.result.shopName == "" || re.result.shopName == null || re.result.shopName == "null")) {
           re.result.name = ''
         }
-        if(re.result.phone == "" || re.result.phone == null || re.result.phone == null){
+        if (re.result.phone == "" || re.result.phone == null || re.result.phone == null) {
           re.result.phone = ''
         }
-        if(re.result.dateBirth == null || re.result.dateBirth == "" || re.result.dateBirth == "null"){
+        if (re.result.dateBirth == null || re.result.dateBirth == "" || re.result.dateBirth == "null") {
           re.result.dateBirth = '1970-01-01'
         }
-        if(re.result.sex == 0 || re.result.sex == 1){
+        if (re.result.sex == 0 || re.result.sex == 1) {
           re.result.sex = 0
-        }else{
+        } else {
           re.result.sex = 1
         }
         that.setData({
-          wxUser:re.result
+          wxUser: re.result
         })
-      }else{
-        wx.showToast({ 
+      } else {
+        wx.showToast({
           title: re.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
     })
   },
   // 保存
-  UpdateUserInfo:function(){
+  UpdateUserInfo: function () {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
-      id:that.data.wxUser.id,
-      name:that.data.wxUser.name,
-      dateBirth:that.data.wxUser.dateBirth,
-      sex:that.data.wxUser.sex + 1,
-      phone:that.data.wxUser.phone
+      id: that.data.wxUser.id,
+      name: that.data.wxUser.name,
+      dateBirth: that.data.wxUser.dateBirth,
+      sex: that.data.wxUser.sex + 1,
+      phone: that.data.wxUser.phone
     }
     var s = qingqiu.yanzheng(data.name + ',请输入真实姓名|' + data.sex + ',请选择性别|' + data.dateBirth + ',请选择出生年月|' + data.phone + ',请输入手机号')
-    if(s != 0){
+    if (s != 0) {
       wx.showToast({
         title: s,
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
-    qingqiu.get("editWxUser",data,function(re){
+    qingqiu.get("editWxUser", data, function (re) {
       if (re.success == true) {
         wx.showToast({
           title: '保存成功！',
-          icon:'none',
-          duration:1000
+          icon: 'none',
+          duration: 1000
         })
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
-        setTimeout(function(){
+        setTimeout(function () {
           wx.switchTab({
             url: '../mine/mine'
           })
-        },1000)
-      } else{
+        }, 1000)
+      } else {
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         wx.showToast({
           title: re.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
         return
       }
-    },'put')
+    }, 'put')
   },
 
   //性别选择
@@ -138,7 +139,7 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     var dateBirth = "wxUser.dateBirth"
     this.setData({
-      [dateBirth] : e.detail.value
+      [dateBirth]: e.detail.value
     })
   },
   //获取输入的名称
@@ -149,9 +150,9 @@ Page({
     })
   },
 
-  nameblur:function(e){
+  nameblur: function (e) {
     var that = this
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var name = "wxUser.name"

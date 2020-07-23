@@ -29,7 +29,7 @@
 					</view>
 				</picker>
 				<view class="enter">
-					<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+					<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
 				</view>
 			</view>
 		</view>
@@ -42,7 +42,7 @@
 					</view>
 				</picker>
 				<view class="enter">
-					<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+					<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
 				</view>
 			</view>
 		</view>
@@ -50,11 +50,11 @@
 		<view class="hengxiang fabu-list1">
 			<view class="fabu" wx:for="{{piclist}}" wx:for-index="index" wx:key="{{item.id}}">
 				<image src="{{viewUrl}}{{item}}" class="fabu-item"></image>
-				<image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 				<text>活动描述图片</text>
 			</view>
 			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" wx:if="{{piclist.length<4}}">
-				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+				<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 				<text>活动描述图片</text>
 			</view>
 		</view>
@@ -100,5 +100,3 @@
 		<view class='close-button' bindtap='hideModal1'>关闭</view>
 	</view>
 </view>
-
-<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

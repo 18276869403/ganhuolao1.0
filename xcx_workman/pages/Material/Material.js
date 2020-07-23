@@ -9,6 +9,7 @@ const bmap = require('../../utils/bmap-wx.min.js')
 Page({
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     animationData: '',
     showModalStatus: '',
     animationData: '',

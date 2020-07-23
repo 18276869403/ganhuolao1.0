@@ -12,6 +12,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     // tupianlist: [{
     //   id: 1,
     //   tupian: '../image/top.png'
@@ -51,7 +52,7 @@ Page({
     tupianlist: [],
     id: '',
     wxUserid: '',
-    btnFlag:false,
+    btnFlag: false,
     type: ''
   },
 
@@ -168,7 +169,7 @@ Page({
   baoming() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       needId: that.data.id,
@@ -185,7 +186,7 @@ Page({
           qingqiu.get("insertNeedSign", data, function (res) {
             if (res.success == true) {
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               wx.showToast({
                 title: '报名成功',
@@ -198,37 +199,37 @@ Page({
               console.log(that.data.xid)
               qingqiu.get("getPublicUserById", obj, function (res) {
                 console.log(res)
-                if(res.result.openid == "" || res.result.openid == null){
+                if (res.result.openid == "" || res.result.openid == null) {
                   return
                 }
                 var objdata = {
                   openId: res.result.openid,
-                  access_token:app.globalData.access_TokenOff,
-                  firstValue:"干活佬有人联系你啦！",
-                  firstColor:'#173177',
-                  keyword1Value:"您的需求有人报名了！",
-                  keyword1Color:'#173177',
-                  keyword2Value:utils.newDate(),
-                  keyword2Color:'#173177',
-                  remarkValue:'干活佬，助力工人/商家接单！',
-                  remarkColor:'#173177',
-                  MiniUrl:''
+                  access_token: app.globalData.access_TokenOff,
+                  firstValue: "干活佬有人联系你啦！",
+                  firstColor: '#173177',
+                  keyword1Value: "您的需求有人报名了！",
+                  keyword1Color: '#173177',
+                  keyword2Value: utils.newDate(),
+                  keyword2Color: '#173177',
+                  remarkValue: '干活佬，助力工人/商家接单！',
+                  remarkColor: '#173177',
+                  MiniUrl: ''
                 }
-               qingqiu.get("SendWxMsg",objdata,function(re){
-                 console.log(re)
-                 if(re.errcode != 0){
-                   wx.showToast({
-                     title: '消息推送失败(用户尚未关注公众号或者用户拒接接收推送)',
-                     icon:'none',
-                   })
-                   return
-                 }
-               })
+                qingqiu.get("SendWxMsg", objdata, function (re) {
+                  console.log(re)
+                  if (re.errcode != 0) {
+                    wx.showToast({
+                      title: '消息推送失败(用户尚未关注公众号或者用户拒接接收推送)',
+                      icon: 'none',
+                    })
+                    return
+                  }
+                })
               })
               that.SelectjiedanList()
             } else {
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               wx.showToast({
                 title: res.message,
@@ -239,7 +240,7 @@ Page({
           }, 'post')
         } else {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           return
         }
@@ -250,7 +251,7 @@ Page({
   shancuoxuqiu() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       id: that.data.id
@@ -263,7 +264,7 @@ Page({
           qingqiu.get("delYneedAndNeedSign", data, function (re) {
             if (re.success == true) {
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               wx.showToast({
                 title: '删除成功',
@@ -277,7 +278,7 @@ Page({
               }, 1000)
             } else {
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               wx.showToast({
                 title: re.message,
@@ -288,7 +289,7 @@ Page({
           }, 'delete')
         } else {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           return
         }
@@ -299,7 +300,7 @@ Page({
   lianxita() {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       id: that.id,
@@ -308,7 +309,7 @@ Page({
     qingqiu.get("needUpdateStateById", data, function (re) {
       if (re.success == true) {
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         wx.showToast({
           title: '需求已完成',
@@ -317,7 +318,7 @@ Page({
         })
       } else {
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         wx.showToast({
           title: re.message,
@@ -342,7 +343,7 @@ Page({
     var shopName = e.currentTarget.dataset.shopname
     var wxNc = e.currentTarget.dataset.wxnc
     var nameV = ''
-    
+
     if (name != '' && name != "null" && name != null && name != undefined) {
       nameV = name
     } else if (shopName != '' && shopName != "null" && shopName != null && shopName != undefined) {

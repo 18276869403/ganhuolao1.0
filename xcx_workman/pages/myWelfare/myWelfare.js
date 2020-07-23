@@ -10,6 +10,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     isShowConfirm: false,
     GyTypeid: 1,
     tid: '',
@@ -61,7 +62,7 @@ Page({
   // 切换类型
   changetype: function (e) {
     var that = this;
-    that.data.gongyilist=[]
+    that.data.gongyilist = []
     var id = e.currentTarget.dataset.id
     that.setData({
       GyTypeid: id
@@ -100,17 +101,17 @@ Page({
       qingqiu.get("myActivitySignList", data, function (res) {
         console.log('我参加的公益活动', res)
         if (res.success == true) {
-          if(res.result.records.length > 0){
+          if (res.result.records.length > 0) {
             var gongyilist = that.data.gongyilist
-            for(let obj of res.result.records){
+            for (let obj of res.result.records) {
               gongyilist.push(obj)
             }
             that.setData({
               gongyilist: gongyilist
             })
-          }else{
+          } else {
             that.setData({
-              isLastPage:true
+              isLastPage: true
             })
             return
           }

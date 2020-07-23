@@ -10,8 +10,8 @@
         <view class="content-name" wx:if="{{item.wxState==0}}">{{item.shopName}}</view>
         <view class="content-name" wx:if="{{item.wxState==1}}">{{item.name}}</view>
         <view class="content-ruzhu">
-          <image src="{{viewUrl}}static/image/ruzhushangjia.png" class="ruzhu-img" wx:if="{{item.wxState==0}}"></image>
-          <image src="{{viewUrl}}static/image/ruzhugongren.png" class="ruzhu-img" wx:if="{{item.wxState==1}}"></image>
+          <image src="{{iconUrl}}static/image/ruzhushangjia.png" class="ruzhu-img" wx:if="{{item.wxState==0}}"></image>
+          <image src="{{iconUrl}}static/image/ruzhugongren.png" class="ruzhu-img" wx:if="{{item.wxState==1}}"></image>
         </view> 
       </view>
       <view class="content-list-right ">
@@ -22,6 +22,6 @@
   </view>
 </view>
 <view class="shuju" wx:if="{{recommendLists.length==0}}">
-  <image src="{{viewUrl}}static/image/noshuju.png" class="shuju_img"></image>
+  <image src="{{iconUrl}}static/image/noshuju.png" class="shuju_img"></image>
   <view>暂无数据</view>
 </view>

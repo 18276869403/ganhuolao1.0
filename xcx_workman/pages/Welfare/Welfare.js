@@ -9,6 +9,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl:api.iconUrl,
     isShowConfirm: false, // 报名弹窗
     gongyilist: [], // 活动集合
     titleText: '', // 搜索框

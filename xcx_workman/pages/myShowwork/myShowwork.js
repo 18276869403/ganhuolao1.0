@@ -9,34 +9,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl,
-    xqlist:{},
-    id:'',
+    viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
+    xqlist: {},
+    id: '',
     needsTypeid: 1,
-    price:'',
-    istrue:0,
-    btnFlag:false,
+    price: '',
+    istrue: 0,
+    btnFlag: false,
     flag: true,
     index: 0,
     day: 0,
-    predict:'',
+    predict: '',
     array: ['天/元', '月/元', '季/元', '年/元'],
     tian: ['天', '月', '季', '年'],
     showList: [],
-    isLastPage:false,
-    pageNo:1
+    isLastPage: false,
+    pageNo: 1
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function() {
+  onLoad: function () {
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.data.showList=[]
-    this.data.isLastPage=false
-    this.data.pageNo=1
+    this.data.showList = []
+    this.data.isLastPage = false
+    this.data.pageNo = 1
     this.getShowList()
   },
   // 下拉刷新
@@ -51,98 +52,102 @@ Page({
     if (this.data.isLastPage) {
       wx.showToast({
         title: '没有更多了！',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
-        return
+      return
     }
-    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
     this.getShowList()
   },
   // 获取晒晒
-  getShowList(){
+  getShowList() {
     var that = this
     var data = {
-      wxUserId:app.globalData.wxid
+      wxUserId: app.globalData.wxid
     }
-    qingqiu.get("casePage",data,function(re){
+    qingqiu.get("casePage", data, function (re) {
       console.log(re)
-      if(re.success==true){
-        if(re.result.records==''){
-          that.data.isLastPage=true
+      if (re.success == true) {
+        if (re.result.records == '') {
+          that.data.isLastPage = true
           return
         }
         // that.data.showList=re.result.records
-        for(var i= 0 ; i < re.result.records.length; i++){
-          re.result.records[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
+        for (var i = 0; i < re.result.records.length; i++) {
+          re.result.records[i].picOne = api.viewUrl + re.result.records[i].picOne.split(',')[0]
           that.data.showList.push(re.result.records[i])
-        } 
+        }
         that.setData({
-          showList:that.data.showList
+          showList: that.data.showList
         })
-      }else{
+      } else {
         wx.showToast({
           title: re.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
     })
   },
 
   // 跳转到晒晒详情页面
-  showDetails: function(e) {
-    var ssid =e.currentTarget.dataset.ssid;
-    qingqiu.get("updateWxCase",{id:ssid},function(re){
+  showDetails: function (e) {
+    var ssid = e.currentTarget.dataset.ssid;
+    qingqiu.get("updateWxCase", {
+      id: ssid
+    }, function (re) {
       console.log(re)
-      if(re.success == true){
+      if (re.success == true) {
         app.globalData.showworkRefresh = 0
         wx.navigateTo({
-          url: '../showDetails/showDetails?obj='+ssid,
+          url: '../showDetails/showDetails?obj=' + ssid,
         })
-      }else{
+      } else {
         wx.showToast({
           title: re.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
-    },'put')
-    
+    }, 'put')
+
   },
-  
-  phonecall: function(e) {
+
+  phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
     wx.makePhoneCall({
-      phoneNumber: phone 
+      phoneNumber: phone
     })
   },
   // 删除我的晒晒
-  deletess(e){
+  deletess(e) {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
-      id:e.currentTarget.dataset.shaid
+      id: e.currentTarget.dataset.shaid
     }
-    qingqiu.get("deletess",data,function(res){
+    qingqiu.get("deletess", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         that.setData({
-          btnFlag:true
+          btnFlag: true
         })
         wx.showToast({
           title: '删除成功',
-          icon:'success',
-          duration:2000
+          icon: 'success',
+          duration: 2000
         })
         that.onLoad()
-      }else{
+      } else {
         that.setData({
-          btnFlag:true
+          btnFlag: true
         })
       }
-    },'delete')
+    }, 'delete')
   },
 })

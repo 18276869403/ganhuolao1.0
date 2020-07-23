@@ -28,7 +28,7 @@
 			<view class="content-text" wx:if="{{cityname==''}}">选择区域</view>
 			<view class='content-text2' wx:if="{{cityname!=''}}">{{cityname}} - {{areaname}}</view>
 			<view class="enter">
-				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
 			</view>
 		</view>
 
@@ -54,11 +54,11 @@
 	<view class="showImg">
 		<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
 			<image src="{{viewUrl}}{{item}}" class="show-img"></image>
-			<image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+			<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 		</view>
 	</view>
 	<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
-		<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+		<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 	</view>
 	<view class="need-photo-text">需求描述图片(可以上传多张，可以不上传)</view>
 	<view class='content-icon hengxiang'>
@@ -132,7 +132,7 @@
 					<view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
 						<view class="list-two-item-left">{{item.className}}</view>
 						<view class="list-two-item-right" wx:if="{{flerjiid==item.id}}">
-							<image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+							<image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
 						</view>
 					</view>
 				</view>
@@ -140,4 +140,3 @@
 		</scroll-view>
 	</view>
 </view>
-<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

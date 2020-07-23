@@ -7,12 +7,12 @@
 				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
 				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
 				<view class="top-title-left-enter">
-					<image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+					<image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
 				</view>
 			</view>
 			<view class="top-title-sort hengxiang" bindtap="showModallist">
 				<view class="sort-fenzu">
-					<image class="fenzu-img" src="{{viewUrl}}static/image/fenzu.png"></image>
+					<image class="fenzu-img" src="{{iconUrl}}static/image/fenzu.png"></image>
 				</view>
 				<view class="sort-text" wx-if="{{yijiname==''}}">
 					按分类
@@ -21,14 +21,14 @@
 					{{yijiname}}-{{erjiname}}
 				</view>
 				<view class="sort-xiamian">
-					<image src="{{viewUrl}}static/image/xiamian.png" class="xiamian-img"></image>
+					<image src="{{iconUrl}}static/image/xiamian.png" class="xiamian-img"></image>
 				</view>
 			</view>
 		</view>
 		<view class="hengxiang top-search">
 			<view class="top-title-right hengxiang">
 				<view class="top-title-right-img">
-					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
 					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入昵称/店铺名称" class="shurukuang" wx:if="{{!showModalStatus&&!show}}"></input>
@@ -38,7 +38,7 @@
 				</view>
 			</view>
 			<view class="top-search-fabu">
-				<image src="{{viewUrl}}static/image/ruzhu.png" class="fabu-img" bindtap="ruzhu"></image>
+				<image src="{{iconUrl}}static/image/ruzhu.png" class="fabu-img" bindtap="ruzhu"></image>
 			</view>
 		</view>
 
@@ -62,14 +62,14 @@
 			<!-- 找工人 -->
 			<view class="content-qiehuan-left" wx:if="{{chooseworker==1}}">
 				<view>
-					<image src="{{viewUrl}}static/image/zhaogongren.png" class="zhaogongren-img"></image>
+					<image src="{{iconUrl}}static/image/zhaogongren.png" class="zhaogongren-img"></image>
 				</view>
 				<view class="gongren-xuanqu" bindtap="changeType"></view>
 			</view>
 			<!-- 找商家 -->
 			<view class="content-qiehuan-right" wx:if="{{chooseworker==0}}">
 				<view>
-					<image src="{{viewUrl}}static/image/zhaoshangjia.png" class="zhaogongren-img"></image>
+					<image src="{{iconUrl}}static/image/zhaoshangjia.png" class="zhaogongren-img"></image>
 				</view>
 				<view class="shangjia-xuanqu" bindtap="changeType"></view>
 			</view>
@@ -89,19 +89,19 @@
 					<view class="right-content hengxiang">
 						<view class="right-content-item hengxiang">
 							<view class="">
-								<image src="{{viewUrl}}static/image/dengji.png" class="dengji-img"></image>
+								<image src="{{iconUrl}}static/image/dengji.png" class="dengji-img"></image>
 							</view>
 							<view>{{item.shopName}}</view>
 						</view>
 						<view class="right-content-item hengxiang">
 							<view class="">
-								<image src="{{viewUrl}}static/image/shiming.png" class="dengji-img"></image>
+								<image src="{{iconUrl}}static/image/shiming.png" class="dengji-img"></image>
 							</view>
 							<view>实名认证</view>
 						</view>
 						<view class="right-content-item hengxiang">
 							<view class="">
-								<image src="{{viewUrl}}static/image/jingyan.png" class="dengji-img"></image>
+								<image src="{{iconUrl}}static/image/jingyan.png" class="dengji-img"></image>
 							</view>
 							<view>{{item.employ}}年经验</view>
 						</view>
@@ -120,7 +120,7 @@
 						<view class="right-bottom-left hengxiang">
 							<view class="hengxiang">
 								<view>
-									<image src="{{viewUrl}}static/image/fuwudingwei.png" class="dingwei-img"></image>
+									<image src="{{iconUrl}}static/image/fuwudingwei.png" class="dingwei-img"></image>
 								</view>
 								<view>{{item.oneAreaName}} | {{item.twoAreaName}}</view>
 							</view>
@@ -184,7 +184,7 @@
 	</view>
 
 	<view class="bottom">
-		<image src="{{viewUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
 	</view>
 </view>
 
@@ -209,7 +209,7 @@
 					<view class="list-two-item hengxiang" bindtap="changetwoclass" data-id="{{item.id}}" data-yjid="{{itemaa.id}}" data-yijiname="{{itemaa.oneclass}}" data-erjiname="{{item.className}}">
 						<view class="list-two-item-left">{{item.className}}</view>
 						<view class="list-two-item-right" wx:if="{{erjiid==item.id}}">
-							<image src="{{viewUrl}}static/image/duihao.png" class="duihao-img"></image>
+							<image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
 						</view>
 					</view>
 				</view>

@@ -1,16 +1,16 @@
 <view class="container">
-  <image src="{{viewUrl}}static/image/xuqiubg.png" class="top"></image>
+  <image src="{{iconUrl}}static/image/xuqiubg.png" class="top"></image>
   <view class="content zongxiang">
     <view class="content-list zongxiang">
       <view class="content-list-item hengxiang">
         <view class="content-list-jiaji" style="background:#339966" wx:if="{{xqxqlist.needType==0}}">普通</view>
         <view class="content-list-jiaji" wx:if="{{xqxqlist.needType==1}}">加急</view>
         <view>
-          <image src="{{viewUrl}}static/image/shang.png" wx:if="{{yneed.wxState==0}}" class="gong-img"></image>
+          <image src="{{iconUrl}}static/image/shang.png" wx:if="{{yneed.wxState==0}}" class="gong-img"></image>
         </view>
         <view class="content-list-time hengxiang">
           <view class="list-time-shalou">
-            <image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+            <image src="{{iconUrl}}static/image/shalou.png" class="shalou-img"></image>
           </view>
           <view class="list-time-text" wx:if="{{xqxqlist.needState==0}}">进行中</view>
           <view class="list-time-text" wx:if="{{xqxqlist.needState==1}}">已完成</view>
@@ -19,7 +19,7 @@
       <view class="content-list-title">{{xqxqlist.needTitle}}</view>
       <view class="hengxiang content-list-type">
         <view>
-          <image src="{{viewUrl}}static/image/dizhi.png" class="leixing-img"></image>
+          <image src="{{iconUrl}}static/image/dizhi.png" class="leixing-img"></image>
         </view>
         <view>
           {{xqxqlist.oneAreaName}} | {{xqxqlist.twoAreaName}}
@@ -27,7 +27,7 @@
       </view>
       <view class="hengxiang content-list-type">
         <view>
-          <image src="{{viewUrl}}static/image/lianxiren.png" class="leixing-img"></image>
+          <image src="{{iconUrl}}static/image/lianxiren.png" class="leixing-img"></image>
         </view>
         <view>
           {{xqxqlist.publishMan}}
@@ -35,7 +35,7 @@
       </view>
       <view class="hengxiang content-list-type">
         <view>
-          <image src="{{viewUrl}}static/image/baoming2.png" class="leixing-img"></image>
+          <image src="{{iconUrl}}static/image/baoming2.png" class="leixing-img"></image>
         </view>
 
         <view>
@@ -90,10 +90,10 @@
             <view class="jiedan-top-content-date">{{item.signTime}}</view>
           </view>
           <view class="jiedan-top-right" wx-if="{{xqxqlist.wxUserId==wxUserid}}">
-            <image src="{{viewUrl}}static/image/liuyan.png" class="img" bindtap="liuyan" data-wxid="{{item.wxUserId}}" data-name="{{item.name}}" data-shopName="{{item.shopName}}" data-wxNc="{{item.wxNc}}"></image>
+            <image src="{{iconUrl}}static/image/liuyan.png" class="img" bindtap="liuyan" data-wxid="{{item.wxUserId}}" data-name="{{item.name}}" data-shopName="{{item.shopName}}" data-wxNc="{{item.wxNc}}"></image>
           </view>
           <view class="jiedan-top-right1" wx-if="{{xqxqlist.wxUserId==wxUserid}}" bindtap="phonecell" data-phone="{{item.phone}}">
-            <image src="{{viewUrl}}static/image/dianhua.png" class="img"></image>
+            <image src="{{iconUrl}}static/image/dianhua.png" class="img"></image>
           </view>
         </view>
         <!-- <view class="content-bottom">

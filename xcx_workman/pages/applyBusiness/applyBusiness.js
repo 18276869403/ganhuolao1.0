@@ -11,6 +11,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl:api.iconUrl,
     type: 2,
     btnFlag:false,
     // 获取分类

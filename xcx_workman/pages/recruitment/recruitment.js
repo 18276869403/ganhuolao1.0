@@ -9,6 +9,7 @@ const bmap = require('../../utils/bmap-wx.min.js')
 Page({
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     workList: [],
     pageNo: 1,
     oneClassId: '',
@@ -115,7 +116,7 @@ Page({
           weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
           pageNo: 1
         })
-      }else{
+      } else {
         this.setData({
           cityId: this.data.id,
           cityname1: this.data.name,
@@ -282,14 +283,14 @@ Page({
   recruitmentDetail: function (e) {
     var list = e.currentTarget.dataset.list
     var list1 = JSON.stringify(list)
-    app.globalData.recruitRefresh=1
+    app.globalData.recruitRefresh = 1
     wx.navigateTo({
       url: '../recruitmentDetail/recruitmentDetail?obj=' + list1,
     })
   },
   // 跳转到提交需求页面
   submitRecruitment: function (e) {
-    app.globalData.recruitRefresh=0
+    app.globalData.recruitRefresh = 0
     wx.navigateTo({
       url: '../submitRecruitment/submitRecruitment',
     })

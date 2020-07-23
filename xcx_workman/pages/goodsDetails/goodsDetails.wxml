@@ -19,13 +19,13 @@
       <view class="price-money">{{splist.newPrice}}</view>
       <view class="price-original">原价：{{splist.oldPrice}}</view>
       <view class="price-enter">
-        <image src="{{viewUrl}}static/image/jindian.png" class="enter-img" bindtap="goShopping"></image>
+        <image src="{{iconUrl}}static/image/jindian.png" class="enter-img" bindtap="goShopping"></image>
       </view>
     </view>
   </view>
   <view class="content zongxiang">
     <view class="content-img">
-      <image src="{{viewUrl}}static/image/details.png" class="xiangqing-img"></image>
+      <image src="{{iconUrl}}static/image/details.png" class="xiangqing-img"></image>
     </view>
     <view class="content-text">{{splist.goodMemo}}</view>
     <view class="content-details" wx:for="{{splist.goodPic2}}">

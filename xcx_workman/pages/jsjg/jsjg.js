@@ -8,6 +8,7 @@ Page({
    */
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     jieguo:'',
     goodslist:[],
     zanwu:[{

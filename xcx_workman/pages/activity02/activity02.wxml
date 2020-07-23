@@ -3,43 +3,43 @@
 	<view class="hengxian"></view>
 	<view class="zt">
 		<view class="tp" bindtap="yyyy">
-			<image class="tpp02" src="{{viewUrl}}static/image/tuliao.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/tuliao.png"></image>
 			<view class="wenz">涂料用量</view>
 		</view>
 	</view>
 	<view class="zt">
 		<view class="tp" bindtap="yl02">
-			<image class="tpp02" src="{{viewUrl}}static/image/diban.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/diban.png"></image>
 		</view>
 		<view class="wenz">地板用量</view>
 	</view>
 	<view class="zt">
 		<view class="tp" bindtap="yl03">
-			<image class="tpp02" src="{{viewUrl}}static/image/dizhuan.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/dizhuan.png"></image>
 			<view class="wenz">地砖用量</view>
 		</view>
 	</view>
 	<view class="zt">
 		<view class="tp" bindtap="yl04">
-			<image class="tpp02" src="{{viewUrl}}static/image/qiangzhuan.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/qiangzhuan.png"></image>
 			<view class="wenz">墙砖用量</view> 
 		</view>
 	</view>
 	<view class="zt">
 		<view class="tp" bindtap="yl05">
-			<image class="tpp02" src="{{viewUrl}}static/image/bizhi.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/bizhi.png"></image>
 			<view class="wenz">壁纸用量</view>
 		</view>
 	</view>
 	<view class="zt">
 		<view class="tp" bindtap="yl06">
-			<image class="tpp02" src="{{viewUrl}}static/image/chuanglian.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/chuanglian.png"></image>
 			<view class="wenz">窗帘用量</view>
 		</view>
 	</view>
 	<view class="zt">
 		<view class="tp" bindtap="yl07">
-			<image class="tpp02" src="{{viewUrl}}static/image/dingpeng.png"></image>
+			<image class="tpp02" src="{{iconUrl}}static/image/dingpeng.png"></image>
 			<view class="wenz">顶棚用量</view>
 		</view>
 	</view>

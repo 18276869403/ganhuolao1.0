@@ -11,14 +11,15 @@ Page({
    * 页面的初始数据
    */
   data: {
-    viewUrl:api.viewUrl,
-    xqxqlist:[],
-    jiedanList:[],
-    tupianlist:[],
-    id:'',
-    wxUserid:'',
-    type:'',
-    btnFlag:false
+    viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
+    xqxqlist: [],
+    jiedanList: [],
+    tupianlist: [],
+    id: '',
+    wxUserid: '',
+    type: '',
+    btnFlag: false
   },
 
   onLoad: function (options) {
@@ -29,54 +30,54 @@ Page({
     var zhaogong = JSON.parse(options.obj)
     this.setData({
       zhaogong: zhaogong,
-      wxUserid:app.globalData.wxid
+      wxUserid: app.globalData.wxid
     })
     console.log(zhaogong)
     console.log(this.data.wxUserid)
-  }, 
+  },
   // 接单人员
   SelectjiedanList() {
     var that = this
-    var data={
+    var data = {
       needId: that.data.id,
       pages: 1,
       size: 10
     }
     console.log(data)
-    that.data.type=''
-    qingqiu.get("needSignPage", data, function(re) {
+    that.data.type = ''
+    qingqiu.get("needSignPage", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
           console.log(re)
-          var list  = re.result.records
-          for(let obj of list){
-            if(obj.name != null && obj.name != "" && obj.name != "null"){
+          var list = re.result.records
+          for (let obj of list) {
+            if (obj.name != null && obj.name != "" && obj.name != "null") {
               obj.name = obj.name
-            }else if(obj.shopName != null && obj.shopName != "" && obj.shopName != "null"){
+            } else if (obj.shopName != null && obj.shopName != "" && obj.shopName != "null") {
               obj.name = obj.shopName
-            }else{
+            } else {
               obj.name = obj.wxNc
             }
-            if(obj.picIurl != null && obj.picIurl!=""&& obj.picIurl!= "null"){
+            if (obj.picIurl != null && obj.picIurl != "" && obj.picIurl != "null") {
               obj.picIurl = api.viewUrl + obj.picIurl
-            }else{
+            } else {
               obj.picIurl = obj.picUrl
             }
-            if(obj.signTime != null && obj.signTime != undefined && obj.signTime != ""){
-              obj.signTime = obj.signTime.slice(0,16)
+            if (obj.signTime != null && obj.signTime != undefined && obj.signTime != "") {
+              obj.signTime = obj.signTime.slice(0, 16)
             }
-            if(obj.wxUserId==app.globalData.wxid){
-              that.data.type=1
+            if (obj.wxUserId == app.globalData.wxid) {
+              that.data.type = 1
             }
           }
-          that.setData ({
-            jiedanList : list,
-            type:that.data.type
+          that.setData({
+            jiedanList: list,
+            type: that.data.type
           })
         } else {
           qingqiu.tk('未查询到任何数据')
         }
-      } 
+      }
     })
   },
   // 图片
@@ -103,47 +104,55 @@ Page({
   //   })
   // },
   // 需求修改
-  xiugaigunali(){
+  xiugaigunali() {
     wx.navigateTo({
       url: '../submitNeeds/submitNeeds?type=1&id=' + this.data.xqxqlist.id,
     })
   },
   // 需求报名
-  baoming(){
+  baoming() {
     var that = this
-    that.setData({btnFlag:true})
+    that.setData({
+      btnFlag: true
+    })
     var data = {
-      needId:that.data.id,
-      wxUserId:app.globalData.wxid
+      needId: that.data.id,
+      wxUserId: app.globalData.wxid
     }
     wx.showModal({
-      title:'提示',
-      cancelText:'否',
-      content:'你确认参与该需求吗？确认后雇主将能够看见你的联系方式！',
-      confirmText:'是',
-      success:function(res){
-        if(res.confirm){
+      title: '提示',
+      cancelText: '否',
+      content: '你确认参与该需求吗？确认后雇主将能够看见你的联系方式！',
+      confirmText: '是',
+      success: function (res) {
+        if (res.confirm) {
           console.log(data)
-          qingqiu.get("insertNeedSign",data,function(res){
-            if(res.success == true){
-              that.setData({btnFlag:false})
+          qingqiu.get("insertNeedSign", data, function (res) {
+            if (res.success == true) {
+              that.setData({
+                btnFlag: false
+              })
               wx.showToast({
                 title: '报名成功',
-                icon:'success',
-                duration:2000
+                icon: 'success',
+                duration: 2000
               })
               that.SelectjiedanList()
-            }else{
-              that.setData({btnFlag:false})
+            } else {
+              that.setData({
+                btnFlag: false
+              })
               wx.showToast({
                 title: res.message,
-                icon:'none',
-                duration:2000
+                icon: 'none',
+                duration: 2000
               })
             }
-          },'post')
-        }else{
-          that.setData({btnFlag:false})
+          }, 'post')
+        } else {
+          that.setData({
+            btnFlag: false
+          })
           return
         }
       }
@@ -152,49 +161,55 @@ Page({
   // 需求删除
   delete() {
     var that = this
-    that.setData({btnFlag:true})
-    var data={
+    that.setData({
+      btnFlag: true
+    })
+    var data = {
       id: that.data.zhaogong.id
     }
     wx.showModal({
-      title:'提示',
-      content:'您确定删除吗？',
-      success:function(res){
-        if(res.confirm){
-          qingqiu.get("workdelete", data, function(re) {
-            that.setData({btnFlag:false})
+      title: '提示',
+      content: '您确定删除吗？',
+      success: function (res) {
+        if (res.confirm) {
+          qingqiu.get("workdelete", data, function (re) {
+            that.setData({
+              btnFlag: false
+            })
             if (re.success == true) {
-               wx.showToast({
-                 title: '删除成功',
-                 icon:'success',
-                 duration:2000
-               })
-               app.globalData.recruitRefresh=0
-               setTimeout(function(){
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 2000
+              })
+              app.globalData.recruitRefresh = 0
+              setTimeout(function () {
                 // wx.navigateTo({
                 //   url: '../myRecruitment/myRecruitment',
                 // })
                 wx.navigateBack({
                   delta: 1
                 })
-               },1000)
-              } else {
-                wx.showToast({
-                  title: re.message,
-                  icon: 'none',
-                  duration: 2000
-                })
-              } 
-          },'delete')
-        }else{
-          that.setData({btnFlag:false})
+              }, 1000)
+            } else {
+              wx.showToast({
+                title: re.message,
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }, 'delete')
+        } else {
+          that.setData({
+            btnFlag: false
+          })
           return
         }
       }
     })
   },
   // 图片放大
-  fangda:function(e){
+  fangda: function (e) {
     var currentUrl = e.currentTarget.dataset.src
     wx.previewImage({
       current: currentUrl, // 当前显示图片的http链接
@@ -202,17 +217,17 @@ Page({
     })
   },
   // 留言
-  liuyan:function(e){
+  liuyan: function (e) {
     var wxid = e.currentTarget.dataset.wxid
     var name = e.currentTarget.dataset.name
     var shopName = e.currentTarget.dataset.shopName
     var wxNc = e.currentTarget.dataset.wxNc
     var nameV = ''
-    if(name != '' && name != "null" && name != null && name != undefined){
+    if (name != '' && name != "null" && name != null && name != undefined) {
       nameV = name
-    }else if(shopName != '' && shopName != "null" && shopName!=null && shopName!= undefined){
+    } else if (shopName != '' && shopName != "null" && shopName != null && shopName != undefined) {
       nameV = shopName
-    }else{
+    } else {
       nameV = wxNc
     }
     wx.redirectTo({
@@ -220,9 +235,9 @@ Page({
     })
   },
   // 打电话
-  zaixianlianxi:function(e){
+  zaixianlianxi: function (e) {
     var phone = e.currentTarget.dataset.phone
-    if(phone==''||phone==null||phone=='null'){
+    if (phone == '' || phone == null || phone == 'null') {
       wx.showToast({
         title: '联系电话为空',
         icon: 'none',
@@ -231,7 +246,7 @@ Page({
       return
     }
     wx.makePhoneCall({
-      phoneNumber: phone, 
+      phoneNumber: phone,
     })
   }
 })

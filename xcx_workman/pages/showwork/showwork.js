@@ -8,6 +8,7 @@ const api = require('../../utils/config.js')
 Page({
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     showList:[],
     // imgList: [
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",

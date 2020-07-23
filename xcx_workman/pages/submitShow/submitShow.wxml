@@ -8,13 +8,13 @@
 			<view class="content-text" wx:if="{{cityname==''}}">选择晒晒区域</view>
 			<view class='content-text1' wx:if="{{cityname!=''}}">{{cityname}} - {{areaname}}</view>
 			<view>
-				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
 			</view>
 		</view>
 		<view class="showImg">
 			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
 				<image src="{{viewUrl}}{{item}}" class="show-img"></image>
-				<image src="{{viewUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 			</view>
 		</view>
 
@@ -22,7 +22,7 @@
 		<view class="fabu" wx-if="{{tupianlists.length<7}}">
 			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
 				<view>
-					<image src="{{viewUrl}}static/image/jiahao.png" class="fabu-img"></image>
+					<image src="{{iconUrl}}static/image/jiahao.png" class="fabu-img"></image>
 				</view>
 				<view>
 					上传照片
@@ -66,4 +66,3 @@
 		</view>
 	</view>
 </view>
-<canvas canvas-id="firstCanvas" style="width: {{cw}}px; height: {{ch}}px;position:fixed;left:100%;"></canvas>

@@ -11,6 +11,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
     id: '',
     needsTypeid: 0,
     select: 'circle',
@@ -30,7 +31,7 @@ Page({
     linkman: '',
     phone: '',
     show: false,
-    btnFlag:false,
+    btnFlag: false,
     needsTypeList: [{
         id: 0,
         name: '普通'
@@ -233,19 +234,23 @@ Page({
   // 发布需求
   lijifabu() {
     var that = this
-    that.setData({btnFlag:true})
+    that.setData({
+      btnFlag: true
+    })
     for (let obj of that.data.tupianlists) {
       that.data.picIurl1 += obj + ","
     }
     that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
-    var s = qingqiu.yanzheng(that.data.needsname + ",输入标题|" + that.data.cityId + ",请选择一级区域|" + that.data.areaId + ",请选择二级区域|"+ that.data.linkman + ",输入联系人|"+ that.data.phone + ",输入联系电话")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入标题|" + that.data.cityId + ",请选择一级区域|" + that.data.areaId + ",请选择二级区域|" + that.data.linkman + ",输入联系人|" + that.data.phone + ",输入联系电话")
     if (s != 0) {
       wx.showToast({
         title: s,
         icon: 'none',
         duration: 2000
       })
-      that.setData({btnFlag:false})
+      that.setData({
+        btnFlag: false
+      })
       return
     }
     var shuzi = util.numberReg(that.data.phone)
@@ -255,7 +260,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
-      that.setData({btnFlag:false})
+      that.setData({
+        btnFlag: false
+      })
       return
     }
     if (that.data.select == "circle") {
@@ -264,7 +271,9 @@ Page({
         icon: 'none',
         duration: 2000
       })
-      that.setData({btnFlag:false})
+      that.setData({
+        btnFlag: false
+      })
       return
     }
     if (that.data.type == 1) {
@@ -285,7 +294,9 @@ Page({
       console.log(data)
       qingqiu.get("needUpdateStateById", data, function (re) {
         if (re.success == true) {
-          that.setData({btnFlag:false})
+          that.setData({
+            btnFlag: false
+          })
           wx.showToast({
             title: '修改成功',
             icon: 'success',
@@ -301,7 +312,9 @@ Page({
             })
           }, 1000)
         } else {
-          that.setData({btnFlag:false})
+          that.setData({
+            btnFlag: false
+          })
           wx.showToast({
             title: re.message,
             icon: 'none',
@@ -329,7 +342,9 @@ Page({
       qingqiu.get("insertYneed", data, function (re) {
         console.log(re)
         if (re.success == true) {
-          that.setData({btnFlag:false})
+          that.setData({
+            btnFlag: false
+          })
           wx.showToast({
             title: '发布成功',
             icon: 'none',
@@ -363,7 +378,9 @@ Page({
             })
           }, 1000)
         } else {
-          that.setData({btnFlag:false})
+          that.setData({
+            btnFlag: false
+          })
           wx.showToast({
             title: re.message,
             icon: 'none',
@@ -566,11 +583,13 @@ Page({
 
   // 过滤
   needsnameblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return;
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needsname: ''
@@ -581,10 +600,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needsname: ''
@@ -594,11 +613,13 @@ Page({
     }, 'POST')
   },
   needscontentblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           needscontent: ''
@@ -609,10 +630,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           needscontent: ''
@@ -622,11 +643,13 @@ Page({
     }, 'POST')
   },
   linkmanblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           linkman: ''
@@ -637,10 +660,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           linkman: ''
@@ -1000,7 +1023,9 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
-    that.setData({btnFlag:true})
+    that.setData({
+      btnFlag: true
+    })
     wx.chooseImage({
       count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
@@ -1021,8 +1046,10 @@ Page({
           },
           success: function (res) {
             console.log(res)
-            if (res.data =="false") {
-              that.setData({btnFlag:false})
+            if (res.data == "false") {
+              that.setData({
+                btnFlag: false
+              })
               wx.showToast({
                 title: '内容含有违法违规内容',
                 icon: 'none'
@@ -1040,7 +1067,9 @@ Page({
                 },
                 name: 'file',
                 success(res) {
-                  that.setData({btnFlag:false})
+                  that.setData({
+                    btnFlag: false
+                  })
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = api.viewUrl + jj.message
@@ -1058,7 +1087,7 @@ Page({
       },
     })
     that.setData({
-      btnFlag:false
+      btnFlag: false
     })
   },
   // 删除图片

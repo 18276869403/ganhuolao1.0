@@ -9,12 +9,12 @@
 				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
 				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
 				<view class="top-title-left-enter">
-					<image src="{{viewUrl}}static/image/xiala.png" class="xiala-img"></image>
+					<image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
 				</view>
 			</view>
 			<view class="top-title-right hengxiang">
 				<view class="top-title-right-img">
-					<image src="{{viewUrl}}static/image/search.png" class="search-img"></image>
+					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
 					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入需求标题搜索" class="shurukuang"></input>
@@ -37,7 +37,7 @@
 		<!-- 通知模块 -->
 		<view class="tongzhi hengxiang">
 			<view class="tongzhi-img">
-				<image src="{{viewUrl}}static/image/laba.png" class="laba-img"></image>
+				<image src="{{iconUrl}}static/image/laba.png" class="laba-img"></image>
 			</view>
 			<!-- <view class="tongzhi-text">恭喜王根入驻成功</view> -->
 			<view class="tongzhi-text" bindtap="advertisement">
@@ -56,17 +56,17 @@
 		<view class="sort zongxiang">
 			<view class="sort-top hengxiang">
 				<view class="sortImg" bindtap="applyBusiness" data-typeid="1">
-					<image src="{{viewUrl}}static/image/gongrenruzhu.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/gongrenruzhu.png" class="sort-img"></image>
 				</view>
 				 <!-- wx:if="{{storeList[0].backup5 == 1}}" -->
 				<view class="sortImg" bindtap="applyBusiness" data-typeid="2">
-					<image src="{{viewUrl}}static/image/shangjiaruzhu.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/shangjiaruzhu.png" class="sort-img"></image>
 				</view>
 				<view class="sortImg" bindtap="activity">
-					<image src="{{viewUrl}}static/image/tuijianyouli.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/tuijianyouli.png" class="sort-img"></image>
 				</view>
 				<view class="sortImg" bindtap="activity02">
-					<image src="{{viewUrl}}static/image/jiangongjisuan.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/jiangongjisuan.png" class="sort-img"></image>
 				</view>
 			</view>
 			<view class="sort-bottom hengxiang">
@@ -89,16 +89,16 @@
 		<view class="sort zongxiang">
 			<view class="sort-top hengxiang">
 				<view class="sortImg" bindtap="gongyi">
-					<image src="{{viewUrl}}static/image/gonyihuodong.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/gonyihuodong.png" class="sort-img"></image>
 				</view>
 				<view class="sortImg" bindtap="ershou">
-					<image src="{{viewUrl}}static/image/ershoushangping.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/ershoushangping.png" class="sort-img"></image>
 				</view>
 				<view class="sortImg" bindtap="bendi">
-					<image src="{{viewUrl}}static/image/bendizhaogong.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/bendizhaogong.png" class="sort-img"></image>
 				</view>
 				<view class="sortImg" bindtap="cuxiao">
-					<image src="{{viewUrl}}static/image/shangjiacuxiao.png" class="sort-img"></image>
+					<image src="{{iconUrl}}static/image/shangjiacuxiao.png" class="sort-img"></image>
 				</view>
 			</view>
 			<view class="sort-bottom hengxiang">
@@ -130,7 +130,7 @@
 						<image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
 					</view>
 					<view class="need-list-left" wx:if="{{item.backup1[0] ==null}}">
-						<image src="{{viewUrl}}static/image/zawu1.png" class="need-content-img"></image>
+						<image src="{{iconUrl}}static/image/zawu1.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-right">
 						<view class="content-list">
@@ -147,7 +147,7 @@
 								<view class="list-bottom-item hengxiang">
 									<view class="bottom-item hengxiang">
 										<view>
-											<image src="{{viewUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+											<image src="{{iconUrl}}static/image/dingwei.png" class="dingwei-img"></image>
 										</view>
 										<view class="bottom-dingwei">
 											{{item.oneAreaName}}|{{item.twoAreaName}}
@@ -159,7 +159,7 @@
 								<view class="list-bottom-item hengxiang">
 									<view class="bottom-item hengxiang">
 										<view>
-											<image src="{{viewUrl}}static/image/renyuan.png" class="baoming-img"></image>
+											<image src="{{iconUrl}}static/image/renyuan.png" class="baoming-img"></image>
 										</view>
 										<view>
 											<text style="color:#333333">{{item.backup2}}</text>人
@@ -171,7 +171,7 @@
 								<view class="list-bottom-item hengxiang">
 									<view class="bottom-item hengxiang">
 										<view>
-											<image src="{{viewUrl}}static/image/shijian.png" class="shijian-img"></image>
+											<image src="{{iconUrl}}static/image/shijian.png" class="shijian-img"></image>
 										</view>
 										<view>
 											{{item.publishTime}}
@@ -180,7 +180,7 @@
 								</view>
 								<view class="hengxiang content-status">
 									<view class="content-status-img">
-										<image src="{{viewUrl}}static/image/shalou.png" class="shalou-img"></image>
+										<image src="{{iconUrl}}static/image/shalou.png" class="shalou-img"></image>
 									</view>
 									<view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
 									<view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
@@ -210,7 +210,7 @@
 								</view>
 								<view class="hengxiang worker-rank">
 									<view>
-										<image class="rank-img" src="{{viewUrl}}static/image/rank.png"></image>
+										<image class="rank-img" src="{{iconUrl}}static/image/rank.png"></image>
 									</view>
 									<view>{{item.shopName}}</view>
 								</view>
@@ -292,7 +292,7 @@
 							</view>
 							<view class="worker-item-bottom hengxiang">
 								<view class="">
-									<image src="{{viewUrl}}static/image/store.png" class="store-img"></image>
+									<image src="{{iconUrl}}static/image/store.png" class="store-img"></image>
 								</view>
 								<view class="worker-sort shenglue">
 									{{item.shopName}}
@@ -310,7 +310,7 @@
 	<view class="bottom">
 		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
 			<!-- <image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image> -->
-			<image src="{{viewUrl}}static/image/kefu.png" class="kefu-img"></image>
+			<image src="{{iconUrl}}static/image/kefu.png" class="kefu-img"></image>
 		</button>
 	</view>
 </view>

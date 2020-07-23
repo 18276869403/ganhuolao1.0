@@ -7,6 +7,7 @@ const api = require('../../utils/config.js')
 Page({
   data: {
     viewUrl:api.viewUrl,
+    iconUrl:api.iconUrl,
     cityId:'',
     cityname1:'',
     cityname:'',
