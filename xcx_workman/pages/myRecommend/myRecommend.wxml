@@ -7,11 +7,10 @@
         <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img"></image>
       </view>
       <view class="content-list-content zongxiang">
-        <view class="content-name" wx:if="{{item.wxState==0}}">{{item.shopName}}</view>
-        <view class="content-name" wx:if="{{item.wxState==1}}">{{item.name}}</view>
+        <view class="content-name">{{item.name}}</view>
         <view class="content-ruzhu">
-          <image src="{{iconUrl}}static/image/ruzhushangjia.png" class="ruzhu-img" wx:if="{{item.wxState==0}}"></image>
-          <image src="{{iconUrl}}static/image/ruzhugongren.png" class="ruzhu-img" wx:if="{{item.wxState==1}}"></image>
+          <image src="{{iconUrl}}static/image/ruzhushangjia.png" class="ruzhu-img" wx:if="{{item.joinState==1}}"></image>
+          <image src="{{iconUrl}}static/image/ruzhugongren.png" class="ruzhu-img" wx:if="{{item.joinState==2}}"></image>
         </view> 
       </view>
       <view class="content-list-right ">
