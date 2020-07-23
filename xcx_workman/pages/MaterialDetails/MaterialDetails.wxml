@@ -61,7 +61,7 @@
 
 		</view>
 		<view class="content-content zongxiang">
-			<view class="content-content-title">剩料描述</view>
+			<view class="content-content-title">二手描述</view>
 			<view class="content-content-list">{{xqxqlist.needContent}}</view>
 		</view>
 		<!-- 图片 -->

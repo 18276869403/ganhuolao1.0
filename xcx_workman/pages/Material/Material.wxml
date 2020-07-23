@@ -15,7 +15,7 @@
 					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
-					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入剩料关键字" class="shurukuang"></input>
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入二手关键字" class="shurukuang"></input>
 				</view>
 				<view class="top-title-right-sousuo">
 					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
@@ -27,7 +27,7 @@
 		</view>
 	</view>
 	<view class="content zongxiang">
-		<!-- 最新剩料模块 -->
+		<!-- 最新二手模块 -->
 		<view class="content-need">
 			<view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index">
 				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
