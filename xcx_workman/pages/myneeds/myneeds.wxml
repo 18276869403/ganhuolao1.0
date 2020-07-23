@@ -4,75 +4,74 @@
   <view class="content zongxiang">
     <!-- 最新需求模块 -->
     <view class="content-need">
-      <view class="list zongxiang" wx:for="{{needsList}}" wx:for-index="index" wx:key="index" >
-        <view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
-          <view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
-            <image src="{{iconUrl}}static/image/zawu1.png" class="need-content-img"></image>
-          </view>
-          <view class="need-list-left"  wx:if="{{item.backup1[0]!=null}}">
-            <image src="{{iconUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
-          </view>
-          <view class="need-list-right zongxiang">
-            <view class="content-list zongxiang">
-              <view class="content-list-item hengxiang">
-                <view class="content-list-leixing">
-                  <view class="content-list-type" wx:if="{{item.needType==1}}">活找人</view>
-                  <view class="content-list-type" style="background:#339966" wx:if="{{item.needType==0}}">人找活</view>
-                </view>
-                <view class="content-list-title">
-                  <!-- <image src="{{viewUrl}}static/image/shang.png" class="gong-img" wx:if="{{item.wxState==0}}"> </image>
-                <image src="{{viewUrl}}static/image/gong.png" class="gong-img" wx:if="{{item.wxState==1}}"></image> -->
-                  ￥{{item.needPrice}}元/天
-                </view>
-                <view class="hengxiang content-status">
-                  <view class="content-status-img">
-                    <image src="{{iconUrl}}static/image/shalou.png" class="shalou-img"></image>
-
-                  </view>
-                  <view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
-                  <view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
-                </view>
-              </view> 
-              <view class="content-neirong">
-                {{item.needTitle}}
-              </view>
+			<view class="list" wx:for="{{needsList}}" wx:for-index="index" wx:key="index">
+				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
+					<view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
+						<image src="{{iconUrl}}static/image/zawu1.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.backup1[0]!=null}}">
+						<image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
+					</view>
+					<view class="need-list-right">
+						<view class="content-list">
+							<view class="content-list-item hengxiang">
+								<view class="content-neirong-title">
+									{{item.needTitle}}
+								</view>
+								<view class="content-list-leixing">
+									<view class="content-list-type" wx:if="{{item.needType==1}}">加急</view>
+									<view class="content-list-type" style="background:#339966" wx:if="{{item.needType==0}}">普通</view>
+								</view>
+							</view>
+              
+							<view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item hengxiang">
+									<view class="bottom-item hengxiang">
+										<view class="baoming-img-item">
+											<image src="{{iconUrl}}static/image/dingwei.png" class="dingwei-img"></image>
+										</view>
+										<view class="bottom-dingwei">
+											{{item.oneAreaName}}|{{item.twoAreaName}}
+										</view>
+									</view>
+								</view>
+							</view>
               <view class="content-list-bottom hengxiang">
-                <view class="list-bottom-item hengxiang">
-                  <view class="bottom-item hengxiang">
-                    <view>
-                      <image src="{{iconUrl}}static/image/dingwei.png" class="dingwei-img"></image>
-                    </view>
-                    <view class="bottom-dingwei">
-                      {{item.oneAreaName}}|{{item.twoAreaName}}
-                    </view>
-                  </view>
-                </view>
-                <view class="list-bottom-item1 hengxiang">
-                  <view class="bottom-item hengxiang">
-                    <view>
-                      <image src="{{iconUrl}}static/image/renyuan.png" class="baoming-img"></image>
-                    </view>
-                    <view>
-                      <text style="color:#333333">{{item.backup2}}</text>人
-                    </view>
-                  </view>
-                </view>
-                <view class="list-bottom-item2 hengxiang">
-                  <view class="bottom-item hengxiang">
-                    <view>
-                      <image src="{{iconUrl}}static/image/shijian.png" class="shijian-img"></image>
-                    </view>
-                    <view>
-                      {{item.publishTime}}
-                    </view>
-                  </view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </view>
-      </view>
-    </view>
+								<view class="list-bottom-item2 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view class="baoming-img-item">
+											<image src="{{iconUrl}}static/image/renyuan.png" class="baoming-img"></image>
+										</view>
+										<view>
+											<text style="color:#333333">{{item.backup2}}</text>人
+										</view>
+									</view>
+								</view>
+							</view>
+              <view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item2 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view class="baoming-img-item">
+											<image src="{{iconUrl}}static/image/shijian.png" class="shijian-img"></image>
+										</view>
+										<view class="bottom-dingwei">
+											{{item.publishTime}}
+										</view>
+									</view>
+								</view>
+                <view class="hengxiang content-status">
+									<view class="content-status-img">
+										<image src="{{iconUrl}}static/image/shalou.png" class="shalou-img"></image>
+									</view>
+									<view class="content-status-text" wx:if="{{item.needState==0}}">进行中</view>
+									<view class="content-status-text" wx:if="{{item.needState==1}}">已完成</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
   </view>
 </view>
 <view class="shuju" wx:if="{{needsList.length==0}}">
