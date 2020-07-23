@@ -46,12 +46,12 @@
     <view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
       <image src="{{viewUrl}}{{item}}" class="show-img"></image>
       <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
-      <text>剩料图片</text>
+      <text>二手图片</text>
     </view>
   </view>
   <view class="fabu  {{btnFlag == true ? 'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
     <image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
-    <text style="margin-left:30%;color: rgba(102, 102, 102, 1);">剩料图片</text>
+    <text style="margin-left:30%;color: rgba(102, 102, 102, 1);">二手图片</text>
   </view>
   <view class='content-icon hengxiang'>
     <icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
@@ -112,7 +112,7 @@
   <view class="tanchuang2 zongxiang">
     <view class="tankuang-top2 hengxiang">
       <view class="tankuang-top2-left" bindtap="hideModallist" data-return="false">取消</view>
-      <view class="tankuang-top2-content">选择剩料类型</view>
+      <view class="tankuang-top2-content">选择二手类型</view>
       <view class="tankuang-top2-right" bindtap="hideModallist" data-return="ture">确认</view>
     </view>
     <scroll-view scroll-y style="height:310px;" class="tankuang-content2 zongxiang">
