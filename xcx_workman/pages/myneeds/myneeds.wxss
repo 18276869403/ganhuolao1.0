@@ -675,3 +675,17 @@ page {
 .baoming-img-item {
   padding-top: 8rpx;
 }
+
+.shuju {
+  width: 100%;
+  text-align: center;
+  font-size: 42rpx;
+  font-weight: 500;
+  color: rgba(117, 115, 115, 1);
+}
+.shuju_img {
+  width: 464rpx;
+  height: 466rpx;
+  margin-top: 172rpx;
+  margin-bottom: 58rpx;
+}
