@@ -9,7 +9,7 @@ const baiduAK = 'CauqHCxjKu4NcebB4UjlUYTbGqtRpEN5'
 
 // url
 // const viewUrl = 'http://www.it-ys.com:91/work-boot/sys/common/view/'
-// const viewUrl = imgurl
+const iconUrl = imgurl
 const viewUrl = imgurl+ 'sys/common/view/'
 const Download = imgurl + 'sys/common/download' 
 const Uploadurl2 = imgurl + 'sys/common/upload2' 
@@ -26,5 +26,6 @@ module.exports = {
 	uploadurl2:Uploadurl2, //图片过滤
 	uploadurl:Uploadurl,	//上传文件
 	baiduAK:baiduAK,
-	imgFilter:imgFilter
+	imgFilter:imgFilter,
+	iconUrl:iconUrl
 };
