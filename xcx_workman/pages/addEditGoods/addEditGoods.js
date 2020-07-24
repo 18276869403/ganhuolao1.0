@@ -156,7 +156,7 @@ Page({
         })
       } else {
         wx.showToast({
-          title: '商家身份审核中...',
+          title: '店铺没有认证，请认证后添加商品',
           icon: 'none',
           duration: 2000
         })

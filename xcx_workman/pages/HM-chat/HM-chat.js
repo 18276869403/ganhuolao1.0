@@ -1110,9 +1110,9 @@ Page({
 		if (!that.data.textMsg) {
 			return;
 		}
-		if(that.data.textMsg == '' || that.data.textMsg == null){
-      return;
-    }
+		if (that.data.textMsg == '' || that.data.textMsg == null) {
+			return;
+		}
 		qingqiu.get("checkWords", {
 			content: that.data.textMsg
 		}, function (res) {
@@ -1215,23 +1215,37 @@ Page({
 				})
 				qingqiu.get("getPublicUserById", obj, function (res) {
 					console.log(res)
-					var objdata = {
-						openId: res.result.openid,
-						access_token: app.globalData.access_TokenOff,
-						firstValue: "干活佬有人联系你啦！",
-						firstColor: '#173177',
-						keyword1Value: "有人给你发消息啦！",
-						keyword1Color: '#173177',
-						keyword2Value: util.newDate(),
-						keyword2Color: '#173177',
-						remarkValue: '干活佬，助力工人/商家接单！',
-						remarkColor: '#173177',
-						MiniUrl: ''
-					}
-					qingqiu.get("SendWxMsg", objdata, function (re) {
-						console.log(re)
-						that.setData({
-							btnFlag: false
+					qingqiu.get("queryWxUser", {
+						id: that.data.user.id
+					}, function (re) {
+						console.log('个人信息',re)
+						var name = ''
+						if(re.result.name != null && re.result.name != ''){
+							name = re.result.name
+						}else if(re.result.shopName != null && re.result.shopName != ''){
+							name = re.result.shopName
+						}else{
+							name = re.result.wxNc
+						}
+						var objdata = {
+							openId: res.result.openid,
+							access_token: app.globalData.access_TokenOff,
+							firstValue: "干活佬有人联系你啦！",
+							firstColor: '#173177',
+							keyword1Value: "有人给你发消息啦！",
+							keyword1Color: '#173177',
+							keyword2Value: util.newDate(),
+							keyword2Color: '#173177',
+							remarkValue: '干活佬，助力工人/商家接单！',
+							remarkColor: '#173177',
+							MiniUrl: 'pages/HM-chat/HM-chat?id=' + that.data.user.id + '&name=' + name
+						}
+						console.log(objdata)
+						qingqiu.get("SendWxMsg", objdata, function (re) {
+							console.log(re)
+							that.setData({
+								btnFlag: false
+							})
 						})
 					})
 				})
