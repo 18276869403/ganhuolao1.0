@@ -78,7 +78,9 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+    // 判断地址栏参数是否存在
     if (options != undefined) {
+      // 判断是从哪个页面进入 obj1列表页/id小程序推送模板/否则异常
       if (options.obj1 != undefined) {
         var xqxqlist = JSON.parse(options.obj1)
         xqxqlist.publishMan = utils.formatName(xqxqlist.publishMan)
@@ -102,6 +104,11 @@ Page({
           title: '该需求已被删除',
           icon: 'none'
         })
+        setTimeout(function(){
+          wx.redirectTo({
+            url: '../index/index',
+          })
+        },1000)
         return
       }
     }else{
@@ -109,6 +116,11 @@ Page({
         title: '该需求已被删除',
         icon: 'none'
       })
+      setTimeout(function(){
+        wx.redirectTo({
+          url: '../index/index',
+        })
+      },1000)
       return
     }
   },
@@ -264,7 +276,7 @@ Page({
                   keyword2Color: '#173177',
                   remarkValue: '干活佬，助力工人/商家接单！',
                   remarkColor: '#173177',
-                  MiniUrl: ''
+                  MiniUrl: 'pages/needsDetails/needsDetails?id=' + that.data.id
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)

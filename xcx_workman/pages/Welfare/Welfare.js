@@ -159,7 +159,6 @@ Page({
         var obj = {
           wxUserId: that.data.wid
         }
-        console.log(that.data.wid)
         qingqiu.get("getPublicUserById", obj, function (res) {
           console.log(res)
           var objdata = {
@@ -173,8 +172,9 @@ Page({
             keyword2Color:'#173177',
             remarkValue:'干活佬，助力工人/商家接单！',
             remarkColor:'#173177',
-            MiniUrl:''
+            MiniUrl:'pages/WelfareDetail/WelfareDetail?id='+that.data.activityId
           }
+          console.log(objdata)
          qingqiu.get("SendWxMsg",objdata,function(re){
            console.log(re)
          })
@@ -182,7 +182,6 @@ Page({
         qingqiu.get("updateActivity", {
           id: that.data.activityId
         }, function (res) {
-          console.log(res)
           that.setData({
             isShowConfirm: false,
           })

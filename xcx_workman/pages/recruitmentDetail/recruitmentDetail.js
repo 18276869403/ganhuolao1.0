@@ -23,8 +23,6 @@ Page({
   },
 
   onLoad: function (options) {
-    console.log(options)
-    this.getRecrument()
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -69,6 +67,11 @@ Page({
         title: '该招工已被删除',
         icon: 'none'
       })
+      setTimeout(function(){
+        wx.redirectTo({
+          url: '../index/index',
+        })
+      }, 1000);
       return
     }
   },
@@ -91,7 +94,6 @@ Page({
         })
         return
       }
-
     })
   },
   // 接单人员

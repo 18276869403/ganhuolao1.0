@@ -367,6 +367,8 @@ Page({
           duration: 3000
         })
         var localid = re.result.id
+        console.log(re.result)
+        console.log(localid)
         // 公众号消息推送
         qingqiu.get("getPublicUser", null, function (res) {
           for (let obj of res.result) {

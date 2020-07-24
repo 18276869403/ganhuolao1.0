@@ -68,7 +68,40 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    var gongyilist = JSON.parse(options.obj)
+    if(options != undefined){
+      if(options.obj != undefined){
+        var gongyilist = JSON.parse(options.obj)
+        this.addressValue(gongyilist)
+      }else if(options.id != undefined){
+        this.getActivityDetail(options.id)
+      }else{
+        wx.showToast({
+          title: '该公益活动已删除',
+          icon:'none'
+        })
+        setTimeout(function(){
+          wx.redirectTo({
+            url: '../index/index',
+          })
+        },1000)
+        return
+      }
+    }else{
+      wx.showToast({
+        title: '该公益活动已删除',
+        icon:'none'
+      })
+      setTimeout(function(){
+        wx.redirectTo({
+          url: '../index/index',
+        })
+      },1000)
+      return
+    }
+  },
+
+  // 处理地址栏参数
+  addressValue(gongyilist){
     gongyilist.createTime = gongyilist.createTime.split(' ')[0]
     if (gongyilist.signNum == '' || gongyilist.signNum == null) {
       gongyilist.signNum = 0
@@ -107,6 +140,53 @@ Page({
     console.log(gongyilist)
     this.SelectjiedanList()
   },
+
+  // 根据id获取活动详情
+  getActivityDetail(id){
+    var that = this
+    qingqiu.get("getActivityById",{id:id},function(res){
+      console.log('id获取',res)
+      if(res.success == true){
+        var gongyilist = res.result
+        gongyilist.createTime = gongyilist.createTime.split(' ')[0]
+        if (gongyilist.signNum == '' || gongyilist.signNum == null) {
+          gongyilist.signNum = 0
+        }
+        if (gongyilist.name != '' || gongyilist.name != null) {
+          gongyilist.name = gongyilist.name
+        } else if (gongyilist.shopName != '' || gongyilist.shopName != null) {
+          gongyilist.name = gongyilist.shopName
+        } else {
+          gongyilist.name = gongyilist.wxNc
+        }
+        gongyilist.activityTime = gongyilist.activityTime.substr(0,10)
+        gongyilist.endTime = gongyilist.endTime.substr(0,10)
+        var piclist = []
+        if (gongyilist.pic != '' && gongyilist.pic != null) {
+          piclist = gongyilist.pic.split(',')
+        }
+        var piclist1 = []
+        var piclist2 = []
+        for (let obj of piclist) {
+          if (obj != '') {
+            piclist1.push(obj)
+            piclist2.push(api.viewUrl + obj)
+          }
+        }
+        var activityid = gongyilist.id
+        that.setData({
+          gongyilist: gongyilist,
+          piclist: piclist1,
+          activityid: activityid,
+          wxId: gongyilist.wxId,
+          wxUserId: app.globalData.wxid,
+          piclist2: piclist2
+        })
+        that.SelectjiedanList()
+      }
+    })
+  },
+
   // 图片点击放大
   imgYu: function (event) {
     var that = this
@@ -302,7 +382,7 @@ Page({
             keyword2Color: '#173177',
             remarkValue: '干活佬，助力工人/商家接单！',
             remarkColor: '#173177',
-            MiniUrl: ''
+            MiniUrl: 'pages/WelfareDetail/WelfareDetail?id=' + that.data.activityid
           }
           qingqiu.get("SendWxMsg", objdata, function (re) {
             console.log(re)
