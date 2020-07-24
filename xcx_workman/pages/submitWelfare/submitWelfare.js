@@ -462,7 +462,10 @@ Page({
                     var jj = JSON.parse(r);
                     var sj = that.data.viewUrl + jj.message
                     console.log(res)
-                    that.data.piclist.push(jj.message)
+                    if(that.data.piclist.length<9){
+                      that.data.piclist.push(jj.message)
+                    }
+                    // that.data.piclist.push(jj.message)
                     that.setData({
                       picIurl: sj,
                       picIurl1: jj.message,

@@ -1078,7 +1078,10 @@ Page({
                     var r = res.data
                     var jj = JSON.parse(r);
                     var sj = api.viewUrl + jj.message
-                    that.data.tupianlists.push(jj.message)
+                    if(that.data.tupianlists.length<9){
+                      that.data.tupianlists.push(jj.message)
+                    }
+                    // that.data.tupianlists.push(jj.message)
                     that.setData({
                       tupianlists: that.data.tupianlists,
                       picimg1: sj,
