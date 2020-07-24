@@ -84,6 +84,8 @@ const getPulicUserAdd = baseUrl + "pc/hall/getPulicUserAdd"
 const wxIndexUserPage = baseUrl + "pc/hall/wxIndexUserPage"
 // 首页推荐商品，仅首页可用
 const wxUserGoodPage = baseUrl + "pc/hall/wxUserGoodPage"
+// 公益活动byid查询
+const getActivityById = baseUrl + "pc/hall/getActivityById"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -125,6 +127,6 @@ module.exports = {
   SendWxMsg:SendWxMsg,
   getPulicUserAdd:getPulicUserAdd,
   wxIndexUserPage:wxIndexUserPage,
-  wxUserGoodPage:wxUserGoodPage
-
+  wxUserGoodPage:wxUserGoodPage,
+  getActivityById:getActivityById
 };
