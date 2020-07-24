@@ -102,7 +102,7 @@
     <image src="{{iconUrl}}static/image/fabubutton.png" class="fabu-img" bindtap="showModal1"></image>
   </view>
 </view>
-
+ 
 <!-- 发布 -->
 <view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
 <view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
