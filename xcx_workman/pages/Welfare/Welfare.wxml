@@ -20,7 +20,7 @@
 			</view>
 		</view>
 		<view class="top-img">
-			<image src="{{iconUrl}}static/image/gongyi.png" class="bg-img"></image>
+			<image src="{{iconUrl}}static/image/gongyi.jpg" class="bg-img"></image>
 		</view>
 	</view>
 	<view class="content zongxiang">

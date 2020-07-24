@@ -101,8 +101,8 @@
       <view class="content-basic-title">晒晒</view>
       <view class="content-show">
         <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key">
-          <view class="show" bindtap="goshowshai" data-id="{{item.id}}">
-            <view class="show-item-top">
+          <view class="show">
+            <view class="show-item-top" bindtap="goshowshai" data-id="{{item.id}}">
               <image src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='0'}}"></image>
               <video src="{{item.picOne}}" class="show-img" wx:if="{{item.backup3=='1'}}"></video>
             </view>
@@ -119,12 +119,12 @@
                 </view>
                 <view>{{item.messageSum}}</view>
               </view>
-              <view class="hengxiang">
-                <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
-                  <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
+              <view class="dianzan hengxiang">
+                <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+                  <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
                 </view>
-                <view wx:if="{{item.backup1==1}}">
-                  <image src="{{iconUrl}}static/image/zan2.png" class="pinglun-img"></image>
+                <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
+                  <image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
                 </view>
                 <view>{{item.giveGood}}</view>
               </view>
