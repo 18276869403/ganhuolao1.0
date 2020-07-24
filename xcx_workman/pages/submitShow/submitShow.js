@@ -138,6 +138,7 @@ Page({
       })
       return
     }
+    that.data.picIurl1=[]
     if (that.data.tupianlists.length > 0) {
       for (let obj of that.data.tupianlists) {
         that.data.picIurl1 += obj + ','
