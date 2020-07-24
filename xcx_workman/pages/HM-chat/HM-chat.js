@@ -1234,7 +1234,7 @@ Page({
 							firstColor: '#173177',
 							keyword1Value: "有人给你发消息啦！",
 							keyword1Color: '#173177',
-							keyword2Value: util.newDate(),
+							keyword2Value: util.newDate(), 
 							keyword2Color: '#173177',
 							remarkValue: '干活佬，助力工人/商家接单！',
 							remarkColor: '#173177',

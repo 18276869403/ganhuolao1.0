@@ -149,7 +149,7 @@ Page({
         wx.showToast({
           title: '添加成功！',
           icon: 'success',
-          duration: 2000
+          duration: 2000 
         })
         wx.redirectTo({
           url: '../myGoods/myGoods',
