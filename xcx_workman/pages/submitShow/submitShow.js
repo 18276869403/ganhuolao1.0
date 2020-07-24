@@ -365,14 +365,14 @@ Page({
         })
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)
-        for(let i=0;i<uploaderlist.length;i++){
+        // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)
+        for(let i=0;i<tempFilePaths.length;i++){
           wx.uploadFile({
             url: api.imgFilter,
             name: 'file',
-            filePath: uploaderlist[index3],
+            filePath: tempFilePaths[index3],
             formData: {
-              media: uploaderlist[index3]
+              media: tempFilePaths[index3]
             },
             method: 'POST',
             header: {
@@ -392,7 +392,7 @@ Page({
               } else {
                 wx.uploadFile({
                   url: api.uploadurl,
-                  filePath: uploaderlist[index2],
+                  filePath: tempFilePaths[index2],
                   header: {
                     "Content-Type": "multipart/form-data"
                   },
