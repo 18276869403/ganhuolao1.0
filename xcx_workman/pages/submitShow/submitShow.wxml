@@ -19,7 +19,7 @@
 		</view>
 
 		<!-- 上传 -->
-		<view class="fabu" wx-if="{{tupianlists.length<9}}">
+		<view class="fabu" wx-if="{{tupianlists.length<10}}">
 			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
 				<view>
 					<image src="{{iconUrl}}static/image/jiahao.png" class="fabu-img"></image>
