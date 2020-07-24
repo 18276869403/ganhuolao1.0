@@ -81,7 +81,7 @@ Page({
             keyword2Color:'#173177',
             remarkValue:'干活佬，助力工人/商家接单！',
             remarkColor:'#173177',
-            MiniUrl:''
+            MiniUrl:'pages/showDetails/showDetails?id=' + that.data.id
           }
          qingqiu.get("SendWxMsg",objdata,function(re){
            console.log(re)

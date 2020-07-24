@@ -26,8 +26,16 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    console.log(options.obj)
-    this.setData({ssid:options.obj})
+    if(options.id!=undefined){
+      this.setData({
+        ssid:options.id
+      })
+    }else{
+      console.log(options.obj)
+      this.setData({ssid:options.obj})
+    }
+    // console.log(options.obj)
+    // this.setData({ssid:options.obj})
     this.ssxqbyid()
     this.pinglun()
   },
