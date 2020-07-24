@@ -351,6 +351,7 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     var index2=0
+    var index3=0
     that.setData({
       btnFlag: true
     })
@@ -369,9 +370,9 @@ Page({
           wx.uploadFile({
             url: api.imgFilter,
             name: 'file',
-            filePath: uploaderlist[index2],
+            filePath: uploaderlist[index3],
             formData: {
-              media: uploaderlist[index2]
+              media: uploaderlist[index3]
             },
             method: 'POST',
             header: {
@@ -420,6 +421,7 @@ Page({
               }
             }
           })
+          index3+=1
         }
       },
     })

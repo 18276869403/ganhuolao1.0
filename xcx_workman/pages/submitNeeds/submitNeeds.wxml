@@ -57,7 +57,7 @@
 			<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 		</view>
 	</view>
-	<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<7}}">
+	<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap="upimg" data-number="0" data-type="{{num}}" wx-if="{{num<9}}">
 		<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 	</view>
 	<view class="need-photo-text">需求描述图片(可以上传多张，可以不上传)</view>

@@ -30,6 +30,7 @@ Page({
     workaddress: '',
     linkman: '',
     phone: '',
+    uploaderlist:[],
     show: false,
     btnFlag: false,
     needsTypeList: [{
@@ -1017,67 +1018,74 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
+    var index2=0
+    var index3=0
     that.setData({
       btnFlag: true
     })
     wx.chooseImage({
-      count: 1,
+      count: 9,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        wx.uploadFile({
-          url: api.imgFilter,
-          name: 'file',
-          filePath: tempFilePaths[0],
-          formData: {
-            media: tempFilePaths[0]
-          },
-          method: 'POST',
-          header: {
-            "Content-Type": "multipart/form-data"
-          },
-          success: function (res) {
-            console.log(res)
-            that.setData({
-              btnFlag: false
-            })
-            if (res.data == "false") {
-              wx.showToast({
-                title: '内容含有违法违规内容',
-                icon: 'none'
+        const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)
+        for(let i=0;i<uploaderlist.length;i++){
+          wx.uploadFile({
+            url: api.imgFilter,
+            name: 'file',
+            filePath: uploaderlist[index3],
+            formData: {
+              media: uploaderlist[index3]
+            },
+            method: 'POST',
+            header: {
+              "Content-Type": "multipart/form-data"
+            },
+            success: function (res) {
+              console.log(res)
+              that.setData({
+                btnFlag: false
               })
-              return
-            } else {
-              wx.uploadFile({
-                url: api.uploadurl,
-                filePath: tempFilePaths[0],
-                header: {
-                  "Content-Type": "multipart/form-data"
-                },
-                formData: {
-                  method: 'POST' //请求方式
-                },
-                name: 'file',
-                success(res) {
-                  that.setData({
-                    btnFlag: false
-                  })
-                  var r = res.data
-                  var jj = JSON.parse(r);
-                  var sj = api.viewUrl + jj.message
-                  that.data.tupianlists.push(jj.message)
-                  that.setData({
-                    tupianlists: that.data.tupianlists,
-                    picimg1: sj,
-                    picimgs1: jj.message
-                  })
-                }
-              })
+              if (res.data == "false") {
+                wx.showToast({
+                  title: '内容含有违法违规内容',
+                  icon: 'none'
+                })
+                return
+              } else {
+                wx.uploadFile({
+                  url: api.uploadurl,
+                  filePath: uploaderlist[index2],
+                  header: {
+                    "Content-Type": "multipart/form-data"
+                  },
+                  formData: {
+                    method: 'POST' //请求方式
+                  },
+                  name: 'file',
+                  success(res) {
+                    that.setData({
+                      btnFlag: false
+                    })
+                    var r = res.data
+                    var jj = JSON.parse(r);
+                    var sj = api.viewUrl + jj.message
+                    that.data.tupianlists.push(jj.message)
+                    that.setData({
+                      tupianlists: that.data.tupianlists,
+                      picimg1: sj,
+                      picimgs1: jj.message
+                    })
+                  }
+                })
+                index2+=1
+              }
             }
-          }
-        })
+          })
+          index3+=1
+        }
       },
     })
     that.setData({
