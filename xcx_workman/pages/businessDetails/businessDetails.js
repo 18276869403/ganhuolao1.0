@@ -4,15 +4,15 @@ const app = getApp()
 
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
- 
+
 Page({
   data: {
-    viewUrl:api.viewUrl,
-    goodsList:[],
-    iconUrl:api.iconUrl,
+    viewUrl: api.viewUrl,
+    goodsList: [],
+    iconUrl: api.iconUrl,
     score: 3,
     CheckItem: 0,
-    goodsList:[],
+    goodsList: [],
     showList: [{
         id: 1,
         pinglun: '12',
@@ -56,35 +56,35 @@ Page({
     ]
   },
   // 图片预览
-  tupian:function(e){
+  tupian: function (e) {
     var current = e.currentTarget.dataset.src
     wx.previewImage({
-      current: current,//当前显示图片的http链接，我这边是把图片转成了base64
+      current: current, //当前显示图片的http链接，我这边是把图片转成了base64
       urls: [current] //需要预览的图片http链接列表
     })
   },
-  onLoad: function(options) {
+  onLoad: function (options) {
     wx.showShareMenu({
       withShareTicket: true
     })
     var obj = JSON.parse(options.obj)
     console.log(obj)
-    if(obj.wxNc == null){
+    if (obj.wxNc == null) {
       obj.wxNc = ""
     }
     this.setData({
-      goodsList:obj
+      goodsList: obj
     })
     this.getGoodsList(obj.id)
     this.getGoodsdata(obj.id)
   },
-  phonecall:function(e){
+  phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
-    if(phone==''||phone==null||phone=='null'){
+    if (phone == '' || phone == null || phone == 'null') {
       wx.showToast({
         title: '联系电话为空',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
       return
     }
@@ -93,53 +93,56 @@ Page({
     })
   },
   // 跳转店家晒晒
-  goshowshai:function(e){
-    var ssid =e.currentTarget.dataset.ssid;
-    qingqiu.get("updateWxCase",{id:ssid},function(re){
+  goshowshai: function (e) {
+    var ssid = e.currentTarget.dataset.ssid;
+    qingqiu.get("updateWxCase", {
+      id: ssid
+    }, function (re) {
       console.log(re)
-      if(re.success == true){
+      if (re.success == true) {
         app.globalData.showworkRefresh = 1
         wx.navigateTo({
-          url: '../showDetails/showDetails?obj='+ssid,
+          url: '../showDetails/showDetails?obj=' + ssid,
         })
-      }else{
+      } else {
         wx.showToast({
           title: re.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
-    },'put')
+    }, 'put')
   },
 
   // 获取店家晒晒
-  getGoodsdata:function(id){
+  getGoodsdata: function (id) {
     var that = this
-    var data = {
-       wxUserId:id
+    var data = {
+      wxUserId: id,
+      wxUserIdGo: app.globalData.wxid
     }
-    qingqiu.get("casePage", data, function(re) {
-    if (re.success == true) {
-      if (re.result.records != null) {
-          that.goodsList = re.result.records
-          for(let obj of re.result.records){
-            if(obj.picOne.indexOf(",") == -1){
+    qingqiu.get("casePage", data, function (re) {
+      if (re.success == true) {
+        if (re.result.records != null) {
+          that.goodsList = re.result.records
+          for (let obj of re.result.records) {
+            if (obj.picOne.indexOf(",") == -1) {
               obj.picOne = that.data.viewUrl + obj.picOne
-            }else{
-              obj.picOne= that.data.viewUrl + obj.picOne.split(',')[0]
+            } else {
+              obj.picOne = that.data.viewUrl + obj.picOne.split(',')[0]
               // obj.picTwo= that.data.viewUrl + obj.picTwo.split(',')[0]
             }
-          }
-        console.log(re.result.records)
-          that.setData ({
-            showList: re.result.records
+          }
+          console.log(re.result.records)
+          that.setData({
+            showList: re.result.records
           })
         }
-      } 
+      }
     })
   },
   // 跳转商品详情
-  goGoodsDetails:function(e){
+  goGoodsDetails: function (e) {
     var obj = JSON.stringify(e.currentTarget.dataset.vals)
     app.globalData.goodsRefresh = 1
     wx.navigateTo({
@@ -147,73 +150,78 @@ Page({
     })
   },
 
-  liuyan:function(e){
+  liuyan: function (e) {
     var id = e.currentTarget.dataset.wxid
     var shopName = e.currentTarget.dataset.name
     var wxNc = e.currentTarget.dataset.wxNc
     var name = ''
-    if(shopName == '' || shopName == null || shopName == 'null'){
+    if (shopName == '' || shopName == null || shopName == 'null') {
       name = wxNc
-    }else{
+    } else {
       name = shopName
     }
     wx.navigateTo({
-      url: '../HM-chat/HM-chat?id='+id+'&name='+name,
+      url: '../HM-chat/HM-chat?id=' + id + '&name=' + name,
     })
   },
 
   // 获取店家商品
-  getGoodsList:function(goodsid) {
-      var that = this
-      var data={
-        pages: 1,
-        size: 10,
-        userId:goodsid,
-        backup1:1
-      }
-      qingqiu.get("tjsp", data, function(re) {
-        if (re.success == true) {
-          if (re.result.records != null) {
-            for(let obj of re.result.records){
-              obj.goodPic1=obj.goodPic1.split(',')
-              obj.goodPic2=obj.goodPic2.split(',')
-            }
-            that.setData ({
-              goodslists: re.result.records
-            })
-          } else {
-            qingqiu.tk('未查询到任何数据')
-          }
-        } 
-      })
-    },
+  getGoodsList: function (goodsid) {
+    var that = this
+    var data = {
+      pages: 1,
+      size: 10,
+      userId: goodsid,
+      backup1: 1
+    }
+    qingqiu.get("tjsp", data, function (re) {
+      if (re.success == true) {
+        if (re.result.records != null) {
+          for (let obj of re.result.records) {
+            obj.goodPic1 = obj.goodPic1.split(',')
+            obj.goodPic2 = obj.goodPic2.split(',')
+          }
+          that.setData({
+            goodslists: re.result.records
+          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
+        }
+      }
+    })
+  },
   //最新最热样式变动
-  serviceSelection1: function(e) {
+  serviceSelection1: function (e) {
     var navid = e.currentTarget.id;
     this.setData({
       CheckItem: navid
     })
   },
   // 晒晒点赞
-  dianzan:function(e){
-    var that=this
-    var shaid = e.currentTarget.dataset.shaid;
-    var data={
-      wxCaseId:shaid
+  dianzan: function (e) {
+    var that = this
+    var item = e.currentTarget.dataset.itemobj;
+    var data = {
+      wxCaseId: item.id,
+      wxUserIdGo:app.globalData.wxid
     }
-    qingqiu.get("userLikes",data,function(re) {
+    qingqiu.get("userLikes", data, function (re) {
       console.log(re)
       if (re.success == true) {
-        for(let obj of that.data.showList){
-          if(obj.id==shaid){
-            obj.giveGood+=1
-            obj.backup1=1
+        for (let obj of that.data.showList) {
+          if (obj.id == item.id) {
+            if (item.giveState == 0) {
+              obj.giveGood += 1
+            } else { 
+              obj.giveGood -= 1
+            }
+            obj.giveState = item.giveState == 0 ? 1 : 0
           }
         }
         that.setData({
-          showList:that.data.showList
+          showList: that.data.showList
         })
-      } 
+      }
     })
   },
 })

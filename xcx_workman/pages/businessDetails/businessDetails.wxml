@@ -94,9 +94,9 @@
       </view>
       <!-- 晒晒样式 CheckItem==1-->
       <view class="content-show" wx:if="{{CheckItem==1}}">
-        <view class="show-item zongxiang" wx:for="{{showList}}" bindtap="goshowshai" wx:key="key" data-ssid="{{item.id}}">
+        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key">
           <view class="show">
-            <view class="show-item-top">
+            <view class="show-item-top" bindtap="goshowshai" data-ssid="{{item.id}}">
               <image src="{{item.picOne}}" class="show-img"></image>
             </view>
             <view class="show-item-bottom hengxiang">
@@ -113,12 +113,12 @@
                 </view>
                 <view>{{item.messageSum}}</view>
               </view>
-              <view class="hengxiang">
-                <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
-                  <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
+              <view class="dianzan hengxiang">
+                <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+                  <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
                 </view>
-                <view wx:if="{{item.backup1==1}}">
-                  <image src="{{iconUrl}}static/image/zan2.png" class="pinglun-img"></image>
+                <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
+                  <image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
                 </view>
                 <view>{{item.giveGood}}</view>
               </view>

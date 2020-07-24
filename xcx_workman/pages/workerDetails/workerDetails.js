@@ -83,7 +83,8 @@ Page({
     var data = {
       wxUserId: this.data.id,
       pages: 1,
-      size: 10
+      size: 10,
+      wxUserIdGo:app.globalData.wxid
     }
     qingqiu.get("CasePage", data, function (re) {
       if (re.success == true) {

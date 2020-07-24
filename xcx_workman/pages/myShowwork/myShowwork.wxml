@@ -26,8 +26,11 @@
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
-              <view>
-                <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
+              <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+                <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
+              </view>
+              <view bindtap="dianzan"  data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
+                <image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
               </view>
               <view>{{item.giveGood}}</view>
             </view>
@@ -63,8 +66,11 @@
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
-              <view>
-                <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
+              <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+                <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
+              </view>
+              <view bindtap="dianzan"  data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
+                <image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
               </view>
               <view>{{item.giveGood}}</view>
             </view>
