@@ -18,10 +18,10 @@
 			<input type="number" placeholder="输入人数" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{activityrenshu}}' name="activityrenshu" bindinput='activityrenshu' bindblur="activityrenshublur"></input>
 		</view>
 		<view class="content-item-textarea">
-			<textarea class="textarea" placeholder="输入活动内容" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{activitycontent}}' name="activitycontent" bindinput='activitycontent' bindblur="activitycontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
+			<textarea class="textarea" placeholder="输入活动内容" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{activitycontent}}' name="activitycontent" bindinput='activitybindinput' bindblur="activitycontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
 		</view>
 		<view class="content-item hengxiang">
-			<view class="content-title">活动开始时间</view>
+			<view class="content-title">开始时间</view>
 			<view class="content-value">
 				<picker mode="date" value="{{startdate}}" start="{{newDate}}" bindchange="bindDateChange">
 					<view class="picker" style="color:#999999;">
@@ -34,7 +34,7 @@
 			</view>
 		</view>
 		<view class="content-item hengxiang">
-			<view class="content-title">报名截止</view>
+			<view class="content-title">截止时间</view>
 			<view class="content-value">
 				<picker mode="date" value="{{enddate}}" start="{{endDate}}" bindchange="FindDateChange">
 					<view class="picker" style="color:#999999;">

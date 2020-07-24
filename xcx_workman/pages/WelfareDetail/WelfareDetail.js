@@ -80,6 +80,8 @@ Page({
     } else {
       gongyilist.name = gongyilist.wxNc
     }
+    gongyilist.activityTime = gongyilist.activityTime.substr(0,10)
+    gongyilist.endTime = gongyilist.endTime.substr(0,10)
     var piclist = []
     if (gongyilist.pic != '' && gongyilist.pic != null) {
       piclist = gongyilist.pic.split(',')

@@ -39,7 +39,7 @@
 							</view>
 						</view>
 						<view class="content-text">
-							<text class="content-text-page">活动内容：{{item.content}}</text>
+							<text class="content-text-page">{{item.content}}</text>
 						</view>
 					</view>
 					<view class="list-top list-top-margin hangxiang">

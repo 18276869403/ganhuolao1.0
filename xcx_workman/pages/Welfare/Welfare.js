@@ -252,6 +252,7 @@ Page({
         if (res.result.records.length > 0) {
           var gongyilist = that.data.gongyilist
           for (let obj of res.result.records) {
+            // obj.content = obj.content.split('&hc').join('\n')
             gongyilist.push(obj)
           }
           that.setData({

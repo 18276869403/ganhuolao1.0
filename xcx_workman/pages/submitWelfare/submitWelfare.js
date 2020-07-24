@@ -174,7 +174,7 @@ Page({
     }
     if (that.data.startdate == '选择活动时间') {
       wx.showToast({
-        title: '请输入活动时间',
+        title: '请输入开始时间',
         icon: 'none',
         duration: 3000
       })
@@ -194,9 +194,9 @@ Page({
       })
       return
     }
-    if (utils.checkDate(that.data.enddate, that.data.startdate) < 1) {
+    if (utils.checkDate(that.data.startdate,that.data.enddate) < 1) {
       wx.showToast({
-        title: '报名时间不能大于活动截止时间哦',
+        title: '开始时间不能大于截止时间哦',
         icon: 'none'
       })
       that.setData({
@@ -352,7 +352,7 @@ Page({
     })
   },
   //获取活动内容
-  activitycontent: function (e) {
+  activitybindinput: function (e) {
     this.setData({
       activitycontent: e.detail.value
     })

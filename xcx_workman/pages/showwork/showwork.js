@@ -95,7 +95,8 @@ Page({
     var data={
       pageNo: that.data.pageNo,
       size: 10,
-      caseName:that.data.sousuonr
+      caseName:that.data.sousuonr,
+      wxUserIdGo:app.globalData.wxid
     }
     if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
       data.oneAreaId = app.globalData.oneCity.id
@@ -106,7 +107,6 @@ Page({
       }
     }
     qingqiu.get("CasePage", data, function(re) {
-      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           that.showList=re.result.records
@@ -126,17 +126,19 @@ Page({
   // 晒晒点赞
   dianzan:function(e){
     var that=this
-    var shaid = e.currentTarget.dataset.shaid;
+    var item = e.currentTarget.dataset.itemobj;
+    console.log(item)
     var data={
-      wxCaseId:shaid
+      wxCaseId:item.id,
+      wxUserIdGo:app.globalData.wxid
     }
     qingqiu.get("userLikes",data,function(re) {
       console.log(re)
       if (re.success == true) {
         for(let obj of that.data.showList){
-          if(obj.id==shaid){
+          if(obj.id==item.id){
             obj.giveGood+=1
-            obj.backup1=1
+            obj.giveState = item.giveState == 0?1:0
           }
         }
         that.setData({
