@@ -24,13 +24,74 @@ Page({
 
   onLoad: function (options) {
     console.log(options)
+    this.getRecrument()
     wx.showShareMenu({
       withShareTicket: true
     })
-    var zhaogong = JSON.parse(options.obj)
-    this.setData({
-      zhaogong: zhaogong,
-      wxUserid: app.globalData.wxid
+    // var zhaogong = JSON.parse(options.obj)
+    // this.setData({
+    //   zhaogong: zhaogong,
+    //   wxUserid: app.globalData.wxid
+    // })
+    if (options != undefined) {
+      if (options.obj != undefined) {
+        var zhaogong = JSON.parse(options.obj)
+        zhaogong.publishMan = utils.formatName(zhaogong.publishMan)
+        this.setData({
+          zhaogong: zhaogong,
+          id: zhaogong.id,
+          zid: zhaogong.wxUserId,
+          wxUserid: app.globalData.wxid
+        })
+        console.log(this.data.zhaogong)
+        this.SelectjiedanList()
+      } else if (options.id != undefined) {
+        this.getRecrument(options.id)
+        this.setData({
+          id: options.id,
+          wxUserid: app.globalData.wxid
+        })
+        this.SelectjiedanList()
+      } else {
+        wx.showToast({
+          title: '该招工已被删除',
+          icon: 'none'
+        })
+        setTimeout(function(){
+          wx.redirectTo({
+            url: '../index/index',
+          })
+        }, 1000);
+        return
+      }
+    }else{
+      wx.showToast({
+        title: '该招工已被删除',
+        icon: 'none'
+      })
+      return
+    }
+  },
+  // 根据id获取详情
+  getRecrument(id) {
+    var that = this
+    qingqiu.get("queryloclaById", {id: id}, function (res) {
+      console.log('招工byid', res)
+      if (res.success == true) {
+        res.result.createTime = res.result.createTime.substring(0,16)
+        res.result.publishMan = utils.formatName(res.result.publishMan)
+        that.setData({
+          zhaogong: res.result,
+          zid: res.result.wxUserId
+        })
+      } else {
+        wx.showToast({
+          title: '招工已被删除',
+          icon: 'none'
+        })
+        return
+      }
+
     })
   },
   // 接单人员
