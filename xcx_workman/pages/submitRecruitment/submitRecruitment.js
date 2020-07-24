@@ -322,6 +322,17 @@ Page({
       })
       return
     }
+    if(that.data.phone.length != 11){
+      wx.showToast({
+        title: "请输入11位联系电话",
+        icon: 'none',
+        duration: 2000
+      })
+      that.setData({
+        btnFlag: false
+      })
+      return
+    }
     if (that.data.select == "circle") {
       wx.showToast({
         title: '请勾选同意协议！',

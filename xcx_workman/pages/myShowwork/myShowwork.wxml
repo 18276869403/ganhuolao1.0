@@ -11,21 +11,21 @@
             </image>
             <video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" ></video>
           </view>
-          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
-            <view class="hengxiang" >
+          <view class="show-item-bottom hengxiang">
+            <view class="bottom-width hengxiang" >
               <view>
                 <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
               </view>
               <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
               <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
             </view>
-            <view class="hengxiang">
+            <view class="bottom-width hengxiang">
               <view>
                 <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
               </view>
               <view>{{item.messageSum}}</view>
             </view>
-            <view class="hengxiang">
+            <view class="bottom-width hengxiang">
               <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
                 <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
               </view>
@@ -34,8 +34,8 @@
               </view>
               <view>{{item.giveGood}}</view>
             </view>
-            <view class="hengxiang">
-              <view catchtap="deletess" class="{{btnFlag == true?'disabled':''}}" data-shaid="{{item.id}}">
+            <view class="bottom-width hengxiang">
+              <view bindtap="deletess" class="{{btnFlag == true?'disabled':''}}" data-shaid="{{item.id}}">
                 <image src="{{iconUrl}}static/image/delete.png" class="pinglun-img"></image>
               </view>
             </view>
@@ -51,7 +51,7 @@
             <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
             <video autoplay loop muted src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}"></video>
           </view>
-          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
+          <view class="show-item-bottom hengxiang">
             <view class="hengxiang" >
               <view>
                 <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>

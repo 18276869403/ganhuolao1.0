@@ -30,7 +30,7 @@ Page({
     workaddress: '',
     linkman: '',
     phone: '',
-    uploaderlist:[],
+    uploaderlist: [],
     show: false,
     btnFlag: false,
     needsTypeList: [{
@@ -348,10 +348,12 @@ Page({
         })
         if (re.success == true) {
           wx.showToast({
-            title: '提交成功',
+            title: '发布成功',
             icon: 'none',
             duration: 2000
           })
+          console.log(re)
+          var needid = re.result.id
           // 公众号消息推送
           qingqiu.get("getPublicUser", null, function (res) {
             for (let obj of res.result) {
@@ -366,7 +368,7 @@ Page({
                 keyword2Color: '#173177',
                 remarkValue: '请进入干活佬查看详情',
                 remarkColor: '#173177',
-                MiniUrl: ''
+                MiniUrl: 'pages/needsDetails/needsDetails?id=' + needid
               }
               qingqiu.get("SendWxMsg", objdata, function (re) {
                 console.log(re)
@@ -1018,8 +1020,8 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
-    var index2=0
-    var index3=0
+    var index2 = 0
+    var index3 = 0
     that.setData({
       btnFlag: true
     })
@@ -1031,7 +1033,7 @@ Page({
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
         // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths) 
-        for(let i=0;i<tempFilePaths.length;i++){
+        for (let i = 0; i < tempFilePaths.length; i++) {
           wx.uploadFile({
             url: api.imgFilter,
             name: 'file',
@@ -1072,7 +1074,7 @@ Page({
                     var r = res.data
                     var jj = JSON.parse(r);
                     var sj = api.viewUrl + jj.message
-                    if(that.data.tupianlists.length<9){
+                    if (that.data.tupianlists.length < 9) {
                       that.data.tupianlists.push(jj.message)
                     }
                     // that.data.tupianlists.push(jj.message)
@@ -1083,11 +1085,11 @@ Page({
                     })
                   }
                 })
-                index2+=1
+                index2 += 1
               }
             }
           })
-          index3+=1
+          index3 += 1
         }
       },
     })

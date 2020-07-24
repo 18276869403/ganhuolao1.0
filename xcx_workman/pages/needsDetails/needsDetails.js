@@ -78,18 +78,27 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    var xqxqlist = JSON.parse(options.obj1)
-    xqxqlist.publishMan = utils.formatName(xqxqlist.publishMan)
-    this.setData({
-      xqxqlist: xqxqlist,
-      id: xqxqlist.id,
-      xid: xqxqlist.wxUserId,
-      wxUserid: app.globalData.wxid
-    })
-    console.log(this.data.xqxqlist)
-    this.SelectjiedanList()
-    // this.SelecttupianList()
+    if(options != undefined){
+      if(options.obj1 != undefined){
+        var xqxqlist = JSON.parse(options.obj1)
+        xqxqlist.publishMan = utils.formatName(xqxqlist.publishMan)
+        this.setData({
+          xqxqlist: xqxqlist,
+          id: xqxqlist.id,
+          xid: xqxqlist.wxUserId,
+          wxUserid: app.globalData.wxid
+        })
+        console.log(this.data.xqxqlist)
+        this.SelectjiedanList()
+      }else if(options.id != undefined){
+        
+      }
+    }
   },
+
+  // 根据id获取详情
+  
+
   // 接单人员
   SelectjiedanList() {
     var that = this
