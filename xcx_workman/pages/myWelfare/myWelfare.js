@@ -65,7 +65,9 @@ Page({
     that.data.gongyilist = []
     var id = e.currentTarget.dataset.id
     that.setData({
-      GyTypeid: id
+      pageNo: 1,
+      GyTypeid: id,
+      gongyilist:that.data.gongyilist
     })
     that.getActivity()
   },
