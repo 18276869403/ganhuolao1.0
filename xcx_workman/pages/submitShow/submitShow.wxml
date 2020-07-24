@@ -22,11 +22,11 @@
 		<view class="fabu" wx-if="{{tupianlists.length<10}}">
 			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
 				<view>
-					<image src="{{iconUrl}}static/image/jiahao.png" class="fabu-img"></image>
+					<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 				</view>
-				<view>
+				<!-- <view>
 					上传照片
-				</view>
+				</view> -->
 			</view>
 		</view>
 
