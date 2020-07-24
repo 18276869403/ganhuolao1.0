@@ -488,7 +488,7 @@ page {
   -webkit-box-orient: vertical;
 }
 
-/* 弹窗 */ 
+/* 弹窗 */
 .toast-box {
   width: 100%;
   height: 100%;
@@ -530,7 +530,7 @@ page {
   padding-bottom: 2vh;
   background-color: white;
   text-align: center;
-  border-radius:6px;
+  border-radius: 6px;
 }
 
 .toast-input {
@@ -544,10 +544,12 @@ page {
   /* padding-top: 1vh;
   padding-bottom: 1vh; */
 }
-.input-class{
+
+.input-class {
   height: 70rpx;
   line-height: 70rpx;
 }
+
 .toast-button {
   display: flex;
 }
@@ -564,7 +566,7 @@ page {
   text-align: center;
 }
 
-.button-img{
+.button-img {
   width: 199rpx;
   height: 66rpx;
 }
@@ -601,4 +603,16 @@ page {
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
-  }
+}
+
+/* 客服 */
+.kefubtn {
+  padding: 0px 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  color: none;
+  border-radius: 0;
+}

@@ -61,7 +61,7 @@
 	<view class="bottom zongxiang">
 		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
 		<button class='kefubtn' style="width:100%" open-type="contact" bindcontact="handleContact">
-			<image src="{{iconUrl}}static/image/kefu.png" class="kefu-img"></image>
+			<image src="{{iconUrl}}static/image/kefu1.png" class="kefu-img"></image>
 		</button>
 	</view>
 </view>
