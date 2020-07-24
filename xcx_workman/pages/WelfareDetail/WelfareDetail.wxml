@@ -36,8 +36,9 @@
 			</view>
 			<view class="content-content-list">
 				<view>招募人数：{{gongyilist.signNum}}/{{gongyilist.activityNum}}</view>
-				<view>活动时间：{{gongyilist.activityTime}}</view>
-				<view>活动内容：{{gongyilist.content}}</view>
+				<view>开始时间：{{gongyilist.activityTime}}</view>
+				<view>活动内容：</view>
+				<view><text>{{gongyilist.content}}</text></view>
 				<view>报名截止：{{gongyilist.endTime}}</view>
 				<view class="image-view hengxiang">
 					<swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
