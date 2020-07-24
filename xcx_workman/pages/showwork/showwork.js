@@ -136,7 +136,7 @@ Page({
     qingqiu.get("userLikes", data, function (re) {
       if (re.success == true) {
         for (let obj of that.data.showList) { 
-          if (obj.id == item.id) {
+          if (obj.id == item.id) { 
             if (item.giveState == 0) {
               obj.giveGood += 1
             } else { 
