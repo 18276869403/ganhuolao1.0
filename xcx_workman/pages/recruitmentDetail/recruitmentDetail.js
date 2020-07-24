@@ -32,8 +32,6 @@ Page({
       zhaogong: zhaogong,
       wxUserid: app.globalData.wxid
     })
-    console.log(zhaogong)
-    console.log(this.data.wxUserid)
   },
   // 接单人员
   SelectjiedanList() {

@@ -359,16 +359,16 @@ Page({
       that.setData({
         btnFlag: false
       })
-      console.log(re)
+      console.log('招工',re)
       if (re.success == true) {
         wx.showToast({
           title: '发布成功',
           icon: 'success',
           duration: 3000
         })
+        var localid = re.result.id
         // 公众号消息推送
         qingqiu.get("getPublicUser", null, function (res) {
-          console.log(res)
           for (let obj of res.result) {
             var objdata = {
               openId: obj.openid,
@@ -381,10 +381,9 @@ Page({
               keyword2Color: '#173177',
               remarkValue: '请进入干活佬查看详情',
               remarkColor: '#173177',
-              MiniUrl: ''
+              MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
             }
             qingqiu.get("SendWxMsg", objdata, function (re) {
-              console.log(re)
             })
           }
           wx.navigateBack({

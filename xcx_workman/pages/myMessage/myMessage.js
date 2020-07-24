@@ -35,7 +35,9 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.data.messageList = []
+    this.setData({
+      messageList:[]
+    })
     this.data.formymessageList = []
     this.data.isLastPage = false
     this.data.pageNo = 1

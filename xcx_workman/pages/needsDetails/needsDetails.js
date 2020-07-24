@@ -78,8 +78,8 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    if(options != undefined){
-      if(options.obj1 != undefined){
+    if (options != undefined) {
+      if (options.obj1 != undefined) {
         var xqxqlist = JSON.parse(options.obj1)
         xqxqlist.publishMan = utils.formatName(xqxqlist.publishMan)
         this.setData({
@@ -90,14 +90,56 @@ Page({
         })
         console.log(this.data.xqxqlist)
         this.SelectjiedanList()
-      }else if(options.id != undefined){
-        
+      } else if (options.id != undefined) {
+        this.getYneed(options.id)
+        this.setData({
+          id: options.id,
+          wxUserid: app.globalData.wxid
+        })
+        this.SelectjiedanList()
+      } else {
+        wx.showToast({
+          title: '该需求已被删除',
+          icon: 'none'
+        })
+        return
       }
+    }else{
+      wx.showToast({
+        title: '该需求已被删除',
+        icon: 'none'
+      })
+      return
     }
   },
 
   // 根据id获取详情
-  
+  getYneed(id) {
+    var that = this
+    qingqiu.get("yneedBy", {
+      id: id
+    }, function (res) {
+      console.log('需求byid', res)
+      if (res.success == true) {
+        res.result.publishTime = res.result.publishTime.split(' ')[0]
+        if (res.result.backup1 != null && res.result.backup1.length > 0) {
+          res.result.backup1 = res.result.backup1.split(',')
+        }
+        res.result.publishMan = utils.formatName(res.result.publishMan)
+        that.setData({
+          xqxqlist: res.result,
+          xid: res.result.wxUserId
+        })
+      } else {
+        wx.showToast({
+          title: '需求已被删除',
+          icon: 'none'
+        })
+        return
+      }
+
+    })
+  },
 
   // 接单人员
   SelectjiedanList() {

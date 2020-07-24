@@ -352,7 +352,6 @@ Page({
             icon: 'none',
             duration: 2000
           })
-          console.log(re)
           var needid = re.result.id
           // 公众号消息推送
           qingqiu.get("getPublicUser", null, function (res) {

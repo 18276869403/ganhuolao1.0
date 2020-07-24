@@ -351,6 +351,7 @@ Page({
             icon: 'none',
             duration: 2000
           })
+          var yneedid = re.result.id
           // 公众号消息推送
           qingqiu.get("getPublicUser", null, function (res) {
             for (let obj of res.result) {
@@ -365,10 +366,9 @@ Page({
                 keyword2Color: '#173177',
                 remarkValue: '请进入干活佬查看详情',
                 remarkColor: '#173177',
-                MiniUrl: ''
+                MiniUrl: 'pages/needsDetails/needsDetails?id=' + yneedid
               }
               qingqiu.get("SendWxMsg", objdata, function (re) {
-                console.log(re)
               })
             }
           })
