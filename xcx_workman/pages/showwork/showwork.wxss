@@ -515,3 +515,13 @@ page {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+/* 点赞 */
+.dianzan-img{
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 25rpx;
+  margin-right: 10rpx;
+}
+.dianzan{
+  margin-left: 50px;
+}

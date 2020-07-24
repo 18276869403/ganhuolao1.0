@@ -1,4 +1,3 @@
-
 //获取应用实例
 const app = getApp()
 
@@ -7,26 +6,26 @@ const api = require('../../utils/config.js')
 
 Page({
   data: {
-    viewUrl:api.viewUrl,
-    iconUrl:api.iconUrl,
-    showList:[],
+    viewUrl: api.viewUrl,
+    iconUrl: api.iconUrl,
+    showList: [],
     // imgList: [
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg"
     // ],
-    imgList:[],
-    sousuotext:'',
-    id:'',
-    name:'',
-    sousuonr:'',
-    pageNo:1
+    imgList: [],
+    sousuotext: '',
+    id: '',
+    name: '',
+    sousuonr: '',
+    pageNo: 1
   },
   onPullDownRefresh: function () {
     app.globalData.showid = 1
-    this.data.pageNo=1
-    this.data.isLastPage=false
-    this.data.showList.splice(0,this.data.showList.length)
+    this.data.pageNo = 1
+    this.data.isLastPage = false
+    this.data.showList.splice(0, this.data.showList.length)
     app.globalData.showworkRefresh = 1
     this.onShow()
     setTimeout(() => {
@@ -47,104 +46,109 @@ Page({
     })
   },
 
-  onShow:function(){
+  onShow: function () {
     wx.showShareMenu({
       withShareTicket: true
     })
-    if(app.globalData.showworkRefresh != 0){
+    if (app.globalData.showworkRefresh != 0) {
       this.chushishouquan()
       this.QueryoneArea()
       this.QuerytwoArea()
-      if(app.globalData.oneCity != undefined){
+      if (app.globalData.oneCity != undefined) {
         this.setData({
-          showList:[],
-          weizhi:app.globalData.oneCity.name + app.globalData.twoCity.name,
-          pageNo:1
+          showList: [],
+          weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
+          pageNo: 1
         })
         this.SelectshowList()
-      }else{
+      } else {
         this.setData({
-          showList:[],
-          pageNo:1,
+          showList: [],
+          pageNo: 1,
           cityId: this.data.id,
           cityname1: this.data.name,
-          weizhi:'全部',
-          areaId:0
+          weizhi: '全部',
+          areaId: 0
         })
         this.SelectshowList()
       }
     }
   },
-  
+
   // 上拉功能
   onReachBottom: function () {
     if (this.data.isLastPage) {
       wx.showToast({
         title: '没有更多了！',
-        icon:'none',
-        duration:2000
+        icon: 'none',
+        duration: 2000
       })
-        return
+      return
     }
-    this.setData({ pageNo: this.data.pageNo + 1 })
+    this.setData({
+      pageNo: this.data.pageNo + 1
+    })
     this.SelectshowList()
   },
   // 获取晒晒 
   SelectshowList() {
     var that = this
-    var data={
+    var data = {
       pageNo: that.data.pageNo,
       size: 10,
-      caseName:that.data.sousuonr,
-      wxUserIdGo:app.globalData.wxid
+      caseName: that.data.sousuonr,
+      wxUserIdGo: app.globalData.wxid
     }
-    if(app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined"){
+    if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
       data.oneAreaId = app.globalData.oneCity.id
     }
-    if(app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined"){
-      if(app.globalData.twoCity.id!= 0){
+    if (app.globalData.twoCity != undefined && app.globalData.twoCity != "undefined") {
+      if (app.globalData.twoCity.id != 0) {
         data.twoAreaId = app.globalData.twoCity.id
       }
     }
-    qingqiu.get("CasePage", data, function(re) {
+    qingqiu.get("CasePage", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
-          that.showList=re.result.records
-          for(var i= 0 ; i < that.showList.length; i++){
-            that.showList[i].picOne = api.viewUrl+re.result.records[i].picOne.split(',')[0]
+          that.showList = re.result.records
+          for (var i = 0; i < that.showList.length; i++) {
+            that.showList[i].picOne = api.viewUrl + re.result.records[i].picOne.split(',')[0]
             that.data.imgList[i] = that.showList[i].picOne
             that.data.showList.push(re.result.records[i])
-          } 
+          }
           console.log(that.data.showList)
           that.setData({
-            showList:that.data.showList
+            showList: that.data.showList
           })
-        } 
-      } 
+        }
+      }
     })
   },
   // 晒晒点赞
-  dianzan:function(e){
-    var that=this
+  dianzan: function (e) {
+    var that = this
     var item = e.currentTarget.dataset.itemobj;
     console.log(item)
-    var data={
-      wxCaseId:item.id,
-      wxUserIdGo:app.globalData.wxid
+    var data = {
+      wxCaseId: item.id,
+      wxUserIdGo: app.globalData.wxid
     }
-    qingqiu.get("userLikes",data,function(re) {
-      console.log(re)
+    qingqiu.get("userLikes", data, function (re) {
       if (re.success == true) {
-        for(let obj of that.data.showList){
-          if(obj.id==item.id){
-            obj.giveGood+=1
-            obj.giveState = item.giveState == 0?1:0
+        for (let obj of that.data.showList) {
+          if (obj.id == item.id) {
+            if (item.giveState == 0) {
+              obj.giveGood += 1
+            } else {
+              obj.giveGood -= 1
+            }
+            obj.giveState = item.giveState == 0 ? 1 : 0
           }
         }
         that.setData({
-          showList:that.data.showList
+          showList: that.data.showList
         })
-      } 
+      }
     })
   },
   // 发布弹窗显示
@@ -194,53 +198,55 @@ Page({
     }.bind(this), 200)
   },
   // 搜索框
-   shurukuang:function(e){
+  shurukuang: function (e) {
     this.setData({
-      sousuotext:e.detail.value
+      sousuotext: e.detail.value
     })
   },
   // 搜索
-  btnsearch:function(){
-    var that=this
-    that.data.pageNo=1
-    that.data.isLastPage=false
-    this.data.showList.splice(0,this.data.showList.length)
-    that.data.sousuonr=that.data.sousuotext
+  btnsearch: function () {
+    var that = this
+    that.data.pageNo = 1
+    that.data.isLastPage = false
+    this.data.showList.splice(0, this.data.showList.length)
+    that.data.sousuonr = that.data.sousuotext
     that.SelectshowList()
   },
   // 跳转到晒晒详情页面
-   showDetails: function(e) {
-    var ssid =e.currentTarget.dataset.ssid;
-    qingqiu.get("updateWxCase",{id:ssid},function(re){
+  showDetails: function (e) {
+    var ssid = e.currentTarget.dataset.ssid;
+    qingqiu.get("updateWxCase", {
+      id: ssid
+    }, function (re) {
       console.log(re)
-      if(re.success == true){
+      if (re.success == true) {
         app.globalData.showworkRefresh = 0
         wx.navigateTo({
-          url: '../showDetails/showDetails?obj='+ssid,
+          url: '../showDetails/showDetails?obj=' + ssid,
         })
-      }else{
+      } else {
         wx.showToast({
           title: re.message,
-          icon:'none',
-          duration:2000
+          icon: 'none',
+          duration: 2000
         })
       }
-    },'put')
+    }, 'put')
   },
   // 发布晒晒页面
-  submitShow: function() {
+  submitShow: function () {
     app.globalData.showworkRefresh = 1
     wx.navigateTo({
       url: '../submitShow/submitShow',
     })
   },
   // 发布视频
-  submitVideo:function(){
+  submitVideo: function () {
     var that = this
     wx.chooseVideo({
-      camera: ['album','camera'],
-      maxDuration:60,
-      success:function(res){
+      camera: ['album', 'camera'],
+      maxDuration: 60,
+      success: function (res) {
         console.log(res)
         var tempFilePath = res.tempFilePath
         console.log(tempFilePath)
@@ -254,52 +260,51 @@ Page({
             method: 'POST' //请求方式
           },
           name: 'file',
-          success:function(res){
+          success: function (res) {
             console.log(res)
             var re = JSON.parse(res.data)
-            if(re.success == true){
-              if(app.globalData.weizhiid==undefined || app.globalData.weizhiid=='')
-              {
+            if (re.success == true) {
+              if (app.globalData.weizhiid == undefined || app.globalData.weizhiid == '') {
                 var data = {
-                  wxUserId:app.globalData.wxid,
-                  backup3:1,
-                  backup4:0,
-                  picOne:re.message
+                  wxUserId: app.globalData.wxid,
+                  backup3: 1,
+                  backup4: 0,
+                  picOne: re.message
                 }
-              }else{
+              } else {
                 var data = {
-                  wxUserId:app.globalData.wxid,
-                  backup3:1,
-                  backup4:0,
-                  oneAreaId:app.globalData.weizhiid,
-                  twoAreaId:app.globalData.weizhiid2,
-                  picOne:re.message
+                  wxUserId: app.globalData.wxid,
+                  backup3: 1,
+                  backup4: 0,
+                  oneAreaId: app.globalData.weizhiid,
+                  twoAreaId: app.globalData.weizhiid2,
+                  picOne: re.message
                 }
               }
-              qingqiu.get('insertCase',data,function(res){
-                if(res.success == true){
+              qingqiu.get('insertCase', data, function (res) {
+                if (res.success == true) {
                   wx.showToast({
                     title: '发布成功,视频正在审核中...',
-                    icon:'success',
-                    duration:2000
+                    icon: 'success',
+                    duration: 2000
                   })
-                  setTimeout(function(){
+                  setTimeout(function () {
                     that.hideModal1()
                     that.onShow()
-                  },1000)
-                }else{
+                  }, 1000)
+                } else {
                   wx.showToast({
                     title: res.message,
-                    icon:'none',
-                    duration:2000
+                    icon: 'none',
+                    duration: 2000
                   })
                 }
-              },'post')
-            }else{
+              }, 'post')
+            } else {
               wx.showToast({
                 title: res.message,
-                icon:'none',
-                duration:2000
+                icon: 'none',
+                duration: 2000
               })
             }
           }
@@ -308,67 +313,74 @@ Page({
     })
   },
   // 一级区域
-  QueryoneArea(){
+  QueryoneArea() {
     var that = this
-    qingqiu.get("queryOneArea", null, function(re) {
-    if (re.success == true) {
-      if (re.result != null) {
-        var obj = {id:0,areaName:'全部'}
-        var city=[]
-        city.push(obj)
-        city.push(re.result[0])
-        that.data.id=re.result[0].id
-        that.data.name=re.result[0].areaName
-        if(app.globalData.oneCity == undefined || app.globalData.oneCity == "undefined"){
+    qingqiu.get("queryOneArea", null, function (re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          var obj = {
+            id: 0,
+            areaName: '全部'
+          }
+          var city = []
+          city.push(obj)
+          city.push(re.result[0])
+          that.data.id = re.result[0].id
+          that.data.name = re.result[0].areaName
+          if (app.globalData.oneCity == undefined || app.globalData.oneCity == "undefined") {
+            that.setData({
+              cityId: that.data.id,
+              cityname1: that.data.name,
+              weizhi: '全部',
+              areaId: 0
+            })
+          } else {
+            that.setData({
+              cityId: app.globalData.oneCity.id,
+              cityname1: app.globalData.oneCity.name,
+              areaId: app.globalData.twoCity.id,
+              areaname: app.globalData.twoCity.name
+            })
+          }
           that.setData({
-            cityId: that.data.id,
-            cityname1: that.data.name,
-            weizhi:'全部',
-            areaId:0
+            city: city
           })
-        }else{
-          that.setData({
-            cityId: app.globalData.oneCity.id,
-            cityname1: app.globalData.oneCity.name,
-            areaId:app.globalData.twoCity.id,
-            areaname:app.globalData.twoCity.name
-          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
         }
-        that.setData({
-          city:city
-        })
-      }else {
-        qingqiu.tk('未查询到任何数据')
       }
-    } 
-  })
+    })
   },
   // 二级区域
-  QuerytwoArea(){
+  QuerytwoArea() {
     var that = this
-    var data ={
-      oneAreaId:that.data.id
+    var data = {
+      oneAreaId: that.data.id
     }
-    qingqiu.get("queryTwoArea", data, function(re) {
-    if (re.success == true) {
-      if (re.result != null) {
-        var obj = {id:0,oneAreaId:0,areaName:'全部'}
-        var area = []
-        area.push(obj)
-        for(let obj of re.result){
+    qingqiu.get("queryTwoArea", data, function (re) {
+      if (re.success == true) {
+        if (re.result != null) {
+          var obj = {
+            id: 0,
+            oneAreaId: 0,
+            areaName: '全部'
+          }
+          var area = []
           area.push(obj)
+          for (let obj of re.result) {
+            area.push(obj)
+          }
+          that.setData({
+            area: area
+          })
+        } else {
+          qingqiu.tk('未查询到任何数据')
         }
-        that.setData({
-          area:area
-        })
-      }else {
-        qingqiu.tk('未查询到任何数据')
       }
-    } 
-  })
+    })
   },
   //地址 显示弹窗样式
-  showModal: function(e) {
+  showModal: function (e) {
     this.setData({
       hasMask: true
     })
@@ -383,7 +395,7 @@ Page({
       animationData: animation.export(),
       showModalStatus: true
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.opacity(1).rotateX(0).step();
       this.setData({
         animationData: animation.export()
@@ -393,7 +405,7 @@ Page({
 
   },
   //隐藏弹窗样式 地址
-  hideModal: function() {
+  hideModal: function () {
     var that = this;
     var animation = wx.createAnimation({
       duration: 200,
@@ -406,7 +418,7 @@ Page({
       animationData: animation.export(),
       hasMask: false
     })
-    setTimeout(function() {
+    setTimeout(function () {
       animation.translateY(0).step()
       this.setData({
         animationData: animation.export(),
@@ -414,9 +426,9 @@ Page({
       })
     }.bind(this), 200)
   },
-  cityyiji: function() {
+  cityyiji: function () {
     var that = this
-    qingqiu.get("oneAreaService", {}, function(re) {
+    qingqiu.get("oneAreaService", {}, function (re) {
       if (re.data.result.length > 0) {
         that.setData({
           cityId: re.data.result[0].id,
@@ -429,86 +441,95 @@ Page({
       that.cityerji()
     })
   },
-  cityerji: function() {
+  cityerji: function () {
     var that = this
     var data = {
       oneAreaId: that.data.cityId
     }
-    qingqiu.get("getAllTwoArea", data, function(re) {
+    qingqiu.get("getAllTwoArea", data, function (re) {
       that.setData({
         area: re.data.result
       })
     })
   },
   // 左侧按钮
-  cityleft: function(e) {
+  cityleft: function (e) {
     var that = this;
     // var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
-    var name = e.currentTarget.dataset.name.replace(' ','')
+    var name = e.currentTarget.dataset.name.replace(' ', '')
     that.setData({
       cityId: id,
       cityname1: name,
-      weizhi:name,
-      showList:[]
+      weizhi: name,
+      showList: []
     })
-    if(id == 0){
+    if (id == 0) {
       app.globalData.oneCity = undefined
       app.globalData.twoCity = undefined
-      that.SelectshowList()  //商家 
+      that.SelectshowList() //商家 
       that.setData({
         showModalStatus: false,
         cityId: that.data.id,
         cityname1: that.data.name,
-        areaId:0,
+        areaId: 0,
       })
-    }else{
-      var data ={
-        oneAreaId:id
+    } else {
+      var data = {
+        oneAreaId: id
       }
-      app.globalData.oneCity = {id:id,name:name}
-      that.SelectshowList()  //商家 
-      qingqiu.get("queryTwoArea", data, function(re) {
+      app.globalData.oneCity = {
+        id: id,
+        name: name
+      }
+      that.SelectshowList() //商家 
+      qingqiu.get("queryTwoArea", data, function (re) {
         if (re.success == true) {
           if (re.result != null) {
-            that.area=re.result
+            that.area = re.result
             that.setData({
-              area:that.area
+              area: that.area
             })
-          }else {
+          } else {
             qingqiu.tk('未查询到任何数据')
           }
-        } 
+        }
       })
     }
   },
   // 右侧单选点击
-  arearight: function(e) {
+  arearight: function (e) {
     var that = this;
-    if(that.data.weizhi == undefined || that.data.weizhi == ""){
+    if (that.data.weizhi == undefined || that.data.weizhi == "") {
       wx.showToast({
         title: '请选择城市',
-        icon:'none',
-        duration:1000
+        icon: 'none',
+        duration: 1000
       })
       return
     }
-    if(app.globalData.oneCity==undefined || app.globalData.oneCity==''){
-      app.globalData.oneCity= {id:that.data.id,name:that.data.name}
-      that.data.cityname1=that.data.name
+    if (app.globalData.oneCity == undefined || app.globalData.oneCity == '') {
+      app.globalData.oneCity = {
+        id: that.data.id,
+        name: that.data.name
+      }
+      that.data.cityname1 = that.data.name
     }
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
-    app.globalData.twoCity={id:id,name:name}
+    app.globalData.twoCity = {
+      id: id,
+      name: name
+    }
     that.setData({
-      weizhi:that.data.cityname1 + name,
+      weizhi: that.data.cityname1 + name,
       areaId: id,
       //curIndex: index,
       areaname: name,
-      showList:[],
+      showList: [],
       showModalStatus: false,
       cityname: this.data.cityname1
     })
-    that.SelectshowList()  //商家 
+    that.SelectshowList() //商家 
   },
 })
