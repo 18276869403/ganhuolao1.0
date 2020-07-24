@@ -139,7 +139,7 @@ Page({
           if (obj.id == item.id) {
             if (item.giveState == 0) {
               obj.giveGood += 1
-            } else {
+            } else { 
               obj.giveGood -= 1
             }
             obj.giveState = item.giveState == 0 ? 1 : 0
