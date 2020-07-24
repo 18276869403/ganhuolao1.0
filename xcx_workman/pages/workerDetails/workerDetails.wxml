@@ -111,7 +111,7 @@
                 <view>
                   <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
                 </view>
-                <view>{{item.giveGood}}</view>
+                <view>{{item.backup5}}</view>
               </view>
               <view class="hengxiang">
                 <view>
