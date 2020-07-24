@@ -66,6 +66,8 @@ Page({
   getShowList() {
     var that = this
     var data = {
+      pageNo: that.data.pageNo,
+      pageSize: 10,
       wxUserId: app.globalData.wxid
     }
     qingqiu.get("casePage", data, function (re) {
@@ -131,23 +133,38 @@ Page({
     var data = {
       id: e.currentTarget.dataset.shaid
     }
-    qingqiu.get("deletess", data, function (res) {
-      console.log(res)
-      if (res.success == true) {
-        that.setData({
-          btnFlag: true
-        })
-        wx.showToast({
-          title: '删除成功',
-          icon: 'success',
-          duration: 2000
-        })
-        that.onLoad()
-      } else {
-        that.setData({
-          btnFlag: true
-        })
+    wx.showModal({
+      title: '提示',
+      content: '你确定要删除吗？',
+      success (res) {
+        if (res.confirm) {
+          qingqiu.get("deletess", data, function (res) {
+            console.log(res)
+            if (res.success == true) {
+              that.setData({
+                btnFlag: false
+              })
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 2000
+              })
+              that.onLoad()
+            } else {
+              that.setData({
+                btnFlag: true
+              })
+            }
+          }, 'delete')
+        } else if (res.cancel) {
+          that.setData({btnFlag:false})
+          wx.showToast({
+            title: '取消删除！',
+            icon:'none',
+            duration:2000
+          })
+        }
       }
-    }, 'delete')
+    })
   },
 })
