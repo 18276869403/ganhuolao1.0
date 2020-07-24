@@ -23,54 +23,6 @@
       </view>
     </view>
   </view>
-  <!-- 晒晒 -->
-  <!-- <view class="content-basic zongxiang">
-      <view class="content-show hengxiang">
-        <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key" data-id="{{item.id}}">
-          <view class="show" wx:if="{{item.id%2 == 0}}">
-            <view class="show-item-top">
-              <image src="{{item.url}}" class="show-img" mode="widthFix"></image>
-            </view>
-            <view class="show-item-bottom hengxiang">
-              <view class="hengxiang">
-                <view>
-                  <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
-                </view>
-                <view>{{item.liulan}}</view>
-              </view>
-              <view class="hengxiang">
-                <view>
-                  <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
-                </view>
-                <view>{{item.pinglun}}</view>
-              </view>
-            </view>
-          </view>
-        </view>
-         <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key" data-id="{{item.id}}">
-          <view class="show" wx:if="{{item.id%2 != 0}}">
-            <view class="show-item-top">
-              <image src="{{item.url}}" class="show-img" mode="widthFix"></image>
-            </view>
-            <view class="show-item-bottom hengxiang">
-              <view class="hengxiang">
-                <view>
-                  <image src="{{viewUrl}}static/image/liulan.png" class="liulan-img"></image>
-                </view>
-                <view>{{item.liulan}}</view>
-              </view>
-              <view class="hengxiang">
-                <view>
-                  <image src="{{viewUrl}}static/image/pinglun.png" class="pinglun-img"></image>
-                </view>
-                <view>{{item.pinglun}}</view>
-              </view>
-            </view>
-          </view>
-        </view>
-
-      </view>
-    </view> -->
 
   <view class="bottom1">
     <!-- 左侧 -->
@@ -82,8 +34,8 @@
             </image>
             <video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" ></video>
           </view>
-          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
-            <view class="hengxiang" >
+          <view class="show-item-bottom hengxiang">
+            <view class="hengxiang">
               <view>
                 <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
               </view>
@@ -97,7 +49,7 @@
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
-              <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
+              <view bindtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
                 <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
               </view>
               <view wx:if="{{item.backup1==1}}">
@@ -117,7 +69,7 @@
             <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
             <video autoplay loop muted src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}"></video>
           </view>
-          <view class="show-item-bottom hengxiang" bindtap="showDetails" data-ssid="{{item.id}}">
+          <view class="show-item-bottom hengxiang">
             <view class="hengxiang" >
               <view>
                 <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
@@ -132,7 +84,7 @@
               <view>{{item.messageSum}}</view>
             </view>
             <view class="hengxiang">
-              <view catchtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
+              <view bindtap="dianzan" data-shaid="{{item.id}}" wx:if="{{item.backup1!=1}}">
                 <image src="{{iconUrl}}static/image/zan.png" class="pinglun-img"></image>
               </view>
               <view wx:if="{{item.backup1==1}}">

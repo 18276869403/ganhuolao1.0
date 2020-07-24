@@ -448,6 +448,7 @@ Page({
       needsname: e.detail.value
     })
   },
+  // 过滤
   needsnameblur: function (e) {
     var that = this
     if(e.detail.value == ''){
@@ -484,6 +485,7 @@ Page({
       needscontent: e.detail.value
     })
   },
+  // 过滤
   needscontentblur: function (e) {
     if(e.detail.value == ''){
       return
@@ -853,6 +855,7 @@ Page({
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
         name: that.data.workername,
+        shopName:'',
         sex: that.data.sex,
         dateBirth: that.data.date,
         employ: that.data.worktime,
@@ -906,7 +909,8 @@ Page({
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
         shopName: that.data.needsname,
-        name: that.data.linkman,
+        name: '',
+        shopLinkman:that.data.linkman,
         phone: that.data.phone,
         shopAddress: that.data.workeraddress,
         content: that.data.needscontent,
@@ -918,7 +922,16 @@ Page({
     console.log(data)
     if (that.data.type == 1 || that.data.type == 0) {
       qingqiu.get("editWxUser", data, function (re) {
-        console.log(re)
+        if(re.message == "1"){
+          wx.showToast({
+            title: '入驻信息商铺/工人姓名重复，请修改重试',
+            icon:"none"
+          })
+          that.setData({
+            btnFlag:false
+          })
+          return
+        }
         if (re.success == true) {
           wx.showToast({
             title: '修改成功',
@@ -932,6 +945,7 @@ Page({
                 qingqiu.get("getKeyInfo", {
                   code: res.code
                 }, function (re) {
+                  console.log('修改',re)
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
@@ -959,6 +973,16 @@ Page({
       }, 'put')
     } else {
       qingqiu.get("wxUserAdd", data, function (re) {
+        if(re.message == "1"){
+          wx.showToast({
+            title: '入驻信息商铺/工人姓名重复，请修改重试',
+            icon:"none"
+          })
+          that.setData({
+            btnFlag:false
+          })
+          return
+        }
         if (re.success == true) {
           wx.showToast({
             title: '入驻成功',
@@ -1026,6 +1050,7 @@ Page({
                   that.setData({
                     btnFlag:false
                   })
+                  console.log('添加',re)
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState

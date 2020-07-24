@@ -20,10 +20,10 @@
 					<image src="{{gongyilist.picUrl}}" class="header-icon"></image>
 				</view>
 				<view class="header-text">
-					<view class="header-text-class" wx-if='{{gongyilist.name!=""&&gongyilist.name!=null}}'>{{gongyilist.name}}</view>
-					<view class="header-text-class" wx-if='{{gongyilist.name==""&&gongyilist.shopName!=null}}'>{{gongyilist.shopName}}</view>
-					<view class="header-text-class" wx-if='{{gongyilist.name==null&&gongyilist.shopName==null}}'>{{gongyilist.wxNc}}</view>
-					<view class="header-danwei">主办单位：{{gongyilist.company}}</view>
+					<view class="header-danwei" wx-if='{{gongyilist.name!=""&&gongyilist.name!=null}}'>{{gongyilist.name}}</view>
+					<view class="header-danwei" wx-if='{{gongyilist.name==""&&gongyilist.shopName!=null}}'>{{gongyilist.shopName}}</view>
+					<view class="header-danwei" wx-if='{{gongyilist.name==null&&gongyilist.shopName==null}}'>{{gongyilist.wxNc}}</view>
+					<view class="header-text-class">主办单位：{{gongyilist.company}}</view>
 				</view>
 			</view>
 		</view>

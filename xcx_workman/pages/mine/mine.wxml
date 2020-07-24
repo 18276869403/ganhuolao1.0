@@ -99,7 +99,7 @@
         <image src="{{iconUrl}}static/image/myshengliao.png" class="ziliao-img"></image>
       </view>
       <view class="bottom-list-content">
-        我的剩料 
+        我的二手
       </view>
       <view class="bottom-list-right">
         <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>

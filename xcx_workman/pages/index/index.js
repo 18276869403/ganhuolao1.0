@@ -90,6 +90,7 @@ Page({
                     data.backup1 = that.data.openid
                   }
                   qingqiu.get("getKeyInfo", data, function (re) {
+                    console.log(re)
                     app.globalData.wxid = re.result.wxUser.id
                     if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
                       app.globalData.sqgl = 1
