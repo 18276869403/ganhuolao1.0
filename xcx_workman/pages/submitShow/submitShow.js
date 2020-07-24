@@ -365,7 +365,7 @@ Page({
         })
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)
+        // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths) 
         for(let i=0;i<tempFilePaths.length;i++){
           wx.uploadFile({
             url: api.imgFilter,
