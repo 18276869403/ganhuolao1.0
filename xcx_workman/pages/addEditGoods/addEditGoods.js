@@ -97,9 +97,17 @@ Page({
           icon: 'success',
           duration: 2000
         })
-        wx.redirectTo({
-          url: '../myGoods/myGoods',
+        wx.navigateBack({
+          delta: 1,
+          success: function(e) {
+            var page = getCurrentPages().pop();
+            if (page == undefined || page == null) return;
+            page.onLoad();
+          }
         })
+        // wx.redirectTo({
+        //   url: '../myGoods/myGoods',
+        // })
       }
     }, 'put')
   },
@@ -151,9 +159,17 @@ Page({
           icon: 'success',
           duration: 2000 
         })
-        wx.redirectTo({
-          url: '../myGoods/myGoods',
+        wx.navigateBack({
+          delta: 1,
+          success: function(e) {
+            var page = getCurrentPages().pop();
+            if (page == undefined || page == null) return;
+            page.onLoad();
+          }
         })
+        // wx.redirectTo({
+        //   url: '../myGoods/myGoods',
+        // })
       } else {
         wx.showToast({
           title: '店铺没有认证，请认证后添加商品',

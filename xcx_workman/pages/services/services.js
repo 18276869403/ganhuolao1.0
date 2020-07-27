@@ -189,10 +189,10 @@ Page({
       this.QuerytwoArea()
     }
   },
-  onLoad: function () {
-    // this.grneedlist()
-    // this.sjneedlist()
-  },
+  // onLoad: function () {
+  //   this.grneedlist()
+  //   this.sjneedlist()
+  // },
   // 我要入驻
   ruzhu: function () {
     var type = this.data.chooseworker

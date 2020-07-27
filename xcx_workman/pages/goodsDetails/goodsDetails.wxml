@@ -6,7 +6,7 @@
      <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper" bindchange='bindchange' style="height:{{imgheights[current]}}rpx;">
       <block wx:for="{{splist.goodPic1}}" wx:key="{{index}}">
         <swiper-item bindtap="tupian" class="swiper-item-img" data-src="{{item}}" wx:if="{{item!=''}}">
-          <image src="{{viewUrl}}{{item}}"  mode='widthFix' class="img" style="height:{{imgheights[current]}}rpx;width:{{imgwidth}}rpx;" bindload="imageLoad" data-src="{{viewUrl}}{{item}}" data-index='{{index}}' />
+          <image src="{{viewUrl}}{{item}}" class="img" style="height:{{imgheights[current]}}rpx;width:{{imgwidth}}rpx;" bindload="imageLoad" data-src="{{viewUrl}}{{item}}" data-index='{{index}}' />
         </swiper-item>
       </block>
     </swiper>
