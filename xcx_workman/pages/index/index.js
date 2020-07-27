@@ -545,6 +545,7 @@ Page({
   },
   // 商家促销
   cuxiao: function () {
+    app.globalData.goodsRefresh=1
     wx.navigateTo({
       url: '../goodsList/goodsList',
     })
@@ -578,6 +579,7 @@ Page({
   },
   // 跳转到更多需求页面
   need: function () {
+    app.globalData.needRefresh=1
     wx.switchTab({
       url: '../need/need',
     })
@@ -620,6 +622,7 @@ Page({
   },
   // 跳转到推荐商品更多页面
   goodList: function () {
+    app.globalData.goodsRefresh=1
     wx.navigateTo({
       url: '../goodsList/goodsList',
     })
@@ -776,6 +779,7 @@ Page({
   // },
   // 跳转到商品详情页面
   goodsDetails(e) {
+    app.globalData.goodsRefresh=1
     var obj = e.currentTarget.dataset.vals;
     var shopxq = JSON.stringify(obj);
     //debugger
