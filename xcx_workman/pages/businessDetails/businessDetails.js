@@ -67,17 +67,91 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    var obj = JSON.parse(options.obj)
-    console.log(obj)
-    if (obj.wxNc == null) {
-      obj.wxNc = ""
+    if (options != undefined) {
+      if (options.obj != undefined) {
+        var obj = JSON.parse(options.obj)
+        console.log(obj)
+        if (obj.wxNc == null) {
+          obj.wxNc = ""
+        }
+        this.setData({
+          goodsList: obj
+        })
+        this.getGoodsList(obj.id)
+        this.getGoodsdata(obj.id)
+      } else if (options.id) {
+        this.getBusiness(options.id)
+      } else {
+        wx.showToast({
+          title: '该商家未入驻',
+          icon: 'none'
+        })
+        setTimeout(function () {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }, 1000)
+      }
+    } else {
+      wx.showToast({
+        title: '该商家未入驻',
+        icon: 'none'
+      })
+      setTimeout(function () {
+        wx.switchTab({
+          url: '../index/index',
+        })
+      }, 1000)
     }
-    this.setData({
-      goodsList: obj
-    })
-    this.getGoodsList(obj.id)
-    this.getGoodsdata(obj.id)
   },
+
+  // 获取商家详情byid
+  getBusiness: function (id) {
+    var that = this
+    var data = {
+      id: id
+    }
+    qingqiu.get("getWxUserById", data, function (res) {
+      console.log('byid', res)
+      if (res.success == true) {
+        res.result.picIurl = that.data.iconUrl + res.result.picIurl
+        // 重定义分类
+        var onename = []
+        var twoname = []
+        if (res.result.oneClassName != null) {
+          if (res.result.oneClassName.indexOf(',') != -1) {
+            onename = res.result.oneClassName.split(',')
+          } else {
+            onename[0] = res.result.oneClassName
+          }
+        }
+        if (res.result.twoClassName != null) {
+          if (res.result.twoClassName.indexOf(',') != -1) {
+            twoname = res.result.twoClassName.split(',')
+          } else {
+            twoname[0] = res.result.twoClassName
+          }
+        }
+        if (onename.length > 0) {
+          res.result.oneClassName = onename[0] + ' | ' + twoname[0]
+          if (onename.length > 1) {
+            res.result.twoClassName = onename[1] + ' | ' + twoname[1]
+          } else {
+            res.result.twoClassName = ''
+          }
+        } else {
+          res.result.oneClassName = ''
+          res.result.twoClassName = ''
+        }
+        that.setData({
+          goodsList: res.result
+        })
+        that.getGoodsList(res.result.id)
+        that.getGoodsdata(res.result.id)
+      }
+    })
+  },
+
   phonecall: function (e) {
     var phone = e.currentTarget.dataset.phone
     if (phone == '' || phone == null || phone == 'null') {
@@ -129,7 +203,7 @@ Page({
             if (obj.picOne.indexOf(",") == -1) {
               obj.picOne = that.data.viewUrl + obj.picOne
             } else {
-              obj.picOne = that.data.viewUrl + obj.picOne.split(',')[0]
+              obj.picOne = that.data.iconUrl + obj.picOne.split(',')[0]
               // obj.picTwo= that.data.viewUrl + obj.picTwo.split(',')[0]
             }
           }
@@ -203,7 +277,7 @@ Page({
     var item = e.currentTarget.dataset.itemobj;
     var data = {
       wxCaseId: item.id,
-      wxUserIdGo:app.globalData.wxid
+      wxUserIdGo: app.globalData.wxid
     }
     qingqiu.get("userLikes", data, function (re) {
       console.log(re)
@@ -212,7 +286,7 @@ Page({
           if (obj.id == item.id) {
             if (item.giveState == 0) {
               obj.giveGood += 1
-            } else { 
+            } else {
               obj.giveGood -= 1
             }
             obj.giveState = item.giveState == 0 ? 1 : 0

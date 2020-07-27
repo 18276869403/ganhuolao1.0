@@ -36,7 +36,7 @@ Page({
           wxUserid: app.globalData.wxid
         })
       }else if(options.id != undefined){
-        this.getYneed(options.id)
+        this.getYneed(152)
         this.setData({
           xqxqlist: xqxqlist,
           id:xqxqlist.id,

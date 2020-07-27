@@ -359,7 +359,7 @@ Page({
             if (obj.starClass == 5) {
               obj.shopName = "五级工匠"
             }
-            obj.picIurl = that.data.viewUrl + obj.picIurl
+            obj.picIurl = that.data.iconUrl + obj.picIurl
             obj.dateBirth = util.ages(obj.dateBirth)
             // 重定义分类
             var onename = []
@@ -410,7 +410,7 @@ Page({
       if (re.success == true) {
         if (re.result != null) {
           for (let obj of re.result.records) {
-            obj.picIurl = that.data.viewUrl + obj.picIurl
+            obj.picIurl = that.data.iconUrl + obj.picIurl
             // 重定义分类
             var onename = []
             var twoname = []
@@ -460,7 +460,7 @@ Page({
         if (re.result != null) {
           that.data.bannerImg = re.result
           for (let obj of that.data.bannerImg) {
-            obj.bannerUrl = that.data.viewUrl + obj.bannerUrl;
+            obj.bannerUrl = that.data.iconUrl + obj.bannerUrl;
           }
           that.setData({
             bannerImg: that.data.bannerImg

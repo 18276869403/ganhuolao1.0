@@ -6,7 +6,7 @@
     <view class="content-list zongxiang">
       <view class="content-list-item hengxiang">
         <view class="list-item-left">
-          <image src="{{workerDetail.picIurl}}" bindtap="preview" data-src="{{workerDetail.picIurl}}" class="worker-img"></image>
+          <image src="{{workerDetail.picIurl}}" mode="aspectFill"  bindtap="preview" data-src="{{workerDetail.picIurl}}" class="worker-img"></image>
         </view>
         <view class="list-item-right zongxiang">
           <view class="right-name">

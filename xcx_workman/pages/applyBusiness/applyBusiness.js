@@ -973,7 +973,7 @@ Page({
       }, 'put')
     } else {
       qingqiu.get("wxUserAdd", data, function (re) {
-        if (re.message == "1") {
+        if (re.result == "1") {
           wx.showToast({
             title: '入驻信息商铺/工人姓名重复，请修改重试',
             icon: "none"
@@ -983,12 +983,14 @@ Page({
           })
           return
         }
+        console.log('入驻',re)
         if (re.success == true) {
           wx.showToast({
             title: '入驻成功',
             icon: 'success',
             duration: 3000
           })
+          var id = re.result.id
           app.globalData.serverRefresh = 1
           if (that.data.needsTypeid != 1) {
             // 公众号消息推送
@@ -1005,7 +1007,7 @@ Page({
                   keyword2Color: '#173177',
                   remarkValue: '请进入干活佬查看详情',
                   remarkColor: '#173177',
-                  MiniUrl: ''
+                  MiniUrl: 'pages/businessDetails/businessDetails?id=' + id
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)
@@ -1030,7 +1032,7 @@ Page({
                   keyword2Color: '#173177',
                   remarkValue: '请进入干活佬查看详情',
                   remarkColor: '#173177',
-                  MiniUrl: ''
+                  MiniUrl: 'pages/workerDetails/workerDetails?id=' + id
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)

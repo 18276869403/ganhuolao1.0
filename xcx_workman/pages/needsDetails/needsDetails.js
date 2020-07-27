@@ -13,40 +13,6 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
-    // tupianlist: [{
-    //   id: 1,
-    //   tupian: '../image/top.png'
-    // },
-    // {
-    //   id: 2,
-    //   tupian: '../image/top.png'
-    // },
-    // {
-    //   id: 3,
-    //   tupian: '../image/top.png'
-    // }
-    // ],
-    // jiedanList:[{
-    //   id:1,
-    //   name:'东鹏瓷砖万载总代',
-    //   date:'05:00',
-    //   details:'我可以做的，找我吧，我在哪哪哪哪',
-    //   avator:'../image/top.png'
-    // },
-    //   {
-    //     id: 2,
-    //     name: '东鹏瓷砖万载总代',
-    //     date: '05:00',
-    //     details: '我可以做的，找我吧，我在哪哪哪哪',
-    //     avator: '../image/top.png'
-    //   },
-    //   {
-    //     id: 3,
-    //     name: '东鹏瓷砖万载总代',
-    //     date: '05:00',
-    //     details: '我可以做的，找我吧，我在哪哪哪哪',
-    //     avator: '../image/top.png'
-    //   }],
     xqxqlist: [],
     jiedanList: [],
     tupianlist: [],

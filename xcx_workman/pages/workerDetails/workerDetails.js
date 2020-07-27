@@ -44,18 +44,116 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    var workerDetail = JSON.parse(options.obj)
-    console.log(workerDetail)
-    var id = workerDetail.id
-    var phone = workerDetail.phone
-    phone = util.formatPhone(phone)
-    this.setData({
-      id: id,
-      workerDetail: workerDetail,
-      phone: phone
-    })
-    this.grshowList()
+    if(options != undefined){
+      if(options.obj != undefined){
+        var workerDetail = JSON.parse(options.obj)
+        console.log(workerDetail)
+        var id = workerDetail.id
+        var phone = workerDetail.phone
+        phone = util.formatPhone(phone)
+        this.setData({
+          id: id,
+          workerDetail: workerDetail,
+          phone: phone
+        })
+      }else if(options.id != undefined){
+        this.getWorker(options.id)
+      }else{
+        wx.showToast({
+          title: "该工人未入驻",
+          icon:"none"
+        })
+        setTimeout(function(){
+          wx.switchTab({
+            url: '../index/index',
+          })
+        },1000)
+      }
+    }else{
+      wx.showToast({
+        title: "该工人未入驻",
+        icon:"none"
+      })
+      setTimeout(function(){
+        wx.switchTab({
+          url: '../index/index',
+        })
+      },1000)
+    }
   },
+
+  getWorker: function (id) {
+    var that = this
+    var data = {
+      id: id
+    }
+    qingqiu.get("getWxUserById", data, function (res) {
+      console.log('byid', res)
+      if (res.success == true) {
+        var phone = util.formatPhone(res.result.phone)
+        switch (res.result.starClass) {
+          case "0":
+            res.result.shopName = "暂未评定"
+            break;
+          case "1":
+            res.result.shopName = "一级工匠"
+            break;
+          case "2":
+            res.result.shopName = "二级工匠"
+            break;
+          case "3":
+            res.result.shopName = "三级工匠"
+            break;
+          case "4":
+            res.result.shopName = "四级工匠"
+            break;
+          case "5":
+            res.result.shopName = "五级工匠"
+            break;
+          default:
+            res.result.shopName = "暂未评定"
+            break;
+        }
+        res.result.picIurl = that.data.iconUrl + res.result.picIurl
+        res.result.dateBirth = util.ages(res.result.dateBirth)
+        // 重定义分类
+        var onename = []
+        var twoname = []
+        if (res.result.oneClassName != null) {
+          if (res.result.oneClassName.indexOf(',') != -1) {
+            onename = res.result.oneClassName.split(',')
+          } else {
+            onename[0] = res.result.oneClassName
+          }
+        }
+        if (res.result.twoClassName != null) {
+          if (res.result.twoClassName.indexOf(',') != -1) {
+            twoname = res.result.twoClassName.split(',')
+          } else {
+            twoname[0] = res.result.twoClassName
+          }
+        }
+        if (onename[0] != undefined) {
+          res.result.oneClassName = onename[0] + ' | ' + twoname[0]
+          if (onename.length > 1) {
+            res.result.twoClassName = onename[1] + ' | ' + twoname[1]
+          } else {
+            res.result.twoClassName = ''
+          }
+        } else {
+          res.result.oneClassName = ''
+          res.result.twoClassName = ''
+        }
+        that.setData({
+          id: res.result.id,
+          workerDetail:res.result,
+          phone: phone
+        })
+        this.grshowList()
+      }
+    })
+  },
+
   // 图片放大，放大预览
   preview: function (e) {
     var current = e.currentTarget.dataset.src
@@ -84,7 +182,7 @@ Page({
       wxUserId: this.data.id,
       pages: 1,
       size: 10,
-      wxUserIdGo:app.globalData.wxid
+      wxUserIdGo: app.globalData.wxid
     }
     qingqiu.get("CasePage", data, function (re) {
       if (re.success == true) {
@@ -316,7 +414,7 @@ Page({
           if (obj.id == item.id) {
             if (item.giveState == 0) {
               obj.giveGood += 1
-            } else { 
+            } else {
               obj.giveGood -= 1
             }
             obj.giveState = item.giveState == 0 ? 1 : 0

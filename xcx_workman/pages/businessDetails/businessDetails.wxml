@@ -84,7 +84,7 @@
         <view class="show-item zongxiang" wx:for="{{goodslists}}" wx:key="key" data-id="{{item.id}}">
           <view class="goods" bindtap="goGoodsDetails" data-vals="{{item}}">
             <view class="show-item-top">
-              <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="show-img"></image>
+              <image src="{{iconUrl}}{{item.goodPic1[0]}}" mode="aspectFill" class="show-img"></image>
             </view>
             <view class="goods-name">{{item.goodName}}</view>
             <view class="goods-price">¥{{item.newPrice}}</view>
@@ -97,7 +97,7 @@
         <view class="show-item zongxiang" wx:for="{{showList}}" wx:key="key">
           <view class="show">
             <view class="show-item-top" bindtap="goshowshai" data-ssid="{{item.id}}">
-              <image src="{{item.picOne}}" class="show-img"></image>
+              <image src="{{item.picOne}}"  mode="aspectFill" class="show-img"></image>
             </view>
             <view class="show-item-bottom hengxiang">
               <view class="hengxiang">
