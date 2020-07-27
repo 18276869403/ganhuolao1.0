@@ -538,6 +538,8 @@ page {
 }
 
 .delete-img {
+  position: absolute;
+  right:0rpx;
   width: 44rpx;
   height: 44rpx;
 }

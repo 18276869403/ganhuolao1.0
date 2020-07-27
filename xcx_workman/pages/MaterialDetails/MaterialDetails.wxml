@@ -42,27 +42,27 @@
 				<view>
 					{{xqxqlist.backup2}}人浏览
 				</view>
- 
+
 				<view class="content-chuangjian hengxiang">
 					<view class="complete-button {{btnFlag == true?'disabled':''}}" style="width:155rpx;" wx:if="{{xqxqlist.wxUserId != wxUserid}}" bindtap="zaixianlianxi" data-wxid="{{xqxqlist.wxUserId}}" data-name="{{xqxqlist.name}}" data-shopName="{{xqxqlist.shopName}}" data-wxNc="{{xqxqlist.wxNc}}">
 						在线联系
 					</view>
 					<view class="update-button {{btnFlag == true?'disabled':''}}" bindtap="xiugaigunali" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
-            修改
-          </view>
-          <view class="delete-button {{btnFlag == true?'disabled':''}}" bindtap="shancuoxuqiu" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
-            删除
-          </view>
-          <view class="complete-button {{btnFlag == true?'disabled':''}}" bindtap="lianxita" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
-            完成
-          </view>
+						修改
+					</view>
+					<view class="delete-button {{btnFlag == true?'disabled':''}}" bindtap="shancuoxuqiu" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+						删除
+					</view>
+					<view class="complete-button {{btnFlag == true?'disabled':''}}" bindtap="lianxita" wx:if="{{xqxqlist.wxUserId===wxUserid}}">
+						完成
+					</view>
 				</view>
 			</view>
 
 		</view>
 		<view class="content-content zongxiang">
 			<view class="content-content-title">二手描述</view>
-			<view class="content-content-list">{{xqxqlist.needContent}}</view>
+			<view class="content-content-list"><text>{{xqxqlist.needContent}}</text></view>
 		</view>
 		<!-- 图片 -->
 		<view class="content-content zongxiang">

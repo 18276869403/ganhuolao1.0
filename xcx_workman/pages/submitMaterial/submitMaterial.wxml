@@ -60,10 +60,6 @@
     <view class='icon-righText' bindtap='showModal1'> 《干活佬使用协议》 </view>
   </view>
   <view class="bottom hengxiang">
-
-    <!-- <view class="bottom-left">
-      <text style="font-size:14px;">¥</text> 0 元
-    </view> -->
     <view class="bottom-right {{btnFlag == true ? 'disabled':''}}" bindtap="lijifabu">立即发布</view>
   </view>
 </view>

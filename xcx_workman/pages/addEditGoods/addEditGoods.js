@@ -369,7 +369,7 @@ Page({
   shanchu1: function (e) {
     var that = this
     var tplj = e.currentTarget.dataset.tplj
-    if (that.data.picIurl1 = tplj) {
+    if (that.data.picIurl1 == tplj) {
       that.data.picIurl1 = ''
     }
     that.setData({

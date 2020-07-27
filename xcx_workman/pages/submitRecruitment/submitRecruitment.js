@@ -483,6 +483,13 @@ Page({
     })
   },
 
+  // 删除图片
+  shanchu:function(e){
+    var src = e.currentTarget.dataset.tplj
+    if(this.data.picIurl == src){
+      this.setData({picIurl:''})
+    }
+  },
   //改变选框状态(免责协议)
   change: function (e) {
     var that = this

@@ -836,7 +836,7 @@ Page({
         })
         return
       }
-      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码|" + that.data.picIurl1 + ",上传门头照")
+      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码|" + that.data.picIurl1 + ",上传工作照")
       if (s != 0) {
         wx.showToast({
           title: s,
@@ -983,7 +983,7 @@ Page({
           })
           return
         }
-        console.log('入驻',re)
+        console.log('入驻', re)
         if (re.success == true) {
           wx.showToast({
             title: '入驻成功',
@@ -1187,8 +1187,50 @@ Page({
       current: src,
       urls: [src]
     })
-  }, 
-
+  },
+  // 删除图片
+  shanchu: function (e) {
+    var type = e.currentTarget.dataset.type
+    var src = e.currentTarget.dataset.tplj
+    console.log("执行了么？")
+    switch (type) {
+      case 1:
+        if (this.data.picIurl == src) {
+          this.setData({
+            picIurl: ''
+          })
+        }
+        break;
+      case 2:
+        if (this.data.picZz == src) {
+          this.setData({
+            picZz: ''
+          })
+        }
+        break;
+      case 3:
+        if (this.data.picIurl == src) {
+          this.setData({
+            picIurl: ''
+          })
+        }
+        break;
+      case 4:
+        if (this.data.picPerson1 == src) {
+          this.setData({
+            picPerson1: ''
+          })
+        }
+        break;
+      case 5:
+        if (this.data.picPerson2 == src) {
+          this.setData({
+            picPerson2: ''
+          })
+        }
+        break;
+    }
+  },
   cityyiji: function () {
     var that = this
     qingqiu.get("queryOneArea", {}, function (re) {

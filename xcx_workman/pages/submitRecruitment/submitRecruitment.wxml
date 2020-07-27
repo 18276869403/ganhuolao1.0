@@ -5,7 +5,7 @@
 			<view class="content-title">职位标题<text style="color:red;">*</text></view>
 			<input type="text" placeholder="输入职位标题" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{needsname}}' name="needsname" bindinput='needsnameinput' bindblur="needsnameblur"></input>
 		</view>
-    <view class="content-item hengxiang">
+		<view class="content-item hengxiang">
 			<view class="content-title">薪资<text style="color:red;">*</text></view>
 			<input type="number" placeholder="输入薪资" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{salary}}' name="salary" bindinput='salaryinput'></input>
 		</view>
@@ -25,23 +25,38 @@
 			<view class="content-title">联系电话<text style="color:red;">*</text></view>
 			<input type="number" placeholder="输入联系电话" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input>
 		</view>
-		<view class="content-item-textarea"> 
+		<view class="content-item-textarea">
 			<textarea class="textarea" placeholder="输入招工描述" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
 		</view>
 
 		<view class="hengxiang fabu-list1">
-			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0">
-			  <image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu-item" wx:if="{{picIurl!=''}}"></image>
-				<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
-				<text>招工描述图片</text>
+			<view class="fabu">
+				<view class="fabu-item1">
+					<view wx:if="{{picIurl==''||picIurl == null}}">
+						<image src="{{iconUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" class="fabu-item  {{btnFlag == true?'disabled':''}}"></image>
+					</view>
+					<view wx:if="{{picIurl!=''&&picIurl!=null}}">
+						<image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu-item"></image>
+						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{picIurl}}"></image>
+					</view>
+				</view>
+			</view>
+			<view class="fabu">
+				<view class="fabu-item3">
+				</view>
+			</view>
+			<view class="fabu2">
+				<view class="fabu-item3">
+					招工描述图片
+				</view>
 			</view>
 		</view>
 	</view>
 	<view class='content-icon hengxiang'>
-    <icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
-    <view class='icon-leftText' bindtap='showModal1'>提交前请仔细阅读</view>
-    <view class='icon-righText' bindtap='showModal1'> 《干活佬使用协议》 </view>
-  </view>
+		<icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
+		<view class='icon-leftText' bindtap='showModal1'>提交前请仔细阅读</view>
+		<view class='icon-righText' bindtap='showModal1'> 《干活佬使用协议》 </view>
+	</view>
 	<view class="bottom {{btnFlag == true?'disabled':''}}" bindtap="fabuzhaogong">
 		发布
 	</view>

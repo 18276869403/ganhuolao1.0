@@ -539,6 +539,8 @@ page {
 }
 
 .delete-img {
+  position: absolute;
+  right: 0rpx;
   width: 44rpx;
   height: 44rpx;
 }
@@ -579,6 +581,18 @@ page {
   color: #999;
   margin-bottom: 10rpx;
   position: relative;
+}
+
+.fabu-item3{
+  width: 334rpx;
+  height: 228rpx;
+  border-radius: 8rpx;
+  font-size: 14px;
+  margin-bottom: 10rpx;
+  position: relative;
+  height: 50rpx;
+  font-size: 26rpx;
+  color:#999999;
 }
 
 .radio-group {

@@ -139,7 +139,7 @@
 				<block wx:for-items="{{businesslist}}" wx:key="{{item.id}}" data-id="{{item.id}}" wx:if="{{index%2 == 0}}">
 					<view class="content-business" wx:if="{{chooseworker==0}}">
 						<view class="content-business-list" bindtap="businessDetails" data-vals="{{item}}">
-							<image mode="widthFix" src="{{item.picIurl}}" class="business-img"></image>
+							<image mode="aspectFill" src="{{item.picIurl}}" class="business-img"></image>
 						</view>
 						<view class="content-business-bottom hengxiang">
 							<view class="content-business-bottom-text">{{item.shopName}}</view>
@@ -162,7 +162,7 @@
 					<view class="content-business zongxiang" wx:if="{{chooseworker==0}}">
 						<view class="content-business-list zongxiang" bindtap="businessDetails" data-vals="{{item}}">
 							<view class="content-business-img">
-								<image src="{{item.picIurl}}" class="business-img"></image>
+								<image src="{{item.picIurl}}" mode="aspectFill" class="business-img"></image>
 							</view>
 							<view class="content-business-bottom hengxiang">
 								<view class="content-business-bottom-text">{{item.shopName}}</view>
