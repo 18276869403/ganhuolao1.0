@@ -16,6 +16,8 @@ Page({
     wxCaseVo: null,
     caseMsgList:[],
     imgList:[],
+    imgheights:[],
+    current:0,
     ssid:''
   },
 
@@ -145,5 +147,26 @@ Page({
       phoneNumber: '19191919919'
     })
   },
-
+  // 图片自动调整高度
+  imageLoad:function(e){
+    //获取图片真实宽度
+    var imgwidth = e.detail.width,
+      imgheight = e.detail.height,
+      //宽高比
+      ratio = imgwidth / imgheight;
+    //计算的高度值
+    var viewHeight = 750 / ratio;
+    var imgheight = viewHeight
+    var imgheights = this.data.imgheights
+    //把每一张图片的高度记录到数组里
+    imgheights[e.target.dataset['index']] = imgheight;// 改了这里 赋值给当前 index
+    this.setData({
+      imgheights: imgheights,
+    })
+  },
+  bindchange: function (e) {
+    this.setData({
+      current: e.detail.current
+    })
+  },
 })

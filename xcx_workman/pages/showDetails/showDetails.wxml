@@ -1,10 +1,10 @@
 <!--pages/showDetails/showDetails.wxml-->
 <view class="container">
   <view class='banner' wx:if="{{caseMsgList.caseType==0}}">
-    <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
+    <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper" bindchange="bindchange" style="height:{{imgheights[current]}}rpx;">
       <block wx:for="{{caseMsgList.picOne}}">
         <swiper-item bindtap="imgYu" data-src="{{item}}">
-          <image src=" {{viewUrl}}{{item}}" bindtap="fangda" class="slide-image" />
+          <image src=" {{viewUrl}}{{item}}" style="height:{{imgheights[current]}}rpx;width:{{imgwidth}}rpx;" bindload="imageLoad" data-src="{{viewUrl}}{{item}}" data-index="{{index}}" bindtap="fangda" class="slide-image" />
         </swiper-item>
       </block>
     </swiper>

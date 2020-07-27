@@ -72,11 +72,11 @@
 		<view class="content-content zongxiang">
 			<view class="content-content-title">图片介绍</view>
 			<view class="zhanshi">
-				<view class="zhanshi-item" data-id="{{item.id}}" wx:if="{{zhaogong.backup4 != null}}">
-					<image src="{{iconUrl}}{{zhaogong.backup4}}" mode="widthFix" bindtap="fangda" class="zhanshitu" data-src="{{iconUrl}}{{zhaogong.backup4}}"></image>
+				<view class="zhanshi-item" data-id="{{item.id}}" wx:if="{{zhaogong.backup4 != null && zhaogong.backup4 != ''}}">
+					<image src="{{iconUrl}}{{zhaogong.backup4}}" mode="aspectFill" bindtap="fangda" class="zhanshitu" data-src="{{iconUrl}}{{zhaogong.backup4}}"></image>
 				</view>
 			</view>
-			<view class="zhanshi" wx:if="{{zhaogong.backup4 == null}}">
+			<view class="zhanshi" wx:if="{{zhaogong.backup4 == null || zhaogong.backup4 == ''}}">
 				<image src="{{iconUrl}}static/image/zawu1.png" class="zhanshitu1"></image>
 			</view>
 		</view>

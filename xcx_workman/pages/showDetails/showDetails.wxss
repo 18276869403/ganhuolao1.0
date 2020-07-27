@@ -6,7 +6,7 @@ page{
   width: 100%;
   text-align: center;
   background: #fff;
-  height: 1000rpx;
+  /* height: 1000rpx; */
 }
 
 .swiper {

@@ -44,41 +44,41 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    if(options != undefined){
-      if(options.obj != undefined){
+    if (options != undefined) {
+      if (options.obj != undefined) {
         var workerDetail = JSON.parse(options.obj)
         console.log(workerDetail)
         var id = workerDetail.id
         var phone = workerDetail.phone
-        phone = util.formatPhone(phone)
+        phone = phone == null ? '' : util.formatPhone(phone)
         this.setData({
           id: id,
           workerDetail: workerDetail,
           phone: phone
         })
-      }else if(options.id != undefined){
+      } else if (options.id != undefined) {
         this.getWorker(options.id)
-      }else{
+      } else {
         wx.showToast({
           title: "该工人未入驻",
-          icon:"none"
+          icon: "none"
         })
-        setTimeout(function(){
+        setTimeout(function () {
           wx.switchTab({
             url: '../index/index',
           })
-        },1000)
+        }, 1000)
       }
-    }else{
+    } else {
       wx.showToast({
         title: "该工人未入驻",
-        icon:"none"
+        icon: "none"
       })
-      setTimeout(function(){
+      setTimeout(function () {
         wx.switchTab({
           url: '../index/index',
         })
-      },1000)
+      }, 1000)
     }
   },
 
@@ -90,7 +90,7 @@ Page({
     qingqiu.get("getWxUserById", data, function (res) {
       console.log('byid', res)
       if (res.success == true) {
-        var phone = util.formatPhone(res.result.phone)
+        var phone = res.result.phone == null ? '' : util.formatPhone(res.result.phone)
         switch (res.result.starClass) {
           case "0":
             res.result.shopName = "暂未评定"
@@ -146,7 +146,7 @@ Page({
         }
         that.setData({
           id: res.result.id,
-          workerDetail:res.result,
+          workerDetail: res.result,
           phone: phone
         })
         this.grshowList()

@@ -72,7 +72,7 @@
       <view class="content-content-title">图片</view>
       <view class="zhanshi" wx:if="{{xqxqlist.backup1.length>0}}">
         <view class="zhanshi-item" wx:for='{{xqxqlist.backup1}}' data-id="{{item.id}}">
-          <image src="{{viewUrl}}{{item}}" mode="widthFix" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{item}}"></image>
+          <image src="{{viewUrl}}{{item}}" mode="aspectFill" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{item}}"></image>
         </view>
       </view>
     </view>
