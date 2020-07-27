@@ -12,6 +12,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
+    iconUrl:api.iconUrl,
     bindImg: [],
     // 发布参数
     needsname: '',
