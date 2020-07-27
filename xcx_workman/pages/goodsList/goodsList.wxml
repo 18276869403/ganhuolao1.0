@@ -58,7 +58,7 @@
         <image src="{{iconUrl}}static/image/store.png" class="store-img"></image>
         </view>
         <view class="goods-store-text">
-        {{item.goodMemo}}
+        {{item.shopName}}
         </view>
         </view>
       </view>
