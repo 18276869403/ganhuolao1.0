@@ -30,7 +30,7 @@
     <view class="content-text">{{splist.goodMemo}}</view>
     <view class="content-details" wx:for="{{splist.goodPic2}}">
       <!-- <image src="{{splist.goodPic1}}" class="details-img" bindtap="tupian" data-src="{{splist.goodPic1}}"></image> -->
-      <image src="{{viewUrl}}{{item}}" mode='widthFix' class="details-img" bindtap="tupian2" data-src="{{item}}"></image>
+      <image src="{{viewUrl}}{{item}}" mode='widthFix' class="details-img" bindtap="tupian2" data-src="{{item}}" wx:if="{{item!=''}}"></image>
     </view>
   </view>
 </view>
