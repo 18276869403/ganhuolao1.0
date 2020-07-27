@@ -86,6 +86,8 @@ const wxIndexUserPage = baseUrl + "pc/hall/wxIndexUserPage"
 const wxUserGoodPage = baseUrl + "pc/hall/wxUserGoodPage"
 // 公益活动byid查询
 const getActivityById = baseUrl + "pc/hall/getActivityById"
+// 获取工人/商家详情byid
+const getWxUserById = baseUrl + "pc/hall/getWxUserById"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -128,5 +130,6 @@ module.exports = {
   getPulicUserAdd:getPulicUserAdd,
   wxIndexUserPage:wxIndexUserPage,
   wxUserGoodPage:wxUserGoodPage,
-  getActivityById:getActivityById
+  getActivityById:getActivityById,
+  getWxUserById:getWxUserById
 };
