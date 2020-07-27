@@ -149,6 +149,10 @@ Page({
             }
             obj.goodPic1 = obj.goodPic1.split(',')
             obj.goodPic2  = obj.goodPic2.split(',')
+            if(obj.goodPic1[0]==''&&obj.goodPic1[1]!=''){
+              obj.goodPic1[0]=obj.goodPic1[1]
+              obj.goodPic1[1]=''
+            }
             that.data.goodslist.push(obj)
           }
           that.setData({

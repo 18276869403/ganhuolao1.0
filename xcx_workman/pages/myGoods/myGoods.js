@@ -112,6 +112,10 @@ Page({
           re.result.records[i].goodPic1 = re.result.records[i].goodPic1.split(',')
           re.result.records[i].goodPic2 = re.result.records[i].goodPic2.split(',')
         }
+        if(re.result.records[i].goodPic1[0]==''&&re.result.records[i].goodPic1[1]!=''){
+          re.result.records[i].goodPic1[0]=re.result.records[i].goodPic1[1]
+          re.result.records[i].goodPic1[1]=''
+        }
         that.data.goodsLists.push(re.result.records[i])    
       }
       that.setData ({
