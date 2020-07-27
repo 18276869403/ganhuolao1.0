@@ -4,7 +4,7 @@
   <view class="content zongxiang">
     <!-- 商家照片 -->
     <view class="businessStore"> 
-      <image src="{{goodsList.picIurl}}" class="businessStore-img" bindtap="tupian" data-src="{{goodsList.picIurl}}"></image>
+      <image src="{{goodsList.picIurl}}" mode="widthFix" class="businessStore-img" bindtap="tupian" data-src="{{goodsList.picIurl}}"></image>
     </view>
     <!-- 商家详情 -->
     <view class="content-list zongxiang">

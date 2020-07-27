@@ -73,7 +73,7 @@
 			<view class="content-content-title">图片介绍</view>
 			<view class="zhanshi">
 				<view class="zhanshi-item" data-id="{{item.id}}" wx:if="{{zhaogong.backup4 != null}}">
-					<image src="{{viewUrl}}{{zhaogong.backup4}}" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{zhaogong.backup4}}"></image>
+					<image src="{{viewUrl}}{{zhaogong.backup4}}" mode="widthFix" bindtap="fangda" class="zhanshitu" data-src="{{viewUrl}}{{zhaogong.backup4}}"></image>
 				</view>
 			</view>
 			<view class="zhanshi" wx:if="{{zhaogong.backup4 == null}}">
