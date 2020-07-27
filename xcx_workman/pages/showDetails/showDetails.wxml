@@ -4,13 +4,13 @@
     <swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper" bindchange="bindchange" style="height:{{imgheights[current]}}rpx;">
       <block wx:for="{{caseMsgList.picOne}}">
         <swiper-item bindtap="imgYu" data-src="{{item}}">
-          <image src=" {{viewUrl}}{{item}}" style="height:{{imgheights[current]}}rpx;width:{{imgwidth}}rpx;" bindload="imageLoad" data-src="{{viewUrl}}{{item}}" data-index="{{index}}" bindtap="fangda" class="slide-image" />
+          <image src=" {{iconUrl}}{{item}}" style="height:{{imgheights[current]}}rpx;width:{{imgwidth}}rpx;" bindload="imageLoad" data-src="{{iconUrl}}{{item}}" data-index="{{index}}" bindtap="fangda" class="slide-image" />
         </swiper-item>
       </block>
     </swiper>
   </view>
   <view class='banner' wx:if="{{caseMsgList.caseType=='1'}}">
-    <video src="{{viewUrl}}{{caseMsgList.picOne[0]}}" style="width:100%"></video>
+    <video src="{{iconUrl}}{{caseMsgList.picOne[0]}}" style="width:100%"></video>
   </view>
   <!-- 产品名 -->
   <view class="top-text" wx:if="{{caseMsgList.caseName != null&&caseMsgList.caseName != 'null'&&caseMsgList.caseName!=''}}">
@@ -19,9 +19,9 @@
   <!-- 顶部详情 -->
   <view class="top hengxiang">
     <view class="top-left">
-      <image src="{{viewUrl}}{{caseMsgList.piciurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl != null && caseMsgList.piciurl != ''}}"></image>
+      <image src="{{iconUrl}}{{caseMsgList.piciurl}}" class="avator-img" wx:if="{{caseMsgList.piciurl != null && caseMsgList.piciurl != ''}}"></image>
       <image src="{{caseMsgList.wximgurl}}" class="avator-img" wx:if="{{(caseMsgList.wximgurl != null && caseMsgList.wximgurl != '')&&(caseMsgList.piciurl == null || caseMsgList.piciurl == '')}}"></image>
-      <image src="{{viewUrl}}{{caseMsgList.picOne[0]}}" class="avator-img" wx:if="{{(caseMsgList.piciurl == null || caseMsgList.piciurl == '')&&(caseMsgList.wximgurl == null || caseMsgList.wximgurl == '')}}"></image>
+      <image src="{{iconUrl}}{{caseMsgList.picOne[0]}}" class="avator-img" wx:if="{{(caseMsgList.piciurl == null || caseMsgList.piciurl == '')&&(caseMsgList.wximgurl == null || caseMsgList.wximgurl == '')}}"></image>
     </view>
     <view class="top-content zongxiang">
       <view class="top-content-top">{{caseMsgList.name}}</view>
@@ -61,7 +61,7 @@
     <view class="bottom-list zongxiang" wx:for='{{pinglunList}}'>
       <view class="hengxiang">
         <view class="top-left">
-          <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img1" wx:if="{{item.picIurl!=''&&item.picIurl!=null}}"></image>
+          <image src="{{iconUrl}}{{item.picIurl}}" class="avator-img1" wx:if="{{item.picIurl!=''&&item.picIurl!=null}}"></image>
           <image src="{{item.wximgurl}}" class="avator-img1" wx:if="{{item.picIurl==''||item.picIurl==null}}"></image>
         </view>
         <view class="top-content-top1">{{item.name}}</view>

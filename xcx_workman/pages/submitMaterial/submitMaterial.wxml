@@ -44,7 +44,7 @@
 
   <view class="showImg">
     <view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
-      <image src="{{viewUrl}}{{item}}" mode="aspectFill" bindtap='imgview' data-src="{{viewUrl}}{{item}}" class="show-img"></image>
+      <image src="{{viewUrl}}{{item}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{item}}" class="show-img"></image>
       <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
       <text>二手图片</text>
     </view>

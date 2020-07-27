@@ -434,4 +434,11 @@ Page({
       phoneNumber: phone,
     })
   },
+  preview:function(e){
+    var src = e.currentTarget.dataset.src
+    wx.previewImage({
+      current:src,
+      urls: [this.data.piclist],
+    })
+  }
 })

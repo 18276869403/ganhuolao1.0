@@ -443,7 +443,7 @@ Page({
                 obj.shopName = "五级工匠"
               }
               obj.dateBirth = util.ages(obj.dateBirth)
-              obj.picIurl = that.data.viewUrl + obj.picIurl
+              obj.picIurl = that.data.iconUrl + obj.picIurl
               var onename = []
               var twoname = []
               if (obj.oneClassName != null) {
@@ -513,7 +513,7 @@ Page({
             })
           } else {
             for (let obj of re.result.records) {
-              obj.picIurl = that.data.viewUrl + obj.picIurl
+              obj.picIurl = that.data.iconUrl + obj.picIurl
               // 重定义分类
               var onename = []
               var twoname = []

@@ -14,7 +14,7 @@
 			<view class="content-text" wx:if="{{workcityname==''}}" style="color:#999999;">选择工作地</view>
 			<view class='content-text2' wx:if="{{workcityname!=''}}" style="color:#999999">{{workcityname}} - {{workareaname}}</view>
 			<view class="enter">
-				<image src="{{viewUrl}}static/image/enter.png" class="enter-img"></image>
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
 			</view>
 		</view>
 		<view class="content-item hengxiang">
@@ -31,8 +31,8 @@
 
 		<view class="hengxiang fabu-list1">
 			<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0">
-			  <image src="{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{picIurl}}" class="fabu-item" wx:if="{{picIurl!=''}}"></image>
-				<image src="{{viewUrl}}static/image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
+			  <image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu-item" wx:if="{{picIurl!=''}}"></image>
+				<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
 				<text>招工描述图片</text>
 			</view>
 		</view>

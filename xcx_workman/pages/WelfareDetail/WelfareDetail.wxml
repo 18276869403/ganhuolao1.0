@@ -44,7 +44,7 @@
 					<swiper indicator-dots="true" indicator-color="rgba(255,255,255,.3)" indicator-active-color="#fff" autoplay="true" class="swiper">
 						<block wx:for="{{piclist}}" wx:for-index="index" wx:key="{{item.id}}">
 							<swiper-item bindtap="imgYu" data-picid="{{item}}">
-								<image src="{{viewUrl}}{{item}}" mode="widthFix" class="slide-image" />
+								<image src="{{iconUrl}}{{item}}" mode="widthFix" bindtap="preview" data-src="{{iconUrl}}{{item}}" class="slide-image" />
 							</swiper-item>
 						</block>
 					</swiper>

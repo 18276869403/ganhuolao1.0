@@ -17,7 +17,7 @@
       <view class="message-show" wx:if="{{!item.isRead}}">*</view>
       <view class="content-list-top hengxiang">
         <view class="list-top-img">
-          <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img" wx:if="{{item.picIurl!=''}}"></image>
+          <image src="{{iconUrl}}{{item.picIurl}}" class="avator-img" wx:if="{{item.picIurl!=''}}"></image>
           <image src="{{item.picUrl}}" class="avator-img" wx:if="{{item.picIurl==''}}"></image>
         </view>
         <view class="list-top-text zongxiang">
@@ -35,7 +35,7 @@
     <view class="content-list zongxiang" wx:for="{{formymessageList}}" wx:key="{{item.id}}" wx:if="{{needsTypeid==2}}">
       <view class="content-list-top hengxiang"> 
         <view class="list-top-img">
-        <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img" wx:if="{{item.picIurl!=''}}"></image>
+        <image src="{{iconUrl}}{{item.picIurl}}" class="avator-img" wx:if="{{item.picIurl!=''}}"></image>
           <image src="{{item.picUrl}}" class="avator-img" wx:if="{{item.picIurl==''}}"></image>
         </view>
         <view class="list-top-text zongxiang">

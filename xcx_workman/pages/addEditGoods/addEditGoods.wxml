@@ -28,7 +28,7 @@
     <view class="showImg-item">
       <!-- 无数据 上传图片样式 -->
       <image src="{{iconUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="1" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picIurl1==''}}"></image>
-      <image src="{{viewUrl}}{{picIurl1}}" mode="aspectFill" bindtap='imgview' data-src="{{viewUrl}}{{picIurl1}}" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picIurl1!=''}}"></image>
+      <image src="{{viewUrl}}{{picIurl1}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl1}}" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picIurl1!=''}}"></image>
       <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu1" data-tplj="{{picIurl1}}" wx:if="{{picIurl1!=''}}"></image>
       <!-- 轮播图展示第一张 -->
       <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
@@ -40,7 +40,7 @@
 
       <!-- 无数据 上传图片样式 -->
       <image src="{{iconUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="2" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picIurltwo1==''}}"></image>
-      <image src="{{viewUrl}}{{picIurltwo1}}" mode="aspectFill" bindtap='imgview' data-src="{{viewUrl}}{{picIurltwo1}}" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picIurltwo1!=''}}"></image>
+      <image src="{{viewUrl}}{{picIurltwo1}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurltwo1}}" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picIurltwo1!=''}}"></image>
       <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="shanchu2" data-tplj="{{picIurltwo1}}" wx:if="{{picIurltwo1!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
@@ -57,7 +57,7 @@
     <view class="showImg-item">
       <!-- 无数据 上传图片样式 -->
       <image src="{{iconUrl}}static/image/shangchuan.png"  bindtap='upimg' data-number="0" data-type="3" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picDetail1==''}}"></image>
-      <image src="{{viewUrl}}{{picDetail1}}" mode="aspectFill" bindtap='imgview' data-src="{{viewUrl}}{{picDetail1}}" class="show-img" wx:if="{{picDetail1!=''}}"></image>
+      <image src="{{viewUrl}}{{picDetail1}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picDetail1}}" class="show-img" wx:if="{{picDetail1!=''}}"></image>
       <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="shanchu3" data-tplj="{{picDetail1}}" wx:if="{{picDetail1!=''}}"></image>
       <!-- 轮播图展示第一张 -->
       <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
@@ -69,7 +69,7 @@
  
       <!-- 无数据 上传图片样式 -->
       <image src="{{iconUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="4" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picDetailtwo1==''}}"></image>
-      <image src="{{viewUrl}}{{picDetailtwo1}}" mode="aspectFill" bindtap='imgview' data-src="{{viewUrl}}{{picDetailtwo1}}" class="show-img" wx:if="{{picDetailtwo1!=''}}"></image>
+      <image src="{{viewUrl}}{{picDetailtwo1}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picDetailtwo1}}" class="show-img" wx:if="{{picDetailtwo1!=''}}"></image>
       <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="shanchu4" data-tplj="{{picDetailtwo1}}" wx:if="{{picDetailtwo1!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->

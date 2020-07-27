@@ -464,7 +464,7 @@ Page({
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
-                  var sj = that.data.viewUrl + jj.message
+                  var sj = jj.message
                   console.log(res)
                   that.setData({
                     picIurl: sj,
