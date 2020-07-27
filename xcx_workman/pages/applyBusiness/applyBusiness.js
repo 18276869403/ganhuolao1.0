@@ -836,7 +836,7 @@ Page({
         })
         return
       }
-      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码")
+      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码|" + that.data.picIurl1 + ",上传门头照")
       if (s != 0) {
         wx.showToast({
           title: s,
