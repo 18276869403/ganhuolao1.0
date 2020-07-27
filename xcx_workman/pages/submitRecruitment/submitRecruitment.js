@@ -627,7 +627,7 @@ Page({
         showModalStatus1: false
       })
     }.bind(this), 200)
-  },
+  }, 
   // 预览图片
   imgview: function (e) {
     var src = e.currentTarget.dataset.src

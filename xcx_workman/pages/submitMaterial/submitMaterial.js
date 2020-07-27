@@ -360,7 +360,7 @@ Page({
                 access_token: app.globalData.access_TokenOff,
                 firstValue: "干活佬又上新啦，赶紧去看看！",
                 firstColor: '#173177',
-                keyword1Value: "有1条剩料发布啦！",
+                keyword1Value: "有1条剩料发布啦！", 
                 keyword1Color: '#173177',
                 keyword2Value: util.nowTime(),
                 keyword2Color: '#173177',

@@ -1120,7 +1120,7 @@ Page({
       num: that.data.num
     });
   },
-
+ 
   // 预览图片
   imgview: function (e) {
     var src = e.currentTarget.dataset.src

@@ -359,7 +359,7 @@ Page({
     that.setData({
       picIurl1: that.data.picIurl1
     })
-  },
+  }, 
   // 预览图片
   imgview: function (e) {
     var src = e.currentTarget.dataset.src

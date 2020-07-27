@@ -1185,7 +1185,7 @@ Page({
       current: src,
       urls: [src]
     })
-  },
+  }, 
 
   cityyiji: function () {
     var that = this

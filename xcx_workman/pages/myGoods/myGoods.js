@@ -90,7 +90,7 @@ Page({
     }
     this.setData({ pageNo: this.data.pageNo + 1 })
     this.mygoodsList()
-  },
+  }, 
   // 我的商品
   mygoodsList() {
     var that = this

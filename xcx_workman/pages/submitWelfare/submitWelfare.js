@@ -415,7 +415,7 @@ Page({
     wx.chooseImage({
       count: 9,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
-      sourceType: ['album', 'camera'],
+      sourceType: ['album', 'camera'], 
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;

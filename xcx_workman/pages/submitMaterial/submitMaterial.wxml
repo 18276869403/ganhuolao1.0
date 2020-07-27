@@ -36,7 +36,7 @@
 
     <view class="content-item hengxiang">
       <view class="content-title">联系电话<text style="color:red;">*</text></view>
-      <input type="number" placeholder="输入联系电话" class="shurukuang" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input>
+      <input type="number" placeholder="输入联系电话" class="shurukuang" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input> 
     </view>
   </view>
 

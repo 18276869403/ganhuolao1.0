@@ -25,7 +25,7 @@
 			<view class="content-title">联系电话<text style="color:red;">*</text></view>
 			<input type="number" placeholder="输入联系电话" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{phone}}' name="phone" bindinput='phoneinput'></input>
 		</view>
-		<view class="content-item-textarea">
+		<view class="content-item-textarea"> 
 			<textarea class="textarea" placeholder="输入招工描述" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
 		</view>
 

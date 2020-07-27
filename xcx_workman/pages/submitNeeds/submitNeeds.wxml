@@ -49,7 +49,7 @@
 	<view class="content-item-textarea">
 		<textarea class="textarea" placeholder="输入需求详情" placeholder-class="placeholder1" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
 	</view>
-
+ 
 
 	<view class="showImg">
 		<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
