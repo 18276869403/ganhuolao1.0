@@ -70,7 +70,7 @@
       <!-- 无数据 上传图片样式 -->
       <image src="{{iconUrl}}static/image/shangchuan.png" bindtap='upimg' data-number="0" data-type="4" class="show-img {{btnFlag == true?'disabled':''}}" wx:if="{{picDetailtwo1==''}}"></image>
       <image src="{{viewUrl}}{{picDetailtwo1}}" mode="aspectFill" bindtap='imgview' data-src="{{viewUrl}}{{picDetailtwo1}}" class="show-img" wx:if="{{picDetailtwo1!=''}}"></image>
-      <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu4 {{btnFlag == true?'disabled':''}}" data-tplj="{{picDetailtwo1}}" wx:if="{{picDetailtwo1!=''}}"></image>
+      <image src="{{iconUrl}}static/image/shanchu.png" class="delete-img {{btnFlag == true?'disabled':''}}" bindtap="shanchu4" data-tplj="{{picDetailtwo1}}" wx:if="{{picDetailtwo1!=''}}"></image>
       <!-- 轮播图展示第二张 -->
       <!-- <image src="{{viewUrl}}static/image/top.png" class="show-img"></image> -->
       <!-- 有数据展示样式 -->
