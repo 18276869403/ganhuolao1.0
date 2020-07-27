@@ -49,7 +49,7 @@
 		<view class="shangchuan-font">上传图片</view>
 		<view class="hengxiang fabu-list1">
 			<view class="fabu" wx:for="{{piclist}}" wx:for-index="index" wx:key="{{item.id}}">
-				<image src="{{viewUrl}}{{item}}" class="fabu-item"></image>
+				<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill"  class="fabu-item"></image>
 				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 				<text>活动描述图片</text>
 			</view>

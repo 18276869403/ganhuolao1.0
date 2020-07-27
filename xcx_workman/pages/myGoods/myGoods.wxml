@@ -3,7 +3,7 @@
   <view class="goods zongxiang">
     <view class="goods-list hengxiang" wx:for="{{goodsLists}}"  wx:key="{{item.id}}" bindtap="mygooddetail" data-mgd="{{item}}">
       <view class="goods-list-left">
-        <image src="{{viewUrl}}{{item.goodPic1[0]}}" class="goods-img"></image>
+        <image src="{{iconUrl}}{{item.goodPic1[0]}}" class="goods-img"></image>
       </view>
       <view class="goods-list-right zongxiang">
         <view class="goods-name">{{item.goodName}}</view>

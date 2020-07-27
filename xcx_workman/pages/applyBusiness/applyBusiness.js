@@ -11,9 +11,9 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
-    iconUrl:api.iconUrl,
+    iconUrl: api.iconUrl,
     type: 2,
-    btnFlag:false,
+    btnFlag: false,
     // 获取分类
     fenleitype1: {
       yjid: '',
@@ -451,7 +451,7 @@ Page({
   // 过滤
   needsnameblur: function (e) {
     var that = this
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     qingqiu.get("checkWords", {
@@ -487,7 +487,7 @@ Page({
   },
   // 过滤
   needscontentblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
@@ -525,7 +525,7 @@ Page({
   },
   //商家联系人敏感词
   linkmanblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
@@ -582,7 +582,7 @@ Page({
   },
   //工人名称敏感词
   workernameblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
@@ -631,7 +631,7 @@ Page({
   },
   //工人详细地址敏感词
   workeraddressblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
@@ -674,7 +674,7 @@ Page({
   },
   // 工人技能介绍敏感词
   workerskillblur: function (e) {
-    if(e.detail.value == ''){
+    if (e.detail.value == '') {
       return
     }
     var that = this
@@ -810,7 +810,7 @@ Page({
   tijiaoshenqing: function () {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {}
     if (that.data.select != 'success') {
@@ -820,7 +820,7 @@ Page({
         duration: 2000
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -832,7 +832,7 @@ Page({
           duration: 2000
         })
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         return
       }
@@ -844,7 +844,7 @@ Page({
           duration: 2000
         })
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         return
       }
@@ -855,7 +855,7 @@ Page({
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
         name: that.data.workername,
-        shopName:'',
+        shopName: '',
         sex: that.data.sex,
         dateBirth: that.data.date,
         employ: that.data.worktime,
@@ -874,7 +874,7 @@ Page({
           duration: 2000
         })
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         return
       }
@@ -892,7 +892,7 @@ Page({
           duration: 2000
         })
         that.setData({
-          btnFlag:false
+          btnFlag: false
         })
         return
       }
@@ -910,7 +910,7 @@ Page({
         twoAreaId: that.data.areaId,
         shopName: that.data.needsname,
         name: '',
-        shopLinkman:that.data.linkman,
+        shopLinkman: that.data.linkman,
         phone: that.data.phone,
         shopAddress: that.data.workeraddress,
         content: that.data.needscontent,
@@ -922,13 +922,13 @@ Page({
     console.log(data)
     if (that.data.type == 1 || that.data.type == 0) {
       qingqiu.get("editWxUser", data, function (re) {
-        if(re.message == "1"){
+        if (re.message == "1") {
           wx.showToast({
             title: '入驻信息商铺/工人姓名重复，请修改重试',
-            icon:"none"
+            icon: "none"
           })
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           return
         }
@@ -945,12 +945,12 @@ Page({
                 qingqiu.get("getKeyInfo", {
                   code: res.code
                 }, function (re) {
-                  console.log('修改',re)
+                  console.log('修改', re)
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                   wx.switchTab({
                     url: '../mine/mine',
@@ -961,7 +961,7 @@ Page({
           }, 1000)
         } else {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           wx.showToast({
             title: re.message,
@@ -973,13 +973,13 @@ Page({
       }, 'put')
     } else {
       qingqiu.get("wxUserAdd", data, function (re) {
-        if(re.message == "1"){
+        if (re.message == "1") {
           wx.showToast({
             title: '入驻信息商铺/工人姓名重复，请修改重试',
-            icon:"none"
+            icon: "none"
           })
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           return
         }
@@ -1010,7 +1010,7 @@ Page({
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                 })
               }
@@ -1035,7 +1035,7 @@ Page({
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                 })
               }
@@ -1048,9 +1048,9 @@ Page({
                   code: res.code
                 }, function (re) {
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
-                  console.log('添加',re)
+                  console.log('添加', re)
                   app.globalData.wxid = re.result.wxUser.id
                   app.globalData.openid = re.result.openId
                   app.globalData.wxState = re.result.wxUser.wxState
@@ -1063,7 +1063,7 @@ Page({
           }, 1000)
         } else {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           wx.showToast({
             title: re.message,
@@ -1080,7 +1080,7 @@ Page({
     var index = e.currentTarget.dataset.number
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     wx.chooseImage({
       count: 1,
@@ -1089,6 +1089,16 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
+        if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[0])) {
+          wx.showToast({
+            title: '请上传静态图片',
+            icon: 'none'
+          })
+          that.setData({
+            btnFlag: false
+          })
+          return
+        }
         wx.uploadFile({
           url: api.imgFilter,
           name: 'file',
@@ -1108,7 +1118,7 @@ Page({
                 icon: 'none'
               })
               that.setData({
-                btnFlag:false
+                btnFlag: false
               })
               return
             } else {
@@ -1124,7 +1134,7 @@ Page({
                 name: 'file',
                 success(res) {
                   that.setData({
-                    btnFlag:false
+                    btnFlag: false
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
@@ -1164,9 +1174,19 @@ Page({
       },
     })
     that.setData({
-      btnFlag:false
+      btnFlag: false
     })
   },
+
+  // 预览图片
+  imgview: function (e) {
+    var src = e.currentTarget.dataset.src
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
+  },
+
   cityyiji: function () {
     var that = this
     qingqiu.get("queryOneArea", {}, function (re) {

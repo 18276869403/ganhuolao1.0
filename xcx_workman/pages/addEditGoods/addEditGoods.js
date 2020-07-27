@@ -263,6 +263,16 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
+        if(!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[0])){
+          wx.showToast({
+            title: '请上传静态图片',
+            icon:'none'
+          })
+          that.setData({
+            btnFlag:false
+          })
+          return
+        }
         wx.uploadFile({
           url: api.imgFilter,
           name: 'file',
@@ -348,6 +358,14 @@ Page({
     }
     that.setData({
       picIurl1: that.data.picIurl1
+    })
+  },
+  // 预览图片
+  imgview: function (e) {
+    var src = e.currentTarget.dataset.src
+    wx.previewImage({
+      current: src,
+      urls: [src]
     })
   },
   shanchu2: function (e) {

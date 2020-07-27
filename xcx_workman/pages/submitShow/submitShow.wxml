@@ -13,7 +13,7 @@
 		</view>
 		<view class="showImg">
 			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
-				<image src="{{viewUrl}}{{item}}" class="show-img"></image>
+				<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill" class="show-img"></image>
 				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 			</view>
 		</view>

@@ -66,13 +66,13 @@
     <view class="hengxiang {{btnFlag == true ? 'disabled' : ''}} fabu-list1">
       <view class="fabu" bindtap='upimg' data-number="0" data-type='5'>
         <image src="{{iconUrl}}static/image/sctouxiang.png" class="fabu-item" wx:if="{{picIurl==''}}"></image>
-        <image src="{{picIurl}}" class="fabu1-img" wx:if="{{picIurl!=''}}"></image>
+        <image src="{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{picIurl}}" class="fabu1-img" wx:if="{{picIurl!=''}}"></image>
         <text>店铺照片</text>
       </view>
       <view class="fabu {{btnFlag == true ? 'disabled' : ''}} zongxiang" bindtap='upimg' data-number="0" data-type='2'>
         <view>
           <image src="{{iconUrl}}static/image/yingyezhizhao.jpg" class="fabu-item" wx:if="{{picZz==''}}"></image>
-          <image src="{{picZz}}" class="fabu1-img" wx:if="{{picZz!=''}}"></image>
+          <image src="{{picZz}}" mode="aspectFill" bindtap='imgview' data-src="{{picZz}}" class="fabu1-img" wx:if="{{picZz!=''}}"></image>
           <text>营业执照</text>
         </view>
       </view>
@@ -156,7 +156,7 @@
             <image src="{{iconUrl}}static/image/sctouxiang.png" class="fabu-item1"></image>
           </view>
           <view wx:if="{{picIurl!=''&&picIurl!=null}}">
-            <image src="{{picIurl}}" class="fabu1-img"></image>
+            <image src="{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{picIurl}}" class="fabu1-img"></image>
           </view>
         </view>
       </view>
@@ -166,7 +166,7 @@
             <image src="{{iconUrl}}static/image/zhengmian.png" class="fabu-item1"></image>
           </view>
           <view wx:if="{{picPerson1!=''&&picPerson1!=null}}">
-            <image src="{{picPerson1}}" class="fabu1-img"></image>
+            <image src="{{picPerson1}}" mode="aspectFill" bindtap='imgview' data-src="{{picPerson1}}" class="fabu1-img"></image>
           </view>
         </view>
       </view>
@@ -178,7 +178,7 @@
             <image src="{{iconUrl}}static/image/fanmian.png" class="fabu-item1"></image>
           </view>
           <view wx:if="{{picPerson2!=''&&picPerson2!=null}}">
-            <image src="{{picPerson2}}" class="fabu1-img"></image>
+            <image src="{{picPerson2}}" mode="aspectFill" bindtap='imgview' data-src="{{picPerson2}}" class="fabu1-img"></image>
           </view>
         </view>
       </view>

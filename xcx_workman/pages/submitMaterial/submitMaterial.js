@@ -31,7 +31,7 @@ Page({
     linkman: '',
     phone: '',
     show: false,
-    uploaderlist:[],
+    uploaderlist: [],
     btnFlag: false,
     needsTypeList: [{
         id: 0,
@@ -366,10 +366,9 @@ Page({
                 keyword2Color: '#173177',
                 remarkValue: '请进入干活佬查看详情',
                 remarkColor: '#173177',
-                MiniUrl: 'pages/needsDetails/needsDetails?id=' + yneedid
+                MiniUrl: 'pages/MaterialDetails/MaterialDetails?id=' + yneedid
               }
-              qingqiu.get("SendWxMsg", objdata, function (re) {
-              })
+              qingqiu.get("SendWxMsg", objdata, function (re) {})
             }
           })
           setTimeout(function () {
@@ -1024,8 +1023,8 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
-    var index2=0
-    var index3=0
+    var index2 = 0
+    var index3 = 0
     that.setData({
       btnFlag: true
     })
@@ -1036,8 +1035,17 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths) 
-        for(let i=0;i<tempFilePaths.length;i++){
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])) {
+            wx.showToast({
+              title: '请上传静态图片',
+              icon: 'none'
+            })
+            that.setData({
+              btnFlag: false
+            })
+            return
+          }
           wx.uploadFile({
             url: api.imgFilter,
             name: 'file',
@@ -1078,7 +1086,7 @@ Page({
                     var r = res.data
                     var jj = JSON.parse(r);
                     var sj = api.viewUrl + jj.message
-                    if(that.data.tupianlists.length<9){
+                    if (that.data.tupianlists.length < 9) {
                       that.data.tupianlists.push(jj.message)
                     }
                     // that.data.tupianlists.push(jj.message)
@@ -1089,11 +1097,11 @@ Page({
                     })
                   }
                 })
-                index2+=1
+                index2 += 1
               }
             }
           })
-          index3+=1
+          index3 += 1
         }
       },
     })
@@ -1114,6 +1122,14 @@ Page({
     that.setData({
       num: that.data.num
     });
+  },
+  // 预览图片
+  imgview: function (e) {
+    var src = e.currentTarget.dataset.src
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
   },
   //显示弹窗样式
   showModal: function (e) {

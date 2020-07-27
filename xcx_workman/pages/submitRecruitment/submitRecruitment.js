@@ -322,7 +322,7 @@ Page({
       })
       return
     }
-    if(that.data.phone.length != 11){
+    if (that.data.phone.length != 11) {
       wx.showToast({
         title: "请输入11位联系电话",
         icon: 'none',
@@ -359,7 +359,7 @@ Page({
       that.setData({
         btnFlag: false
       })
-      console.log('招工',re)
+      console.log('招工', re)
       if (re.success == true) {
         wx.showToast({
           title: '发布成功',
@@ -385,8 +385,7 @@ Page({
               remarkColor: '#173177',
               MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
             }
-            qingqiu.get("SendWxMsg", objdata, function (re) {
-            })
+            qingqiu.get("SendWxMsg", objdata, function (re) {})
           }
           wx.navigateBack({
             delta: 1
@@ -416,6 +415,16 @@ Page({
       success: function (res) {
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
+        if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[0])) {
+          wx.showToast({
+            title: '请上传静态图片',
+            icon: 'none'
+          })
+          that.setData({
+            btnFlag: false
+          })
+          return
+        }
         wx.uploadFile({
           url: api.imgFilter,
           name: 'file',
@@ -619,5 +628,12 @@ Page({
       })
     }.bind(this), 200)
   },
-
+  // 预览图片
+  imgview: function (e) {
+    var src = e.currentTarget.dataset.src
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
+  }
 })

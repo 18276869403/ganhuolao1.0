@@ -1033,6 +1033,16 @@ Page({
         const tempFilePaths = res.tempFilePaths;
         // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths) 
         for (let i = 0; i < tempFilePaths.length; i++) {
+          if(!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])){
+            wx.showToast({
+              title: '请上传静态图片',
+              icon:'none'
+            })
+            that.setData({
+              btnFlag:false
+            })
+            return
+          }
           wx.uploadFile({
             url: api.imgFilter,
             name: 'file',
@@ -1110,6 +1120,16 @@ Page({
       num: that.data.num
     });
   },
+
+  // 预览图片
+  imgview: function (e) {
+    var src = e.currentTarget.dataset.src
+    wx.previewImage({
+      current: src,
+      urls: [src]
+    })
+  },
+
   //显示弹窗样式
   showModal: function (e) {
     this.setData({
