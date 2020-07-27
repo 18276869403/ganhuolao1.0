@@ -65,7 +65,9 @@
     </view>
     <view class="content-content zongxiang">
       <view class="content-content-title">需求内容</view>
-      <view class="content-content-list" wx:if="{{xqxqlist.needContent!='undefined'&&xqxqlist.needContent!=null&&xqxqlist.needContent!='null'}}">{{xqxqlist.needContent}}</view>
+      <view class="content-content-list" wx:if="{{xqxqlist.needContent!='undefined'&&xqxqlist.needContent!=null&&xqxqlist.needContent!='null'}}">
+        <text>{{xqxqlist.needContent}}</text>
+      </view>
     </view>
     <!-- 图片 -->
     <view class="content-content zongxiang" wx:if="{{xqxqlist.backup1 != null}}">

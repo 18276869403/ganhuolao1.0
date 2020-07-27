@@ -68,7 +68,8 @@ Page({
     var data = {
       pageNo: that.data.pageNo,
       pageSize: 10,
-      wxUserId: app.globalData.wxid
+      wxUserId: app.globalData.wxid,
+      wxUserIdGo: app.globalData.wxid
     }
     qingqiu.get("casePage", data, function (re) {
       console.log(re)
