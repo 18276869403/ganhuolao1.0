@@ -10,7 +10,7 @@
 						<image src="{{iconUrl}}static/image/zawu1.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-left" wx:if="{{item.backup1[0]!=null}}">
-						<image src="{{viewUrl}}{{item.backup1[0]}}" class="need-content-img"></image>
+						<image src="{{viewUrl}}{{item.backup1[0]}}" mode="aspectFill" class="need-content-img"></image>
 					</view>
 					<view class="need-list-right zongxiang">
 						<view class="content-list zongxiang">

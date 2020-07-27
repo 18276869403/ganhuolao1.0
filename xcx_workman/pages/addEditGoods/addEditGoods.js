@@ -85,7 +85,7 @@ Page({
       newPrice: that.data.salesPrice != "" ? that.data.salesPrice : that.data.spxglist.newPrice,
       goodMemo: that.data.detailscontent != "" ? that.data.detailscontent : that.data.spxglist.goodMemo,
       goodPic1: that.imglunbo != "," ? that.imglunbo : that.data.spxglist.goodPic1[0] + ',' + that.data.spxglist.goodPic1[1],
-      goodPic2: that.imgDetail != "," ? that.imglunbo : that.data.spxglist.goodPic2[0] + ',' + that.data.spxglist.goodPic2[1],
+      goodPic2: that.imgDetail != "," ? that.imgDetail : that.data.spxglist.goodPic2[0] + ',' + that.data.spxglist.goodPic2[1],
     }
     qingqiu.get("editUserGood", data, function (re) {
       that.setData({
