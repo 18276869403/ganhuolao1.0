@@ -79,7 +79,7 @@
 			<view class="content-list-item hengxiang" bindtap="workerDetails" data-vals="{{item}}">
 				<view class="list-item-left">
 					<image src="{{item.picIurl}}" mode="aspectFit" class="worker-img" wx:if="{{item.picIurl != ''}}"></image>
-					<image src="{{item.picIurl}}" class="worker-img" wx:if="{{item.picIurl == ''}}"></image>
+					<image src="{{item.picIurl}}" class="worker-img" wx:if="{{item.picIurl== ''}}"></image>
 				</view>
 				<view class="list-item-right zongxiang">
 					<view class="right-name right-name-text hengxiang">
