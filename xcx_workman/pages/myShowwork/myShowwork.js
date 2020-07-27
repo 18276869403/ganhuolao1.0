@@ -77,7 +77,7 @@ Page({
           that.data.isLastPage = true
         }else{
           for (var i = 0; i < re.result.records.length; i++) {
-            re.result.records[i].picOne = api.viewUrl + re.result.records[i].picOne.split(',')[0]
+            re.result.records[i].picOne = re.result.records[i].picOne.split(',')[0]
             that.data.showList.push(re.result.records[i])
           }
         }

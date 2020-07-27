@@ -7,9 +7,9 @@
       <block wx:for-items="{{showList}}">
         <view class="show" wx:if="{{index%2 == 0}}">
           <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}">
+            <image src="{{iconUrl}}{{item.picOne}}" class="show-img" mode="aspectFill" wx:if="{{item.backup3=='0'}}">
             </image>
-            <video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" ></video>
+            <video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{viewUrl}}{{item.picOne}}" class="show-img" mode="aspectFill" wx:if="{{item.backup3=='1'}}" ></video>
           </view>
           <view class="show-item-bottom hengxiang">
             <view class="bottom-width hengxiang" >
@@ -48,8 +48,8 @@
       <block wx:for-items="{{showList}}">
         <view class="show" wx:if="{{index%2 != 0}}">
           <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
-            <video autoplay loop muted src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}"></video>
+            <image src="{{iconUrl}}{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+            <video autoplay loop muted src="{{viewUrl}}{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{viewUrl}}{{item.picOne}}"></video>
           </view>
           <view class="show-item-bottom hengxiang">
             <view class="hengxiang" >

@@ -4,7 +4,7 @@
   <view class="content zongxiang">
     <view class="content-list hengxiang" wx:for="{{recommendLists}}" wx:key="{{item.id}}">
       <view class="content-list-left">
-        <image src="{{viewUrl}}{{item.picIurl}}" class="avator-img"></image>
+        <image src="{{iconUrl}}{{item.picIurl}}" class="avator-img"></image>
       </view>
       <view class="content-list-content zongxiang">
         <view class="content-name">{{item.name}}</view>
