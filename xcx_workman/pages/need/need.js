@@ -217,7 +217,8 @@ Page({
           cityname1: this.data.name,
           needsList: [],
           weizhi: '全部',
-          areaId: 0
+          areaId: 0,
+          pageNo: 1
         })
         this.xqneedlist()
       }
