@@ -31,7 +31,6 @@ Page({
     city: [],
     area: []
   },
-
   onShow: function () {
     wx.showShareMenu({
       withShareTicket: true

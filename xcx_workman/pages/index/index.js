@@ -940,7 +940,7 @@ Page({
       }
       that.data.cityname1 = that.data.name
     }
-    //var index = e.currentTarget.dataset.index;
+    //var index = e.currentTarget.dataset.index; 
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
     app.globalData.twoCity = {
