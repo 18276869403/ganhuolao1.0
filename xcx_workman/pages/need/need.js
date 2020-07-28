@@ -203,9 +203,9 @@ Page({
       this.twoClass()
       this.QueryoneArea()
       this.QuerytwoArea()
+      this.data.needsList=[]
       if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
         this.setData({
-          needsList: [],
           weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
           pageNo: 1
         })
@@ -215,7 +215,6 @@ Page({
         this.setData({
           cityId: this.data.id,
           cityname1: this.data.name,
-          needsList: [],
           weizhi: '全部',
           areaId: 0,
           pageNo: 1

@@ -314,6 +314,7 @@ Page({
             icon: 'success',
             duration: 2000
           })
+          app.globalData.needRefresh=1
           setTimeout(function () {
             wx.navigateBack({
               delta: 2,
