@@ -13,6 +13,7 @@ Page({
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     pageNo: 1,
+    pageSize:10,
     isLastPage: false,
     needsList: [],
     zstate:false
