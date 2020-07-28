@@ -55,7 +55,8 @@ Page({
     needTitle: '',
     oneClassId: '',
     twoClassId: '',
-    weizhi: ''
+    weizhi: '',
+    z:false
   },
   // 搜索框
   shurukuang: function (e) {
@@ -207,6 +208,7 @@ Page({
       if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
         this.setData({
           weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
+          // needsList:[],
           pageNo: 1
         })
         this.xqneedlist()
@@ -215,6 +217,7 @@ Page({
         this.setData({
           cityId: this.data.id,
           cityname1: this.data.name,
+          // needsList:[],
           weizhi: '全部',
           areaId: 0,
           pageNo: 1

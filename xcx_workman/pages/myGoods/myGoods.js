@@ -55,7 +55,8 @@ Page({
     pageNo:1,
     isLastPage:false,
     btnFlag:false,
-    type:0
+    type:0,
+    zstate:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,9 +67,11 @@ Page({
     //   pageNo:1,
     //   goodsLists:[]
     // })
-    this.data.isLastPage=false
-    this.data.pageNo=1
     this.data.goodsLists=[]
+    if(this.data.pageNo>1){
+      this.data.pageSize=Number(this.data.pageNo)*10
+      this.data.zstate=true
+    }
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -76,6 +79,9 @@ Page({
   },
   // 下拉刷新
   onPullDownRefresh: function () {
+    this.data.isLastPage=false
+    this.data.pageNo=1
+    this.data.goodsLists=[]
     this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
@@ -89,7 +95,7 @@ Page({
         icon:'none',
         duration:2000
       })
-        return
+      return
     }
     this.setData({ pageNo: this.data.pageNo + 1 })
     this.mygoodsList()
@@ -97,14 +103,23 @@ Page({
   // 我的商品
   mygoodsList() {
     var that = this
-    var data={
-      userId:app.globalData.wxid,
-      pageNo:that.data.pageNo,
-      pageSize:10
-  }
+    if(that.data.zstate==true){
+      var data={
+        userId:app.globalData.wxid,
+        pageNo:1,
+        pageSize:that.data.pageSize
+      }
+    }else{
+      var data={
+        userId:app.globalData.wxid,
+        pageNo:that.data.pageNo,
+        pageSize:10
+      }
+    }
   qingqiu.get("queryMyGoodPage", data, function(re) {
     console.log(re)
   if (re.success == true) {
+    that.data.zstate=false
     if(re.result.records==''){
       that.data.isLastPage=true
     }

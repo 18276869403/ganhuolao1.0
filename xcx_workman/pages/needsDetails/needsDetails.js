@@ -300,10 +300,19 @@ Page({
                 icon: 'success',
                 duration: 2000
               })
+              app.globalData.needRefresh=1
               setTimeout(function () {
-                wx.redirectTo({
-                  url: '../myneeds/myneeds',
+                wx.navigateBack({
+                  delta:1,
+                  success: function(e) {
+                    var page = getCurrentPages().pop();
+                    if (page == undefined || page == null) return;
+                    page.onLoad();
+                  }
                 })
+                // wx.redirectTo({
+                //   url: '../myneeds/myneeds',
+                // })
               }, 1000)
             } else {
               that.setData({
