@@ -56,7 +56,7 @@ Page({
     oneClassId: '',
     twoClassId: '',
     weizhi: '',
-    z:false
+    zstate:false
   },
   // 搜索框
   shurukuang: function (e) {
@@ -170,7 +170,7 @@ Page({
     this.data.pageNo = 1
     this.data.isLastPage = false
     app.globalData.needRefresh = 1
-    this.onShow()
+    this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -189,7 +189,7 @@ Page({
     })
   },
 
-  onShow() {
+  onLoad() {
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -205,11 +205,15 @@ Page({
       this.QueryoneArea()
       this.QuerytwoArea()
       this.data.needsList=[]
+      if(this.data.pageNo>1){
+        this.data.pageSize=Number(this.data.pageNo)*10
+        this.data.zstate=true
+      }
       if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
         this.setData({
           weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
           // needsList:[],
-          pageNo: 1
+          // pageNo: 1
         })
         this.xqneedlist()
       } else {
@@ -220,7 +224,7 @@ Page({
           // needsList:[],
           weizhi: '全部',
           areaId: 0,
-          pageNo: 1
+          // pageNo: 1
         })
         this.xqneedlist()
       }
@@ -296,7 +300,7 @@ Page({
     that.setData({
       secondId: id,
       secondname: name,
-      yijiname: this.data.yijiname1,
+      yijiname: that.data.yijiname1,
       showModalStatus: false,
     })
   },
@@ -325,13 +329,24 @@ Page({
   // 需求列表
   xqneedlist() {
     var that = this
-    var data = {
-      pageNo: that.data.pageNo,
-      pageSize: 10,
-      wxUserId: that.data.mid,
-      needTitle: that.data.needTitle,
-      backup5: 0
+    if(that.data.zstate==true){
+      var data = {
+        pageNo: 1,
+        pageSize: that.data.pageSize,
+        wxUserId: that.data.mid,
+        needTitle: that.data.needTitle,
+        backup5: 0
+      }
+    }else{
+      var data = {
+        pageNo: that.data.pageNo,
+        pageSize: 10,
+        wxUserId: that.data.mid,
+        needTitle: that.data.needTitle,
+        backup5: 0
+      }
     }
+    
     if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
       data.oneAreaId = app.globalData.oneCity.id
     }
@@ -344,6 +359,7 @@ Page({
     qingqiu.get("zuixinxq", data, function (re) {
       console.log(re)
       if (re.success == true) {
+        that.data.zstate=false
         if (re.result != null) {
           // if(re.result.records==''){
           //   that.data.isLastPage=true
@@ -357,6 +373,7 @@ Page({
             }
             that.data.needsList.push(re.result.records[i])
           }
+          console.log(that.data.needsList)
           that.setData({
             needsList: that.data.needsList,
             needsListfy: re.result.records
