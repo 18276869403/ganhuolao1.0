@@ -9,7 +9,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
-    iconUrl:api.iconUrl,
+    iconUrl: api.iconUrl,
     isShowConfirm: false, // 报名弹窗
     gongyilist: [], // 活动集合
     titleText: '', // 搜索框
@@ -17,7 +17,7 @@ Page({
     signPhone: '', //报名电话
     pageNo: 1,
     wxUserId: '',
-    btnFlag:false,
+    btnFlag: false,
     isLastPage: false
   },
 
@@ -61,12 +61,14 @@ Page({
   },
 
   // 敏感词
-  signNameblur:function(e){
-    if(e.detail.value == ''){
+  signNameblur: function (e) {
+    if (e.detail.value == '') {
       return
     }
     var that = this
-    qingqiu.get("checkWords",{content:e.detail.value}, function (res) {
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
       if (res == 1) {
         that.setData({
           signName: ''
@@ -77,10 +79,10 @@ Page({
           duration: 2000
         })
         return
-      }else if(res == 2){
+      } else if (res == 2) {
         wx.showToast({
           title: '校验失败',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           signName: ''
@@ -106,7 +108,7 @@ Page({
   confirmAcceptance: function () {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     var data = {
       signName: that.data.signName,
@@ -120,7 +122,7 @@ Page({
         icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -130,7 +132,7 @@ Page({
         icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -140,7 +142,7 @@ Page({
         icon: 'none'
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -148,7 +150,7 @@ Page({
     qingqiu.get("insertActivitySign", data, function (res) {
       console.log(res)
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       if (res.success == true) {
         wx.showToast({
@@ -163,21 +165,21 @@ Page({
           console.log(res)
           var objdata = {
             openId: res.result.openid,
-            access_token:app.globalData.access_TokenOff,
-            firstValue:"干活佬有人联系你啦！",
-            firstColor:'#173177',
-            keyword1Value:"有人报名你的活动啦！",
-            keyword1Color:'#173177',
-            keyword2Value:utils.newDate(),
-            keyword2Color:'#173177',
-            remarkValue:'干活佬，助力工人/商家接单！',
-            remarkColor:'#173177',
-            MiniUrl:'pages/WelfareDetail/WelfareDetail?id='+that.data.activityId
+            access_token: app.globalData.access_TokenOff,
+            firstValue: "干活佬有人联系你啦！",
+            firstColor: '#173177',
+            keyword1Value: "有人报名你的活动啦！",
+            keyword1Color: '#173177',
+            keyword2Value: utils.newDate(),
+            keyword2Color: '#173177',
+            remarkValue: '干活佬，助力工人/商家接单！',
+            remarkColor: '#173177',
+            MiniUrl: 'pages/WelfareDetail/WelfareDetail?id=' + that.data.activityId
           }
           console.log(objdata)
-         qingqiu.get("SendWxMsg",objdata,function(re){
-           console.log(re)
-         })
+          qingqiu.get("SendWxMsg", objdata, function (re) {
+            console.log(re)
+          })
         })
         qingqiu.get("updateActivity", {
           id: that.data.activityId
@@ -213,7 +215,7 @@ Page({
    */
   onShow() {
     this.getTokenValue()
-    if(app.globalData.welfareRefresh != 0){
+    if (app.globalData.welfareRefresh != 0) {
       this.setData({
         gongyilist: [],
         wxUserId: app.globalData.wxid
@@ -228,6 +230,7 @@ Page({
       pageNo: 1,
       gongyilist: []
     })
+    app.globalData.welfareRefresh = 1
     this.onShow()
     setTimeout(() => {
       wx.stopPullDownRefresh()
@@ -267,9 +270,10 @@ Page({
     })
   },
   // 跳转修改活动页面
-  updateActivity(e){
+  updateActivity(e) {
     var id = e.currentTarget.dataset.id
-    console.log('详情id',id)
+    console.log('详情id', id)
+    app.globalData.welfareRefresh = 1
     wx.navigateTo({
       url: '../submitWelfare/submitWelfare?id=' + id,
     })
@@ -284,11 +288,11 @@ Page({
     })
   },
   zaixianlianxi: function (e) {
-    var that=this
+    var that = this
     var activityId = e.currentTarget.dataset.item.id
     that.setData({
       activityId: activityId,
-      wid:e.currentTarget.dataset.item.wxId,
+      wid: e.currentTarget.dataset.item.wxId,
       isShowConfirm: true
     })
   },
@@ -299,6 +303,7 @@ Page({
       url: '../submitWelfare/submitWelfare',
     })
   },
+
   // 置顶
   goTop: function (e) {
     if (wx.pageScrollTo) {

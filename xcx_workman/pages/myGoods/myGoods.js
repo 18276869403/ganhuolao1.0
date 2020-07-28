@@ -53,6 +53,7 @@ Page({
     spid:'',
     spxx:'',
     pageNo:1,
+    pageSize:10,
     isLastPage:false,
     btnFlag:false,
     type:0,
@@ -69,8 +70,10 @@ Page({
     // })
     this.data.goodsLists=[]
     if(this.data.pageNo>1){
-      this.data.pageSize=Number(this.data.pageNo)*10
-      this.data.zstate=true
+      this.setData({
+        pageSize:Number(this.data.pageNo)*10,
+        zstate:true
+      })
     }
     wx.showShareMenu({
       withShareTicket: true
@@ -113,7 +116,7 @@ Page({
       var data={
         userId:app.globalData.wxid,
         pageNo:that.data.pageNo,
-        pageSize:10
+        pageSize:that.data.pageSize
       }
     }
   qingqiu.get("queryMyGoodPage", data, function(re) {

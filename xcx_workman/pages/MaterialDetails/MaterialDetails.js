@@ -37,11 +37,7 @@ Page({
         })
       }else if(options.id != undefined){
         this.getYneed(options.id)
-        this.setData({
-          xqxqlist: xqxqlist,
-          id:xqxqlist.id,
-          wxUserid: app.globalData.wxid
-        })
+        
       }else{
         wx.showToast({
           title: '该剩料已被删除',
@@ -80,7 +76,8 @@ Page({
         res.result.publishMan = utils.formatName(res.result.publishMan)
         that.setData({
           xqxqlist: res.result,
-          xid: res.result.wxUserId
+          xid: res.result.wxUserId,
+          wxUserid: app.globalData.wxid
         })
       } else {
         wx.showToast({

@@ -35,7 +35,9 @@ Page({
     tian: ['天', '月', '季', '年'],
     messageList: [],
     isLastPage: false,
-    pageNo: 1
+    pageNo: 1,
+    pageSize: 10,
+    zstate: false
   },
 
   // 下拉刷新
@@ -134,7 +136,7 @@ Page({
   liuyan: function (e) {
     var id = e.currentTarget.dataset.wxid
     var name = e.currentTarget.dataset.name
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../HM-chat/HM-chat?id=' + id + "&name=" + name,
     })
   },
@@ -146,13 +148,13 @@ Page({
     if (that.data.needsTypeid == 1) {
       data = {
         pageNo: that.data.pageNo,
-        pageSize: 10,
+        pageSize: that.data.pageSize,
         wxCaseId: app.globalData.wxid
       }
     } else {
       data = {
         pageNo: that.data.pageNo,
-        pageSize: 10,
+        pageSize: that.data.pageSize,
         wxCaseId2: app.globalData.wxid
       }
     }

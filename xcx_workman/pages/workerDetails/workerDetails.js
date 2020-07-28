@@ -328,7 +328,9 @@ Page({
         var obj = {
           wxUserId: that.data.workerDetail.id
         }
+        console.log(obj)
         qingqiu.get("getPublicUserById", obj, function (res) {
+          console.log(res)
           var objdata = {
             openId: res.result.openid,
             access_token: app.globalData.access_TokenOff,

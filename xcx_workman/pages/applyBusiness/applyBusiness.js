@@ -990,6 +990,26 @@ Page({
             duration: 3000
           })
           app.globalData.serverRefresh = 1
+          setTimeout(function () {
+            wx.login({
+              success: function (res) {
+                qingqiu.get("getKeyInfo", {
+                  code: res.code
+                }, function (re) {
+                  that.setData({
+                    btnFlag: false
+                  })
+                  console.log('添加', re)
+                  app.globalData.wxid = re.result.wxUser.id
+                  app.globalData.openid = re.result.openId
+                  app.globalData.wxState = re.result.wxUser.wxState
+                  wx.redirectTo({
+                    url: '../activityPublic/activityPublic',
+                  })
+                }, "POST")
+              }
+            })
+          }, 1000)
           if (that.data.needsTypeid != 1) {
             // 公众号消息推送
             qingqiu.get("getPublicUser", null, function (res) {
@@ -1041,26 +1061,7 @@ Page({
               }
             })
           }
-          setTimeout(function () {
-            wx.login({
-              success: function (res) {
-                qingqiu.get("getKeyInfo", {
-                  code: res.code
-                }, function (re) {
-                  that.setData({
-                    btnFlag: false
-                  })
-                  console.log('添加', re)
-                  app.globalData.wxid = re.result.wxUser.id
-                  app.globalData.openid = re.result.openId
-                  app.globalData.wxState = re.result.wxUser.wxState
-                  wx.redirectTo({
-                    url: '../activityPublic/activityPublic',
-                  })
-                }, "POST")
-              }
-            })
-          }, 1000)
+          
         } else {
           that.setData({
             btnFlag: false

@@ -352,6 +352,7 @@ Page({
             duration: 2000
           })
           var yneedid = re.result.id
+          console.log('剩料id',yneedid)
           // 公众号消息推送
           qingqiu.get("getPublicUser", null, function (res) {
             for (let obj of res.result) {
