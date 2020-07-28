@@ -14,7 +14,8 @@ Page({
     iconUrl:api.iconUrl,
     needsList:[],
     isLastPage:false,
-    pageNo:1
+    pageNo:1,
+    zstate:false
   },
 
   
@@ -38,17 +39,23 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.setData({
-      needsList:[]
-    })
-    // this.data.needsList=[] 
+    // this.setData({
+    //   needsList:[]
+    // })
+    if(this.data.pageNo>1){
+      this.data.pageSize=Number(this.data.pageNo)*10
+      this.data.zstate=true
+    }
+    this.data.needsList=[] 
     this.data.isLastPage=false
-    this.data.pageNo=1
+    // this.data.pageNo=1
     this.xqneedlist()
   },
   // 下拉刷新
   onPullDownRefresh:function () {
-    this.data.needsList=[]
+    this.setData({
+      needsList:[]
+    })
     this.data.isLastPage=false
     this.data.pageNo=1
     this.onLoad()
@@ -59,15 +66,25 @@ Page({
   // 需求列表
   xqneedlist() {
     var that = this
-    var data={
-      pageNo:that.data.pageNo,
-      pageSize:10,
-      wxUserId:app.globalData.wxid,
-      backup5:0
+    if(that.data.zstate==true){
+      var data={
+        pageNo:1,
+        pageSize:that.data.pageSize,
+        wxUserId:app.globalData.wxid,
+        backup5:0
+      }
+    }else{
+      var data={
+        pageNo:that.data.pageNo,
+        pageSize:10,
+        wxUserId:app.globalData.wxid,
+        backup5:0
+      }
     }
     qingqiu.get("zuixinxq", data, function(re) {
       console.log(re)
       if (re.success == true) {
+        that.data.zstate=false
         if (re.result != null) {
           if(re.result.records==''){
             that.data.isLastPage=true
