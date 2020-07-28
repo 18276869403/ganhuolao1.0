@@ -180,7 +180,12 @@ Page({
                 //   url: '../myMaterial/myMaterial',
                 // })
                 wx.navigateBack({
-                  delta: 1
+                  delta: 1,
+                  success: function(e) {
+                    var page = getCurrentPages().pop();
+                    if (page == undefined || page == null) return;
+                    page.onLoad();
+                  }
                 })
                },1000)
               } else {
