@@ -266,6 +266,14 @@ Page({
       }
     })
   },
+  // 跳转修改活动页面
+  updateActivity(e){
+    var id = e.currentTarget.dataset.id
+    console.log('详情id',id)
+    wx.navigateTo({
+      url: '../submitWelfare/submitWelfare?id=' + id,
+    })
+  },
   // 公益详情
   WelfareDetail: function (e) {
     var list = e.currentTarget.dataset.list

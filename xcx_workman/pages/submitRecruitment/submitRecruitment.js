@@ -12,7 +12,7 @@ Page({
    */
   data: {
     viewUrl: api.viewUrl,
-    iconUrl:api.iconUrl,
+    iconUrl: api.iconUrl,
     bindImg: [],
     // 发布参数
     needsname: '',
@@ -170,6 +170,42 @@ Page({
       withShareTicket: true
     })
     this.getcity()
+    if (options != undefined) {
+      if (options.id != undefined) {
+        this.setData({
+          id: options.id
+        })
+        this.getRecruitment(options.id)
+      }
+    }
+  },
+
+  // 获取招工信息
+  getRecruitment(id) {
+    console.log('招工id',id)
+    var that = this
+    var data = {
+      id: id
+    }
+    qingqiu.get("queryloclaById", data, function (res) {
+      console.log(res)
+      if(res.success == true){
+        that.setData({
+          needsname:res.result.hireTitle,
+          salary:res.result.backup3,
+          needscontent:res.result.hireContent,
+          linkman:res.result.publishMan,
+          phone:res.result.publishPhone,
+          workcityname:res.result.oneAreaName,
+          workareaname:res.result.twoAreaName,
+          picIurl:res.result.backup4,
+          picIurl1:res.result.backup4,
+          typeid:res.result.oneAreaId,
+          areaId:res.result.twoAreaId,
+          select:'success'
+        })
+      }
+    })
   },
 
   //获取输入的需求标题
@@ -356,50 +392,69 @@ Page({
       hireContent: that.data.needscontent,
       backup4: that.data.picIurl1
     }
-    qingqiu.get("localHireAdd", data, function (re) {
-      that.setData({
-        btnFlag: false
-      })
-      console.log('招工', re)
-      if (re.success == true) {
+    if(that.data.id != 0){
+      data.id = that.data.id
+      qingqiu.get("localHireEdit",data,function(res){
+        console.log('修改招工',res)
         wx.showToast({
-          title: '发布成功',
-          icon: 'success',
-          duration: 3000
+          title: res.message,
+          icon:'success',
         })
-        var localid = re.result.id
-        console.log(re.result)
-        console.log(localid)
-        // 公众号消息推送
-        qingqiu.get("getPublicUser", null, function (res) {
-          for (let obj of res.result) {
-            var objdata = {
-              openId: obj.openid,
-              access_token: app.globalData.access_TokenOff,
-              firstValue: "干活佬又上新啦，赶紧去看看！",
-              firstColor: '#173177',
-              keyword1Value: "有1条招工信息发布啦！",
-              keyword1Color: '#173177',
-              keyword2Value: utils.nowTime(),
-              keyword2Color: '#173177',
-              remarkValue: '请进入干活佬查看详情',
-              remarkColor: '#173177',
-              MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
-            }
-            qingqiu.get("SendWxMsg", objdata, function (re) {})
-          }
+        that.setData({
+          btnFlag: false
+        })
+        setTimeout(function(){
           wx.navigateBack({
             delta: 1
           })
+        },1000)
+      },'put')
+    }else{
+      qingqiu.get("localHireAdd", data, function (re) {
+        that.setData({
+          btnFlag: false
         })
-      } else {
-        wx.showToast({
-          title: re.message,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    }, 'post')
+        console.log('招工', re)
+        if (re.success == true) {
+          wx.showToast({
+            title: '发布成功',
+            icon: 'success',
+            duration: 3000
+          })
+          var localid = re.result.id
+          console.log(re.result)
+          console.log(localid)
+          // 公众号消息推送
+          qingqiu.get("getPublicUser", null, function (res) {
+            for (let obj of res.result) {
+              var objdata = {
+                openId: obj.openid,
+                access_token: app.globalData.access_TokenOff,
+                firstValue: "干活佬又上新啦，赶紧去看看！",
+                firstColor: '#173177',
+                keyword1Value: "有1条招工信息发布啦！",
+                keyword1Color: '#173177',
+                keyword2Value: utils.nowTime(),
+                keyword2Color: '#173177',
+                remarkValue: '请进入干活佬查看详情',
+                remarkColor: '#173177',
+                MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
+              }
+              qingqiu.get("SendWxMsg", objdata, function (re) {})
+            }
+            wx.navigateBack({
+              delta: 1
+            })
+          })
+        } else {
+          wx.showToast({
+            title: re.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }, 'post')
+    }
   },
   // 图片上传（对接完成）
   upimg: function (e) {
@@ -484,10 +539,12 @@ Page({
   },
 
   // 删除图片
-  shanchu:function(e){
+  shanchu: function (e) {
     var src = e.currentTarget.dataset.tplj
-    if(this.data.picIurl == src){
-      this.setData({picIurl:''})
+    if (this.data.picIurl == src) {
+      this.setData({
+        picIurl: ''
+      })
     }
   },
   //改变选框状态(免责协议)
@@ -497,7 +554,6 @@ Page({
     var select = e.currentTarget.dataset.select
     if (select == "circle") {
       var stype = "success"
-
     } else {
       var stype = "circle"
     }
@@ -635,7 +691,7 @@ Page({
         showModalStatus1: false
       })
     }.bind(this), 200)
-  }, 
+  },
   // 预览图片
   imgview: function (e) {
     var src = e.currentTarget.dataset.src

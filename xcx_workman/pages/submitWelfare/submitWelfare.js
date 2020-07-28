@@ -14,6 +14,7 @@ Page({
     iconUrl: api.iconUrl,
     startdate: '选择活动时间',
     enddate: '选择截止时间',
+    id:0,
     select: 'circle',
     endDate: '',
     newDate: '',
@@ -122,6 +123,40 @@ Page({
       newDate: utils.newDate(),
       endDate: utils.newDate()
     })
+    if(options != undefined){
+      if(options.id != undefined){
+        this.getActivity(options.id)
+      }
+    }
+  },
+  // 获取活动
+  getActivity(id){
+    var that = this
+    var data = {
+      id:id
+    }
+    qingqiu.get("getActivityById",data,function(res){
+      console.log('获取活动',res)
+      if(res.success == true){
+        var piclist = []
+        if(res.result.pic.indexOf(',') != -1){
+          piclist = res.result.pic.split(',')
+        }else{
+          piclist.push(res.result.pic)
+        }
+        that.setData({
+          id:res.result.id,
+          activityname:res.result.title,
+          activityCompany:res.result.company,
+          activityrenshu:res.result.activityNum,
+          activitycontent:res.result.content,
+          startdate:res.result.activityTime.split(' ')[0],
+          enddate:res.result.endTime.split(' ')[0],
+          piclist:piclist,
+          select:'success'
+        })
+      }
+    })
   },
   // 发布活动
   fabugongyi() {
@@ -215,16 +250,8 @@ Page({
       })
       return
     }
-    // if(that.data.picIurl1==''){
-    //   wx.showToast({
-    //     title: '请上传图片',
-    //     icon: 'none',
-    //     duration: 3000
-    //   })
-    //   return
-    // }
-    if (that.data.picIurl1 != '') {
-      var pic = ''
+    var pic = ''
+    if (that.data.piclist != '') {
       for (let obj of that.data.piclist) {
         pic += obj + ','
       }
@@ -237,31 +264,56 @@ Page({
       content: that.data.activitycontent,
       activityTime: that.data.startdate + " 00:00:00",
       endTime: that.data.enddate + " 00:00:00",
-      pic: pic,
+      pic: pic.substring(0,pic.length-1),
     }
-    console.log(data)
-    qingqiu.get("addActivity", data, function (re) {
-      console.log(re)
-      that.setData({
-        btnFlag: false
-      })
-      if (re.success == true) {
-        wx.showToast({
-          title: '发布成功',
-          icon: 'success',
-          duration: 3000
+    if(that.data.id != 0){
+      data.id = that.data.id
+      qingqiu.get("editActivity",data,function(res){
+        that.setData({
+          btnFlag: false
         })
-        wx.navigateBack({
-          delta: 1
+        if(res.success == true){
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 1
+            })
+          },1000)
+        }else{
+          wx.showToast({
+            title: res.message,
+            icon:'none'
+          })
+        }
+      },'put')
+    }else{
+      qingqiu.get("addActivity", data, function (re) {
+        that.setData({
+          btnFlag: false
         })
-      } else {
-        wx.showToast({
-          title: re.message,
-          icon: 'none',
-          duration: 2000
-        })
-      }
-    }, 'post')
+        if (re.success == true) {
+          wx.showToast({
+            title: '发布成功',
+            icon: 'success',
+            duration: 3000
+          })
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 1
+            })
+          },1000)
+        } else {
+          wx.showToast({
+            title: re.message,
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }, 'post')
+    }
   },
   //获取活动名称
   activitynameinput: function (e) {
@@ -470,15 +522,12 @@ Page({
                     })
                     var r = res.data
                     var jj = JSON.parse(r);
-                    var sj = that.data.viewUrl + jj.message
                     console.log(res)
                     if(that.data.piclist.length<9){
                       that.data.piclist.push(jj.message)
                     }
                     // that.data.piclist.push(jj.message)
                     that.setData({
-                      picIurl: sj,
-                      picIurl1: jj.message,
                       piclist: that.data.piclist
                     })
                   }
