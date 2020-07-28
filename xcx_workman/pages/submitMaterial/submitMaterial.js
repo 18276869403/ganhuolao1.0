@@ -309,7 +309,12 @@ Page({
             //   url: '../Material/Material',
             // })
             wx.navigateBack({
-              delta: 2
+              delta: 2,
+              success: function(e) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
             })
           }, 1000)
         } else {

@@ -14,7 +14,8 @@ Page({
     iconUrl: api.iconUrl,
     pageNo: 1,
     isLastPage: false,
-    needsList: []
+    needsList: [],
+    zstate:false
   },
 
   // 下拉刷新
@@ -24,7 +25,7 @@ Page({
       isLastPage: false,
       needsList: []
     })
-    this.onShow()
+    this.onLoad()
     setTimeout(() => {
       wx.stopPullDownRefresh()
     }, 1000);
@@ -45,31 +46,30 @@ Page({
     })
     this.xqneedlist()
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  // onLoad: function () {
-  //   this.setData({
-  //     needsList: []
-  //   })
-  //   wx.showShareMenu({
-  //     withShareTicket: true
-  //   })
-  //   this.xqneedlist()
-  // },
+  
   // 需求列表
   xqneedlist() {
     var that = this
-    var data = {
-      pageNo: that.data.pageNo,
-      pageSize: 10,
-      wxUserId: app.globalData.wxid,
-      backup5: 1
+    if(this.data.zstate==true){
+      var data = {
+        pageNo: 1,
+        pageSize: that.data.pageSize,
+        wxUserId: app.globalData.wxid,
+        backup5: 1
+      }
+    }else{
+      var data = {
+        pageNo: that.data.pageNo,
+        pageSize: 10,
+        wxUserId: app.globalData.wxid,
+        backup5: 1
+      }
     }
     console.log(data)
     qingqiu.get("zuixinxq", data, function (re) {
       console.log(re)
       if (re.success == true) {
+        that.data.zstate=false
         if (re.result != null) {
           if (re.result.records.length > 0) {
             var needsList = that.data.needsList
@@ -127,49 +127,22 @@ Page({
       }
     }, 'put')
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
-  },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    this.setData({
-      pageNo: 1,
-      isLastPage: false,
-      needsList: []
-    })
+  onLoad: function () {
+    this.data.isLastPage=false
+    this.data.needsList=[]
+    if(this.data.pageNo>1){
+      this.data.pageSize=Number(this.data.pageNo)*10
+      this.data.zstate=true
+    }
     wx.showShareMenu({
       withShareTicket: true
     })
     this.xqneedlist()
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
 })
