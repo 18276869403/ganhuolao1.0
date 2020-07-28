@@ -61,11 +61,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.setData({
-      isLastPage:false,
-      pageNo:1,
-      goodsLists:[]
-    })
+    // this.setData({
+    //   isLastPage:false,
+    //   pageNo:1,
+    //   goodsLists:[]
+    // })
+    this.data.isLastPage=false
+    this.data.pageNo=1
+    this.data.goodsLists=[]
     wx.showShareMenu({
       withShareTicket: true
     })

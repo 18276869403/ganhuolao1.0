@@ -316,7 +316,12 @@ Page({
           })
           setTimeout(function () {
             wx.navigateBack({
-              delta: 1
+              delta: 2,
+              success: function(e) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
             })
           }, 1000)
         } else {

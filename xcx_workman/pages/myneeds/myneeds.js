@@ -38,6 +38,9 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+    this.data.needsList=[]
+    this.data.isLastPage=false
+    this.data.pageNo=1
     this.xqneedlist()
   },
   // 下拉刷新
@@ -68,7 +71,7 @@ Page({
             return
           }
           that.needsList = re.result.records
-          for(var i= 0 ; i < that.needsList.length; i++){
+          for(var i= 0 ; i < re.result.records.length; i++){
             re.result.records[i].publishTime = re.result.records[i].publishTime.split(' ')[0]
             if(re.result.records[i].backup1!= null&&re.result.records[i].backup1.length>0){
               re.result.records[i].backup1 = re.result.records[i].backup1.split(',')
