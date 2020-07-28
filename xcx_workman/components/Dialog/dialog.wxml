@@ -7,7 +7,7 @@
         <view class="dialog-content">
           <!-- <view>需要授权获取微信头像和昵称才能有更好的体验哦~</view> -->
           <view class="dialog-content-img">
-            <image src="{{viewUrl}}static/image/shouquan.png" class="dialog-img"></image>  
+            <image src="{{iconUrl}}static/image/shouquan.png" class="dialog-img"></image>  
           </view>
           
           <view class="dialog-content-text"> 
