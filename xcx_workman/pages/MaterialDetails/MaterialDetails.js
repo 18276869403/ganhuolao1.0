@@ -36,7 +36,7 @@ Page({
           wxUserid: app.globalData.wxid
         })
       }else if(options.id != undefined){
-        this.getYneed(152)
+        this.getYneed(options.id)
         this.setData({
           xqxqlist: xqxqlist,
           id:xqxqlist.id,
@@ -49,17 +49,18 @@ Page({
         })
         setTimeout(function(){
           wx.switchTab({
-            url: 'url',
+            url: '../index/index',
           })
         },1000)
       }
     }else{
       wx.showToast({
         title: '该剩料已被删除',
+        icon:'none'
       })
       setTimeout(function(){
         wx.switchTab({
-          url: 'url',
+          url: '../index/index',
         })
       },1000)
     }
@@ -71,7 +72,6 @@ Page({
     qingqiu.get("yneedBy", {
       id: id
     }, function (res) {
-      console.log('需求byid', res)
       if (res.success == true) {
         res.result.publishTime = res.result.publishTime.split(' ')[0]
         if (res.result.backup1 != null && res.result.backup1.length > 0) {

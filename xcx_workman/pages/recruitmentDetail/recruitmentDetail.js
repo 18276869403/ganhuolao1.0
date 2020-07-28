@@ -167,7 +167,7 @@ Page({
   // 需求修改
   xiugaigunali() {
     wx.navigateTo({
-      url: '../submitNeeds/submitNeeds?type=1&id=' + this.data.xqxqlist.id,
+      url: '../submitRecruitment/submitRecruitment?type=1&id=' + this.data.zhaogong.id,
     })
   },
   // 需求报名

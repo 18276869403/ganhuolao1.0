@@ -37,7 +37,6 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    this.getBusiness(1797)
     if (options != undefined) {
       if (options.obj != undefined) {
         var obj = JSON.parse(options.obj)
