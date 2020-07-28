@@ -40,6 +40,7 @@
 						<view class="content-text1 text-jiequ" style="width:68%;">
 							<text>{{item.createTime}}</text>
 						</view>
+						<view class="complete-button" style="width:135rpx;background: #38bdf1;" catchtap="updateActivity" data-id="{{item.id}}">我要修改</view>
 					</view>
 				</view>
 			</view>

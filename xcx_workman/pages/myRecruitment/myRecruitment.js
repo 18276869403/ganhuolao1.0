@@ -13,16 +13,18 @@ Page({
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     workList: [],
-    isLastPage:false,
-    pageNo: 1
+    isLastPage: false,
+    pageNo: 1,
+    zstate: false,
+    pageSize:10
   },
 
   // 下拉刷新
   onPullDownRefresh: function () {
     this.setData({
-      pageNo:1,
-      isLastPage:false,
-      workList:[]
+      pageNo: 1,
+      isLastPage: false,
+      workList: []
     })
     this.onShow()
     setTimeout(() => {
@@ -44,27 +46,22 @@ Page({
     })
     this.FindWorklist()
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  // onLoad: function () {
-  //   this.setData({
-  //     pageNo:1,
-  //     isLastPage:false,
-  //     workList:[]
-  //   })
-  //   wx.showShareMenu({
-  //     withShareTicket: true
-  //   })
-  //   this.FindWorklist()
-  // },
+
   // 获取招工信息列表
   FindWorklist() {
     var that = this
-    var data = {
-      pageNo: that.data.pageNo,
-      pageSize: 10,
-      wxUserId:app.globalData.wxid
+    if(this.data.zstate == true){
+      var data = {
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize,
+        wxUserId: app.globalData.wxid
+      }
+    }else{
+      var data = {
+        pageNo: that.data.pageNo,
+        pageSize: 10,
+        wxUserId: app.globalData.wxid
+      }
     }
     qingqiu.get("list", data, function (re) {
       console.log('请求数据', re)
@@ -115,16 +112,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-      this.setData({
-        pageNo:1,
-        isLastPage:false,
-        workList:[]
-      })
-      wx.showShareMenu({
-        withShareTicket: true
-      })
-      this.FindWorklist()
+    this.setData({
+      pageNo: 1,
+      isLastPage: false,
+      workList: []
+    })
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+    this.FindWorklist()
   },
-
-  
+  onLoad: function () {
+    if(this.data.pageNo > 0){
+      this.setData({
+        pageSize:Number(this.data.pageNo)*10,
+        zstate:true
+      })
+    }
+  }
 })

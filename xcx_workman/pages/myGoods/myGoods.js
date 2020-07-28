@@ -66,13 +66,14 @@ Page({
     // this.setData({
     //   isLastPage:false,
     //   pageNo:1,
-    //   goodsLists:[]
+    //   
     // })
     this.data.goodsLists=[]
     if(this.data.pageNo>1){
       this.setData({
         pageSize:Number(this.data.pageNo)*10,
-        zstate:true
+        zstate:true,
+        goodsLists:[]
       })
     }
     wx.showShareMenu({

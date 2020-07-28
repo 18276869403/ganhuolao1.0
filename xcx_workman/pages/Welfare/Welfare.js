@@ -217,6 +217,7 @@ Page({
     this.getTokenValue()
     if (app.globalData.welfareRefresh != 0) {
       this.setData({
+        pageNo: 1,
         gongyilist: [],
         wxUserId: app.globalData.wxid
       })
@@ -226,10 +227,6 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh: function () {
-    this.setData({
-      pageNo: 1,
-      gongyilist: []
-    })
     app.globalData.welfareRefresh = 1
     this.onShow()
     setTimeout(() => {

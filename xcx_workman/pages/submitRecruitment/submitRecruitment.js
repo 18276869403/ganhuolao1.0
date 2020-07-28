@@ -161,6 +161,9 @@ Page({
       }
     })
   },
+  onShow:function(){
+    this.onLoad()
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -404,8 +407,8 @@ Page({
           btnFlag: false
         })
         setTimeout(function(){
-          wx.navigateBack({
-            delta: 1
+          wx.redirectTo({
+            url: '../recruitmentDetail/recruitmentDetail?id='+that.data.id,
           })
         },1000)
       },'put')

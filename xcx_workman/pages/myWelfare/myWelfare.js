@@ -24,6 +24,8 @@ Page({
     gongyilist: [],
     isLastPage: false,
     pageNo: 1,
+    pageSize: 10,
+    zstate:false
   },
 
   // 下拉刷新
@@ -57,6 +59,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onShow: function (options) {
+    if(this.data.pageNo > 1){
+      this.setData({
+        pageSize:Number(this.data.pageNo)*10,
+        zstate:true,
+        gongyilist: []
+      })
+    }
     this.getActivity()
   },
   // 切换类型
@@ -74,10 +83,18 @@ Page({
   // 获取我发布的公益活动
   getActivity: function () {
     var that = this
-    var data = {
-      wxUserId: app.globalData.wxid,
-      pageNo: that.data.pageNo,
-      pageSize: 10
+    if(that.data.zstate == true){
+      var data = {
+        wxUserId: app.globalData.wxid,
+        pageNo: that.data.pageNo,
+        pageSize: that.data.pageSize
+      }
+    }else{
+      var data = {
+        wxUserId: app.globalData.wxid,
+        pageNo: that.data.pageNo,
+        pageSize: 10
+      }
     }
     if (that.data.GyTypeid == 1) {
       qingqiu.get("myActivityList", data, function (res) {
@@ -89,7 +106,8 @@ Page({
               gongyilist.push(obj)
             }
             that.setData({
-              gongyilist: gongyilist
+              gongyilist: gongyilist,
+              zstate:false
             })
           } else {
             that.setData({
@@ -129,4 +147,11 @@ Page({
       url: '../WelfareDetail/WelfareDetail?obj=' + list1,
     })
   },
+  // 修改公益
+  updateActivity:function(e){
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../submitWelfare/submitWelfare?id=' + id,
+    })
+  }
 })

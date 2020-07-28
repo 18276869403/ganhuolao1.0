@@ -26,11 +26,6 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    // var zhaogong = JSON.parse(options.obj)
-    // this.setData({
-    //   zhaogong: zhaogong,
-    //   wxUserid: app.globalData.wxid
-    // })
     if (options != undefined) {
       if (options.obj != undefined) {
         var zhaogong = JSON.parse(options.obj)
@@ -166,7 +161,7 @@ Page({
   // },
   // 需求修改
   xiugaigunali() {
-    wx.navigateTo({
+    wx.redirectTo({
       url: '../submitRecruitment/submitRecruitment?type=1&id=' + this.data.zhaogong.id,
     })
   },
