@@ -88,6 +88,10 @@ const wxUserGoodPage = baseUrl + "pc/hall/wxUserGoodPage"
 const getActivityById = baseUrl + "pc/hall/getActivityById"
 // 获取工人/商家详情byid
 const getWxUserById = baseUrl + "pc/hall/getWxUserById"
+// 修改招工
+const localHireEdit = baseUrl + "work/loclahire/localHireEdit"
+// 修改公益
+const editActivity = baseUrl + "pc/hall/editActivity"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -131,5 +135,7 @@ module.exports = {
   wxIndexUserPage:wxIndexUserPage,
   wxUserGoodPage:wxUserGoodPage,
   getActivityById:getActivityById,
-  getWxUserById:getWxUserById
+  getWxUserById:getWxUserById,
+  localHireEdit:localHireEdit,
+  editActivity:editActivity
 };
