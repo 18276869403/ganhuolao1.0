@@ -175,7 +175,6 @@ Page({
       wx.stopPullDownRefresh()
     }, 1000);
   },
-
   // 授权
   chushishouquan() {
     wx.getSetting({
