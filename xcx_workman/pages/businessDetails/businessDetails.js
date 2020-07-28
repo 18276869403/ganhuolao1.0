@@ -13,22 +13,7 @@ Page({
     score: 3,
     CheckItem: 0,
     goodsList: [],
-    showList: [{
-        id: 1,
-        pinglun: '12',
-        liulan: '12',
-      },
-      {
-        id: 2,
-        pinglun: '12',
-        liulan: '12',
-      },
-      {
-        id: 3,
-        pinglun: '12',
-        liulan: '12',
-      },
-    ],
+    showList: [],
     goodsdata1: [{
         colName: "商品",
         id: 0
@@ -38,22 +23,7 @@ Page({
         id: 1
       }
     ],
-    goodslists: [{
-        id: 1,
-        name: '室内F-10木门（含五室内F-10木门（含五',
-        price: '12',
-      },
-      {
-        id: 2,
-        name: '室内F-10木门（含五室内F-10木门（含五',
-        price: '12',
-      },
-      {
-        id: 3,
-        name: '室内F-10木门（含五室内F-10木门（含五',
-        price: '12',
-      },
-    ]
+    goodslists: []
   },
   // 图片预览
   tupian: function (e) {
@@ -67,6 +37,7 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+    this.getBusiness(1797)
     if (options != undefined) {
       if (options.obj != undefined) {
         var obj = JSON.parse(options.obj)
@@ -79,7 +50,7 @@ Page({
         })
         this.getGoodsList(obj.id)
         this.getGoodsdata(obj.id)
-      } else if (options.id) {
+      } else if(options.id) {
         this.getBusiness(options.id)
       } else {
         wx.showToast({
@@ -146,6 +117,7 @@ Page({
         that.setData({
           goodsList: res.result
         })
+        console.log(that.data.goodsList)
         that.getGoodsList(res.result.id)
         that.getGoodsdata(res.result.id)
       }

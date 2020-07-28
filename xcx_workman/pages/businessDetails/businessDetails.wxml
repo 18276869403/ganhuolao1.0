@@ -18,7 +18,8 @@
           <view>
             <image src="{{iconUrl}}static/image/shiming.png" class="shiming-img"></image>
           </view>
-          <view>实名认证</view>
+          <view wx:if="{{goodsList.backup4 == '0'}}">未实名认证</view>
+          <view wx:if="{{goodsList.backup4 == '1'}}">实名认证</view>
         </view>
         <view class="content-online" bindtap="liuyan" data-wxid="{{goodsList.id}}" data-name="{{goodsList.shopName}}" data-wxNc="{{goodsList.wxNc}}">在线联系</view>
         <view class="content-phone" bindtap="phonecall" data-phone="{{goodsList.phone}}">电话联系</view>

@@ -825,9 +825,10 @@ Page({
       return
     }
     if (that.data.needsTypeid == 1) {
-      if (that.data.workerphone.length != 11) {
+      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码|" + that.data.picIurl1 + ",上传工作照")
+      if (s != 0) {
         wx.showToast({
-          title: '输入11位手机号',
+          title: s,
           icon: 'none',
           duration: 2000
         })
@@ -836,10 +837,9 @@ Page({
         })
         return
       }
-      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择工种分类|" + that.data.workername + ",输入姓名|" + that.data.date + ",选择出生年月日|" + that.data.worktime + ",输入从业年限|" + that.data.areaId + ",选择区域|" + that.data.workerphone + ",输入手机号码|" + that.data.picIurl1 + ",上传工作照")
-      if (s != 0) {
+      if (that.data.workerphone.length != 11) {
         wx.showToast({
-          title: s,
+          title: '输入11位手机号',
           icon: 'none',
           duration: 2000
         })
@@ -867,9 +867,16 @@ Page({
         wxState: 1
       }
     } else {
-      if (that.data.phone.length != 11) {
+      if (that.data.fenleitype1.yjid == '' && that.data.fenleitype2.yjid != '') {
+        that.data.fenleitype1.yjid = that.data.fenleitype2.yjid
+        that.data.fenleitype2.yjid = ''
+        that.data.fenleitype1.erjiid = that.data.fenleitype2.erjiid
+        that.data.fenleitype2.erjiid = ''
+      }
+      var s = qingqiu.yanzheng(that.data.fenleitype1.yjid + ",选择商家分类|" + that.data.needsname + ",输入商铺名称|" + that.data.linkman + ",输入联系人|" + that.data.phone + ",输入联系电话|" + that.data.areaId + ",选择区域|" + that.data.workeraddress + ",输入商铺地址|" + that.data.picIurl1 + ",上传门头照")
+      if (s != 0) {
         wx.showToast({
-          title: '输入11位手机号',
+          title: s,
           icon: 'none',
           duration: 2000
         })
@@ -878,16 +885,9 @@ Page({
         })
         return
       }
-      if (that.data.fenleitype1.yjid == '' && that.data.fenleitype2.yjid != '') {
-        that.data.fenleitype1.yjid = that.data.fenleitype2.yjid
-        that.data.fenleitype2.yjid = ''
-        that.data.fenleitype1.erjiid = that.data.fenleitype2.erjiid
-        that.data.fenleitype2.erjiid = ''
-      }
-      var s = qingqiu.yanzheng(that.data.areaId + ",选择区域|" + that.data.fenleitype1.yjid + ",选择商家分类|" + that.data.needsname + ",输入商铺名称|" + that.data.linkman + "输入联系人|" + that.data.phone + ",输入联系电话|" + that.data.picIurl1 + ",上传门头照")
-      if (s != 0) {
+      if (that.data.phone.length != 11) {
         wx.showToast({
-          title: s,
+          title: '输入11位手机号',
           icon: 'none',
           duration: 2000
         })
@@ -919,7 +919,6 @@ Page({
         wxState: 0,
       }
     }
-    console.log(data)
     if (that.data.type == 1 || that.data.type == 0) {
       qingqiu.get("editWxUser", data, function (re) {
         if (re.message == "1") {
@@ -973,7 +972,8 @@ Page({
       }, 'put')
     } else {
       qingqiu.get("wxUserAdd", data, function (re) {
-        if (re.result == "1") {
+        console.log(re)
+        if (re.message == "1") {
           wx.showToast({
             title: '入驻信息商铺/工人姓名重复，请修改重试',
             icon: "none"
@@ -983,14 +983,12 @@ Page({
           })
           return
         }
-        console.log('入驻', re)
         if (re.success == true) {
           wx.showToast({
             title: '入驻成功',
             icon: 'success',
             duration: 3000
           })
-          var id = re.result.id
           app.globalData.serverRefresh = 1
           if (that.data.needsTypeid != 1) {
             // 公众号消息推送
@@ -1007,7 +1005,7 @@ Page({
                   keyword2Color: '#173177',
                   remarkValue: '请进入干活佬查看详情',
                   remarkColor: '#173177',
-                  MiniUrl: 'pages/businessDetails/businessDetails?id=' + id
+                  MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)
@@ -1032,7 +1030,7 @@ Page({
                   keyword2Color: '#173177',
                   remarkValue: '请进入干活佬查看详情',
                   remarkColor: '#173177',
-                  MiniUrl: 'pages/workerDetails/workerDetails?id=' + id
+                  MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
                 }
                 qingqiu.get("SendWxMsg", objdata, function (re) {
                   console.log(re)

@@ -57,7 +57,7 @@
 			</view>
 		</view>
 		<view class="content-item hengxiang">
-			<view class="content-title">店铺地址</view>
+			<view class="content-title">店铺地址<text style="color:red;">*</text></view>
 			<input type="text" placeholder="输入店铺地址" class="shurukuang" style="color:#999999;" placeholder-class="placeholder" value='{{workeraddress}}' name="workaddress" bindinput='workeraddressinput' bindblur="workeraddressblur"></input>
 		</view>
 		<view class="content-item-textarea">

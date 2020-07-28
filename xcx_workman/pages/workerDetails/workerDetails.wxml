@@ -20,11 +20,12 @@
               </view>
               <view>{{workerDetail.shopName}}</view>
             </view>
-            <view class="right-content-item hengxiang">
+            <view class="right-content-item1 hengxiang">
               <view class="">
                 <image src="{{iconUrl}}static/image/shiming.png" class="dengji-img"></image>
               </view>
-              <view>实名认证</view>
+              <view wx:if="{{workerDetail.backup4 == 0}}">未实名认证</view>
+              <view wx:if="{{workerDetail.backup4 == 1}}">实名认证</view>
             </view>
             <view class="right-content-item hengxiang">
               <view class="">
