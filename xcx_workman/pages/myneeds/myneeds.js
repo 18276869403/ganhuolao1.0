@@ -41,7 +41,7 @@ Page({
     this.setData({
       needsList:[]
     })
-    // this.data.needsList=[]
+    // this.data.needsList=[] 
     this.data.isLastPage=false
     this.data.pageNo=1
     this.xqneedlist()

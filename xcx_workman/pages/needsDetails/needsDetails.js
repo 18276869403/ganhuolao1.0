@@ -311,7 +311,7 @@ Page({
                   }
                 })
                 // wx.redirectTo({
-                //   url: '../myneeds/myneeds',
+                //   url: '../myneeds/myneeds', 
                 // })
               }, 1000)
             } else {

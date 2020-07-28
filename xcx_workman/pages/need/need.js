@@ -321,7 +321,7 @@ Page({
       scrollTop: 0,
       duration: 300
     })
-  },
+  }, 
   // 需求列表
   xqneedlist() {
     var that = this

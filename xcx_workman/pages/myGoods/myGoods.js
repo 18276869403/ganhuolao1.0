@@ -124,7 +124,7 @@ Page({
       that.data.isLastPage=true
     }
     if (re.result != null) {
-      // that.goodsLists = re.result.records
+      // that.goodsLists =re.result.records
       for(var i= 0 ; i < re.result.records.length; i++){
         if(re.result.records[i].goodPic1 !=null && re.result.records[i].goodPic1.length>0){
           re.result.records[i].goodPic1 = re.result.records[i].goodPic1.split(',')
