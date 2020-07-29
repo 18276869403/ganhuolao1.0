@@ -69,6 +69,13 @@ Page({
       id: id
     }, function (res) {
       if (res.success == true) {
+        if(res.result == null){
+          wx.showToast({
+            title: '剩料已被删除',
+            icon: 'none'
+          })
+          return
+        }
         res.result.publishTime = res.result.publishTime.split(' ')[0]
         if (res.result.backup1 != null && res.result.backup1.length > 0) {
           res.result.backup1 = res.result.backup1.split(',')
@@ -81,7 +88,7 @@ Page({
         })
       } else {
         wx.showToast({
-          title: '需求已被删除',
+          title: '剩料已被删除',
           icon: 'none'
         })
         return

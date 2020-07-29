@@ -1012,56 +1012,45 @@ Page({
           }, 1000)
           if (that.data.needsTypeid != 1) {
             // 公众号消息推送
-            qingqiu.get("getPublicUser", null, function (res) {
-              for (let obj of res.result) {
-                var objdata = {
-                  openId: obj.openid,
-                  access_token: app.globalData.access_TokenOff,
-                  firstValue: "干活佬又上新啦，赶紧去看看！",
-                  firstColor: '#173177',
-                  keyword1Value: "有1位商家入驻啦！",
-                  keyword1Color: '#173177',
-                  keyword2Value: utils.nowTime(),
-                  keyword2Color: '#173177',
-                  remarkValue: '请进入干活佬查看详情',
-                  remarkColor: '#173177',
-                  MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
-                }
-                qingqiu.get("SendWxMsg", objdata, function (re) {
-                  console.log(re)
-                  that.setData({
-                    btnFlag: false
-                  })
-                })
-              }
+            var objdata = {
+              access_token: app.globalData.access_TokenOff,
+              firstValue: "干活佬又上新啦，赶紧去看看！",
+              firstColor: '#173177',
+              keyword1Value: "有1位商家入驻啦！",
+              keyword1Color: '#173177',
+              keyword2Value: utils.nowTime(),
+              keyword2Color: '#173177',
+              remarkValue: '请进入干活佬查看详情',
+              remarkColor: '#173177',
+              MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
+            }
+            qingqiu.get("SendWxMsgIM", objdata, function (re) {
+              console.log(re)
+              that.setData({
+                btnFlag: false
+              })
             })
           } else {
             // 公众号消息推送
-            qingqiu.get("getPublicUser", null, function (res) {
-              for (let obj of res.result) {
-                var objdata = {
-                  openId: obj.openid,
-                  access_token: app.globalData.access_TokenOff,
-                  firstValue: "干活佬又上新啦，赶紧去看看！",
-                  firstColor: '#173177',
-                  keyword1Value: "有1位工人入驻啦！",
-                  keyword1Color: '#173177',
-                  keyword2Value: utils.nowTime(),
-                  keyword2Color: '#173177',
-                  remarkValue: '请进入干活佬查看详情',
-                  remarkColor: '#173177',
-                  MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
-                }
-                qingqiu.get("SendWxMsg", objdata, function (re) {
-                  console.log(re)
-                  that.setData({
-                    btnFlag: false
-                  })
-                })
-              }
+            var objdata = {
+              access_token: app.globalData.access_TokenOff,
+              firstValue: "干活佬又上新啦，赶紧去看看！",
+              firstColor: '#173177',
+              keyword1Value: "有1位工人入驻啦！",
+              keyword1Color: '#173177',
+              keyword2Value: utils.nowTime(),
+              keyword2Color: '#173177',
+              remarkValue: '请进入干活佬查看详情',
+              remarkColor: '#173177',
+              MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
+            }
+            qingqiu.get("SendWxMsgIM", objdata, function (re) {
+              console.log(re)
+              that.setData({
+                btnFlag: false
+              })
             })
           }
-          
         } else {
           that.setData({
             btnFlag: false

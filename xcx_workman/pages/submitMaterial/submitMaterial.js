@@ -310,7 +310,7 @@ Page({
             // })
             wx.navigateBack({
               delta: 2,
-              success: function(e) {
+              success: function (e) {
                 var page = getCurrentPages().pop();
                 if (page == undefined || page == null) return;
                 page.onLoad();
@@ -357,26 +357,21 @@ Page({
             duration: 2000
           })
           var yneedid = re.result.id
-          console.log('剩料id',yneedid)
+          console.log('剩料id', yneedid)
           // 公众号消息推送
-          qingqiu.get("getPublicUser", null, function (res) {
-            for (let obj of res.result) {
-              var objdata = {
-                openId: obj.openid,
-                access_token: app.globalData.access_TokenOff,
-                firstValue: "干活佬又上新啦，赶紧去看看！",
-                firstColor: '#173177',
-                keyword1Value: "有1条剩料发布啦！", 
-                keyword1Color: '#173177',
-                keyword2Value: util.nowTime(),
-                keyword2Color: '#173177',
-                remarkValue: '请进入干活佬查看详情',
-                remarkColor: '#173177',
-                MiniUrl: 'pages/MaterialDetails/MaterialDetails?id=' + yneedid
-              }
-              qingqiu.get("SendWxMsg", objdata, function (re) {})
-            }
-          })
+          var objdata = {
+            access_token: app.globalData.access_TokenOff,
+            firstValue: "干活佬又上新啦，赶紧去看看！",
+            firstColor: '#173177',
+            keyword1Value: "有1条剩料发布啦！",
+            keyword1Color: '#173177',
+            keyword2Value: util.nowTime(),
+            keyword2Color: '#173177',
+            remarkValue: '请进入干活佬查看详情',
+            remarkColor: '#173177',
+            MiniUrl: 'pages/MaterialDetails/MaterialDetails?id=' + yneedid
+          }
+          qingqiu.get("SendWxMsgIM", objdata, function (re) {})
           setTimeout(function () {
             app.globalData.materialRefresh = 1
             wx.navigateBack({

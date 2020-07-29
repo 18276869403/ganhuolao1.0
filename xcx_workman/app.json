@@ -1,12 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/submitRecruitment/submitRecruitment",
+    "pages/addEditGoods/addEditGoods",
+    "pages/MaterialDetails/MaterialDetails",
     "pages/WelfareDetail/WelfareDetail",
     "pages/submitShow/submitShow",
     "pages/recruitmentDetail/recruitmentDetail",
     "pages/recruitment/recruitment",
-    "pages/submitRecruitment/submitRecruitment",
-    "pages/MaterialDetails/MaterialDetails",
     "pages/applyBusiness/applyBusiness",
     "pages/submitMaterial/submitMaterial",
     "pages/jsjg/jsjg",
@@ -18,7 +19,6 @@
     "pages/goodsList/goodsList",
     "pages/myEmploy/myEmploy",
     "pages/myMessage/myMessage",
-    "pages/addEditGoods/addEditGoods",
     "pages/myRecommend/myRecommend",
     "pages/activity/activity",
     "pages/activityPublic/activityPublic",

@@ -49,7 +49,8 @@
           <view class="basicImg">
             <image src="{{iconUrl}}static/image/xingming.png" class="basic-img"></image>
           </view>
-          <view class="basic-text">{{goodsList.wxNc}}</view>
+          <view class="basic-text" wx:if="{{goodsList.shopLinkman==null||goodsList.shopLinkman==''}}">{{goodsList.wxNc}}</view>
+          <view class="basic-text" wx:if="{{goodsList.shopLinkman!=null||goodsList.shopLinkman==''}}">{{goodsList.shopLinkman}}</view>
         </view>
         <view class="basic-list-item hengxiang">
           <view class="basicImg">

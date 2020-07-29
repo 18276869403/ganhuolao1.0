@@ -78,6 +78,10 @@ const getPublicAccessToken = baseUrl + "pc/hall/getPublicAccessToken"
 const checkWords = baseUrl + "pc/hall/checkWords"
 // 公众号消息推送
 const SendWxMsg = baseUrl + "pc/hall/SendWxMsg"
+// 公众号消息推送-全部-方案一
+const SendWxMsgAll = baseUrl + "pc/hall/SendWxMsgAll"
+// 公众号消息推送-全部-方案二
+const SendWxMsgIM = baseUrl + "pc/hall/SendWxMsgIM"
 // 获取公众号下所有用户
 const getPulicUserAdd = baseUrl + "pc/hall/getPulicUserAdd"
 // 首页推荐工人/商家，仅首页可用
@@ -131,6 +135,8 @@ module.exports = {
   getPublicAccessToken:getPublicAccessToken,
   checkWords:checkWords,
   SendWxMsg:SendWxMsg,
+  SendWxMsgAll:SendWxMsgAll,
+  SendWxMsgIM:SendWxMsgIM,
   getPulicUserAdd:getPulicUserAdd,
   wxIndexUserPage:wxIndexUserPage,
   wxUserGoodPage:wxUserGoodPage,

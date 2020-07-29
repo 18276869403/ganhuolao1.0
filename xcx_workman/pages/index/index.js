@@ -67,8 +67,6 @@ Page({
           wx.login({
             success: function (res) {
               var code = res.code
-              var encryptedData = res.encryptedData
-              var iv = res.iv
               // qingqiu.get("getOpenIdbyjscode", {
               //   js_code: code
               // }, function (res) {

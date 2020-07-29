@@ -161,7 +161,7 @@ Page({
       }
     })
   },
-  onShow:function(){
+  onShow: function () {
     this.onLoad()
   },
   /**
@@ -185,27 +185,27 @@ Page({
 
   // 获取招工信息
   getRecruitment(id) {
-    console.log('招工id',id)
+    console.log('招工id', id)
     var that = this
     var data = {
       id: id
     }
     qingqiu.get("queryloclaById", data, function (res) {
       console.log(res)
-      if(res.success == true){
+      if (res.success == true) {
         that.setData({
-          needsname:res.result.hireTitle,
-          salary:res.result.backup3,
-          needscontent:res.result.hireContent,
-          linkman:res.result.publishMan,
-          phone:res.result.publishPhone,
-          workcityname:res.result.oneAreaName,
-          workareaname:res.result.twoAreaName,
-          picIurl:res.result.backup4,
-          picIurl1:res.result.backup4,
-          typeid:res.result.oneAreaId,
-          areaId:res.result.twoAreaId,
-          select:'success'
+          needsname: res.result.hireTitle,
+          salary: res.result.backup3,
+          needscontent: res.result.hireContent,
+          linkman: res.result.publishMan,
+          phone: res.result.publishPhone,
+          workcityname: res.result.oneAreaName,
+          workareaname: res.result.twoAreaName,
+          picIurl: res.result.backup4,
+          picIurl1: res.result.backup4,
+          typeid: res.result.oneAreaId,
+          areaId: res.result.twoAreaId,
+          select: 'success'
         })
       }
     })
@@ -395,24 +395,24 @@ Page({
       hireContent: that.data.needscontent,
       backup4: that.data.picIurl1
     }
-    if(that.data.id != 0){
+    if (that.data.id != 0) {
       data.id = that.data.id
-      qingqiu.get("localHireEdit",data,function(res){
-        console.log('修改招工',res)
+      qingqiu.get("localHireEdit", data, function (res) {
+        console.log('修改招工', res)
         wx.showToast({
           title: res.message,
-          icon:'success',
+          icon: 'success',
         })
         that.setData({
           btnFlag: false
         })
-        setTimeout(function(){
+        setTimeout(function () {
           wx.redirectTo({
-            url: '../recruitmentDetail/recruitmentDetail?id='+that.data.id,
+            url: '../recruitmentDetail/recruitmentDetail?id=' + that.data.id,
           })
-        },1000)
-      },'put')
-    }else{
+        }, 1000)
+      }, 'put')
+    } else {
       qingqiu.get("localHireAdd", data, function (re) {
         that.setData({
           btnFlag: false
@@ -426,26 +426,21 @@ Page({
           })
           var localid = re.result.id
           // 公众号消息推送
-          qingqiu.get("getPublicUser", null, function (res) {
-            for (let obj of res.result) {
-              var objdata = {
-                openId: obj.openid,
-                access_token: app.globalData.access_TokenOff,
-                firstValue: "干活佬又上新啦，赶紧去看看！",
-                firstColor: '#173177',
-                keyword1Value: "有1条招工信息发布啦！",
-                keyword1Color: '#173177',
-                keyword2Value: utils.nowTime(),
-                keyword2Color: '#173177',
-                remarkValue: '请进入干活佬查看详情',
-                remarkColor: '#173177',
-                MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
-              }
-              qingqiu.get("SendWxMsg", objdata, function (re) {})
-            }
-            wx.navigateBack({
-              delta: 1
-            })
+          var objdata = {
+            access_token: app.globalData.access_TokenOff,
+            firstValue: "干活佬又上新啦，赶紧去看看！",
+            firstColor: '#173177',
+            keyword1Value: "有1条招工信息发布啦！",
+            keyword1Color: '#173177',
+            keyword2Value: utils.nowTime(),
+            keyword2Color: '#173177',
+            remarkValue: '请进入干活佬查看详情',
+            remarkColor: '#173177',
+            MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
+          }
+          qingqiu.get("SendWxMsgIM", objdata, function (re) {})
+          wx.navigateBack({
+            delta: 1
           })
         } else {
           wx.showToast({

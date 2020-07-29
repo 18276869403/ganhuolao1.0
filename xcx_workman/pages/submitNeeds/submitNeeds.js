@@ -314,11 +314,11 @@ Page({
             icon: 'success',
             duration: 2000
           })
-          app.globalData.needRefresh=1
+          app.globalData.needRefresh = 1
           setTimeout(function () {
             wx.navigateBack({
               delta: 2,
-              success: function(e) {
+              success: function (e) {
                 var page = getCurrentPages().pop();
                 if (page == undefined || page == null) return;
                 page.onLoad();
@@ -360,28 +360,24 @@ Page({
           })
           var needid = re.result.id
           // 公众号消息推送
-          qingqiu.get("getPublicUser", null, function (res) {
-            for (let obj of res.result) {
-              var objdata = {
-                openId: obj.openid,
-                access_token: app.globalData.access_TokenOff,
-                firstValue: "干活佬又上新啦，赶紧去看看！",
-                firstColor: '#173177',
-                keyword1Value: "有1条需求发布啦！",
-                keyword1Color: '#173177',
-                keyword2Value: util.nowTime(),
-                keyword2Color: '#173177',
-                remarkValue: '请进入干活佬查看详情',
-                remarkColor: '#173177',
-                MiniUrl: 'pages/needsDetails/needsDetails?id=' + needid
-              }
-              qingqiu.get("SendWxMsg", objdata, function (re) {
-                console.log(re)
-              })
-            }
-            wx.navigateBack({
-              delta: 1
-            })
+
+          var objdata = {
+            access_token: app.globalData.access_TokenOff,
+            firstValue: "干活佬又上新啦，赶紧去看看！",
+            firstColor: '#173177',
+            keyword1Value: "有1条需求发布啦！",
+            keyword1Color: '#173177',
+            keyword2Value: util.nowTime(),
+            keyword2Color: '#173177',
+            remarkValue: '请进入干活佬查看详情',
+            remarkColor: '#173177',
+            MiniUrl: 'pages/needsDetails/needsDetails?id=' + needid
+          }
+          qingqiu.get("SendWxMsgIM", objdata, function (re) {
+            console.log(re)
+          })
+          wx.navigateBack({
+            delta: 1
           })
         } else {
           wx.showToast({
@@ -1039,13 +1035,13 @@ Page({
         const tempFilePaths = res.tempFilePaths;
         // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths) 
         for (let i = 0; i < tempFilePaths.length; i++) {
-          if(!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])){
+          if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])) {
             wx.showToast({
               title: '请上传静态图片',
-              icon:'none'
+              icon: 'none'
             })
             that.setData({
-              btnFlag:false
+              btnFlag: false
             })
             return
           }
@@ -1126,7 +1122,7 @@ Page({
       num: that.data.num
     });
   },
- 
+
   // 预览图片
   imgview: function (e) {
     var src = e.currentTarget.dataset.src
