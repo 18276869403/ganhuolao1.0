@@ -33,7 +33,6 @@ Page({
     this.setData({
       pageNo: 1,
       isLastPage: false,
-      gongyilist: []
     })
     this.onShow()
     setTimeout(() => {
@@ -65,6 +64,10 @@ Page({
         zstate:true,
         gongyilist: []
       })
+    }else{
+      this.setData({
+        gongyilist: []
+      })
     }
     this.getActivity()
   },
@@ -86,7 +89,7 @@ Page({
     if(that.data.zstate == true){
       var data = {
         wxUserId: app.globalData.wxid,
-        pageNo: that.data.pageNo,
+        pageNo: 1,
         pageSize: that.data.pageSize
       }
     }else{
@@ -96,6 +99,7 @@ Page({
         pageSize: 10
       }
     }
+    console.log(data)
     if (that.data.GyTypeid == 1) {
       qingqiu.get("myActivityList", data, function (res) {
         console.log('我发布的公益活动', res)
@@ -127,7 +131,8 @@ Page({
               gongyilist.push(obj)
             }
             that.setData({
-              gongyilist: gongyilist
+              gongyilist: gongyilist,
+              zstate:false
             })
           } else {
             that.setData({

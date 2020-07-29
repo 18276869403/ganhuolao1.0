@@ -52,7 +52,7 @@ Page({
     var that = this
     if(this.data.zstate == true){
       var data = {
-        pageNo: that.data.pageNo,
+        pageNo: 1,
         pageSize: that.data.pageSize,
         wxUserId: app.globalData.wxid
       }
