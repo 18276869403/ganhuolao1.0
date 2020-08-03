@@ -1,0 +1,156 @@
+/* pages/inletWelfare/inletWelfare.wxss */
+page{
+  background: #f5f7fb;
+}
+.top{
+  height: 40rpx;
+}
+.content{
+  width: 100%;
+}
+.content-left{
+  width: 50%;
+}
+.img-remark{
+  width: 140rpx;
+  height: 140rpx;
+  /* border: 4rpx solid red; */
+}
+.content-left-all{
+  width: 100%;
+  text-align: center;
+  padding-top: 40rpx;
+  padding-left: 40rpx;
+}
+.content-right{
+  width: 50%;
+}
+.content-righ-all{
+  width: 100%;
+  text-align: center;
+  padding-top: 40rpx;
+  padding-right: 50rpx;
+}
+.sort-text {
+  text-align: center;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  }
+  
+  /* 弹窗 */
+.toast-box {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
+
+.toastbg {
+  opacity: 0.2;
+  background-color: black;
+  position: absolute;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.showToast {
+  position: absolute;
+  opacity: 1;
+  width: 70%;
+  margin-left: 15%;
+  margin-top: 50%;
+}
+
+.toast-title {
+  padding-left: 5%;
+  background-color: #2196f3;
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-top-right-radius: 16rpx;
+  border-top-left-radius: 16rpx;
+}
+
+.toast-main {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  background-color: white;
+  text-align: center;
+  border-radius: 6px;
+}
+
+.toast-input {
+  margin-left: 5%;
+  margin-right: 5%;
+  border: 1px solid #ddd;
+  padding-left: 1vh;
+  padding-right: 1vh;
+  height: 70rpx;
+  line-height: 70rpx;
+  /* padding-top: 1vh;
+  padding-bottom: 1vh; */
+}
+
+.input-class {
+  height: 70rpx;
+  line-height: 70rpx;
+}
+
+.toast-button {
+  display: flex;
+}
+
+.button1 {
+  width: 50%;
+  background-color: white;
+  text-align: center;
+}
+
+.button2 {
+  width: 50%;
+  background-color: white;
+  text-align: center;
+}
+
+.button-img {
+  width: 199rpx;
+  height: 66rpx;
+}
+
+.button1 button {
+  width: 100%;
+  background-color: white;
+  color: red;
+  border-radius: 0px;
+  border-bottom-left-radius: 16rpx;
+}
+
+.button2 button {
+  width: 100%;
+  background-color: white;
+  color: black;
+  border-radius: 0px;
+  border-bottom-right-radius: 16rpx;
+}
+
+.key-class {
+  width: 30%;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: left;
+}
+
+.value-class {
+  width: 70%;
+  font-size: 30rpx;
+  text-align: right;
+}
+
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+}

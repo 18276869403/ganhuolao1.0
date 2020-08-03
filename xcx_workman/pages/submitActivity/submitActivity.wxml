@@ -1,0 +1,28 @@
+<!--pages/submitShow/submitShow.wxml-->
+<view class="container">
+	<view class="content zongxiang">
+		<view class="content-item-title hengxiang">
+			<input class="content-item-text" placeholder="输入活动标题" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="comment" bindinput='commentinput' bindblur="commentinputblur"></input>
+		</view>
+		<view class="showImg">
+			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
+				<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}"  mode="aspectFill" class="show-img"></image> 
+				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+			</view>
+		</view>
+
+		<!-- 上传 -->
+		<view class="fabu" wx-if="{{tupianlists.length<9}}">
+			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
+				<view>
+					<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+				</view>
+			</view>
+		</view>
+
+  <view class="show-photo-text">上传摄影图片(最少上传一张，可以上传多张)</view>
+		<view class="content-button {{btnFlag == true?'disabled':''}}" bindtap="lijifabu">
+			立即发布
+		</view>
+	</view>
+</view>

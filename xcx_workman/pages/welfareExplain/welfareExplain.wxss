@@ -1,0 +1,14 @@
+/* pages/welfareExplain/welfareExplain.wxss */
+.content{
+  padding: 0rpx 5%;
+}
+.content-title{
+  color: red;
+  font-size: 30rpx;
+  font-weight: 600;
+  text-align: center;
+  padding: 50rpx 0rpx;
+}
+.content-text{
+  font-size: 28rpx;
+}

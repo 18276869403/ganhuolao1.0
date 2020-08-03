@@ -1,0 +1,13 @@
+<!--pages/welfareExplain/welfareExplain.wxml-->
+<!-- 活动说明 -->
+<view>
+	<view class="hengxian"></view>
+	<view>
+		<view class="content zongxiang">
+			<!-- <view class="content-title">{{title}}</view> -->
+			<view class="content-text">
+				<rich-text nodes="{{remark}}" space="nbsp"></rich-text>
+			</view>
+		</view>
+	</view>
+</view>

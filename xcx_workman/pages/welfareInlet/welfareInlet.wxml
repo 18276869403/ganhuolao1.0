@@ -1,0 +1,82 @@
+<!--pages/inletWelfare/inletWelfare.wxml-->
+<!-- 活动入口 -->
+<view>
+	<view class="hengxian"></view>
+	<view class="top"></view>
+	<view class="content hengxiang">
+		<view class="content-left">
+			<view class="content-left-all zongxiang" bindtap="activityRemark">
+				<view>
+					<image src="../image/huodongshuoming.png" class="img-remark"></image>
+				</view>
+				<view>活动说明</view>
+			</view>
+			<view class="content-left-all zongxiang" bindtap="activityJoin">
+				<view>
+					<image src="../image/woyaobaomingactivity.png" class="img-remark"></image>
+				</view>
+				<view>我要报名</view>
+			</view>
+			<view class="content-left-all zongxiang">
+				<view>
+					<image src="../image/cansaizuopin.png" class="img-remark"></image>
+				</view>
+				<view>作品欣赏</view>
+			</view>
+		</view>
+		<view class="content-right">
+			<view class="content-righ-all zongxiang" bindtap="welfareReview">
+				<view>
+					<image src="../image/pingshenzhuanjia.png" class="img-remark"></image>
+				</view>
+				<view>活动详情</view>
+			</view>
+			<view class="content-righ-all zongxiang">
+				<view>
+					<image src="../image/shangchuanzuopin.png" class="img-remark"></image>
+				</view>
+				<view>作品上传</view>
+			</view>
+			<view class="content-righ-all zongxiang">
+				<view>
+					<image src="../image/huojianggongbu.png" class="img-remark"></image>
+				</view>
+				<view>获奖公布</view>
+			</view>
+		</view>
+	</view>
+</view>
+
+<block wx:if="{{isShowConfirm}}">
+	<view class='toast-box'>
+		<view class='toastbg'></view>
+		<view class='showToast'>
+			<view class='toast-main'>
+				<view class="toast-main-class">
+					<view class='toast-input hengxiang'>
+						<view class="key-class">姓名</view>
+						<view class="value-class"><input type='text' placeholder='输入姓名' bindinput='signName' bindblur="signNameblur" value="{{signName}}" class="input-class"></input></view>
+					</view>
+				</view>
+				<view class='toast-main'>
+					<view class='toast-input hengxiang'>
+						<view class="key-class">电话</view>
+						<view class="value-class"><input type='number' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}' class="input-class"></input></view>
+					</view>
+				</view>
+				<view class='toast-button'>
+					<view class='button1 {{btnFlag == true ? "disabled":""}}'>
+						<view catchtap='confirmAcceptance'>
+							<image src="{{iconUrl}}static/image/querenbaoming.png" class="button-img"></image>
+						</view>
+					</view>
+					<view class='button2'>
+						<view catchtap='cancel'>
+							<image src="{{iconUrl}}static/image/guanbibaoming.png" class="button-img"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</block>
