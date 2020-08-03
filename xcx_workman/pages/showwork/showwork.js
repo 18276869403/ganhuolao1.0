@@ -9,6 +9,38 @@ Page({
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     showList: [],
+    activityList: [{
+        id: 1,
+        picIurl: '../image/fengjingtu.jpg',
+        name: '王小二',
+        sumnum: 1230,
+        datetime:'2020-8-3'
+      },
+      {
+        id: 2,
+        picIurl: '../image/fengjingtu.jpg',
+        name: '店小二',
+        sumnum: 120,
+        datetime:'2020-8-3'
+      },
+      {
+        id: 3,
+        picIurl: '../image/fengjingtu.jpg',
+        name: '顺溜',
+        sumnum: 230,
+        datetime:'2020-8-3'
+      }
+    ],
+    showsTypeList: [{
+        id: 0,
+        name: '活动'
+      },
+      {
+        id: 1,
+        name: '万载风光'
+      }
+    ],
+    typeflag: 0,
     // imgList: [
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
@@ -21,6 +53,29 @@ Page({
     sousuonr: '',
     pageNo: 1
   },
+  // 活动
+  changeType: function (e) {
+    var that = this;
+    var id = e.currentTarget.dataset.id
+    that.setData({
+      typeflag: id
+    })
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onPullDownRefresh: function () {
     app.globalData.showid = 1
     this.data.pageNo = 1
@@ -135,11 +190,11 @@ Page({
     }
     qingqiu.get("userLikes", data, function (re) {
       if (re.success == true) {
-        for (let obj of that.data.showList) { 
-          if (obj.id == item.id) { 
+        for (let obj of that.data.showList) {
+          if (obj.id == item.id) {
             if (item.giveState == 0) {
               obj.giveGood += 1
-            } else { 
+            } else {
               obj.giveGood -= 1
             }
             obj.giveState = item.giveState == 0 ? 1 : 0

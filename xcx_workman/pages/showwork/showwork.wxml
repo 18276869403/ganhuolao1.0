@@ -1,157 +1,224 @@
 <!--pages/showwork/showwork.wxml-->
 <view class="container">
-  <view class="hengxian"></view>
-  <view class="top zongxiang">
-    <view class="top-title hengxiang">
-      <view class="top-title-left hengxiang" bindtap="showModal">
-        <view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
-        <view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
-        <view class="top-title-left-enter">
-          <image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
-        </view>
-      </view>
-      <view class="top-title-right hengxiang">
-        <view class="top-title-right-img">
-          <image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
-        </view>
-        <view class="top-title-right-shuru">
-          <input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入晒晒标题" class="shurukuang"></input>
-        </view>
-        <view class="top-title-right-sousuo">
-          <view class="sousuo-button" bindtap="btnsearch">搜索</view>
-        </view>
-      </view>
-    </view>
-  </view>
+	<view class="hengxian"></view>
+	<view class="top-type hengxiang">
+		<view wx:for="{{showsTypeList}}" wx:key="key" bindtap="changeType" data-id="{{item.id}}" class="xuanzhong">
+			<view wx:if="{{typeflag==item.id}}" class="top-item-checked">
+				<text class="bian"> {{item.name}}</text>
+			</view>
+			<view wx:if="{{typeflag!=item.id}}" class="top-item-normal">
+				<text class="">{{item.name}}</text>
+			</view>
+		</view>
+	</view>
+	<view wx:if="{{typeflag == 0}}">
+		<view class="top-activity zongxiang">
+			<view class="top-title hengxiang">
+				<view class="top-title-activty hengxiang">
+					<view class="top-title-right-img">
+						<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
+					</view>
+					<view class="top-title-right-shuru">
+						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入活动标题" class="shurukuang"></input>
+					</view>
+					<view class="top-title-right-sousuo">
+						<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="bottom-activity">
+			<block wx:for-items="{{activityList}}">
+				<view class="show-activity zongxiang">
+					<view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+						<image src="{{item.picIurl}}" class="show-img" mode="aspectFill">
+						</image>
+					</view>
+					<view class="hengxiang">
+						<view class="activity-bottom-left">
+							<view class="activity-left-text hengxiang">
+								<view class="bianhao" style="width:50%;">
+									<image src="../image/xuanshou.png" class="icon-img"></image>
+									<text> {{item.id}}</text>号选手
+								</view>
+								<view class="bianhao" style="width:50%;">
+									<image src="../image/xuanshouxuhao.png" class="icon-img"></image>
+									<text> {{item.name}}</text>
+								</view>
+							</view>
+							<view class="activity-left-text hengxiang">
+								<view class="bianhao" style="width:50%;">
+									<image src="../image/vote.png" class="icon-img"></image>
+									<text> {{item.sumnum}}</text> 票
+								</view>
+								<view class="bianhao" style="width:50%;">
+									<image src="../image/shangchuanshijian.png" class="icon-img"></image>
+									<text> {{item.datetime}}</text>
+								</view>
+							</view>
+						</view>
+						<view>
+							<image src="../image/weitoupiao.png" class="activity-img" bindtap="activity"></image>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
 
-  <view class="bottom1">
-    <!-- 左侧 -->
-    <view class="left">
-      <block wx:for-items="{{showList}}">
-        <view class="show" wx:if="{{index%2 == 0}}">
-          <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}">
-            </image>
-            <video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" ></video>
-          </view>
-          <view class="show-item-bottom hengxiang">
-            <view class="hengxiang">
-              <view>
-                <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
-              </view>
-              <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
-              <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
-            </view>
-            <view class="hengxiang">
-              <view>
-                <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
-              </view>
-              <view>{{item.messageSum}}</view>
-            </view>
-            <view class="dianzan hengxiang">
-              <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
-                <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
-              </view>
-              <view bindtap="dianzan"  data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
-                <image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
-              </view>
-              <view>{{item.giveGood}}</view> 
-            </view>
-          </view>
-        </view>
-      </block>
-    </view>
-    <!-- 右侧 -->
-    <view class="right"> 
-      <block wx:for-items="{{showList}}">
-        <view class="show" wx:if="{{index%2 != 0}}">
-          <view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
-            <image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
-            <video autoplay loop muted src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}"></video>
-          </view>
-          <view class="show-item-bottom hengxiang">
-            <view class="hengxiang" >
-              <view>
-                <image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
-              </view>
-              <view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
-              <view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
-            </view>
-            <view class="hengxiang">
-              <view>
-                <image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
-              </view>
-              <view>{{item.messageSum}}</view>
-            </view>
-            <view class="dianzan hengxiang">
-              <view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
-                <image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
-              </view>
-              <view bindtap="dianzan"  data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
-                <image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
-              </view>
-              <view>{{item.giveGood}}</view>
-            </view>
-          </view>
-        </view>
-      </block>
-    </view>
-  </view>
+	<view wx:if="{{typeflag == 1}}">
+		<view class="top zongxiang">
+			<view class="top-title hengxiang">
+				<view class="top-title-left hengxiang" bindtap="showModal">
+					<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
+					<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
+					<view class="top-title-left-enter">
+						<image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
+					</view>
+				</view>
+				<view class="top-title-right hengxiang">
+					<view class="top-title-right-img">
+						<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
+					</view>
+					<view class="top-title-right-shuru">
+						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入晒晒标题" class="shurukuang"></input>
+					</view>
+					<view class="top-title-right-sousuo">
+						<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+					</view>
+				</view>
+			</view>
+		</view>
 
-  <view class="fabu-button">
-    <image src="{{iconUrl}}static/image/fabubutton.png" class="fabu-img" bindtap="showModal1"></image>
-  </view>
-</view> 
- 
+		<view class="bottom1">
+			<!-- 左侧 -->
+			<view class="left">
+				<block wx:for-items="{{showList}}">
+					<view class="show" wx:if="{{index%2 == 0}}">
+						<view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+							<image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}">
+							</image>
+							<video autoplay loop muted controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}"></video>
+						</view>
+						<view class="show-item-bottom hengxiang">
+							<view class="hengxiang">
+								<view>
+									<image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
+								</view>
+								<view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
+								<view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
+							</view>
+							<view class="hengxiang">
+								<view>
+									<image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+								</view>
+								<view>{{item.messageSum}}</view>
+							</view>
+							<view class="dianzan hengxiang">
+								<view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+									<image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
+								</view>
+								<view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
+									<image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
+								</view>
+								<view>{{item.giveGood}}</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+			<!-- 右侧 -->
+			<view class="right">
+				<block wx:for-items="{{showList}}">
+					<view class="show" wx:if="{{index%2 != 0}}">
+						<view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
+							<image src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='0'}}"></image>
+							<video autoplay loop muted src="{{item.picOne}}" class="show-img" mode="widthFix" wx:if="{{item.backup3=='1'}}" controls='{{false}}' show-play-btn='{{false}}' show-center-play-btn='{{false}}' src="{{item.picOne}}"></video>
+						</view>
+						<view class="show-item-bottom hengxiang">
+							<view class="hengxiang">
+								<view>
+									<image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
+								</view>
+								<view wx:if="{{item.backup5 == ''||item.backup5==null}}">0</view>
+								<view wx:if="{{item.backup5 != ''&&item.backup5!=null}}">{{item.backup5}}</view>
+							</view>
+							<view class="hengxiang">
+								<view>
+									<image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+								</view>
+								<view>{{item.messageSum}}</view>
+							</view>
+							<view class="dianzan hengxiang">
+								<view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+									<image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
+								</view>
+								<view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
+									<image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
+								</view>
+								<view>{{item.giveGood}}</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+
+		<view class="fabu-button">
+			<image src="{{iconUrl}}static/image/fabubutton.png" class="fabu-img" bindtap="showModal1"></image>
+		</view>
+	</view>
+</view>
+
 <!-- 发布 -->
 <view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
 <view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
-  <view class='tanchuang'>
-    <image src="{{iconUrl}}static/image/showbg.png" class="tanchuang-img"></image>
-    <view class="tanchuang-block zongxiang">
-      <view class="tanchuang-title">您可以发布</view>
-      <view class="hengxiang tanchuang-item">
-        <view class="tanchuang-item-left zongxiang">
-          <view>
-            <image src="{{iconUrl}}static/image/tupian.png" class="tupian-img" bindtap="submitShow"></image>
-          </view>
-          <view>照片</view>
-        </view>
-        <view class="tanchuang-item-right zongxiang" bindtap="submitVideo" wx:if="{{showList[0].backup1==1}}">
-          <view>
-            <image src="{{iconUrl}}static/image/shipin.png" class="tupian-img"></image>
-          </view>
-          <view>视频</view>
-        </view>
-      </view>
-      <view class="tanchuang-close">
-        <image src="{{iconUrl}}static/image/showclose.png" class="close-img" bindtap="hideModal1"></image>
-      </view>
-    </view>
-  </view>
+	<view class='tanchuang'>
+		<image src="{{iconUrl}}static/image/showbg.png" class="tanchuang-img"></image>
+		<view class="tanchuang-block zongxiang">
+			<view class="tanchuang-title">您可以发布</view>
+			<view class="hengxiang tanchuang-item">
+				<view class="tanchuang-item-left zongxiang">
+					<view>
+						<image src="{{iconUrl}}static/image/tupian.png" class="tupian-img" bindtap="submitShow"></image>
+					</view>
+					<view>照片</view>
+				</view>
+				<view class="tanchuang-item-right zongxiang" bindtap="submitVideo" wx:if="{{showList[0].backup1==1}}">
+					<view>
+						<image src="{{iconUrl}}static/image/shipin.png" class="tupian-img"></image>
+					</view>
+					<view>视频</view>
+				</view>
+			</view>
+			<view class="tanchuang-close">
+				<image src="{{iconUrl}}static/image/showclose.png" class="close-img" bindtap="hideModal1"></image>
+			</view>
+		</view>
+	</view>
 </view>
 <!-- 遮罩层显示 地址区域 -->
 <view>
-  <view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
-  <view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
-    <view class='alert hengxiang'>
-      <view class='s-left'>
-        <scroll-view class='left-navbar' scroll-y="true">
-          <!-- <view class='normal-title'>一级分类</view> -->
-          <view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
-            {{item.areaName}}
-          </view>
-        </scroll-view>
-      </view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<!-- <view class='normal-title'>一级分类</view> -->
+					<view wx:for="{{city}}" class="nav_left_items {{cityId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="cityleft" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
 
-      <view class='s-right'>
-        <scroll-view class='left-navbar1' scroll-y="true">
-          <!-- <view class='normal-title'>二级分类</view> -->
-          <view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
-            {{item.areaName}}
-          </view>
-        </scroll-view>
-      </view>
-    </view>
-  </view>
+			<view class='s-right'>
+				<scroll-view class='left-navbar1' scroll-y="true">
+					<!-- <view class='normal-title'>二级分类</view> -->
+					<view wx:for="{{area}}" class="nav_left_items {{areaId == item.id? 'active' : 'normal'}}" wx:key="key" bindtap="arearight" data-index="{{index}}" data-name=" {{item.areaName}}" data-id='{{item.id}}'>
+						{{item.areaName}}
+					</view>
+				</scroll-view>
+			</view>
+		</view>
+	</view>
 </view>

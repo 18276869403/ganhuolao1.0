@@ -278,10 +278,10 @@ Page({
   // 公益详情
   WelfareDetail: function (e) {
     var list = e.currentTarget.dataset.list
-    var list1 = JSON.stringify(list)
+    console.log(list)
     app.globalData.welfareRefresh = 0
     wx.navigateTo({
-      url: '../WelfareDetail/WelfareDetail?obj=' + list1,
+      url: '../welfareInlet/welfareInlet?id=' + list.id + '&wid=' + list.wxUserId,
     })
   },
   zaixianlianxi: function (e) {

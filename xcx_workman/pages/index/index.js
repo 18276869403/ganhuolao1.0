@@ -454,6 +454,7 @@ Page({
       size: 100
     }
     qingqiu.get("bannerlist", data, function (re) {
+      console.log(re)
       if (re.success == true) {
         if (re.result != null) {
           that.data.bannerImg = re.result
@@ -468,16 +469,18 @@ Page({
     })
   },
 
-  // // banner点击事件
-  // goBaidu: function (event) {
-  //   var data = (event.currentTarget.dataset)
-  //   wx.navigateTo({
-  //     url: '../outurl/outurl?goBaidu=' + data.url, //
-  //     success: function () {}, //成功后的回调；
-  //     fail: function () {}, //失败后的回调；
-  //     complete: function () {}, //结束后的回调(成功，失败都会执行)
-  //   })
-  // },
+  // banner点击事件
+  goBaidu: function (e) {
+    console.log(e)
+    var data = e.currentTarget.dataset.url
+    console.log(data)
+    wx.navigateTo({
+      url: data, //
+      success: function (e) {console.log('成功')}, //成功后的回调；
+      fail: function (e) {console.log(e)}, //失败后的回调；
+      complete: function () {console.log('没成功没失败')}, //结束后的回调(成功，失败都会执行)
+    })
+  },
 
   // 通知
   pointList: function () {

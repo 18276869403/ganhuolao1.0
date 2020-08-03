@@ -295,6 +295,7 @@ Page({
       var typeerji1 = "fenleitype2.erjiid"
       var typestate1 = "fenleitype2.typestate"
       if (re.result.wxState == 0) {
+        // 加载-商家
         var str = []
         var str1 = []
         var index = []
@@ -352,7 +353,7 @@ Page({
           typeid: re.result.oneAreaId,
           areaId: re.result.twoAreaId,
           needsname: re.result.shopName,
-          linkman: re.result.name,
+          linkman: re.result.shopLinkman,
           phone: re.result.phone,
           workeraddress: re.result.shopAddress,
           needscontent: re.result.content,
@@ -366,7 +367,8 @@ Page({
           needsTypeid: 2,
           select: 'success'
         })
-      } else {
+      } else if(re.result.wxState == 1){
+        // 加载-工人
         var str = []
         var index = []
         var index1 = []
@@ -374,32 +376,35 @@ Page({
           str = re.result.oneClassName.split(',')
           index = re.result.oneClassIds.split(',')
         } else {
-          str = re.result.oneClassName
+          str.push(re.result.oneClassName)
+          index.push(re.result.oneClassIds)
         }
         var str1 = []
         if (re.result.twoClassName.indexOf(',') > -1) {
           str1 = re.result.twoClassName.split(',')
           index1 = re.result.twoClassIds.split(',')
         } else {
-          str1 = re.result.twoClassName
+          str1.push(re.result.twoClassName)
+          index1.push(re.result.twoClassIds)
         }
         var temp = ''
         if (str.length > 0 && str1.length > 0) {
-          temp = str[0] + "|" + str1[0] + "," + str[1] + "|" + str1[1]
+          if(str.length > 1 && str1.length > 1){
+            temp = str[0] + "|" + str1[0] + "," + str[1] + "|" + str1[1]
+            that.setData({[typeid]: index[0], [typeid1]: index1[0],[typeerji]: index[1],[typeerji1]: index1[1],oneClassName: index[0] + "," + index1[0],twoClassName:index[1] + "," + index1[1],})
+          }else{
+            temp = str[0] + "|" + str1[0]
+            that.setData({[typeid]: index[0], [typeid1]: index1[0],oneClassName: index[0],twoClassName:index[1]})
+          }
         } else {
           temp = str[0] + "," + str1[0]
+          that.setData({[typeid]: index[0], [typeid1]: index1[0],oneClassName: index[0],twoClassName:index[1]})
         }
         var data = re.result.dateBirth.split(' ')
         that.setData({
           needsTypeid: 2,
           tempClass: temp,
           yijiname: temp,
-          [typeid]: index[0],
-          [typeerji]: index[1],
-          [typeid1]: index1[0],
-          [typeerji1]: index1[1],
-          oneClassName: index[0] + "," + index1[0],
-          twoClassName: index[1] + "," + index1[1],
           workcityname: re.result.oneAreaName,
           workareaname: re.result.twoAreaName,
           typeyj: re.result.oneClassId,
@@ -425,21 +430,6 @@ Page({
           select: 'success'
         })
       }
-      // data = {
-      //   name: that.data.workername,
-      //   sex: that.data.sex,
-      //   dateBirth: that.data.date,
-      //   employ: that.data.worktime,
-      //   shopAddress: that.data.workeraddress,
-      //   phone: that.data.workerphone,
-      //   content: that.data.workerskill,
-      //   picUrl: that.data.picZz,
-      //   picPerson1: that.data.picPerson1,
-      //   picPerson2: that.data.picPerson2,
-      //   wxState: 1
-      // }
-      // that.data.select != 'success'
-      // content: that.data.needscontent,
     })
   },
   //获取输入的需求标题
@@ -919,6 +909,7 @@ Page({
         wxState: 0,
       }
     }
+    console.log(data)
     if (that.data.type == 1 || that.data.type == 0) {
       qingqiu.get("editWxUser", data, function (re) {
         if (re.message == "1") {
