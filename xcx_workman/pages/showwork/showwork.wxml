@@ -4,7 +4,7 @@
 	<view class="top-type hengxiang">
 		<view wx:for="{{showsTypeList}}" wx:key="key" bindtap="changeType" data-id="{{item.id}}" class="xuanzhong">
 			<view wx:if="{{typeflag==item.id}}" class="top-item-checked">
-				<text class="bian"> {{item.name}}</text>
+				<text class="bian">{{item.name}}</text>
 			</view>
 			<view wx:if="{{typeflag!=item.id}}" class="top-item-normal">
 				<text class="">{{item.name}}</text>
@@ -19,46 +19,43 @@
 						<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 					</view>
 					<view class="top-title-right-shuru">
-						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入活动标题" class="shurukuang"></input>
+						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入作者名/标题名" class="shurukuang"></input>
 					</view>
 					<view class="top-title-right-sousuo">
-						<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+						<view class="sousuo-button" bindtap="btnsearchvote">搜索</view>
 					</view>
+				</view>
+				<view class="top-title-activty-right">
+					<image src="{{iconUrl}}static/image/shangchuanzuopin1.png" class="top-img" bindtap="submitVote"></image>
 				</view>
 			</view>
 		</view>
 		<view class="bottom-activity">
+			<view style="padding-bottom:20rpx;font-size:25rpx;">每日可为5名作者投1票，作弊取消参赛资格（今日剩余投票 <text style="color:red;">{{voteNum}}</text>）</view>
 			<block wx:for-items="{{activityList}}">
 				<view class="show-activity zongxiang">
-					<view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
-						<image src="{{item.picIurl}}" class="show-img" mode="aspectFill">
+					<view class="show-item-top" bindtap="showVote" data-obj="{{item}}">
+						<image src="{{iconUrl}}{{item.picOne[0]}}" class="show-img" mode="aspectFill">
 						</image>
 					</view>
 					<view class="hengxiang">
 						<view class="activity-bottom-left">
 							<view class="activity-left-text hengxiang">
-								<view class="bianhao" style="width:50%;">
-									<image src="../image/xuanshou.png" class="icon-img"></image>
-									<text> {{item.id}}</text>号选手
+								<view class="bianhao" style="width:60%;">
+									<image src="{{iconUrl}}static/image/huodongbiaoti.png" class="icon-img"></image>
+									<text> {{item.caseName}}</text>
 								</view>
-								<view class="bianhao" style="width:50%;">
-									<image src="../image/xuanshouxuhao.png" class="icon-img"></image>
-									<text> {{item.name}}</text>
-								</view>
-							</view>
-							<view class="activity-left-text hengxiang">
-								<view class="bianhao" style="width:50%;">
-									<image src="../image/vote.png" class="icon-img"></image>
-									<text> {{item.sumnum}}</text> 票
-								</view>
-								<view class="bianhao" style="width:50%;">
-									<image src="../image/shangchuanshijian.png" class="icon-img"></image>
-									<text> {{item.datetime}}</text>
+								<view class="bianhao" style="width:40%;">
+									<image src="{{iconUrl}}static/image/vote.png" class="icon-img"></image>
+									<text> {{item.giveGood}}</text> 票
 								</view>
 							</view>
 						</view>
-						<view>
-							<image src="../image/weitoupiao.png" class="activity-img" bindtap="activity"></image>
+						<view bindtap="activity" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+							<image src="{{iconUrl}}static/image/weitoupiao.png" class="activity-img"></image>
+						</view>
+						<view wx:if="{{item.giveState==1}}">
+							<image src="{{iconUrl}}static/image/yitoupiao.png" class="activity-img"></image>
 						</view>
 					</view>
 				</view>
@@ -178,7 +175,7 @@
 		<view class="tanchuang-block zongxiang">
 			<view class="tanchuang-title">您可以发布</view>
 			<view class="hengxiang tanchuang-item">
-				<view class="tanchuang-item-left zongxiang">
+				<view class="tanchuang-item-left zongxiang" wx:if="{{typeflag==1}}">
 					<view>
 						<image src="{{iconUrl}}static/image/tupian.png" class="tupian-img" bindtap="submitShow"></image>
 					</view>

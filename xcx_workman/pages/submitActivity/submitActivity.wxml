@@ -2,7 +2,7 @@
 <view class="container">
 	<view class="content zongxiang">
 		<view class="content-item-title hengxiang">
-			<input class="content-item-text" placeholder="输入活动标题" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="comment" bindinput='commentinput' bindblur="commentinputblur"></input>
+			<input class="content-item-text" placeholder="输入作品名称" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="comment" bindinput='commentinput' bindblur="commentinputblur"></input>
 		</view>
 		<view class="showImg">
 			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
@@ -21,8 +21,9 @@
 		</view>
 
   <view class="show-photo-text">上传摄影图片(最少上传一张，可以上传多张)</view>
+		<view class="show-photo-text" style="color:red;">注：大赛截稿日之前可修改。</view>
 		<view class="content-button {{btnFlag == true?'disabled':''}}" bindtap="lijifabu">
-			立即发布
+			立即上传
 		</view>
 	</view>
 </view>

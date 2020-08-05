@@ -8,36 +8,90 @@ Page({
    * 页面的初始数据
    */
   data: {
-    iconUrl:api.iconUrl,
-    activityId:0,
-    isShowConfirm:false,
-    signName:'',
-    signPhone:'',
-    btnFlag:false
+    iconUrl: api.iconUrl,
+    activityId: 0,
+    isShowConfirm: false,
+    signName: '',
+    signPhone: '',
+    btnFlag: false
   },
 
   // 活动说明
-  activityRemark:function(){
+  activityRemark: function () {
     wx.navigateTo({
       url: '../welfareExplain/welfareExplain',
     })
   },
-  // 评审专家
-  welfareReview:function(){
+  // 活动详情
+  WelfareDetail: function (e) {
+    var id = e.currentTarget.dataset.id
     wx.navigateTo({
-      url: '../welfareReview/welfareReview',
+      url: '../WelfareDetail/WelfareDetail?id=' + id,
+    })
+  },
+  // 作品欣赏
+  showwork: function () {
+    wx.switchTab({
+      url: '../showwork/showwork',
+    })
+  },
+  // 上传作品
+  submitVote: function () {
+    var that = this
+    qingqiu.get("getActivityVote", {
+      wxUserId: app.globalData.wxid
+    }, function (res) {
+      console.log(res)
+      if (res.result > 0) {
+        qingqiu.get("getVoteCount", {
+          wxUserId: app.globalData.wxid
+        }, function (re) {
+          console.log(re)
+          if (re.result != null) {
+            var obj = JSON.stringify(re.result)
+            wx.navigateTo({
+              url: '../submitActivity/submitActivity?obj=' + obj,
+            })
+          }else{
+            wx.navigateTo({
+              url: '../submitActivity/submitActivity',
+            })
+          }
+        })
+      } else {
+        wx.showToast({
+          title: '请先报名，再来上传作品',
+          icon: "none"
+        })
+      }
+    })
+  },
+  //获奖公布
+  votePublish:function(){
+    wx.showToast({
+      title: '暂未到获奖公布时间',
+      icon:"none"
     })
   },
 
-
-
-
-
   // 弹窗
   activityJoin: function () {
-    this.setData({
-      isShowConfirm: true
+    var that = this
+    qingqiu.get("getActivityVote", {
+      wxUserId: app.globalData.wxid
+    }, function (res) {
+      if (res.result > 0) {
+        wx.showToast({
+          title: '你己经报名，请上传作品',
+          icon:'none'
+        })
+      } else {
+        that.setData({
+          isShowConfirm: true
+        })
+      }
     })
+    
   },
   signName: function (e) {
     console.log('报名人员姓名：', e.detail.value)
@@ -193,8 +247,8 @@ Page({
   onLoad: function (options) {
     console.log(options.id)
     this.setData({
-      activityId:options.id,
-      wid:options.wid
+      activityId: options.id,
+      wid: options.wid
     })
   },
 

@@ -8,94 +8,82 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uploaderlist:[],
+    uploaderlist: [],
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
+    activityId: 0,
+    wxCaseId:0,
     needscontent: '',
-    cityname: '',
-    areaname: '',
-    cityId: '',
-    areaId: '',
-    ceshi: [{
-        id: 1,
-        areaName: '万载'
-      },
-      {
-        id: 2,
-        areaName: '万载111'
-      }
-    ],
-    city: [],
-    area: [],
     tupian: '',
     id: '',
     name: '',
     tupianlist: [],
     imgUrl: '',
-    cityname1: '',
     picIurl1: [],
     picIurl: '',
     picimg: '',
     num: 1,
     btnFlag: false,
     tupianlists: [],
-    addresslist: []
+    caseitem:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onLoad: function (options) {
     wx.showShareMenu({
       withShareTicket: true
     })
+    if (options != undefined) {
+      if (options.id != undefined) {
+        var that = this
+        qingqiu.get("getVoteById",{id:options.id},function(res){
+          console.log(res)
+          if(res.result != null){
+            var tupianlists = []
+            if(res.result.picOne.indexOf(',') != -1){
+              tupianlists = res.result.picOne.split(',')
+            }else{
+              tupianlists.push(res.result.picOne)
+            }
+            res.result.picOne = tupianlists
+            that.setData({
+              needscontent:res.result.caseName,
+              tupianlists:tupianlists,
+              wxCase:res.result,
+              wxCaseId:res.result.id
+            })
+            console.log(that.data.wxCase)
+          }else{
+            wx.showToast({
+              title: res.message,
+              icon:"none"
+            })
+          }
+        })
+      }
+      if(options.obj != undefined){
+        var item = JSON.parse(options.obj)
+        console.log(item)
+        var tupianlists = []
+        if(item.picOne.indexOf(',') != -1){
+          tupianlists = item.picOne.split(',')
+        }else{
+          tupianlists.push(item.picOne)
+        }
+        this.setData({
+          needscontent:item.caseName,
+          tupianlists:tupianlists,
+          wxCase:item,
+          wxCaaseId:item.id
+        })
+      }
+    }
     this.setData({
       wxuserid: app.globalData.wxid
     })
-    this.QueryoneArea()
-    // this.QuerytwoArea()
   },
-  // 一级区域
-  QueryoneArea() {
-    var that = this
-    qingqiu.get("queryOneArea", null, function (re) {
-      if (re.success == true) {
-        if (re.result != null) {
-          that.data.city = re.result
-          that.data.id = re.result[0].id
-          that.data.name = re.result[0].areaName
-          that.setData({
-            cityId: that.data.id,
-            cityname1: that.data.name,
-            city: that.data.city
-          })
-        } else {
-          qingqiu.tk('未查询到任何数据')
-        }
-      }
-    })
-    that.QuerytwoArea()
-  },
-  // 二级区域
-  QuerytwoArea() {
-    var that = this
-    var data = {
-      oneAreaId: that.data.id
-    }
-    qingqiu.get("queryTwoArea", data, function (re) {
-      if (re.success == true) {
-        if (re.result != null) {
-          that.data.area = re.result
-          that.setData({
-            area: that.data.area
-          })
-        } else {
-          qingqiu.tk('未查询到任何数据')
-        }
-      }
-    })
-  },
-
   onShow: function () {
 
   },
@@ -124,7 +112,7 @@ Page({
       })
       return
     }
-    that.data.picIurl1=[]
+    that.data.picIurl1 = []
     if (that.data.tupianlists.length > 0) {
       for (let obj of that.data.tupianlists) {
         that.data.picIurl1 += obj + ','
@@ -140,38 +128,68 @@ Page({
       })
       return
     }
-    var data = {
-      wxUserId: app.globalData.wxid,
-      backup3: 0,
-      backup4: 0,
-      oneAreaId: that.data.cityId,
-      twoAreaId: that.data.areaId,
-      caseName: that.data.needscontent,
-      picOne: that.data.picIurl1
-    }
-    console.log(data)
-    qingqiu.get("insertCase", data, function (re) {
-      console.log(re)
-      that.setData({
-        btnFlag: false
-      })
-      if (re.success == true) {
-        wx.showToast({
-          title: '发布成功！',
-          icon: 'success',
-          duration: 2000
-        })
-        app.globalData.showworkRefresh = 1
-        // wx.switchTab({
-        //   url: '../showwork/showwork',
-        // })
-        setTimeout(function () {
-          wx.navigateBack({
-            delta: 1
-          })
-        }, 1000)
+    if(that.data.wxCaseId != 0){
+      var data = {
+        id:that.data.wxCase.id,
+        wxUserId:app.globalData.wxid,
+        backup2:that.data.wxCase.backup2,
+        backup3:that.data.wxCase.backup3,
+        backup4:that.data.wxCase.backup4,
+        caseitem:that.data.needscontent,
+        picOne:that.data.picIurl1
       }
-    }, 'post')
+      qingqiu.get("updateCase",data,function(res){
+        that.setData({
+          btnFlag: true
+        })
+        if(res.result != true){
+          wx.showToast({
+            title: '修改成功',
+            icon:'none'
+          })
+          wx.navigateBack({
+            delta:1
+          })
+        }else{
+          wx.showToast({
+            title: res.message,
+            icon:"none"
+          })
+        }
+      })
+    }else{
+      var data = {
+        wxUserId: app.globalData.wxid,
+        backup2: 1,
+        backup3: 0,
+        backup4: 0,
+        caseName: that.data.needscontent,
+        picOne: that.data.picIurl1
+      }
+      console.log(data)
+      qingqiu.get("insertCase", data, function (re) {
+        console.log(re)
+        that.setData({
+          btnFlag: false
+        })
+        if (re.success == true) {
+          wx.showToast({
+            title: '发布成功！',
+            icon: 'success',
+            duration: 2000
+          })
+          app.globalData.showworkRefresh = 1
+          // wx.switchTab({
+          //   url: '../showwork/showwork',
+          // })
+          setTimeout(function () {
+            wx.navigateBack({
+              delta: 1
+            })
+          }, 1000)
+        }
+      }, 'post')
+    }
   },
   //获取输入的晒活内容
   commentinput: function (e) {
@@ -336,8 +354,8 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
-    var index2=0
-    var index3=0
+    var index2 = 0
+    var index3 = 0
     that.setData({
       btnFlag: true
     })
@@ -352,14 +370,14 @@ Page({
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
         // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)  
-        for(let i=0;i<tempFilePaths.length;i++){
-          if(!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])){
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])) {
             wx.showToast({
               title: '请上传静态图片',
-              icon:'none'
+              icon: 'none'
             })
             that.setData({
-              btnFlag:false
+              btnFlag: false
             })
             return
           }
@@ -405,7 +423,7 @@ Page({
                     var jj = JSON.parse(r);
                     var sj = api.viewUrl + jj.message
                     var tupianlists = that.data.tupianlists
-                    if(tupianlists.length<9){
+                    if (tupianlists.length < 9) {
                       tupianlists.push(jj.message)
                     }
                     // tupianlists.push(jj.message)
@@ -416,18 +434,18 @@ Page({
                     })
                   }
                 })
-                index2+=1
+                index2 += 1
               }
             }
           })
-          index3+=1
+          index3 += 1
         }
       },
     })
     that.setData({
       btnFlag: false
     })
-  }, 
+  },
   // 删除图片
   shanchu: function (e) {
     var that = this
@@ -443,11 +461,11 @@ Page({
     });
   },
   // 预览图片
-  imgview:function(e){
+  imgview: function (e) {
     var src = e.currentTarget.dataset.src
     wx.previewImage({
-      current:src,
-      urls:[src]
+      current: src,
+      urls: [src]
     })
   }
 })

@@ -7,41 +7,41 @@
 		<view class="content-left">
 			<view class="content-left-all zongxiang" bindtap="activityRemark">
 				<view>
-					<image src="../image/huodongshuoming.png" class="img-remark"></image>
+					<image src="{{iconUrl}}static/image/huodongshuoming.png" class="img-remark"></image>
 				</view>
 				<view>活动说明</view>
 			</view>
-			<view class="content-left-all zongxiang" bindtap="activityJoin">
+			<view class="content-left-all zongxiang" bindtap="submitVote">
 				<view>
-					<image src="../image/woyaobaomingactivity.png" class="img-remark"></image>
-				</view>
-				<view>我要报名</view>
-			</view>
-			<view class="content-left-all zongxiang">
-				<view>
-					<image src="../image/cansaizuopin.png" class="img-remark"></image>
-				</view>
-				<view>作品欣赏</view>
-			</view>
-		</view>
-		<view class="content-right">
-			<view class="content-righ-all zongxiang" bindtap="welfareReview">
-				<view>
-					<image src="../image/pingshenzhuanjia.png" class="img-remark"></image>
-				</view>
-				<view>活动详情</view>
-			</view>
-			<view class="content-righ-all zongxiang">
-				<view>
-					<image src="../image/shangchuanzuopin.png" class="img-remark"></image>
+					<image src="{{iconUrl}}static/image/shangchuanzuopin.png" class="img-remark"></image>
 				</view>
 				<view>作品上传</view>
 			</view>
-			<view class="content-righ-all zongxiang">
+			<view class="content-left-all zongxiang" bindtap="votePublish">
 				<view>
-					<image src="../image/huojianggongbu.png" class="img-remark"></image>
+					<image src="{{iconUrl}}static/image/huojianggongbu.png" class="img-remark"></image>
 				</view>
 				<view>获奖公布</view>
+			</view>
+		</view>
+		<view class="content-right">
+			<!-- <view class="content-righ-all zongxiang" bindtap="WelfareDetail" data-id="{{activityId}}">
+				<view>
+					<image src="{{iconUrl}}static/image/pingshenzhuanjia.png" class="img-remark"></image>
+				</view>
+				<view>活动详情</view>
+			</view> -->
+			<view class="content-righ-all zongxiang" bindtap="activityJoin">
+				<view>
+					<image src="{{iconUrl}}static/image/woyaobaomingactivity.png" class="img-remark"></image>
+				</view>
+				<view>我要报名</view>
+			</view>
+			<view class="content-righ-all zongxiang" bindtap="showwork">
+				<view>
+					<image src="{{iconUrl}}static/image/cansaizuopin.png" class="img-remark"></image>
+				</view>
+				<view>作品欣赏</view>
 			</view>
 		</view>
 	</view>

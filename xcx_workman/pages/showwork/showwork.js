@@ -9,38 +9,17 @@ Page({
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     showList: [],
-    activityList: [{
-        id: 1,
-        picIurl: '../image/fengjingtu.jpg',
-        name: '王小二',
-        sumnum: 1230,
-        datetime:'2020-8-3'
-      },
-      {
-        id: 2,
-        picIurl: '../image/fengjingtu.jpg',
-        name: '店小二',
-        sumnum: 120,
-        datetime:'2020-8-3'
-      },
-      {
-        id: 3,
-        picIurl: '../image/fengjingtu.jpg',
-        name: '顺溜',
-        sumnum: 230,
-        datetime:'2020-8-3'
-      }
-    ],
+    activityList: [],
     showsTypeList: [{
         id: 0,
-        name: '活动'
+        name: '摄影大赛'
       },
       {
         id: 1,
         name: '万载风光'
       }
     ],
-    typeflag: 0,
+    typeflag: 0, // 0活动，1风光照
     // imgList: [
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
     //   "http://192.168.1.254:3000/work-boot/sys/common/view/191590400845_.pic_hd.jpg",
@@ -48,6 +27,7 @@ Page({
     // ],
     imgList: [],
     sousuotext: '',
+    voteNum: '0',
     id: '',
     name: '',
     sousuonr: '',
@@ -58,23 +38,146 @@ Page({
     var that = this;
     var id = e.currentTarget.dataset.id
     that.setData({
+      // pageNo:1,
       typeflag: id
     })
   },
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  // 上传作品
+  submitVote: function () {
+    var that = this
+    qingqiu.get("getActivityVote", {
+      wxUserId: app.globalData.wxid
+    }, function (res) {
+      console.log(res)
+      if (res.result > 0) {
+        qingqiu.get("getVoteCount", {
+          wxUserId: app.globalData.wxid
+        }, function (re) {
+          console.log(re)
+          if (re.result != null) {
+            var obj = JSON.stringify(re.result)
+            wx.navigateTo({
+              url: '../submitActivity/submitActivity?&obj=' + obj,
+            })
+          } else {
+            wx.navigateTo({
+              url: '../submitActivity/submitActivity'
+            })
+          }
+        })
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '请先报名，再来上传作品',
+          cancelText: '取消',
+          confirmText: '立即前往',
+          success: function (res) {
+            console.log(res)
+            if (res.confirm) {
+              app.globalData.welfareRefresh = 1
+              wx.navigateTo({
+                url: '../Welfare/Welfare',
+              })
+            }
+          }
+        })
+      }
+    })
+  },
+  getCasePageVote: function () {
+    var that = this
+    var data = {
+      pageNo: that.data.pageNo,
+      size: 10,
+      wxUserIdGo: app.globalData.wxid,
+      backup2: 1
+    }
+    if (that.data.sousuotext != '') {
+      data.signName = that.data.sousuotext
+    }
+    qingqiu.get("getCasePageVote", data, function (res) {
+      if (res.success == true) {
+        if (res.result != null) {
+          console.log(res)
+          var activityList = []
+          for (var i = 0; i < res.result.records.length; i++) {
+            var activityimg = []
+            if (res.result.records[i].picOne.indexOf(',') != -1) {
+              activityimg = res.result.records[i].picOne.split(',')
+            } else {
+              activityimg.push(res.result.records[i].picOne)
+            }
+            res.result.records[i].picOne = activityimg
+            activityList.push(res.result.records[i])
+          }
+          console.log('摄影作品', activityList)
+          that.setData({
+            activityList: activityList
+          })
+        } else {
+          wx.showToast({
+            title: re.message,
+            icon: "none"
+          })
+        }
+      }
+    })
+  },
+  // 跳转到晒晒详情页面
+  showVote: function (e) {
+    var item = e.currentTarget.dataset.obj;
+    app.globalData.showworkRefresh = 0
+    item = JSON.stringify(item)
+    console.log(item)
+    wx.navigateTo({
+      url: '../showVote/showVote?url=' + item,
+    })
+  },
+  // 投票功能
+  activity: function (e) {
+    var that = this
+    if (that.data.voteNum == 0) {
+      wx.showToast({
+        title: '当天投票次数已经用完，请明天再来...',
+        icon: "none"
+      })
+      return
+    }
+    var item = e.currentTarget.dataset.itemobj;
+    var data = {
+      wxCaseId: item.id,
+      wxUserIdGo: app.globalData.wxid
+    }
+    qingqiu.get("voteLikes", data, function (re) {
+      console.log('投票', re)
+      if (re.success == true) {
+        for (let obj of that.data.activityList) {
+          if (obj.id == item.id) {
+            if (item.giveState == 0) {
+              obj.giveGood += 1
+            }
+            obj.giveState = 1
+          }
+        }
+        wx.showToast({
+          title: '投票成功',
+          icon: 'success'
+        })
+        that.setData({
+          activityList: that.data.activityList,
+          voteNum: Number(that.data.voteNum) - 1
+        })
+      }
+    })
+  },
+  // 搜索
+  btnsearchvote: function () {
+    this.data.pageNo = 1
+    this.data.isLastPage = false
+    this.data.activityList.splice(0, this.data.activityList.length)
+    this.getCasePageVote()
+  },
 
   onPullDownRefresh: function () {
     app.globalData.showid = 1
@@ -116,6 +219,8 @@ Page({
           pageNo: 1
         })
         this.SelectshowList()
+        this.getCasePageVote()
+        this.getVoteNum()
       } else {
         this.setData({
           showList: [],
@@ -126,10 +231,24 @@ Page({
           areaId: 0
         })
         this.SelectshowList()
+        this.getCasePageVote()
+        this.getVoteNum()
       }
     }
   },
-
+  getVoteNum: function () {
+    var that = this
+    qingqiu.get("getVoteNum", {
+      id: app.globalData.wxid
+    }, function (res) {
+      console.log(res)
+      if (res.success == true) {
+        that.setData({
+          voteNum: res.result.backup6
+        })
+      }
+    })
+  },
   // 上拉功能
   onReachBottom: function () {
     if (this.data.isLastPage) {
@@ -145,6 +264,7 @@ Page({
     })
     this.SelectshowList()
   },
+
   // 获取晒晒 
   SelectshowList() {
     var that = this
@@ -152,7 +272,8 @@ Page({
       pageNo: that.data.pageNo,
       size: 10,
       caseName: that.data.sousuonr,
-      wxUserIdGo: app.globalData.wxid
+      wxUserIdGo: app.globalData.wxid,
+      backup2: 0
     }
     if (app.globalData.oneCity != undefined && app.globalData.oneCity != "undefined") {
       data.oneAreaId = app.globalData.oneCity.id
@@ -167,11 +288,10 @@ Page({
         if (re.result != null) {
           that.showList = re.result.records
           for (var i = 0; i < that.showList.length; i++) {
-            that.showList[i].picOne = api.viewUrl + re.result.records[i].picOne.split(',')[0]
+            that.showList[i].picOne = api.iconUrl + re.result.records[i].picOne.split(',')[0]
             that.data.imgList[i] = that.showList[i].picOne
             that.data.showList.push(re.result.records[i])
           }
-          console.log(that.data.showList)
           that.setData({
             showList: that.data.showList
           })

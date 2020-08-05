@@ -157,6 +157,7 @@ Page({
     console.log(app.globalData.wxid)
     var data = {
       wxUserId: app.globalData.wxid,
+      backup2: 0,
       backup3: 0,
       backup4: 0,
       oneAreaId: that.data.cityId,
@@ -166,7 +167,6 @@ Page({
     }
     console.log(data)
     qingqiu.get("insertCase", data, function (re) {
-      console.log(re)
       that.setData({
         btnFlag: false
       })

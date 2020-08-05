@@ -268,65 +268,116 @@ Page({
     }
     wx.showModal({
       title: '提示',
-      content:'是否发布为摄影活动？(发布为摄影活动需等待后台审核)',
+      content:'是否发布为摄影活动？(摄影活动需等待后台审核)',
       cancelText:'否',
       confirmText:'是',
       success:function(res){
         console.log(res)
         if(res.confirm){
           data.backup1 = 1
+          data.backup2 = 0
+          if(that.data.id != 0){
+            data.id = that.data.id
+            qingqiu.get("editActivity",data,function(res){
+              that.setData({
+                btnFlag: false
+              })
+              if(res.success == true){
+                wx.showToast({
+                  title: res.message,
+                  icon:'none'
+                })
+                setTimeout(function(){
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                },1000)
+              }else{
+                wx.showToast({
+                  title: res.message,
+                  icon:'none'
+                })
+              }
+            },'put')
+          }else{
+            qingqiu.get("addActivity", data, function (re) {
+              that.setData({
+                btnFlag: false
+              })
+              if (re.success == true) {
+                wx.showToast({
+                  title: '发布成功',
+                  icon: 'success',
+                  duration: 3000
+                })
+                setTimeout(function(){
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                },1000)
+              } else {
+                wx.showToast({
+                  title: re.message,
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            }, 'post')
+          }
+        }else{
+          data.backup1 = 0
+          data.backup2 = 1
+          if(that.data.id != 0){
+            data.id = that.data.id
+            qingqiu.get("editActivity",data,function(res){
+              that.setData({
+                btnFlag: false
+              })
+              if(res.success == true){
+                wx.showToast({
+                  title: res.message,
+                  icon:'none'
+                })
+                setTimeout(function(){
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                },1000)
+              }else{
+                wx.showToast({
+                  title: res.message,
+                  icon:'none'
+                })
+              }
+            },'put')
+          }else{
+            qingqiu.get("addActivity", data, function (re) {
+              that.setData({
+                btnFlag: false
+              })
+              if (re.success == true) {
+                wx.showToast({
+                  title: '发布成功',
+                  icon: 'success',
+                  duration: 3000
+                })
+                setTimeout(function(){
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                },1000)
+              } else {
+                wx.showToast({
+                  title: re.message,
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            }, 'post')
+          }
         }
       }
     })
-
-    if(that.data.id != 0){
-      data.id = that.data.id
-      qingqiu.get("editActivity",data,function(res){
-        that.setData({
-          btnFlag: false
-        })
-        if(res.success == true){
-          wx.showToast({
-            title: res.message,
-            icon:'none'
-          })
-          setTimeout(function(){
-            wx.navigateBack({
-              delta: 1
-            })
-          },1000)
-        }else{
-          wx.showToast({
-            title: res.message,
-            icon:'none'
-          })
-        }
-      },'put')
-    }else{
-      qingqiu.get("addActivity", data, function (re) {
-        that.setData({
-          btnFlag: false
-        })
-        if (re.success == true) {
-          wx.showToast({
-            title: '发布成功',
-            icon: 'success',
-            duration: 3000
-          })
-          setTimeout(function(){
-            wx.navigateBack({
-              delta: 1
-            })
-          },1000)
-        } else {
-          wx.showToast({
-            title: re.message,
-            icon: 'none',
-            duration: 2000
-          })
-        }
-      }, 'post')
-    }
   },
   //获取活动名称
   activitynameinput: function (e) {

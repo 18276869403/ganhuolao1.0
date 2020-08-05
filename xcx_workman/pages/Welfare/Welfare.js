@@ -104,6 +104,7 @@ Page({
       isShowConfirm: false,
     })
   },
+  
   // 提交报名
   confirmAcceptance: function () {
     var that = this
@@ -146,7 +147,6 @@ Page({
       })
       return
     }
-    console.log(data)
     qingqiu.get("insertActivitySign", data, function (res) {
       console.log(res)
       that.setData({

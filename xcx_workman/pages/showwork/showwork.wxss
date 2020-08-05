@@ -530,9 +530,11 @@ page {
 }  
 /* 活动 */
 .top-type{
-  width: 94%;
+  width: 80%;
   background: #fff;
   padding: 3%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 .xuanzhong {
   width: 50%;
@@ -555,11 +557,22 @@ page {
   /* line-height: 80rpx; */
 }
 .top-title-activty{
-  width: 100%;
+  width: 75%;
   height: 60rpx;
   line-height: 60rpx;
   background: rgba(242, 242, 242, 1);
   overflow: hidden;
+}
+.top-title-activty-right{
+  width: 25%;
+  height: 60rpx;
+  line-height: 60rpx;
+  overflow: hidden;
+}
+.top-img{
+  padding-left: 10rpx;
+  width: 160rpx;
+  height: 60rpx;
 }
 .bian {
   border-bottom: 6rpx solid #e02323;
@@ -594,16 +607,18 @@ page {
   padding-right: 3%;
   padding-left: 3%;
 }
+.activity-image{
+  padding-top: -10rpx;
+}
 .activity-img{
-  width: 220rpx;
-  height: 100rpx;
-  padding-top: 8rpx;
+  width: 199rpx;
+  height: 99rpx;
 }
 .activity-bottom-left{
-  width: 68%;
+  width: 70%;
   padding-left: 3%;
   padding-bottom: 2%;
-  line-height: 40rpx;
+  /* line-height: 40rpx; */
 }
 .bianhao{
   font-size: 30rpx;
@@ -619,4 +634,6 @@ page {
 .activity-left-text{
   width: 100%;
   padding-top: 10rpx;
+  height: 80rpx;
+  line-height: 80rpx;
 }

@@ -10,26 +10,25 @@ page{
 }
 .content-left{
   width: 50%;
+  padding-left: 50rpx;
 }
 .img-remark{
   width: 140rpx;
   height: 140rpx;
-  /* border: 4rpx solid red; */
 }
 .content-left-all{
   width: 100%;
   text-align: center;
   padding-top: 40rpx;
-  padding-left: 40rpx;
 }
 .content-right{
   width: 50%;
+  padding-right: 50rpx;
 }
 .content-righ-all{
   width: 100%;
   text-align: center;
   padding-top: 40rpx;
-  padding-right: 50rpx;
 }
 .sort-text {
   text-align: center;

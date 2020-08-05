@@ -72,7 +72,7 @@ Page({
       if(options.obj != undefined){
         var gongyilist = JSON.parse(options.obj)
         this.addressValue(gongyilist)
-      }else if(options.id != undefined){
+      }else if(options.id != undefined && options.id != 0){
         this.getActivityDetail(options.id)
       }else{
         wx.showToast({
