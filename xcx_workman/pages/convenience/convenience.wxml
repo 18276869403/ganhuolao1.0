@@ -1,63 +1,90 @@
 <!--pages/convenience/convenience.wxml-->
-<view>
+<view class="container">
 	<view class="hengxian"></view>
-	<view class="view-content">
-		<view class="view-top">
-			<view class="view-top-title">公告板</view>
-			<view class="top-hengxiang"></view>
-			<view class="view-top-content zongxiang">
-				<view class="view-top-content-item" wx:for="{{NoticeList}}">
-					{{item}}
-				</view>
-			</view>
+	<view class="top zongxiang">
+		<view class="top-img">
+			<image src="{{iconUrl}}static/image/gongyi.jpg" class="bg-img"></image>
 		</view>
-		<view class="view-kuai"></view>
-		<view class="view-content zongxiang" style="margin-bottom:0rpx;">
-			<view class="view-content-item hengxiang">
-				<view class="view-content-item-key">出发地</view>
-				<view class="shengxian">|</view>
-				<view class="view-content-item-value">
-					<input type="text" placeholder="输入出发地" class="shurukuang"></input>
-				</view>
-			</view>
-			<view class="view-content-item hengxiang" style="margin-top:10rpx;">
-				<view class="view-content-item-key">目的地</view>
-				<view class="shengxian">|</view>
-				<view class="view-content-item-value">
-					<input type="text" placeholder="输入目的地" class="shurukuang"></input>
-				</view>
-			</view>
-			<view class="view-content-item hengxiang" style="margin-top:10rpx;">
-				<view class="view-content-item-key">出发日期</view>
-				<view class="shengxian">|</view>
-				<view class="view-content-item-value">
-					<input type="text" placeholder="输入出发日期(年-月-日)" class="shurukuang"></input>
-				</view>
-			</view>
-			<view class="view-content-item hengxiang" style="margin-top:10rpx;">
-				<view class="view-content-item-key">类型</view>
-				<view class="shengxian">|</view>
-				<view class="view-content-item-value">
-					<picker class="view-picker" bindchange="bindPickerChangeType" value="{{index}}" range="{{type}}">
-						<view class="picker hengxiang">
-							<view class="prcker-text {{index===0?'picker-text':''}}">
-								{{type[index]}}</view>
-							<view>
-								<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
+	</view>
+	<view class="content zongxiang">
+		<!-- 公益活动模块 -->
+			<view class="content-need">
+			<view class="list" wx:for="{{bianminlist}}" wx:for-index="index" wx:key="index">
+				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
+					<view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
+						<image src="{{iconUrl}}static/image/zawu1.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-right">
+						<view class="content-list">
+							<view class="content-list-item hengxiang">
+								<view class="content-neirong-title">
+									{{item.time}}
+								</view>
+								<view class="content-list-leixing">
+									<view class="content-list-type">详情</view>
+								</view>
+							</view>
+              <view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item2 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view class="baoming-img-item">
+											出发地：
+										</view>
+										<view>
+											<text style="color:#333333">{{item.chu}}</text>
+										</view>
+									</view>
+								</view>
+							</view>
+              <view class="content-list-bottom hengxiang">
+								<view class="list-bottom-item2 hengxiang">
+									<view class="bottom-item hengxiang">
+										<view class="baoming-img-item">
+											目的地：
+										</view>
+										<view>
+											<text style="color:#333333">{{item.chu}}</text>
+										</view>
+									</view>
+								</view>
 							</view>
 						</view>
-					</picker>
+					</view>
 				</view>
 			</view>
 		</view>
-		<view>
-			<view class="view-kuai"></view>
-			<view class="view-bottom">
-				<view class="view-bottom-icon">
-					<image src="../image/renzhaoche.png" class="icon"></image>
-					<view class="view-bottom-title">北京 上海</view>
-				</view>
-				<view class="view-bootom-time">2020-08-06 17:47:00</view>
+
+	</view>
+	<view class="bottom zongxiang">
+		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		<button class='sousuo' style="width:100%" bindtap="Findss">
+			<image src="{{iconUrl}}static/image/kefu1.png" class="kefu-img"></image>
+		</button>
+	</view>
+</view>
+<!-- 遮罩层显示 -->
+<view>
+	<view class="commodity_screen" wx:if="{{showModalStatus}}" bindtap='hideModal'></view>
+	<view animation="{{animationData1}}" class="commodity_attr_box6" wx:if="{{showModalStatus}}">
+		<view class='alert hengxiang'>
+			<view class='s-left'>
+				<scroll-view class='left-navbar' scroll-y="true">
+					<view>
+					<view class="content-title">类型</view>
+          <view class="content-leixinganniu">人找车</view>
+					<view class="content-leixinganniu2">车找人</view>
+					<view class="content-leixinganniu2">车找货</view>
+					<view class="content-leixinganniu2">货找车</view>
+					<view class="content-title">出发时间</view>
+          <input type="text" placeholder="输入出发时间" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
+					<view class="content-title">出发地</view>
+          <input type="text" placeholder="输入出发地" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
+					<view class="content-title">目的地</view>
+          <input type="text" placeholder="输入目的地" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
+					</view>
+					<view class="bottom-right" bindtap="queding">确定</view>
+					<view class="bottom-left" bindtap="quxiao">取消</view>
+				</scroll-view>
 			</view>
 		</view>
 	</view>
