@@ -14,6 +14,7 @@ Page({
     activityId: 0,
     wxCaseId:0,
     needscontent: '',
+    comment:'',
     tupian: '',
     id: '',
     name: '',
@@ -49,12 +50,12 @@ Page({
             }
             res.result.picOne = tupianlists
             that.setData({
-              needscontent:res.result.caseName,
+              comment:res.result.caseName,
+              needscontent:res.result.caseContent,
               tupianlists:tupianlists,
               wxCase:res.result,
               wxCaseId:res.result.id
             })
-            console.log(that.data.wxCase)
           }else{
             wx.showToast({
               title: res.message,
@@ -73,10 +74,11 @@ Page({
           tupianlists.push(item.picOne)
         }
         this.setData({
-          needscontent:item.caseName,
+          comment:item.caseName,
+          needscontent:item.caseContent,
           tupianlists:tupianlists,
           wxCase:item,
-          wxCaaseId:item.id
+          wxCaseId:item.id
         })
       }
     }
@@ -101,7 +103,7 @@ Page({
     that.setData({
       btnFlag: true
     })
-    if (that.data.needscontent == "") {
+    if (that.data.comment == "") {
       wx.showToast({
         title: '活动标题不能为空！',
         icon: 'none',
@@ -128,45 +130,16 @@ Page({
       })
       return
     }
-    if(that.data.wxCaseId != 0){
-      var data = {
-        id:that.data.wxCase.id,
-        wxUserId:app.globalData.wxid,
-        backup2:that.data.wxCase.backup2,
-        backup3:that.data.wxCase.backup3,
-        backup4:that.data.wxCase.backup4,
-        caseitem:that.data.needscontent,
-        picOne:that.data.picIurl1
-      }
-      qingqiu.get("updateCase",data,function(res){
-        that.setData({
-          btnFlag: true
-        })
-        if(res.result != true){
-          wx.showToast({
-            title: '修改成功',
-            icon:'none'
-          })
-          wx.navigateBack({
-            delta:1
-          })
-        }else{
-          wx.showToast({
-            title: res.message,
-            icon:"none"
-          })
-        }
-      })
-    }else{
+    if(that.data.wxCaseId == 0){
       var data = {
         wxUserId: app.globalData.wxid,
         backup2: 1,
         backup3: 0,
         backup4: 0,
-        caseName: that.data.needscontent,
+        caseName: that.data.comment,
+        caseContent:that.data.needscontent,
         picOne: that.data.picIurl1
       }
-      console.log(data)
       qingqiu.get("insertCase", data, function (re) {
         console.log(re)
         that.setData({
@@ -189,15 +162,85 @@ Page({
           }, 1000)
         }
       }, 'post')
+    }else{
+      var data = {
+        id:that.data.wxCase.id,
+        wxUserId:app.globalData.wxid,
+        backup2:that.data.wxCase.backup2,
+        backup3:that.data.wxCase.backup3,
+        backup4:that.data.wxCase.backup4,
+        caseName:that.data.comment,
+        caseContent:that.data.needscontent,
+        picOne:that.data.picIurl1
+      }
+      qingqiu.get("updateCase",data,function(res){
+        that.setData({
+          btnFlag: true
+        })
+        if(res.result != true){
+          wx.showToast({
+            title: '修改成功',
+            icon:'none'
+          })
+          setTimeout(function () {
+            app.globalData.showworkRefresh = 1
+            wx.switchTab({
+              url: '../showwork/showwork',
+            })
+          }, 1000)
+        }else{
+          wx.showToast({
+            title: res.message,
+            icon:"none"
+          })
+        }
+      })
     }
   },
   //获取输入的晒活内容
   commentinput: function (e) {
     this.setData({
-      needscontent: e.detail.value
+      comment: e.detail.value
     })
   },
   commentinputblur: function (e) {
+    if (e.detail.value == '') {
+      return
+    }
+    var that = this
+    qingqiu.get("checkWords", {
+      content: e.detail.value
+    }, function (res) {
+      if (res == 1) {
+        that.setData({
+          comment: ''
+        })
+        wx.showToast({
+          title: '内容包含敏感词，请重新输入...',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      } else if (res == 2) {
+        wx.showToast({
+          title: '校验失败',
+          icon: 'none'
+        })
+        that.setData({
+          comment: ''
+        })
+        return
+      }
+    }, 'POST')
+  },
+
+  //获取输入的晒活内容
+  needscontentinput: function (e) {
+    this.setData({
+      needscontent: e.detail.value
+    })
+  },
+  needscontentblur: function (e) {
     if (e.detail.value == '') {
       return
     }
@@ -227,128 +270,7 @@ Page({
       }
     }, 'POST')
   },
-  //地址 显示弹窗样式
-  showModal: function (e) {
-    this.setData({
-      hasMask: true
-    })
-    var animation = wx.createAnimation({
-      duration: 300,
-      timingFunction: "linear",
-      delay: 0
-    })
-    this.animation = animation
-    animation.opacity(0).rotateX(-100).step();
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: true
-    })
-    setTimeout(function () {
-      animation.opacity(1).rotateX(0).step();
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 200)
 
-
-  },
-  //隐藏弹窗样式 地址
-  hideModal: function () {
-    var that = this;
-    var animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: "linear",
-      delay: 0
-    })
-    this.animation = animation
-    animation.translateY(300).step()
-    this.setData({
-      animationData: animation.export(),
-      hasMask: false
-    })
-    setTimeout(function () {
-      animation.translateY(0).step()
-      this.setData({
-        animationData: animation.export(),
-        showModalStatus: false
-      })
-    }.bind(this), 200)
-  },
-  cityyiji: function () {
-    var that = this
-    qingqiu.get("oneAreaService", {}, function (re) {
-      if (re.data.result.length > 0) {
-        that.setData({
-          cityId: re.data.result[0].id,
-          cityname1: re.data.result[0].areaName
-        })
-      }
-      that.setData({
-        city: re.data.result
-      })
-      that.cityerji()
-    })
-  },
-  cityerji: function () {
-    var that = this
-    var data = {
-      oneAreaId: that.data.cityId
-    }
-    qingqiu.get("getAllTwoArea", data, function (re) {
-      that.setData({
-        area: re.data.result
-      })
-    })
-  },
-  // 左侧按钮
-  cityleft: function (e) {
-    var that = this;
-    // var index = e.currentTarget.dataset.index;
-    var id = e.currentTarget.dataset.id
-    var name = e.currentTarget.dataset.name
-    that.setData({
-      cityId: id,
-      cityname1: name,
-    })
-    var data = {
-      oneAreaId: id
-    }
-    qingqiu.get("queryTwoArea", data, function (re) {
-      if (re.success == true) {
-        if (re.result != null) {
-          that.area = re.result
-          that.setData({
-            area: that.area
-          })
-        } else {
-          qingqiu.tk('未查询到任何数据')
-        }
-      }
-    })
-  },
-  // 右侧单选点击
-  arearight: function (e) {
-    var that = this;
-    if (that.data.cityname1 == '') {
-      // wx.showToast({
-      //   title: '请先选择城市',
-      //   icon:'none',
-      //   duration:2000
-      // })
-      // return
-      that.data.cityname1 = that.data.name
-    }
-    //var index = e.currentTarget.dataset.index;
-    var id = e.currentTarget.dataset.id
-    var name = e.currentTarget.dataset.name
-    that.setData({
-      areaId: id,
-      //curIndex: index,
-      areaname: name,
-      showModalStatus: false,
-      cityname: that.data.cityname1
-    })
-  },
   // 图片上传（对接完成）
   upimg: function (e) {
     var type = e.currentTarget.dataset.type
@@ -360,7 +282,7 @@ Page({
       btnFlag: true
     })
     wx.chooseImage({
-      count: 9,
+      count: 5,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success: function (res) {
@@ -423,7 +345,7 @@ Page({
                     var jj = JSON.parse(r);
                     var sj = api.viewUrl + jj.message
                     var tupianlists = that.data.tupianlists
-                    if (tupianlists.length < 9) {
+                    if (tupianlists.length < 5) {
                       tupianlists.push(jj.message)
                     }
                     // tupianlists.push(jj.message)

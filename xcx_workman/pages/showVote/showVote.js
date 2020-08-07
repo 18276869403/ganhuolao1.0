@@ -34,6 +34,14 @@ Page({
     this.getVoteNum()
   },
 
+  // 图片放大
+  priview:function(e){
+    var url = e.currentTarget.dataset.src
+    wx.previewImage({
+      current:url,
+      urls: [url]
+    })
+  },
   getVoteNum: function () {
     var that = this
     qingqiu.get("getVoteNum", {
@@ -51,6 +59,39 @@ Page({
     var id = e.currentTarget.dataset.id
     wx.navigateTo({
       url: '../submitActivity/submitActivity?id=' + id,
+    })
+  },
+  deleteVote:function(e){
+    var that = this
+    var data = {
+      id: e.currentTarget.dataset.id
+    }
+    wx.showModal({
+      title: '提示',
+      content: '你确定要删除吗？',
+      success (res) {
+        if (res.confirm) {
+          qingqiu.get("deletess", data, function (res) {
+            console.log(res)
+            if (res.success == true) {
+              that.setData({
+                btnFlag: false
+              })
+              wx.showToast({
+                title: '删除成功',
+                icon: 'success',
+                duration: 2000
+              })
+              setTimeout(function(){
+                app.globalData.showworkRefresh = 1
+                wx.switchTab({
+                  url: '../showwork/showwork',
+                })
+              },1000)
+            } 
+          }, 'delete')
+        }
+      }
     })
   },
 

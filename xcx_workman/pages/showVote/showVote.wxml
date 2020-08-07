@@ -7,29 +7,36 @@
 			</view>
 			<view class="top-date hengxiang">
 				<view class="top-date-left zongxiang">
+					<view>编号：{{wxCase.needId}}</view>
 					<view style="width:100%" class="hengxiang">
 						<view style="width:50%;">作者：{{wxCase.signName}}</view>
 						<view style="width:50%;">票数：<text style="color:red;">{{wxCase.giveGood}}</text></view>
 					</view>
 					<view style="width:100%">上传时间：{{wxCase.createTime}}</view>
 				</view>
-				<view class="top-date-right">
+				<view class="top-date-right hengxiang">
 					<view class="update-button" data-id="{{wxCase.id}}" bindtap="editVote" wx:if="{{wxCase.wxUserId===wxUserid}}">
-						修 改
+						修改
+					</view>
+					<view class="delete-button" data-id="{{wxCase.id}}" bindtap="deleteVote" wx:if="{{wxCase.wxUserId===wxUserid}}">
+						删除
 					</view>
 					<view wx:if="{{wxCase.wxUserId!=wxUserid}}">
-						<view bindtap="activity" data-itemobj="{{wxCase}}" wx:if="{{wxCase.giveState==0}}">
+						<view bindtap="activity" data-itemobj="{{wxCase}}" wx:if="{{wxCase.giveState==0}}" style="margin-left:15rpx;">
 							<image src="{{iconUrl}}static/image/weitoupiao.png" class="activity-img"></image>
 						</view>
 						<view wx:if="{{wxCase.giveState==1}}">
-							<image src="{{iconUrl}}static/image/yitoupiao.png" class="activity-img"></image>
+							<image src="{{iconUrl}}static/image/yitoupiao.png" class="activity-img" style="margin-left:15rpx;"></image>
 						</view>
 					</view>
 				</view>
 			</view>
+			<view class="top-title-c hengxiang">
+				<view class="top-title-content"><text>创作灵感说明：{{wxCase.caseContent}}</text></view>
+			</view>
 		</view>
 		<view wx:for="{{wxCase.picOne}}" class="{{index != wxCase.picOne-1}}?'':content-bottom">
-			<image src="{{iconUrl}}{{item}}" mode="widthFix" class="img-class"></image>
+			<image src="{{iconUrl}}{{item}}" mode="widthFix" class="img-class" bindtap="priview" data-src="{{iconUrl}}{{item}}"></image>
 		</view>
 	</view>
 </view>

@@ -62,11 +62,14 @@
 				<view class="sortImg" bindtap="applyBusiness" data-typeid="2">
 					<image src="{{iconUrl}}static/image/shangjiaruzhu.png" class="sort-img"></image>
 				</view>
-				<view class="sortImg" bindtap="activity">
+				<!-- <view class="sortImg" bindtap="activity">
 					<image src="{{iconUrl}}static/image/tuijianyouli.png" class="sort-img"></image>
-				</view>
+				</view> -->
 				<view class="sortImg" bindtap="activity02">
 					<image src="{{iconUrl}}static/image/jiangongjisuan.png" class="sort-img"></image>
+				</view>
+				<view class="sortImg" bindtap="Convenience">
+					<image src="{{iconUrl}}static/image/bianminzhan.png" class="sort-img"></image>
 				</view>
 			</view>
 			<view class="sort-bottom hengxiang">
@@ -77,11 +80,14 @@
 				<view class="sort-text">
 					商家入驻
 				</view>
-				<view class="sort-text">
+				<!-- <view class="sort-text">
 					推荐有礼
-				</view>
+				</view> -->
 				<view class="sort-text">
 					建工计算
+				</view>
+				<view class="sort-text">
+					便民站
 				</view>
 
 			</view>

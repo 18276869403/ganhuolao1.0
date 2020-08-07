@@ -3,11 +3,13 @@ const app = getApp()
 
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
+const utils = require('../../utils/util.js')
 
 Page({
   data: {
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
+    btnFlag:false,
     showList: [],
     activityList: [],
     showsTypeList: [{
@@ -94,8 +96,9 @@ Page({
       backup2: 1
     }
     if (that.data.sousuotext != '') {
-      data.signName = that.data.sousuotext
+      data.signName = that.data.sousuotext.replace(/\b(0+)/gi,"")
     }
+    console.log(data)
     qingqiu.get("getCasePageVote", data, function (res) {
       if (res.success == true) {
         if (res.result != null) {
@@ -107,6 +110,9 @@ Page({
               activityimg = res.result.records[i].picOne.split(',')
             } else {
               activityimg.push(res.result.records[i].picOne)
+            }
+            if(res.result.records[i].caseContent == undefined || res.result.records[i].caseContent == "undefined" || res.result.records[i].caseContent == null){
+              res.result.records[i].caseContent = ''
             }
             res.result.records[i].picOne = activityimg
             activityList.push(res.result.records[i])
@@ -137,19 +143,31 @@ Page({
   // 投票功能
   activity: function (e) {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     if (that.data.voteNum == 0) {
       wx.showToast({
         title: '当天投票次数已经用完，请明天再来...',
         icon: "none"
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
     var item = e.currentTarget.dataset.itemobj;
     var data = {
       wxCaseId: item.id,
-      wxUserIdGo: app.globalData.wxid
+      wxUserIdGo: app.globalData.wxid,
+      backup1:app.globalData.wxNc,
+      backup2:app.globalData.openid
     }
+    console.log(data)
     qingqiu.get("voteLikes", data, function (re) {
+      that.setData({
+        btnFlag:false
+      })
       console.log('投票', re)
       if (re.success == true) {
         for (let obj of that.data.activityList) {
@@ -208,6 +226,10 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
+    if(app.globalData.showtype != undefined){
+      this.setData({typeflag:app.globalData.showtype})
+      app.globalData.showtype = undefined
+  }
     if (app.globalData.showworkRefresh != 0) {
       this.chushishouquan()
       this.QueryoneArea()
@@ -241,7 +263,7 @@ Page({
     qingqiu.get("getVoteNum", {
       id: app.globalData.wxid
     }, function (res) {
-      console.log(res)
+      console.log('投票数量',res)
       if (res.success == true) {
         that.setData({
           voteNum: res.result.backup6

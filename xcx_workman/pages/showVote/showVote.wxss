@@ -1,65 +1,81 @@
 /* pages/showVote/showVote.wxss */
-page{
+page {
   background: #f5f7fb;
 }
-.content{
+
+.content {
   width: 94%;
   padding: 0rpx 3%;
   padding-top: 20rpx;
 }
-.content-top{
-  height: 180rpx;
-  line-height: 60rpx;
+
+.content-top {
+  /* height: 600rpx; */
+  line-height: 50rpx;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
   border-radius: 8rpx;
   margin-bottom: 20rpx;
-  padding-left: 2%;
+  padding-left: 3%;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
 }
 
-.top-title{
+.top-title {
   width: 100%;
 }
-.top-title-left{
+
+.top-title-left {
   width: 100%;
   font-size: 32rpx;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.top-title-right{
+
+.top-title-right {
   width: 20%;
   font-size: 28rpx;
 }
-.top-date{
+
+.top-date {
   width: 100%;
   font-size: 28rpx;
   /* text-align: right; */
   color: #696969;
 }
-.top-date-left{
-  width: 70%;
+
+.top-date-left {
+  width: 64%;
 }
-.top-date-right{
-  width: 30%;
-  padding-top: 30rpx;
+
+.top-date-right {
+  /* width: 36%; */
+  position: absolute;
+  text-align: center;
+  right: 32rpx;
+  top: 166rpx;
 }
-.img-class{
+
+.img-class {
   width: 100%;
 }
-.hengxian{
+
+.hengxian {
   width: 100%;
   height: 10rpx;
   background-color: #999999;
 }
-.content-bottom{
+
+.content-bottom {
   margin-bottom: 50rpx;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
   border-radius: 8rpx;
 }
+
 .update-button {
-  width: 179rpx;
+  width: 100rpx;
   /* height: 80rpx; */
   border-radius: 4rpx;
   border: 2rpx solid #38bdf1;
@@ -68,9 +84,36 @@ page{
   font-size: 15px;
   color: #fff;
   background: #38bdf1;
+  height: 50rpx;
 }
-.activity-img{
-  width: 199rpx;
-  height: 99rpx;
+
+.delete-button {
+  width: 100rpx;
+  /* height: 80rpx; */
+  border-radius: 4rpx;
+  border: 2rpx solid #f4820d;
+  /* line-height: 80rpx; */
+  text-align: center;
+  font-size: 15px;
+  color: #fff;
+  background: #f4820d;
+  height: 50rpx;
+  margin-left: 19rpx;
+  margin-right: 10rpx;
+}
+
+.activity-img {
+  width: 177rpx;
+  height: 80rpx;
   margin-top: -10rpx;
+}
+
+.top-title-content {
+  width: 100%;
+  font-size: 28rpx;
+  color: #696969;
+}
+
+.top-title-c {
+  width: 100%;
 }

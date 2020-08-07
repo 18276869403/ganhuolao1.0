@@ -31,6 +31,7 @@ Page({
   },
   // 作品欣赏
   showwork: function () {
+    app.globalData.showtype = 0
     wx.switchTab({
       url: '../showwork/showwork',
     })

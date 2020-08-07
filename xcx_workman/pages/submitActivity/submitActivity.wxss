@@ -20,6 +20,7 @@
   font-size: 14px;
 }
 
+
 .content-item-title {
   margin-left: 30rpx;
   margin-right: 30rpx;
@@ -54,6 +55,7 @@
   padding-bottom: 16rpx;
   padding-left: 25rpx;
   padding-right: 25rpx;
+  background: #f5f6f9;
 }
 
 .content-button {

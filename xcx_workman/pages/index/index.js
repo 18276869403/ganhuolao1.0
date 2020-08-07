@@ -93,6 +93,7 @@ Page({
                     if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
                       app.globalData.sqgl = 1
                     }
+                    app.globalData.wxNc = re.result.wxNc
                     app.globalData.openid = re.result.openId
                     app.globalData.unionid = re.result.wxUser.unionid
                     app.globalData.wxState = re.result.wxUser.wxState
@@ -583,6 +584,17 @@ Page({
     app.globalData.needRefresh=1
     wx.switchTab({
       url: '../need/need',
+    })
+  },
+  // 便民站
+  Convenience:function(){
+    wx.showToast({
+      title: '功能开发中...',
+      icon:"none"
+    })
+    return
+    wx.navigateTo({
+      url: '../convenienceDetails/convenienceDetails',
     })
   },
   // 跳转到需求详情页面

@@ -19,7 +19,7 @@
 						<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 					</view>
 					<view class="top-title-right-shuru">
-						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入作者名/标题名" class="shurukuang"></input>
+						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入编号/作者名" class="shurukuang"></input>
 					</view>
 					<view class="top-title-right-sousuo">
 						<view class="sousuo-button" bindtap="btnsearchvote">搜索</view>
@@ -32,6 +32,7 @@
 		</view>
 		<view class="bottom-activity">
 			<view style="padding-bottom:20rpx;font-size:25rpx;">每日可为5名作者投1票，作弊取消参赛资格（今日剩余投票 <text style="color:red;">{{voteNum}}</text>）</view>
+			<view style="padding-bottom:20rpx;font-size:25rpx;"><text style="color:red;">郑重声明：\n1、照片必须为原创拍摄。\n2、从网上下载的图片取消作品参赛资格，且涉及侵权责任自负。\n3、取景地非万载境内作品取消参赛资格。\n4、投票为海选，请大家不要作弊刷票，异常刷票将取消资格。</text></view>
 			<block wx:for-items="{{activityList}}">
 				<view class="show-activity zongxiang">
 					<view class="show-item-top" bindtap="showVote" data-obj="{{item}}">
@@ -41,17 +42,15 @@
 					<view class="hengxiang">
 						<view class="activity-bottom-left">
 							<view class="activity-left-text hengxiang">
-								<view class="bianhao" style="width:60%;">
-									<image src="{{iconUrl}}static/image/huodongbiaoti.png" class="icon-img"></image>
-									<text> {{item.caseName}}</text>
+								<view class="bianhao" style="width:70%;">编号:{{item.needId}}
 								</view>
-								<view class="bianhao" style="width:40%;">
+								<view class="bianhao" style="width:30%;">
 									<image src="{{iconUrl}}static/image/vote.png" class="icon-img"></image>
 									<text> {{item.giveGood}}</text> 票
 								</view>
 							</view>
 						</view>
-						<view bindtap="activity" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+						<view bindtap="activity" class="{{btnFlag == true?'disabled':''}}" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
 							<image src="{{iconUrl}}static/image/weitoupiao.png" class="activity-img"></image>
 						</view>
 						<view wx:if="{{item.giveState==1}}">

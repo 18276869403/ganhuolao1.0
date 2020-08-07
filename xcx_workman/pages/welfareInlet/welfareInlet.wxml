@@ -64,6 +64,11 @@
 						<view class="value-class"><input type='number' placeholder='输入联系电话' bindinput='signPhone' data-name='{{signPhone}}' class="input-class"></input></view>
 					</view>
 				</view>
+				<view class='toast-text'>
+					<view class="toast-main-text">
+						注：请填写真实信息，否则获奖后无法联系，后果自负
+					</view>
+				</view>
 				<view class='toast-button'>
 					<view class='button1 {{btnFlag == true ? "disabled":""}}'>
 						<view catchtap='confirmAcceptance'>
