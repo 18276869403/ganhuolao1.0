@@ -23,9 +23,9 @@
 				<view class="header-text zongxiang">
 					<view class="header-text-font">联系人：{{convenience.linkName}}</view>
 					<view class="header-text-font hengxiang" style="padding-top:10rpx;">
-            <view><text decode="{{true}}" space="{{true}}">电 &nbsp;&nbsp;话：</text>{{convenience.linkPhone}}</view>
-            <view class="phone" bindtap="phone" data-phone="{{convenience.linkPhone}}">联系TA</view>
-          </view>
+						<view><text decode="{{true}}" space="{{true}}">电 &nbsp;&nbsp;话：</text>{{convenience.linkPhone}}</view>
+						<view class="phone" bindtap="phone" data-phone="{{convenience.linkPhone}}">联系TA</view>
+					</view>
 				</view>
 			</view>
 		</view>
@@ -49,13 +49,15 @@
 			</view>
 		</view>
 		<view class="bottom hengxiang">
-			<view class="bottom-left">
-				<image src="https://www.it-ys.com:81/work-boot/files/20200807/wx14e076d27e942480.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130_1596778400251.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130.jpg" mode="aspectFill" class="tupian"></image>
-			</view>
-      <view class="bottom-center"></view>
-			<view class="bottom-right">
-				<image src="https://www.it-ys.com:81/work-boot/files/20200807/wx14e076d27e942480.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130_1596778400251.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130.jpg" mode="aspectFill" class="tupian"></image>
-			</view>
+			<block wx:for="{{tupian}}">
+				<view class="bottom-left" wx:if="{{index%2==0}}">
+					<image src="{{iconUrl}}{{item}}" mode="aspectFill" class="tupian" bindtap="tupian" data-url="{{iconUrl}}{{item}}"></image>
+				</view>
+				<view class="bottom-center"></view>
+				<view class="bottom-right" wx:if="{{index%2!=0}}">
+					<image src="{{iconUrl}}{{item}}" mode="aspectFill" class="tupian" bindtap="tupian" data-url="{{iconUrl}}{{item}}"></image>
+				</view>
+			</block>
 		</view>
 	</view>
 </view>
