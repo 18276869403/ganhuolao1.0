@@ -93,11 +93,12 @@ Page({
                     if (re.result.wxUser.picUrl != null && re.result.wxUser.picUrl.length > 0) {
                       app.globalData.sqgl = 1
                     }
-                    app.globalData.wxNc = re.result.wxNc
+                    app.globalData.wxNc = re.result.wxUser.wxNc
                     app.globalData.openid = re.result.openId
                     app.globalData.unionid = re.result.wxUser.unionid
                     app.globalData.wxState = re.result.wxUser.wxState
                     app.globalData.gender = re.result.wxUser.sex
+                    console.log(app.globalData)
                   }, 'post')
                 }
               })
