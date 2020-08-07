@@ -116,6 +116,10 @@ const updateCase = baseUrl + "pc/hall/updateCase"
 const getVoteById = baseUrl + "pc/user/getVoteById"
 // 便民站添加
 const convenienceAdd = baseUrl + "work/convenience/add"
+// 便民站修改
+const convenienceEdit = baseUrl + "work/convenience/edit"
+// 便民站获取详情ById
+const queryconvenienceById = baseUrl + "work/convenience/queryconvenienceById"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -171,5 +175,7 @@ module.exports = {
   getVoteCount:getVoteCount,
   updateCase:updateCase,
   getVoteById:getVoteById,
-  convenienceAdd:convenienceAdd
+  convenienceAdd:convenienceAdd,
+  convenienceEdit:convenienceEdit,
+  queryconvenienceById:queryconvenienceById
 };
