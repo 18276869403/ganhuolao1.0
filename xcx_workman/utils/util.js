@@ -43,7 +43,7 @@ const SubName = function (str) {
   var temp = "";
   if (str.length > 2) {
     temp = temp + str.substring(0, 3) + "...";
-  } else { 
+  } else {
     temp = str
   }
   return temp;
@@ -150,10 +150,28 @@ const newDate = function () {
   var D = date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
   return Y + "-" + M + "-" + D
 }
-
+// 编号重定义
+const getById = function (str) {
+  console.log(str)
+  switch (str.length) {
+    case 1:
+      str = '000' + str
+      break;
+    case 2:
+      str = '00' + str
+      break;
+    case 3:
+      str = '0' + str
+      break
+    default:
+      str = str
+      break
+  }
+  return str
+}
 
 // 比较两个时间的大小
-const checkDate = function(startTime,endTime) {
+const checkDate = function (startTime, endTime) {
   //日期格式化
   var start_date = new Date(startTime.replace(/-/g, "/"));
   var end_date = new Date(endTime.replace(/-/g, "/"));
@@ -177,6 +195,7 @@ module.exports = {
   floatReglist: floatReglist,
   numberReglist: numberReglist,
   nowTime: nowTime,
-  newDate:newDate,
-  checkDate:checkDate
+  newDate: newDate,
+  checkDate: checkDate,
+  getById:getById
 }

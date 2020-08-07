@@ -1,6 +1,10 @@
 var api = require('./config.js')
-const baseUrl = "https://www.it-ys.com:81/work-boot/"  
-// const baseUrl = "http://192.168.1.250:8080/work-boot/"  
+// 线上
+// const baseUrl = "https://www.it-ys.com:81/work-boot/"
+// 体验
+// const baseUrl = "http://111.231.51.198:9045/work-boot/"  
+// 本地
+const baseUrl = "http://192.168.1.250:8080/work-boot/" 
 // const baseUrl = "http://192.168.1.233:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.235:8080/work-boot/"   
 
@@ -33,15 +37,15 @@ const UserWorkPage = baseUrl + "pc/user/userWorkPage"
 // 获取二维码
 const GetCode = baseUrl + "pc/hall/code"
 // 雇佣TA
-const UserWorkAdd = baseUrl + "/pc/hall/userWorkAdd"
+const UserWorkAdd = baseUrl + "pc/hall/userWorkAdd"
 // 删除我的雇佣
-const DeleteUserWork = baseUrl + "/pc/hall/deleteUserWork"
+const DeleteUserWork = baseUrl + "pc/hall/deleteUserWork"
 // 需求报名
-const InsertNeedSign = baseUrl + "/pc/user/insertNeedSign"
+const InsertNeedSign = baseUrl + "pc/user/insertNeedSign"
 // 通过需求id查询需求
-const YneedBy = baseUrl + "/pc/hall/yneedBy"
+const YneedBy = baseUrl + "pc/hall/yneedBy"
 // 通过雇佣id查询
-const UserWorkBy = baseUrl + "/pc/user/userWorkBy"
+const UserWorkBy = baseUrl + "pc/user/userWorkBy"
 // 修改雇佣
 const UserWorkUpdateById = baseUrl + "/pc/user/userWorkUpdateById"
 // 晒晒浏览+1
@@ -96,6 +100,22 @@ const getWxUserById = baseUrl + "pc/hall/getWxUserById"
 const localHireEdit = baseUrl + "work/loclahire/localHireEdit"
 // 修改公益
 const editActivity = baseUrl + "pc/hall/editActivity"
+// 获取用户是否参与摄影大赛活动
+const getActivityVote = baseUrl + "pc/hall/getActivityVote"
+// 获取摄影作品
+const getCasePageVote = baseUrl + "pc/hall/getCasePageVote"
+// 摄影活动投票
+const voteLikes = baseUrl + "pc/hall/voteLikes"
+// 获取当前投票次数
+const getVoteNum = baseUrl + "pc/hall/getVoteNum"
+// 判断是否上传了作品
+const getVoteCount = baseUrl + "pc/hall/getVoteCount"
+// 修改摄影作品
+const updateCase = baseUrl + "pc/hall/updateCase"
+// 获取晒晒详情byId
+const getVoteById = baseUrl + "pc/user/getVoteById"
+// 便民站添加
+const convenienceAdd = baseUrl + "work/convenience/add"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -143,5 +163,13 @@ module.exports = {
   getActivityById:getActivityById,
   getWxUserById:getWxUserById,
   localHireEdit:localHireEdit,
-  editActivity:editActivity
+  editActivity:editActivity,
+  getActivityVote:getActivityVote,
+  getCasePageVote:getCasePageVote,
+  voteLikes:voteLikes,
+  getVoteNum:getVoteNum,
+  getVoteCount:getVoteCount,
+  updateCase:updateCase,
+  getVoteById:getVoteById,
+  convenienceAdd:convenienceAdd
 };
