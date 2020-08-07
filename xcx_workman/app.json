@@ -1,6 +1,13 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/submitConvenience/submitConvenience",
+    "pages/convenience/convenience",
+    "pages/convenienceDetails/convenienceDetails",
+    "pages/welfareExplain/welfareExplain",
+    "pages/showwork/showwork",
+    "pages/welfareReview/welfareReview",
+    "pages/welfareInlet/welfareInlet",
     "pages/submitRecruitment/submitRecruitment",
     "pages/addEditGoods/addEditGoods",
     "pages/MaterialDetails/MaterialDetails",
@@ -14,7 +21,6 @@
     "pages/services/services",
     "pages/mine/mine",
     "pages/myInfo/myInfo",
-    "pages/showwork/showwork",
     "pages/goodsDetails/goodsDetails",
     "pages/goodsList/goodsList",
     "pages/myEmploy/myEmploy",
@@ -40,7 +46,8 @@
     "pages/myMaterial/myMaterial",
     "pages/myRecruitment/myRecruitment",
     "pages/myWelfare/myWelfare",
-    "pages/Welfare/Welfare"
+    "pages/Welfare/Welfare",
+    "pages/showVote/showVote"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",
@@ -74,7 +81,7 @@
       },
       {
         "pagePath": "pages/showwork/showwork",
-        "text": "晒晒",
+        "text": "美图",
         "iconPath": "pages/image/show.png",
         "selectedIconPath": "pages/image/showhong.png"
       },
@@ -88,7 +95,10 @@
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  "requiredBackgroundModes": ["audio", "location"],
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于小程序位置接口的效果展示"
