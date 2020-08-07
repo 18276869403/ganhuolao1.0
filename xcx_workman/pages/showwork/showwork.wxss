@@ -642,3 +642,7 @@ page {
   height: 80rpx;
   line-height: 80rpx;
 }
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+}

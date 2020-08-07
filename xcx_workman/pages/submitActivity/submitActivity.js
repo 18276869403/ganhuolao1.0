@@ -8,25 +8,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uploaderlist: [],
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     activityId: 0,
-    wxCaseId:0,
+    wxCaseId: 0,
     needscontent: '',
-    comment:'',
+    comment: '',
     tupian: '',
     id: '',
     name: '',
-    tupianlist: [],
     imgUrl: '',
-    picIurl1: [],
     picIurl: '',
     picimg: '',
     num: 1,
     btnFlag: false,
     tupianlists: [],
-    caseitem:{}
+    caseitem: {}
   },
 
   /**
@@ -39,46 +36,30 @@ Page({
     if (options != undefined) {
       if (options.id != undefined) {
         var that = this
-        qingqiu.get("getVoteById",{id:options.id},function(res){
+        qingqiu.get("getVoteById", {
+          id: options.id
+        }, function (res) {
           console.log(res)
-          if(res.result != null){
-            var tupianlists = []
-            if(res.result.picOne.indexOf(',') != -1){
-              tupianlists = res.result.picOne.split(',')
-            }else{
-              tupianlists.push(res.result.picOne)
+          if (res.result != null) {
+            if (res.result.picOne.indexOf(',') != -1) {
+              that.data.picIurl = res.result.picOne.split(',')[0]
+            } else {
+              that.data.picIurl = res.result.picOne
             }
-            res.result.picOne = tupianlists
+            res.result.picOne = that.data.picIurl
             that.setData({
-              comment:res.result.caseName,
-              needscontent:res.result.caseContent,
-              tupianlists:tupianlists,
-              wxCase:res.result,
-              wxCaseId:res.result.id
+              comment: res.result.caseName,
+              needscontent: res.result.caseContent,
+              picIurl: that.data.picIurl,
+              wxCase: res.result,
+              wxCaseId: res.result.id
             })
-          }else{
+          } else {
             wx.showToast({
               title: res.message,
-              icon:"none"
+              icon: "none"
             })
           }
-        })
-      }
-      if(options.obj != undefined){
-        var item = JSON.parse(options.obj)
-        console.log(item)
-        var tupianlists = []
-        if(item.picOne.indexOf(',') != -1){
-          tupianlists = item.picOne.split(',')
-        }else{
-          tupianlists.push(item.picOne)
-        }
-        this.setData({
-          comment:item.caseName,
-          needscontent:item.caseContent,
-          tupianlists:tupianlists,
-          wxCase:item,
-          wxCaseId:item.id
         })
       }
     }
@@ -114,13 +95,7 @@ Page({
       })
       return
     }
-    that.data.picIurl1 = []
-    if (that.data.tupianlists.length > 0) {
-      for (let obj of that.data.tupianlists) {
-        that.data.picIurl1 += obj + ','
-      }
-      that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
-    } else {
+    if (that.data.picIurl == '' || that.data.picIurl == null) {
       wx.showToast({
         title: '至少上传一张图片',
         icon: 'none'
@@ -130,15 +105,15 @@ Page({
       })
       return
     }
-    if(that.data.wxCaseId == 0){
+    if (that.data.wxCaseId == 0) {
       var data = {
         wxUserId: app.globalData.wxid,
         backup2: 1,
         backup3: 0,
         backup4: 0,
         caseName: that.data.comment,
-        caseContent:that.data.needscontent,
-        picOne: that.data.picIurl1
+        caseContent: that.data.needscontent,
+        picOne: that.data.picIurl
       }
       qingqiu.get("insertCase", data, function (re) {
         console.log(re)
@@ -152,9 +127,6 @@ Page({
             duration: 2000
           })
           app.globalData.showworkRefresh = 1
-          // wx.switchTab({
-          //   url: '../showwork/showwork',
-          // })
           setTimeout(function () {
             wx.navigateBack({
               delta: 1
@@ -162,25 +134,25 @@ Page({
           }, 1000)
         }
       }, 'post')
-    }else{
+    } else {
       var data = {
-        id:that.data.wxCase.id,
-        wxUserId:app.globalData.wxid,
-        backup2:that.data.wxCase.backup2,
-        backup3:that.data.wxCase.backup3,
-        backup4:that.data.wxCase.backup4,
-        caseName:that.data.comment,
-        caseContent:that.data.needscontent,
-        picOne:that.data.picIurl1
+        id: that.data.wxCase.id,
+        wxUserId: app.globalData.wxid,
+        backup2: that.data.wxCase.backup2,
+        backup3: that.data.wxCase.backup3,
+        backup4: that.data.wxCase.backup4,
+        caseName: that.data.comment,
+        caseContent: that.data.needscontent,
+        picOne: that.data.picIurl
       }
-      qingqiu.get("updateCase",data,function(res){
+      qingqiu.get("updateCase", data, function (res) {
         that.setData({
-          btnFlag: false
+          btnFlag: true
         })
-        if(res.result != true){
+        if (res.result != true) {
           wx.showToast({
             title: '修改成功',
-            icon:'none'
+            icon: 'none'
           })
           setTimeout(function () {
             app.globalData.showworkRefresh = 1
@@ -188,17 +160,18 @@ Page({
               url: '../showwork/showwork',
             })
           }, 1000)
-        }else{
+        } else {
           wx.showToast({
             title: res.message,
-            icon:"none"
+            icon: "none"
           })
         }
       })
     }
   },
-  //获取输入的晒活内容
+  //获取输入的晒活标题
   commentinput: function (e) {
+    deteleString(e.detail.value)
     this.setData({
       comment: e.detail.value
     })
@@ -234,6 +207,14 @@ Page({
     }, 'POST')
   },
 
+  deteleString:function(s){
+    // 去掉转义字符
+    s = s.replace(/[\'\"\\\/\b\f\n\r\t]/g, '');
+    // 去掉特殊字符
+    s = s.replace(/[\@\#\$\%\^\&\*\(\)\{\}\:\"\L\<\>\?\[\]]/);
+    return s;
+
+  },
   //获取输入的晒活内容
   needscontentinput: function (e) {
     this.setData({
@@ -276,109 +257,78 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
-    var index2 = 0
-    var index3 = 0
     that.setData({
       btnFlag: true
     })
     wx.chooseImage({
-      count: 5,
+      count: 1,
       sizeType: ['compressed'], // 指定只能为压缩图，首先进行一次默认压缩
       sourceType: ['album', 'camera'],
       success: function (res) {
-        that.setData({
-          btnFlag: false
-        })
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
-        // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)  
-        for (let i = 0; i < tempFilePaths.length; i++) {
-          if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])) {
-            wx.showToast({
-              title: '请上传静态图片',
-              icon: 'none'
-            })
-            that.setData({
-              btnFlag: false
-            })
-            return
-          }
-          wx.uploadFile({
-            url: api.imgFilter,
-            name: 'file',
-            filePath: tempFilePaths[index3],
-            formData: {
-              media: tempFilePaths[index3]
-            },
-            method: 'POST',
-            header: {
-              "Content-Type": "multipart/form-data"
-            },
-            success: function (res) {
-              console.log(res)
-              if (res.data == "false") {
-                that.setData({
-                  btnFlag: false
-                })
-                wx.showToast({
-                  title: '内容含有违法违规内容',
-                  icon: 'none'
-                })
-                return
-              } else {
-                wx.uploadFile({
-                  url: api.uploadurl,
-                  filePath: tempFilePaths[index2],
-                  header: {
-                    "Content-Type": "multipart/form-data"
-                  },
-                  formData: {
-                    method: 'POST' //请求方式
-                  },
-                  name: 'file',
-                  success(res) {
-                    that.setData({
-                      btnFlag: false
-                    })
-                    console.log(index2)
-                    var r = res.data
-                    var jj = JSON.parse(r);
-                    var sj = api.viewUrl + jj.message
-                    var tupianlists = that.data.tupianlists
-                    if (tupianlists.length < 5) {
-                      tupianlists.push(jj.message)
-                    }
-                    // tupianlists.push(jj.message)
-                    that.setData({
-                      tupianlists: tupianlists,
-                    })
-                  }
-                })
-                index2 += 1
-              }
-            }
+        if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[0])) {
+          wx.showToast({
+            title: '请上传静态图片',
+            icon: 'none'
           })
-          index3 += 1
+          that.setData({
+            btnFlag: false
+          })
+          return
         }
+        wx.uploadFile({
+          url: api.imgFilter,
+          name: 'file',
+          filePath: tempFilePaths[0],
+          formData: {
+            media: tempFilePaths[0]
+          },
+          method: 'POST',
+          header: {
+            "Content-Type": "multipart/form-data"
+          },
+          success: function (res) {
+            console.log(res)
+            if (res.data == "false") {
+              wx.showToast({
+                title: '内容含有违法违规内容',
+                icon: 'none'
+              })
+              that.setData({
+                btnFlag: false
+              })
+              return
+            } else {
+              wx.uploadFile({
+                url: api.uploadurl,
+                filePath: tempFilePaths[0],
+                header: {
+                  "Content-Type": "multipart/form-data"
+                },
+                formData: {
+                  method: 'POST' //请求方式
+                },
+                name: 'file',
+                success(res) {
+                  that.setData({
+                    btnFlag: false
+                  })
+                  var r = res.data
+                  var jj = JSON.parse(r);
+                  that.setData({
+                    picIurl: jj.message
+                  })
+                }
+              })
+            }
+          }
+        })
       },
     })
     that.setData({
       btnFlag: false
     })
-  },
-  // 删除图片
-  shanchu: function (e) {
-    var that = this
-    var tplj = e.currentTarget.dataset.tplj
-    that.data.tupianlists.splice(tplj, 1)
-    console.log(that.data.tupianlists)
-    that.setData({
-      tupianlists: that.data.tupianlists
-    })
-    that.data.num -= 1;
-    that.setData({
-      num: that.data.num
-    });
   },
   // 预览图片
   imgview: function (e) {

@@ -8,7 +8,7 @@
 	</view>
 	<view class="content zongxiang">
 		<!-- 公益活动模块 -->
-			<view class="content-need">
+		<view class="content-need">
 			<view class="list" wx:for="{{bianminlist}}" wx:for-index="index" wx:key="index">
 				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
 					<view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
@@ -24,7 +24,7 @@
 									<view class="content-list-type">详情</view>
 								</view>
 							</view>
-              <view class="content-list-bottom hengxiang">
+							<view class="content-list-bottom hengxiang">
 								<view class="list-bottom-item2 hengxiang">
 									<view class="bottom-item hengxiang">
 										<view class="baoming-img-item">
@@ -36,7 +36,7 @@
 									</view>
 								</view>
 							</view>
-              <view class="content-list-bottom hengxiang">
+							<view class="content-list-bottom hengxiang">
 								<view class="list-bottom-item2 hengxiang">
 									<view class="bottom-item hengxiang">
 										<view class="baoming-img-item">
@@ -70,20 +70,36 @@
 			<view class='s-left'>
 				<scroll-view class='left-navbar' scroll-y="true">
 					<view>
-					<view class="content-title">类型</view>
-          <view class="content-leixinganniu">人找车</view>
-					<view class="content-leixinganniu2">车找人</view>
-					<view class="content-leixinganniu2">车找货</view>
-					<view class="content-leixinganniu2">货找车</view>
-					<view class="content-title">出发时间</view>
-          <input type="text" placeholder="输入出发时间" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
-					<view class="content-title">出发地</view>
-          <input type="text" placeholder="输入出发地" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
-					<view class="content-title">目的地</view>
-          <input type="text" placeholder="输入目的地" class="shurukuang" placeholder-class="placeholder" value='{{youhuijia}}' name="youhuijia" bindinput='youhuijiainput'></input>
+						<view class="content-title">类型</view>
+						<view wx:for="{{type}}">
+							<view class="{{index == parameter.typeid?'content-leixinganniu':'content-leixinganniu2'}}" bindtap="switchType" data-index="{{index}}">{{item}}</view>
+						</view>
+						<view class="content-title">出发时间</view>
+						<view class="shurukuang">
+							<picker mode="date" class="picker-view" value="{{parameter.date}}" start="{{parameter.newDate}}" bindchange="bindDateChange">
+								<view class="picker hengxiang" wx:if="{{parameter.date != ''}}">
+									<view  style="padding-left:80rpx">{{parameter.date}}</view>
+									<view>
+										<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
+									</view>
+								</view>
+								<view class="null hengxiang" wx:if="{{parameter.date == ''}}">
+									<view style="padding-left:80rpx">选择出发时间</view>
+									<view>
+										<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
+									</view>
+								</view>
+							</picker>
+						</view>
+						<view class="content-title">出发地</view>
+						<input type="text" placeholder="输入出发地" class="shurukuang" placeholder-class="placeholder" value='{{parameter.starAddress}}' name="starAddress" bindinput='starAddressinput'></input>
+						<view class="content-title">目的地</view>
+						<input type="text" placeholder="输入目的地" class="shurukuang" placeholder-class="placeholder" value='{{endAddress}}' name="endAddress" bindinput='endAddressinput'></input>
 					</view>
-					<view class="bottom-right" bindtap="queding">确定</view>
-					<view class="bottom-left" bindtap="quxiao">取消</view>
+					<view class="hengxiang">
+						<view class="bottom-right" bindtap="queding">确定</view>
+						<view class="bottom-left" bindtap="quxiao">取消</view>
+					</view>
 				</scroll-view>
 			</view>
 		</view>

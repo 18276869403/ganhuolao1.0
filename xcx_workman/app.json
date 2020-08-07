@@ -1,9 +1,9 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/submitConvenience/submitConvenience",
     "pages/convenience/convenience",
     "pages/convenienceDetails/convenienceDetails",
+    "pages/submitConvenience/submitConvenience",
     "pages/welfareExplain/welfareExplain",
     "pages/showwork/showwork",
     "pages/welfareReview/welfareReview",

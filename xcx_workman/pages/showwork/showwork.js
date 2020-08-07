@@ -5,6 +5,8 @@ const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
 const utils = require('../../utils/util.js')
 const date = new Date();
+//年
+var Y = date.getFullYear();
 //月
 var M = (date.getMonth());
 //日
@@ -42,7 +44,8 @@ Page({
     id: '',
     name: '',
     sousuonr: '',
-    pageNo: 1
+    pageNo: 1,
+    btnFlag:false
   },
   // 活动
   changeType: function (e) {
@@ -57,6 +60,9 @@ Page({
   // 上传作品
   submitVote: function () {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
     qingqiu.get("getActivityVote", {
       wxUserId: app.globalData.wxid
     }, function (res) {
@@ -65,15 +71,17 @@ Page({
         qingqiu.get("getVoteCount", {
           wxUserId: app.globalData.wxid
         }, function (re) {
-          console.log(re)
-          if (re.result != null) {
-            var obj = JSON.stringify(re.result)
+          that.setData({
+            btnFlag:false
+          })
+          if (re.result < 5) {
             wx.navigateTo({
-              url: '../submitActivity/submitActivity?&obj=' + obj,
+              url: '../submitActivity/submitActivity',
             })
-          } else {
-            wx.navigateTo({
-              url: '../submitActivity/submitActivity'
+          } else{
+            wx.showToast({
+              title: '上传作品次数用尽',
+              icon:'none'
             })
           }
         })
@@ -140,6 +148,7 @@ Page({
   },
   // 跳转到晒晒详情页面
   showVote: function (e) {
+    console.log(e.currentTarget.dataset.obj)
     var item = e.currentTarget.dataset.obj;
     app.globalData.showworkRefresh = 0
     item = JSON.stringify(item)
@@ -157,16 +166,30 @@ Page({
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.userInfo']) {
-         wx.showToast({
-           title: '未授权，无法投票',
-           icon:"none"
-         })
-         that.setData({
-          btnFlag: false
-        })
+          wx.showToast({
+            title: '未授权，无法投票',
+            icon: "none"
+          })
+          that.setData({
+            btnFlag: false
+          })
         }
       }
     })
+    if (Y == 2020) {
+      if(M <= 8){
+        if(D < 20){
+          wx.showToast({
+            title: '投票通道于8月20日0:00开启',
+            icon:'none'
+          })
+          that.setData({
+            btnFlag: false
+          })
+          return
+        }
+      }
+    }
     if (!(h >= 7 && h <= 23)) {
       wx.showToast({
         title: '投票时段为07:00-23:00',
@@ -269,7 +292,7 @@ Page({
       if (app.globalData.oneCity != undefined) {
         this.setData({
           showList: [],
-          activityList:[],
+          activityList: [],
           weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
           pageNo: 1
         })
@@ -279,7 +302,7 @@ Page({
       } else {
         this.setData({
           showList: [],
-          activityList:[],
+          activityList: [],
           pageNo: 1,
           cityId: this.data.id,
           cityname1: this.data.name,

@@ -8,22 +8,17 @@
 			<textarea class="textarea" placeholder="输入创作灵感说明" placeholder-class="placeholder1" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
 		</view>
 		<view class="showImg">
-			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
-				<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill" class="show-img"></image>
-				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
-			</view>
-		</view>
-
-		<!-- 上传 -->
-		<view class="fabu" wx-if="{{tupianlists.length<5}}">
-			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
-				<view>
-					<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+			<view class="fabu-item1 zongxiang">
+				<view wx:if="{{picIurl==''||picIurl == null}}">
+					<image src="{{iconUrl}}static/image/sctouxiang.png" bindtap='upimg' class="fabu-item {{btnFlag == true ? 'disabled' : ''}}"></image>
+				</view>
+				<view wx:if="{{picIurl!=''&&picIurl != null}}">
+					<image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{picIurl}}" class="fabu1-img"></image>
 				</view>
 			</view>
 		</view>
 
-		<view class="show-photo-text">上传作品图片(最多可上传5张)</view>
+		<view class="show-photo-text">上传作品图片(最多可上1张)</view>
 		<view class="show-photo-text" style="color:red;">注：必须拍摄原创照片，如上传他人作品造成的侵权责任由上传人负责。（大赛截稿日之前可删除重新上传作品，一旦删除投票数清零）</view>
 		<view class="content-button {{btnFlag == true?'disabled':''}}" bindtap="lijifabu">
 			立即上传

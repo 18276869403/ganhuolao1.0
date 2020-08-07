@@ -580,7 +580,7 @@ page {
 .bottom-left {
   text-align: center;
   font-size: 16px;
-  color: #fff;
+  /* color: #fff; */
   width: 40%;
   margin-left: 10%;
   margin-right: 10%;
@@ -590,4 +590,18 @@ page {
   /* box-shadow: 0rpx 6rpx 24rpx 0rpx rgba(220, 14, 14, 0.41); */
   border-radius: 10rpx;
   margin-top: 600px;
+}
+.null{
+  color: #696969;
+  text-align: center;
+  width: 100%;
+}
+.enter-img{
+  padding-top: 20rpx;
+  width: 48rpx;
+  height: 48rpx;
+}
+.picker-view{
+  /* width: 100%; */
+  text-align: center;
 }

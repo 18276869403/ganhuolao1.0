@@ -313,6 +313,14 @@
   margin-left: 20rpx;
 }
 
+.fabu1-img {
+  width: 334rpx;
+  height: 228rpx;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+}
+
 .fabu-img {
   width: 52rpx;
   height: 52rpx;

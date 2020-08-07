@@ -48,14 +48,14 @@ Page({
           wxUserId: app.globalData.wxid
         }, function (re) {
           console.log(re)
-          if (re.result != null) {
-            var obj = JSON.stringify(re.result)
-            wx.navigateTo({
-              url: '../submitActivity/submitActivity?obj=' + obj,
-            })
-          }else{
+          if (re.result < 5) {
             wx.navigateTo({
               url: '../submitActivity/submitActivity',
+            })
+          }else{
+            wx.showToast({
+              title: '上传作品次数用尽',
+              icon:'none'
             })
           }
         })

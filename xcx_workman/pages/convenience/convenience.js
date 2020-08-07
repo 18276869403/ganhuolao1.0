@@ -1,5 +1,8 @@
 // pages/convenience/convenience.js
+const app = getApp()
 const api = require('../../utils/config.js')
+const qingqiu = require('../../utils/request.js')
+const utils = require('../../utils/util.js')
 Page({
 
   /**
@@ -7,9 +10,18 @@ Page({
    */
   data: {
     iconUrl:api.iconUrl,
-    NoticeList:["1、便民站从今日开始正式开发啦！","2、点击查看便民站使用说明",'3、欢迎使用便民站'],
-    index: 0,
-    type: ['选择类型', '车找人', '人找车','车找货'],
+    // 参数
+    parameter:{
+      date:'',
+      newDate:'',
+      starAddress:'',
+      endAddress:'',
+      typeid: -1,
+      pageNo:1,
+      pageSize:10
+    },
+    type: ['车找人', '人找车','车找货','货找车'],
+    conveniencelist:[],
     bianminlist:[{
       id:1,
       chu:'上海',
@@ -20,16 +32,88 @@ Page({
       chu:'上海',
       mu:'江苏',
       time:'2020-5-20'
-    }]
+    }],
+  },
+
+  /**
+   * 获取集合
+   */
+  chushihua:function(){
+    var that = this
+    var para = that.data.parameter
+    var data = {
+      pageNo:para.pageNo,
+      pageSize:para.pageSize
+    }
+    if(para.typeid != -1){
+      data.type = para.typeid
+    }
+    if(para.date != ''){
+      data.starTime = para.date
+    }
+    if(para.starAddress != ''){
+      data.starAddress = para.starAddress
+    }
+    if(para.endAddress != ''){
+      data.endAddress = para.endAddress
+    }
+    qingqiu.get("getConveniencePage",data,function(res){
+      console.log(res)
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.chushihua()
+    this.setData({
+      ['parameter.newDate']:utils.newDate
+    })
   },
   
+  /**
+   * 目的地输入框
+   * @param {*} e 
+   */
+  endAddressinput:function(e){
+    this.setData({
+      ['parameter.endAddress']:e.detail.value
+    })
+  },
+
+  /**
+   * 出发地输入框
+   * @param {*} e 
+   */
+  starAddressinput:function(e){
+    this.setData({
+      ['parameter.starAddress']:e.detail.value
+    })
+  },
+
+  /**
+   * 类型切换
+   * @param {*} e 
+   */
+  switchType:function(e){
+    this.setData({
+      ['parameter.typeid']:e.currentTarget.dataset.index
+    })
+  },
+
+  /**
+   * 日期选择器
+   * @param {*} e 
+   */
+  bindDateChange:function(e){
+    console.log('事件携带值：',e.detail.value)
+    this.setData({
+      ['parameter.date']:e.detail.value
+    })
+  },
+
+
   //显示弹窗样式
   Findss: function (e) {
     this.setData({
@@ -44,7 +128,8 @@ Page({
     animation.opacity(0).rotateX(-100).step();
     this.setData({
       animationData: animation.export(),
-      showModalStatus: true
+      showModalStatus: true,
+      ['parameter.typeid']:0
     })
     setTimeout(function () {
       animation.opacity(1).rotateX(0).step();

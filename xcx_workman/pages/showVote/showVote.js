@@ -119,6 +119,20 @@ Page({
         }
       }
     })
+    if (Y == 2020) {
+      if(M <= 8){
+        if(D < 20){
+          wx.showToast({
+            title: '投票通道于8月20日0:00开启',
+            icon:'none'
+          })
+          that.setData({
+            btnFlag: false
+          })
+          return
+        }
+      }
+    }
     if(!(h >= 7 && h <= 23)){
       wx.showToast({
         title: '投票时段为07:00-23:00',

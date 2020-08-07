@@ -589,6 +589,11 @@ Page({
   },
   // 便民站
   Convenience:function(){
+    wx.showToast({
+      title: '功能开发中...',
+      icon:'none'
+    })
+    return
     wx.navigateTo({
       url: '../convenience/convenience',
     })
