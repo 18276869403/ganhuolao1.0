@@ -1,0 +1,64 @@
+<!--pages/convenience/convenience.wxml-->
+<view>
+	<view class="hengxian"></view>
+	<view class="view-content">
+		<view class="view-top">
+			<view class="view-top-title">公告板</view>
+			<view class="top-hengxiang"></view>
+			<view class="view-top-content zongxiang">
+				<view class="view-top-content-item" wx:for="{{NoticeList}}">
+					{{item}}
+				</view>
+			</view>
+		</view>
+		<view class="view-kuai"></view>
+		<view class="view-content zongxiang" style="margin-bottom:0rpx;">
+			<view class="view-content-item hengxiang">
+				<view class="view-content-item-key">出发地</view>
+				<view class="shengxian">|</view>
+				<view class="view-content-item-value">
+					<input type="text" placeholder="输入出发地" class="shurukuang"></input>
+				</view>
+			</view>
+			<view class="view-content-item hengxiang" style="margin-top:10rpx;">
+				<view class="view-content-item-key">目的地</view>
+				<view class="shengxian">|</view>
+				<view class="view-content-item-value">
+					<input type="text" placeholder="输入目的地" class="shurukuang"></input>
+				</view>
+			</view>
+			<view class="view-content-item hengxiang" style="margin-top:10rpx;">
+				<view class="view-content-item-key">出发日期</view>
+				<view class="shengxian">|</view>
+				<view class="view-content-item-value">
+					<input type="text" placeholder="输入出发日期(年-月-日)" class="shurukuang"></input>
+				</view>
+			</view>
+			<view class="view-content-item hengxiang" style="margin-top:10rpx;">
+				<view class="view-content-item-key">类型</view>
+				<view class="shengxian">|</view>
+				<view class="view-content-item-value">
+					<picker class="view-picker" bindchange="bindPickerChangeType" value="{{index}}" range="{{type}}">
+						<view class="picker hengxiang">
+							<view class="prcker-text {{index===0?'picker-text':''}}">
+								{{type[index]}}</view>
+							<view>
+								<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
+							</view>
+						</view>
+					</picker>
+				</view>
+			</view>
+		</view>
+		<view>
+			<view class="view-kuai"></view>
+			<view class="view-bottom">
+				<view class="view-bottom-icon">
+					<image src="../image/renzhaoche.png" class="icon"></image>
+					<view class="view-bottom-title">北京 上海</view>
+				</view>
+				<view class="view-bootom-time">2020-08-06 17:47:00</view>
+			</view>
+		</view>
+	</view>
+</view>

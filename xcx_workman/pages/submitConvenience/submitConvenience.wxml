@@ -1,0 +1,62 @@
+<!--pages/submitConvenience/submitConvenience.wxml-->
+<view>
+	<view class="hengxian"></view>
+	<view class="content-item hengxiang">
+		<view class="content-item-left">类型</view>
+		<view class="content-item-right">
+			<picker bindchange="bindPickerChangeType" value="{{index}}" range="{{type}}">
+				<view class="picker hengxiang">
+					<view class="prcker-text {{index===0?'font-class':''}}">
+						{{type[index]}}</view>
+					<view>
+						<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
+					</view>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="content-item hengxiang">
+		<view class="content-item-left">出发日期</view>
+		<view class="content-item-right">
+			<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+				<view class="picker hengxiang">
+					<view class="prcker-text {{time == '选择出发日期'?'font-class':''}}">
+						{{time}}</view>
+					<view>
+						<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
+					</view>
+				</view>
+			</picker>
+		</view>
+	</view>
+	<view class="content-item hengxiang">
+		<view class="content-item-left">出发地</view>
+		<view class="content-item-right">
+			<input type="text" placeholder="输入出发地" placeholder-class="font-class" class="shurukuang" value="{{starAddress}}" bindinput="starAddressinput" bindblur="starAddressblur"></input>
+		</view>
+	</view>
+	<view class="content-item hengxiang">
+		<view class="content-item-left">目的地</view>
+		<view class="content-item-right">
+			<input type="text" placeholder="输入目的地" placeholder-class="font-class" class="shurukuang" value="{{endAddress}}" bindinput="endAddressinput" bindblur="endAddressblur"></input>
+		</view>
+	</view>
+	<view class="content-item hengxiang">
+		<view class="content-item-left">联系人</view>
+		<view class="content-item-right">
+			<input type="text" placeholder="输入联系人" placeholder-class="font-class" class="shurukuang" value="{{linkname}}" bindinput="linknameinput" bindblur="linknameblur"></input>
+		</view>
+	</view>
+	<view class="content-item hengxiang">
+		<view class="content-item-left">联系电话</view>
+		<view class="content-item-right">
+			<input type="text" placeholder="输入联系电话" placeholder-class="font-class" class="shurukuang" value="{{linkphone}}" bindinput="linkphoneinput" bindblur="linkphoneblur"></input>
+		</view>
+	</view>
+	<view class="content-item-textarea">
+		<textarea class="textarea" placeholder="输入详细介绍" placeholder-class="placeholder1" maxlength='-1' value='{{content}}' name="content" bindinput='contentinput' bindblur="contentblur"></textarea>
+	</view>
+	<view class="bottom hengxiang">
+		<view class="bottom-right {{btnFlag == true?'disabled':''}}" bindtap="submit">立即发布</view>
+	</view>
+</view>
