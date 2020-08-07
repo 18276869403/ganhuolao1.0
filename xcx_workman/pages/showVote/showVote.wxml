@@ -22,7 +22,7 @@
 						删除
 					</view>
 					<view wx:if="{{wxCase.wxUserId!=wxUserid}}">
-						<view bindtap="activity" data-itemobj="{{wxCase}}" wx:if="{{wxCase.giveState==0}}" style="margin-left:15rpx;">
+						<view bindtap="activity" class="{{btnFlag == true?'disabled':''}}" data-itemobj="{{wxCase}}" wx:if="{{wxCase.giveState==0}}" style="margin-left:15rpx;">
 							<image src="{{iconUrl}}static/image/weitoupiao.png" class="activity-img"></image>
 						</view>
 						<view wx:if="{{wxCase.giveState==1}}">
@@ -32,7 +32,7 @@
 				</view>
 			</view>
 			<view class="top-title-c hengxiang">
-				<view class="top-title-content"><text>创作灵感说明：{{wxCase.caseContent}}</text></view>
+				<view class="top-title-content"><text>创作灵感：{{wxCase.caseContent}}</text></view>
 			</view>
 		</view>
 		<view wx:for="{{wxCase.picOne}}" class="{{index != wxCase.picOne-1}}?'':content-bottom">

@@ -56,6 +56,23 @@
 	<view class="content-item-textarea">
 		<textarea class="textarea" placeholder="输入详细介绍" placeholder-class="placeholder1" maxlength='-1' value='{{content}}' name="content" bindinput='contentinput' bindblur="contentblur"></textarea>
 	</view>
+
+	<view class="showImg">
+			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
+				<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill" class="show-img"></image>
+				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+			</view>
+		</view>
+
+		<!-- 上传 -->
+		<view class="fabu" wx-if="{{tupianlists.length<5}}">
+			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
+				<view>
+					<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+				</view>
+			</view>
+		</view>
+
 	<view class="bottom hengxiang">
 		<view class="bottom-right {{btnFlag == true?'disabled':''}}" bindtap="submit">立即发布</view>
 	</view>

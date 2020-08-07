@@ -548,7 +548,7 @@ page {
 .top-item-normal {
   font-size: 32rpx;
   font-weight: 400;
-  color: #cacaca;
+  /* color: #cacaca; */
   width: 100%;
   text-align: center;
 }

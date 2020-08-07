@@ -175,7 +175,7 @@ Page({
       }
       qingqiu.get("updateCase",data,function(res){
         that.setData({
-          btnFlag: true
+          btnFlag: false
         })
         if(res.result != true){
           wx.showToast({
@@ -351,8 +351,6 @@ Page({
                     // tupianlists.push(jj.message)
                     that.setData({
                       tupianlists: tupianlists,
-                      picimg1: sj,
-                      picimgs1: jj.message
                     })
                   }
                 })

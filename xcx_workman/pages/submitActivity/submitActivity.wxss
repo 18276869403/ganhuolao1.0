@@ -64,7 +64,7 @@
   background: rgba(237, 48, 48, 1);
   border-radius: 8px;
   margin: auto;
-  margin-top: 150rpx;
+  margin-top: 30rpx;
   color: #fff;
   font-size: 16px;
   font-weight: bold;

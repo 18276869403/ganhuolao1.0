@@ -2,6 +2,10 @@
 const app = getApp()
 const api = require("../../utils/config.js")
 const qingqiu = require("../../utils/request.js")
+const date = new Date();
+//时
+var h = date.getHours();
+
 Page({
 
   /**
@@ -14,6 +18,7 @@ Page({
     title: '',
     wxUserid: '',
     voteNum:0,
+    btnFlag:false,
     date: ''
   },
 
@@ -98,19 +103,53 @@ Page({
   // 投票功能
   activity: function (e) {
     var that = this
+    that.setData({
+      btnFlag:true
+    })
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+         wx.showToast({
+           title: '未授权，无法投票',
+           icon:"none"
+         })
+         that.setData({
+          btnFlag: false
+        })
+        }
+      }
+    })
+    if(!(h >= 7 && h <= 23)){
+      wx.showToast({
+        title: '投票时段为07:00-23:00',
+        icon:"none"
+      })
+      that.setData({
+        btnFlag:false
+      })
+      return
+    }
     if (that.data.voteNum == 0) {
       wx.showToast({
         title: '当天投票次数已经用完，请明天再来...',
         icon: "none"
+      })
+      that.setData({
+        btnFlag:false
       })
       return
     }
     var item = e.currentTarget.dataset.itemobj;
     var data = {
       wxCaseId: item.id,
-      wxUserIdGo: app.globalData.wxid
+      wxUserIdGo: app.globalData.wxid,
+      backup1:app.globalData.wxNc,
+      backup2:app.globalData.openid
     }
     qingqiu.get("voteLikes", data, function (re) {
+      that.setData({
+        btnFlag:false
+      })
       console.log('投票', re)
       if (re.success == true) {
         if (item.giveState == 0) {
@@ -120,6 +159,9 @@ Page({
         wx.showToast({
           title: '投票成功',
           icon: 'success'
+        })
+        that.setData({
+          btnFlag:true
         })
         that.setData({
           wxCase: item,

@@ -31,7 +31,7 @@
 			</view>
 		</view>
 		<view class="bottom-activity">
-			<view style="padding-bottom:20rpx;font-size:25rpx;">每日可为5名作者投1票，作弊取消参赛资格（今日剩余投票 <text style="color:red;">{{voteNum}}</text>）</view>
+			<view style="padding-bottom:20rpx;font-size:25rpx;">每日可为5名作者投1票，投票时段07:00-23:00（今日剩余投票 <text style="color:red;">{{voteNum}}</text>）</view>
 			<view style="padding-bottom:20rpx;font-size:25rpx;"><text style="color:red;">郑重声明：\n1、照片必须为原创拍摄。\n2、从网上下载的图片取消作品参赛资格，且涉及侵权责任自负。\n3、取景地非万载境内作品取消参赛资格。\n4、投票为海选，请大家不要作弊刷票，异常刷票将取消资格。</text></view>
 			<block wx:for-items="{{activityList}}">
 				<view class="show-activity zongxiang">

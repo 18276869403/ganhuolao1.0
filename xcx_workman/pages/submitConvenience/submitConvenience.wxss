@@ -72,7 +72,7 @@
 /* 底部 */
 .bottom {
   width: 100%;
-  margin-top: 65rpx;
+  padding-top: 65rpx;
   margin-bottom: 160rpx;
 }
 .bottom-right {
@@ -88,4 +88,77 @@
   background: rgba(224, 35, 35, 1);
   box-shadow: 0rpx 6rpx 24rpx 0rpx rgba(220, 14, 14, 0.41);
   border-radius: 40rpx;
+}
+
+/* 晒图详情 */
+
+.showImg {
+  width: 94%;
+  margin-left: 3%;
+  margin-right: 3%;
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 30rpx;
+}
+
+.showImg-item {
+  width: 50%;
+  text-align: center;
+  position: relative;
+}
+
+.delete-img {
+  position: absolute;
+  top: 0rpx;
+  width: 50%;
+  right: 10rpx;
+}
+
+.show-img {
+  width: 334rpx;
+  height: 228rpx;
+  margin-bottom: 10rpx;
+  border-radius: 8rpx;
+}
+.fabu-item {
+  width: 334rpx;
+  height: 228rpx;
+  background: rgba(245, 246, 249, 1);
+  border-radius: 8rpx;
+  font-size: 14px;
+  color: #999;
+  float: left;
+}
+
+.fabu-item1 {
+  width: 334rpx;
+  height: 228rpx;
+  background: rgba(245, 246, 249, 1);
+  border-radius: 8rpx;
+  font-size: 14px;
+  color: #999;
+  float: left;
+  margin-left: 20rpx;
+}
+.fabu-img {
+  width: 52rpx;
+  height: 52rpx;
+  margin-top: 60rpx;
+  margin-bottom: 16rpx;
+}
+
+.delete-img {
+  width: 44rpx;
+  height: 44rpx;
+}
+.fabu {
+  width: 95%;
+  margin-left: 4%;
+  text-align: center;
+  float: left;
+  margin-top: 20rpx;
+}
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
 }

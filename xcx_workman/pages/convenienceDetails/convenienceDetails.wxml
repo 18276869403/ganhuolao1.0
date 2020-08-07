@@ -1,2 +1,61 @@
 <!--pages/convenienceDetails/convenienceDetails.wxml-->
-<text>pages/convenienceDetails/convenienceDetails.wxml</text>
+<view class="container">
+	<view class="content zongxiang">
+		<view class="content-list zongxiang">
+			<view class="content-list-item hengxiang">
+				<view class="title hengxiang">
+					<view class="title-text" wx:if="{{convenience.type == 1}}">
+						<view class="type1">人找车</view>
+					</view>
+					<view class="title-text" wx:if="{{convenience.type == 2}}">
+						<view class="type2">车找人</view>
+					</view>
+					<view class="title-text" wx:if="{{convenience.type == 3}}">
+						<view class="type3">车找货</view>
+					</view>
+					<view class="title-time">
+						<view class="title-time-text">发布时间：{{convenience.createTime}}</view>
+					</view>
+				</view>
+			</view>
+			<view class="uhengxiang"></view>
+			<view class="hengxiang content-list-type">
+				<view class="header-text zongxiang">
+					<view class="header-text-font">联系人：{{convenience.linkName}}</view>
+					<view class="header-text-font hengxiang" style="padding-top:10rpx;">
+            <view><text decode="{{true}}" space="{{true}}">电 &nbsp;&nbsp;话：</text>{{convenience.linkPhone}}</view>
+            <view class="phone" bindtap="phone" data-phone="{{convenience.linkPhone}}">联系TA</view>
+          </view>
+				</view>
+			</view>
+		</view>
+		<view class="content-content zongxiang">
+			<view class="content-content-title hengxiang">
+				<view>便民信息</view>
+			</view>
+			<view class="content-content-list">
+				<view style="color:#dc132c;">出发时间：{{convenience.starTime}}</view>
+				<view style="padding-top:8rpx;">出发地：{{convenience.starAddress}}</view>
+				<view style="padding-top:8rpx;">目的地：{{convenience.endAddress}}</view>
+			</view>
+		</view>
+		<!-- 备注 -->
+		<view class="content-content zongxiang">
+			<view class="content-content-title hengxiang">
+				<view>备注</view>
+			</view>
+			<view class="content-content-list">
+				<text>{{convenience.content}}</text>
+			</view>
+		</view>
+		<view class="bottom hengxiang">
+			<view class="bottom-left">
+				<image src="https://www.it-ys.com:81/work-boot/files/20200807/wx14e076d27e942480.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130_1596778400251.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130.jpg" mode="aspectFill" class="tupian"></image>
+			</view>
+      <view class="bottom-center"></view>
+			<view class="bottom-right">
+				<image src="https://www.it-ys.com:81/work-boot/files/20200807/wx14e076d27e942480.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130_1596778400251.o6zAJs_iE4JfSS6s8ttY_nagFwOs.zxdDJWKfpOFU1a63dc80fc42b9498117578b3eca5130.jpg" mode="aspectFill" class="tupian"></image>
+			</view>
+		</view>
+	</view>
+</view>

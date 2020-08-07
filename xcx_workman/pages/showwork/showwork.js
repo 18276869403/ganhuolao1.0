@@ -4,12 +4,21 @@ const app = getApp()
 const qingqiu = require('../../utils/request.js')
 const api = require('../../utils/config.js')
 const utils = require('../../utils/util.js')
+const date = new Date();
+//月
+var M = (date.getMonth());
+//日
+var D = date.getDate();
+//时
+var h = date.getHours();
+//分
+var m = date.getMinutes();
 
 Page({
   data: {
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
-    btnFlag:false,
+    btnFlag: false,
     showList: [],
     activityList: [],
     showsTypeList: [{
@@ -96,14 +105,14 @@ Page({
       backup2: 1
     }
     if (that.data.sousuotext != '') {
-      data.signName = that.data.sousuotext.replace(/\b(0+)/gi,"")
+      data.signName = that.data.sousuotext.replace(/\b(0+)/gi, "")
     }
     console.log(data)
     qingqiu.get("getCasePageVote", data, function (res) {
       if (res.success == true) {
         if (res.result != null) {
           console.log(res)
-          var activityList = []
+          var activityList = that.data.activityList
           for (var i = 0; i < res.result.records.length; i++) {
             var activityimg = []
             if (res.result.records[i].picOne.indexOf(',') != -1) {
@@ -111,13 +120,12 @@ Page({
             } else {
               activityimg.push(res.result.records[i].picOne)
             }
-            if(res.result.records[i].caseContent == undefined || res.result.records[i].caseContent == "undefined" || res.result.records[i].caseContent == null){
+            if (res.result.records[i].caseContent == undefined || res.result.records[i].caseContent == "undefined" || res.result.records[i].caseContent == null) {
               res.result.records[i].caseContent = ''
             }
             res.result.records[i].picOne = activityimg
             activityList.push(res.result.records[i])
           }
-          console.log('摄影作品', activityList)
           that.setData({
             activityList: activityList
           })
@@ -144,15 +152,38 @@ Page({
   activity: function (e) {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userInfo']) {
+         wx.showToast({
+           title: '未授权，无法投票',
+           icon:"none"
+         })
+         that.setData({
+          btnFlag: false
+        })
+        }
+      }
+    })
+    if (!(h >= 7 && h <= 23)) {
+      wx.showToast({
+        title: '投票时段为07:00-23:00',
+        icon: "none"
+      })
+      that.setData({
+        btnFlag: false
+      })
+      return
+    }
     if (that.data.voteNum == 0) {
       wx.showToast({
         title: '当天投票次数已经用完，请明天再来...',
         icon: "none"
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -160,13 +191,12 @@ Page({
     var data = {
       wxCaseId: item.id,
       wxUserIdGo: app.globalData.wxid,
-      backup1:app.globalData.wxNc,
-      backup2:app.globalData.openid
+      backup1: app.globalData.wxNc,
+      backup2: app.globalData.openid
     }
-    console.log(data)
     qingqiu.get("voteLikes", data, function (re) {
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       console.log('投票', re)
       if (re.success == true) {
@@ -226,10 +256,12 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     })
-    if(app.globalData.showtype != undefined){
-      this.setData({typeflag:app.globalData.showtype})
+    if (app.globalData.showtype != undefined) {
+      this.setData({
+        typeflag: app.globalData.showtype
+      })
       app.globalData.showtype = undefined
-  }
+    }
     if (app.globalData.showworkRefresh != 0) {
       this.chushishouquan()
       this.QueryoneArea()
@@ -237,6 +269,7 @@ Page({
       if (app.globalData.oneCity != undefined) {
         this.setData({
           showList: [],
+          activityList:[],
           weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name,
           pageNo: 1
         })
@@ -246,6 +279,7 @@ Page({
       } else {
         this.setData({
           showList: [],
+          activityList:[],
           pageNo: 1,
           cityId: this.data.id,
           cityname1: this.data.name,
@@ -263,7 +297,7 @@ Page({
     qingqiu.get("getVoteNum", {
       id: app.globalData.wxid
     }, function (res) {
-      console.log('投票数量',res)
+      console.log('投票数量', res)
       if (res.success == true) {
         that.setData({
           voteNum: res.result.backup6
@@ -273,18 +307,33 @@ Page({
   },
   // 上拉功能
   onReachBottom: function () {
-    if (this.data.isLastPage) {
-      wx.showToast({
-        title: '没有更多了！',
-        icon: 'none',
-        duration: 2000
+    if (this.data.typeflag == 0) {
+      if (this.data.isLastPage) {
+        wx.showToast({
+          title: '没有更多了！',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      this.setData({
+        pageNo: this.data.pageNo + 1
       })
-      return
+      this.getCasePageVote()
+    } else {
+      if (this.data.isLastPage) {
+        wx.showToast({
+          title: '没有更多了！',
+          icon: 'none',
+          duration: 2000
+        })
+        return
+      }
+      this.setData({
+        pageNo: this.data.pageNo + 1
+      })
+      this.SelectshowList()
     }
-    this.setData({
-      pageNo: this.data.pageNo + 1
-    })
-    this.SelectshowList()
   },
 
   // 获取晒晒 

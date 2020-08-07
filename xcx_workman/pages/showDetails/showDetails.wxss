@@ -229,3 +229,7 @@ page{
   height: 50rpx;
   padding-top: 30rpx;
 }
+/* 禁用按钮 */
+.disabled {
+  pointer-events: none;
+}

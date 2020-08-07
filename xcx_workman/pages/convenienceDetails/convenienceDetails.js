@@ -1,18 +1,57 @@
 // pages/convenienceDetails/convenienceDetails.js
+const app = getApp()
+const api = require("../../utils/config.js")
+const qingqiu = require("../../utils/request.js")
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    convenience:{}
   },
+
+  /**
+   * 通过id加载数据
+   * @param {*} id 
+   */
+  chushihuabyid:function(id){
+    var that = this
+    qingqiu.get("queryconvenienceById",{id:id},function(res){
+      console.log(res)
+      if(res.success == true){
+        if(res.result != null){
+          that.setData({
+            convenience:res.result
+          })
+        }
+      }
+    })
+  },
+
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.chushihuabyid(1)
+    // 通过id加载数据
+    if(options != undefined){
+      if(options.id != undefined){
+        this.chushihuabyid(options.id)
+      }
+    }
+  },
 
+  /**
+   * 联系TA
+   * @param {*} e 
+   */
+  phone:function(e){
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.phone,
+    })
   },
 
   /**
