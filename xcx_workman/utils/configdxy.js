@@ -121,7 +121,7 @@ const convenienceEdit = baseUrl + "work/convenience/edit"
 // 便民站获取详情ById
 const queryconvenienceById = baseUrl + "work/convenience/queryconvenienceById"
 // 便民站获取详情
-const getConveniencePage = baseUrl + "work/convenience/getConveniencePage"
+const getConveniencePage = baseUrl + "work/convenience/list"
 
 module.exports = {
   wxUserAdd: WxUserAdd,

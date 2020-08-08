@@ -18,7 +18,7 @@
 						<view class="content-list">
 							<view class="content-list-item hengxiang">
 								<view class="content-neirong-title">
-									{{item.time}}
+									出发日期：{{item.starTime}}
 								</view>
 								<view class="content-list-leixing">
 									<view class="content-list-type">详情</view>

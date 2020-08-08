@@ -19,7 +19,7 @@
 						<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 					</view>
 					<view class="top-title-right-shuru">
-						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入编号/作者名" class="shurukuang"></input>
+						<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入编号" class="shurukuang"></input>
 					</view>
 					<view class="top-title-right-sousuo">
 						<view class="sousuo-button" bindtap="btnsearchvote">搜索</view>
@@ -31,8 +31,15 @@
 			</view>
 		</view>
 		<view class="bottom-activity">
-			<view style="padding-bottom:20rpx;font-size:25rpx;">每日可为5名作者投1票，投票时段07:00-23:00（今日可投<text style="color:red;">{{voteNum}}</text>票）</view>
-			<view style="padding-bottom:20rpx;font-size:25rpx;"><text style="color:red;">郑重声明：\n1、照片必须为原创拍摄。\n2、从网上下载的图片取消作品参赛资格，且涉及侵权责任自负。\n3、取景地非万载境内作品取消参赛资格。\n4、投票为海选，请大家不要作弊刷票，异常刷票将取消资格。\n5、为了公平起见，投票通道于8月20日开通，之前投票仍有效。</text></view>
+			<!-- <view style="padding-bottom:20rpx;font-size:25rpx;">每日可为5名作者投1票，投票时段07:00-23:00（今日可投<text style="color:red;">{{voteNum}}</text>票）</view> -->
+			<view class="gonggao">
+				<view style="width:100%;text-align:center;font-weight:600;padding-bottom:10rpx;">大赛公告</view>
+				<view style="width:100%;height:2rpx;background:#999;"></view>
+					<!-- <scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+						<view style="font-size:26rpx;padding-top:10rpx;"><text style="color:red;">1、报名、上传作品时间截止2020年9月15日。\n2、投票开启时间为2020年9月16日至9月25日。\n3、9月26日至30日线下专家评选。\n4、10月1日公布获奖名单。\n5、照片必须为原创且拍摄地为万载境内。\n6、如照片涉及肖像权纠纷，由作者本人负责。\n7、从网上下载的图片，涉及侵权责任由作者本人负责。\n8、每人可上传5个作品，每个作品一张照片。\n8、作品必须体现“劳动创造美”主题。\n9、每天每人可投5票，不限作品。\n10、一等奖1名，奖金2000元+证书。\n11、二等奖2名，奖金1000元+证书。\n12、三等奖3名，奖金600元+证书。\n13、优秀奖30名，奖金100元。\n14、网络人气奖20名，奖金100元。</text></view>
+					</scroll-view> -->
+				<view style="font-size:26rpx;padding-top:10rpx;"><text style="color:red;">1、报名、上传作品时间截止2020年9月15日。\n2、投票开启时间为2020年9月16日至9月25日。\n3、9月26日至30日线下专家评选。\n4、10月1日公布获奖名单。\n5、照片必须为原创且拍摄地为万载境内。\n6、如照片涉及肖像权纠纷，由作者本人负责。\n7、从网上下载的图片，涉及侵权责任由作者本人负责。\n8、每人可上传5个作品，每个作品一张照片。\n8、作品必须体现“劳动创造美”主题。\n9、每天每人可投5票，不限作品。\n10、一等奖1名，奖金2000元+证书。\n11、二等奖2名，奖金1000元+证书。\n12、三等奖3名，奖金600元+证书。\n13、优秀奖30名，奖金100元+证书。\n14、网络人气奖20名，奖金100元+奖状。</text></view>
+			</view>
 			<block wx:for-items="{{activityList}}">
 				<view class="show-activity zongxiang">
 					<view class="show-item-top" bindtap="showVote" data-obj="{{item}}">
@@ -42,20 +49,20 @@
 					<view class="hengxiang">
 						<view class="activity-bottom-left">
 							<view class="activity-left-text hengxiang">
-								<view class="bianhao" style="width:70%;">编号:{{item.needId}}
+								<view class="bianhao" style="width:70%;font-size:28rpx;">编号:{{item.needId}}
 								</view>
-								<view class="bianhao" style="width:30%;">
+								<view class="bianhao" style="width:30%;font-size:28rpx;">
 									<image src="{{iconUrl}}static/image/vote.png" class="icon-img"></image>
 									<text> {{item.giveGood}}</text> 票
 								</view>
 							</view>
 						</view>
-						<view bindtap="activity" class="{{btnFlag == true?'disabled':''}}" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
+						<view bindtap="activity" class="{{btnFlag == true?'disabled':''}}" data-itemobj="{{item}}">
 							<image src="{{iconUrl}}static/image/weitoupiao.png" class="activity-img"></image>
 						</view>
-						<view wx:if="{{item.giveState==1}}">
+						<!-- <view wx:if="{{item.giveState==1}}">
 							<image src="{{iconUrl}}static/image/yitoupiao.png" class="activity-img"></image>
-						</view>
+						</view> -->
 					</view>
 				</view>
 			</block>

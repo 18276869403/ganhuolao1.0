@@ -17,8 +17,8 @@ Page({
     wxCase: {},
     title: '',
     wxUserid: '',
-    voteNum:0,
-    btnFlag:false,
+    voteNum: 0,
+    btnFlag: false,
     date: ''
   },
 
@@ -40,10 +40,10 @@ Page({
   },
 
   // 图片放大
-  priview:function(e){
+  priview: function (e) {
     var url = e.currentTarget.dataset.src
     wx.previewImage({
-      current:url,
+      current: url,
       urls: [url]
     })
   },
@@ -66,7 +66,7 @@ Page({
       url: '../submitActivity/submitActivity?id=' + id,
     })
   },
-  deleteVote:function(e){
+  deleteVote: function (e) {
     var that = this
     var data = {
       id: e.currentTarget.dataset.id
@@ -74,7 +74,7 @@ Page({
     wx.showModal({
       title: '提示',
       content: '你确定要删除吗？',
-      success (res) {
+      success(res) {
         if (res.confirm) {
           qingqiu.get("deletess", data, function (res) {
             console.log(res)
@@ -87,13 +87,13 @@ Page({
                 icon: 'success',
                 duration: 2000
               })
-              setTimeout(function(){
+              setTimeout(function () {
                 app.globalData.showworkRefresh = 1
                 wx.switchTab({
                   url: '../showwork/showwork',
                 })
-              },1000)
-            } 
+              }, 1000)
+            }
           }, 'delete')
         }
       }
@@ -104,27 +104,27 @@ Page({
   activity: function (e) {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     wx.getSetting({
       success(res) {
         if (!res.authSetting['scope.userInfo']) {
-         wx.showToast({
-           title: '未授权，无法投票',
-           icon:"none"
-         })
-         that.setData({
-          btnFlag: false
-        })
+          wx.showToast({
+            title: '未授权，无法投票',
+            icon: "none"
+          })
+          that.setData({
+            btnFlag: false
+          })
         }
       }
     })
     if (Y == 2020) {
-      if(M <= 8){
-        if(D < 20){
+      if (M <= 9) {
+        if (D < 16) {
           wx.showToast({
             title: '投票通道于8月20日0:00开启',
-            icon:'none'
+            icon: 'none'
           })
           that.setData({
             btnFlag: false
@@ -133,23 +133,13 @@ Page({
         }
       }
     }
-    if(!(h >= 7 && h <= 23)){
-      wx.showToast({
-        title: '投票时段为07:00-23:00',
-        icon:"none"
-      })
-      that.setData({
-        btnFlag:false
-      })
-      return
-    }
     if (that.data.voteNum == 0) {
       wx.showToast({
         title: '当天投票次数已经用完，请明天再来...',
         icon: "none"
       })
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       return
     }
@@ -157,25 +147,19 @@ Page({
     var data = {
       wxCaseId: item.id,
       wxUserIdGo: app.globalData.wxid,
-      backup1:app.globalData.wxNc,
-      backup2:app.globalData.openid
+      backup1: app.globalData.wxNc,
+      backup2: app.globalData.openid
     }
     qingqiu.get("voteLikes", data, function (re) {
       that.setData({
-        btnFlag:false
+        btnFlag: false
       })
       console.log('投票', re)
       if (re.success == true) {
-        if (item.giveState == 0) {
-          item.giveGood += 1
-        }
-        item.giveState = 1
+        item.giveGood += 1
         wx.showToast({
           title: '投票成功',
           icon: 'success'
-        })
-        that.setData({
-          btnFlag:true
         })
         that.setData({
           wxCase: item,

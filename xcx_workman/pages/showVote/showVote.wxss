@@ -54,7 +54,7 @@ page {
   position: absolute;
   text-align: center;
   right: 32rpx;
-  top: 166rpx;
+  top: 116rpx;
 }
 
 .img-class {

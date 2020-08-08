@@ -309,8 +309,22 @@
   border-radius: 8rpx;
   font-size: 14px;
   color: #999;
-  float: left;
-  margin-left: 20rpx;
+  margin-bottom: 10rpx;
+  position: relative;
+}
+
+.fabu1 {
+  width: 50%;
+  text-align: center;
+}
+
+.fabu-list1 {
+  margin-left: 4%;
+  margin-right: 4%;
+  width: 92%;
+  margin-top: 32rpx;
+  display: flex;
+  flex-flow: row wrap;
 }
 
 .fabu1-img {
@@ -328,7 +342,9 @@
   margin-bottom: 16rpx;
 }
 
-.delete-img {
+.delete-img1 {
+  position: absolute;
+  right:0rpx;
   width: 44rpx;
   height: 44rpx;
 }

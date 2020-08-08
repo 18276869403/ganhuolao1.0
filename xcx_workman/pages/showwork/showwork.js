@@ -45,7 +45,7 @@ Page({
     name: '',
     sousuonr: '',
     pageNo: 1,
-    btnFlag:false
+    btnFlag: false
   },
   // 活动
   changeType: function (e) {
@@ -61,7 +61,7 @@ Page({
   submitVote: function () {
     var that = this
     that.setData({
-      btnFlag:true
+      btnFlag: true
     })
     qingqiu.get("getActivityVote", {
       wxUserId: app.globalData.wxid
@@ -72,16 +72,16 @@ Page({
           wxUserId: app.globalData.wxid
         }, function (re) {
           that.setData({
-            btnFlag:false
+            btnFlag: false
           })
           if (re.result < 5) {
             wx.navigateTo({
               url: '../submitActivity/submitActivity',
             })
-          } else{
+          } else {
             wx.showToast({
               title: '上传作品次数用尽',
-              icon:'none'
+              icon: 'none'
             })
           }
         })
@@ -177,10 +177,10 @@ Page({
       }
     })
     if (Y == 2020) {
-      if(M <= 8){
-        if(D < 20){
+      if(M <= 9){
+        if(D < 16){
           wx.showToast({
-            title: '投票通道于8月20日0:00开启',
+            title: '投票通道9月16日开启',
             icon:'none'
           })
           that.setData({
@@ -189,16 +189,6 @@ Page({
           return
         }
       }
-    }
-    if (!(h >= 7 && h <= 23)) {
-      wx.showToast({
-        title: '投票时段为07:00-23:00',
-        icon: "none"
-      })
-      that.setData({
-        btnFlag: false
-      })
-      return
     }
     if (that.data.voteNum == 0) {
       wx.showToast({
@@ -225,10 +215,7 @@ Page({
       if (re.success == true) {
         for (let obj of that.data.activityList) {
           if (obj.id == item.id) {
-            if (item.giveState == 0) {
-              obj.giveGood += 1
-            }
-            obj.giveState = 1
+            obj.giveGood += 1
           }
         }
         wx.showToast({

@@ -646,3 +646,10 @@ page {
 .disabled {
   pointer-events: none;
 }
+.gonggao{
+  width: 96%;
+  border: 2rpx solid #999;
+  margin-bottom: 30rpx;
+  padding: 2%;
+  border-radius: 10rpx;
+}

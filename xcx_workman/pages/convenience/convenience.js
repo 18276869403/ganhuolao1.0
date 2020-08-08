@@ -59,7 +59,25 @@ Page({
     }
     qingqiu.get("getConveniencePage",data,function(res){
       console.log(res)
+      if(res.success == true){
+        for(let obj of res.result.records){
+          obj.starTime = obj.starTime.substring(0,10)
+        }
+        that.setData({
+          conveniencelist:res.result.records
+        })
+      }
     })
+  },
+
+  /**
+   * 确定按钮
+   */
+  queding:function(){
+    this.setData({
+      conveniencelist:[]
+    })
+    this.chushihua()
   },
 
   /**

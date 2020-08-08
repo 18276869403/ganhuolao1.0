@@ -115,6 +115,7 @@ Page({
         caseContent: that.data.needscontent,
         picOne: that.data.picIurl
       }
+      console.log(data)
       qingqiu.get("insertCase", data, function (re) {
         console.log(re)
         that.setData({
@@ -171,7 +172,7 @@ Page({
   },
   //获取输入的晒活标题
   commentinput: function (e) {
-    deteleString(e.detail.value)
+    // this.deteleString(e.detail.value)
     this.setData({
       comment: e.detail.value
     })
@@ -329,6 +330,20 @@ Page({
     that.setData({
       btnFlag: false
     })
+  },
+  // 删除图片
+  shanchu: function (e) {
+    var type = e.currentTarget.dataset.type
+    var src = e.currentTarget.dataset.tplj
+    switch (type) {
+      case 1:
+        if (this.data.picIurl == src) {
+          this.setData({
+            picIurl: ''
+          })
+        }
+        break;
+    }
   },
   // 预览图片
   imgview: function (e) {

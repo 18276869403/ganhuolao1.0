@@ -59,7 +59,7 @@ Page({
     iconUrl: api.iconUrl,
     id: 0,
     index: 0,
-    type: ['选择类型', '车找人', '人找车', '车找货'],
+    type: ['选择类型', '车找人', '人找车', '车找货','货找车'],
     multiArray: [years, months, days, hours, minutes],
     multiIndex: [0, 9, 16, 10, 17],
     choose_year: '',
