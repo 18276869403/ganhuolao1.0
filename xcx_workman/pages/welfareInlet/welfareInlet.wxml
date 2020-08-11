@@ -25,12 +25,6 @@
 			</view>
 		</view>
 		<view class="content-right">
-			<!-- <view class="content-righ-all zongxiang" bindtap="WelfareDetail" data-id="{{activityId}}">
-				<view>
-					<image src="{{iconUrl}}static/image/pingshenzhuanjia.png" class="img-remark"></image>
-				</view>
-				<view>活动详情</view>
-			</view> -->
 			<view class="content-righ-all zongxiang" bindtap="activityJoin">
 				<view>
 					<image src="{{iconUrl}}static/image/woyaobaomingactivity.png" class="img-remark"></image>
@@ -42,6 +36,12 @@
 					<image src="{{iconUrl}}static/image/cansaizuopin.png" class="img-remark"></image>
 				</view>
 				<view>作品欣赏</view>
+			</view>
+			<view class="content-righ-all zongxiang" bindtap="myShowVote">
+				<view>
+					<image src="{{iconUrl}}static/image/pingshenzhuanjia.png" class="img-remark"></image>
+				</view>
+				<view>我的作品</view>
 			</view>
 		</view>
 	</view>

@@ -242,7 +242,7 @@ Page({
       that.data.picIurl1 += obj + ","
     }
     that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
-    var s = qingqiu.yanzheng(that.data.needsname + ",输入标题|" + that.data.cityId + ",请选择一级区域|" + that.data.areaId + ",请选择二级区域|" + that.data.linkman + ",输入联系人|" + that.data.phone + ",输入联系电话")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入标题|" + that.data.cityId + ",选择一级区域|" + that.data.areaId + ",选择二级区域|" + that.data.linkman + ",输入联系人|" + that.data.phone + ",输入联系电话")
     if (s != 0) {
       wx.showToast({
         title: s,
@@ -294,6 +294,16 @@ Page({
       }
       console.log(data)
       qingqiu.get("needUpdateStateById", data, function (re) {
+        if(re.message == "操作失败"){
+          wx.showToast({
+            title: '修改失败',
+            icon:"none"
+          })
+          that.setData({
+            btnFlag: false
+          })
+          return
+        }
         if (re.success == true) {
           that.setData({
             btnFlag: false
@@ -351,6 +361,13 @@ Page({
           that.setData({
             btnFlag: false
           })
+          if(re.result == null){
+            wx.showToast({
+              title: '发布失败',
+              icon:'none'
+            })
+            return
+          }
           wx.showToast({
             title: '发布成功',
             icon: 'none',

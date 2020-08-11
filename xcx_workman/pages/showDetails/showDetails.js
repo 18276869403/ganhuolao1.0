@@ -18,6 +18,7 @@ Page({
     imgList: [],
     imgheights: [],
     current: 0,
+    givePic:[],
     ssid: ''
   },
 
@@ -42,13 +43,14 @@ Page({
     // this.setData({ssid:options.obj})
     this.ssxqbyid()
     this.pinglun()
+    this.getShowGivePic()
   },
   // 晒晒详情
   ssxqbyid() {
     var that = this
     var data = {
       id: that.data.ssid,
-      wxUserIdGo:app.globalData.wxid
+      wxUserIdGo: app.globalData.wxid
     }
     qingqiu.get("pcQueryWxCaseById", data, function (re) {
       console.log(re)
@@ -75,7 +77,7 @@ Page({
             caseMsgList: that.data.caseMsgList,
             imgList: that.imgList
           })
-          console.log('晒晒',that.data.caseMsgList)
+          console.log('晒晒', that.data.caseMsgList)
         } else {
           wx.showToast({
             title: re.message,
@@ -84,6 +86,20 @@ Page({
           })
         }
       }
+    })
+  },
+  /**
+   * 获取晒晒点赞人数头像
+   */
+  getShowGivePic: function () {
+    var that = this
+    qingqiu.get("getShowGive", {
+      id: that.data.ssid
+    }, function (res) {
+      console.log('点赞人数',res)
+      that.setData({
+        givePic:res.result
+      })
     })
   },
   // 晒晒评论
@@ -192,6 +208,7 @@ Page({
             that.data.caseMsgList.giveGood -= 1
           }
           that.data.caseMsgList.giveState = item.giveState == 0 ? 1 : 0
+          that.getShowGivePic()
         }
       }
       that.setData({

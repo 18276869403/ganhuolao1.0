@@ -14,7 +14,7 @@ Page({
     needscontent: '',
     cityname: '',
     areaname: '',
-    cityId: '',
+    cityId: 1,
     areaId: '',
     ceshi: [{
         id: 1,
@@ -129,7 +129,7 @@ Page({
     }
     if (that.data.areaId == "") {
       wx.showToast({
-        title: '请选择所在区域！',
+        title: '请选择二级区域！',
         icon: 'none',
         duration: 2000
       })
@@ -170,6 +170,13 @@ Page({
       that.setData({
         btnFlag: false
       })
+      if(re.message == "操作失败"){
+        wx.showToast({
+          title: '发布失败',
+          icon:'none'
+        })
+        return
+      }
       if (re.success == true) {
         wx.showToast({
           title: '发布成功！',

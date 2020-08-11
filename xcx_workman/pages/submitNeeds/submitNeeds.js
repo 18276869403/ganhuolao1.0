@@ -23,7 +23,7 @@ Page({
     erjiname: '',
     cityname: '',
     areaname: '',
-    cityId: 0,
+    cityId: 1,
     areaId: '',
     needsname: '',
     needscontent: '',
@@ -245,7 +245,7 @@ Page({
       that.data.picIurl1 = that.data.picIurl1.substring(0, that.data.picIurl1.length - 1)
     }
 
-    var s = qingqiu.yanzheng(that.data.needsname + ",输入需求标题|" + that.data.cityId + ",选择所在区域|" + that.data.areaId + ",选择所在区域|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人")
+    var s = qingqiu.yanzheng(that.data.needsname + ",输入需求标题|" + that.data.cityId + ",选择所在一级区域|" + that.data.areaId + ",选择所在二级区域|" + that.data.phone + ",输入联系电话|" + that.data.linkman + ",输入联系人")
     if (s != 0) {
       wx.showToast({
         title: s,
@@ -308,6 +308,13 @@ Page({
         that.setData({
           btnFlag: false
         })
+        if(re.message == "操作失败"){
+          wx.showToast({
+            title: '修改失败',
+            icon:'none'
+          })
+          return
+        }
         if (re.success == true) {
           wx.showToast({
             title: '修改成功',
@@ -353,6 +360,13 @@ Page({
           btnFlag: false
         })
         if (re.success == true) {
+          if(re.result == null){
+            wx.showToast({
+              title: '发布失败',
+              icon:'none'
+            })
+            return
+          }
           wx.showToast({
             title: '发布成功',
             icon: 'none',
@@ -360,7 +374,6 @@ Page({
           })
           var needid = re.result.id
           // 公众号消息推送
-
           var objdata = {
             access_token: app.globalData.access_TokenOff,
             firstValue: "干活佬又上新啦，赶紧去看看！",
@@ -835,31 +848,30 @@ Page({
     }.bind(this), 200)
   },
 
-  //地址 显示弹窗样式
-  showModal: function (e) {
-    this.setData({
-      hasMask: true
-    })
-    var animation = wx.createAnimation({
-      duration: 300,
-      timingFunction: "linear",
-      delay: 0
-    })
-    this.animation = animation
-    animation.opacity(0).rotateX(-100).step();
-    this.setData({
-      animationData: animation.export(),
-      showModalStatus: true
-    })
-    setTimeout(function () {
-      animation.opacity(1).rotateX(0).step();
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 200)
-
-
-  },
+  // //地址 显示弹窗样式
+  // showModal: function (e) {
+  //   this.setData({
+  //     hasMask: true,
+  //   })
+  //   console.log('一级区域',that.data.cityname)
+  //   var animation = wx.createAnimation({
+  //     duration: 300,
+  //     timingFunction: "linear",
+  //     delay: 0
+  //   })
+  //   this.animation = animation
+  //   animation.opacity(0).rotateX(-100).step();
+  //   this.setData({
+  //     animationData: animation.export(),
+  //     showModalStatus: true
+  //   })
+  //   setTimeout(function () {
+  //     animation.opacity(1).rotateX(0).step();
+  //     this.setData({
+  //       animationData: animation.export()
+  //     })
+  //   }.bind(this), 200)
+  // },
   //隐藏弹窗样式 地址
   hideModal: function () {
     var that = this;
@@ -882,32 +894,32 @@ Page({
       })
     }.bind(this), 200)
   },
-  cityyiji: function () {
-    var that = this
-    qingqiu.get("oneAreaService", {}, function (re) {
-      if (re.data.result.length > 0) {
-        that.setData({
-          cityId: re.data.result[0].id,
-          cityname1: re.data.result[0].areaName
-        })
-      }
-      that.setData({
-        city: re.data.result
-      })
-      that.cityerji()
-    })
-  },
-  cityerji: function () {
-    var that = this
-    var data = {
-      oneAreaId: that.data.cityId
-    }
-    qingqiu.get("getAllTwoArea", data, function (re) {
-      that.setData({
-        area: re.data.result
-      })
-    })
-  },
+  // cityyiji: function () {
+  //   var that = this
+  //   qingqiu.get("oneAreaService", {}, function (re) {
+  //     if (re.data.result.length > 0) {
+  //       that.setData({
+  //         cityId: re.data.result[0].id,
+  //         cityname1: re.data.result[0].areaName
+  //       })
+  //     }
+  //     that.setData({
+  //       city: re.data.result
+  //     })
+  //     that.cityerji()
+  //   })
+  // },
+  // cityerji: function () {
+  //   var that = this
+  //   var data = {
+  //     oneAreaId: that.data.cityId
+  //   }
+  //   qingqiu.get("getAllTwoArea", data, function (re) {
+  //     that.setData({
+  //       area: re.data.result
+  //     })
+  //   })
+  // },
   // 左侧按钮
   cityleft: function (e) {
     var that = this;
@@ -917,7 +929,7 @@ Page({
     that.setData({
       cityId: id,
       curIndex: index,
-      cityname1: name,
+      cityname: name,
       show: true
     })
     var data = {
@@ -939,7 +951,7 @@ Page({
   // 右侧单选点击
   arearight: function (e) {
     var that = this;
-    if (that.data.cityname1 == undefined) {
+    if (that.data.cityname == undefined) {
       wx.showToast({
         title: '请先选择城市',
         icon: 'none',
@@ -955,9 +967,10 @@ Page({
       curIndex: index,
       areaname: name,
       show: false,
-      cityname: that.data.cityname1,
+      cityname: that.data.cityname,
       showModalStatus: false,
     })
+    console.log('区域',that.data.cityname + that.data.areaname)
   },
   // 服务规则页面显示
   showModal1: function () {
@@ -1135,7 +1148,8 @@ Page({
   //显示弹窗样式
   showModal: function (e) {
     this.setData({
-      hasMask: true
+      hasMask: true,
+      cityname:'万载县'
     })
     var animation = wx.createAnimation({
       duration: 300,

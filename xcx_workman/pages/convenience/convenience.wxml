@@ -9,10 +9,19 @@
 	<view class="content zongxiang">
 		<!-- 公益活动模块 -->
 		<view class="content-need">
-			<view class="list" wx:for="{{bianminlist}}" wx:for-index="index" wx:key="index">
-				<view class="need-list hengxiang" bindtap="needsDetails" data-vall="{{item}}">
-					<view class="need-list-left" wx:if="{{item.backup1[0]==null}}">
-						<image src="{{iconUrl}}static/image/zawu1.png" class="need-content-img"></image>
+			<view class="list" wx:for="{{conveniencelist}}" wx:for-index="index" wx:key="index">
+				<view class="need-list hengxiang" bindtap="convenienceDetails" data-id="{{item.id}}">
+					<view class="need-list-left" wx:if="{{item.type===1}}">
+						<image src="../image/chezhaoren1.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.type ===2}}">
+						<image src="../image/renzhaoche.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.type ===3}}">
+						<image src="../image/chezhaohuo.png" class="need-content-img"></image>
+					</view>
+					<view class="need-list-left" wx:if="{{item.type ===4}}">
+						<image src="../image/huozhaoche.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-right">
 						<view class="content-list">
@@ -20,9 +29,7 @@
 								<view class="content-neirong-title">
 									出发日期：{{item.starTime}}
 								</view>
-								<view class="content-list-leixing">
-									<view class="content-list-type">详情</view>
-								</view>
+								<!-- <view class="content-list-type">详情</view> -->
 							</view>
 							<view class="content-list-bottom hengxiang">
 								<view class="list-bottom-item2 hengxiang">
@@ -31,7 +38,7 @@
 											出发地：
 										</view>
 										<view>
-											<text style="color:#333333">{{item.chu}}</text>
+											<text style="color:#333333">{{item.starAddress}}</text>
 										</view>
 									</view>
 								</view>
@@ -43,7 +50,7 @@
 											目的地：
 										</view>
 										<view>
-											<text style="color:#333333">{{item.chu}}</text>
+											<text style="color:#333333">{{item.endAddress}}</text>
 										</view>
 									</view>
 								</view>
@@ -57,10 +64,10 @@
 	</view>
 	<view class="bottom zongxiang">
 		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
-		<button class='sousuo' style="width:100%" bindtap="Findss">
-			<image src="{{iconUrl}}static/image/kefu1.png" class="kefu-img"></image>
-		</button>
+		<image src="../image/kefusousuo.png" bindtap="Findss" class="sousuo-img"></image>
+		<image src="../image/kefufabu.png" bindtap="submit" class="submit-img"></image>
 	</view>
+
 </view>
 <!-- 遮罩层显示 -->
 <view>
@@ -70,15 +77,29 @@
 			<view class='s-left'>
 				<scroll-view class='left-navbar' scroll-y="true">
 					<view>
-						<view class="content-title">类型</view>
-						<view wx:for="{{type}}">
+						<view class="content-title" style="color:#000;">类型</view>
+						<block wx:for="{{type}}">
+							<view class="shurukuang hengxiang" style="margin-bottom:20rpx;" bindtap="convType" data-id="{{item.value}}">
+								<view class="navbar-type-icon">
+									<image src="{{item.src}}" class="conv-icon"></image>
+								</view>
+								<view class="navbar-type-text">{{item.name}}</view>
+								<view class="navbar-type-checked" wx:if="{{item.type == 1}}">
+									<image src="../image/convchecked.png" class="checked-img"></image>
+								</view>
+								<view class="navbar-type-checked" wx:if="{{item.type == 0}}">
+									<image src="../image/convnochecked.png" class="checked-img"></image>
+								</view>
+							</view>
+						</block>
+						<!-- <view wx:for="{{type}}">
 							<view class="{{index == parameter.typeid?'content-leixinganniu':'content-leixinganniu2'}}" bindtap="switchType" data-index="{{index}}">{{item}}</view>
-						</view>
-						<view class="content-title">出发时间</view>
+						</view> -->
+						<view class="content-title" style="color:#000;">出发时间</view>
 						<view class="shurukuang">
 							<picker mode="date" class="picker-view" value="{{parameter.date}}" start="{{parameter.newDate}}" bindchange="bindDateChange">
 								<view class="picker hengxiang" wx:if="{{parameter.date != ''}}">
-									<view  style="padding-left:80rpx">{{parameter.date}}</view>
+									<view style="padding-left:80rpx">{{parameter.date}}</view>
 									<view>
 										<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
 									</view>
@@ -91,9 +112,9 @@
 								</view>
 							</picker>
 						</view>
-						<view class="content-title">出发地</view>
+						<view class="content-title" style="color:#000;">出发地</view>
 						<input type="text" placeholder="输入出发地" class="shurukuang" placeholder-class="placeholder" value='{{parameter.starAddress}}' name="starAddress" bindinput='starAddressinput'></input>
-						<view class="content-title">目的地</view>
+						<view class="content-title" style="color:#000;">目的地</view>
 						<input type="text" placeholder="输入目的地" class="shurukuang" placeholder-class="placeholder" value='{{endAddress}}' name="endAddress" bindinput='endAddressinput'></input>
 					</view>
 					<view class="hengxiang">

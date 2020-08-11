@@ -27,15 +27,15 @@ page {
 
 .title {
   width: 100%;
-  padding-bottom: 25rpx;
+  padding-bottom: 10rpx;
 }
 
 .title-text {
   width: 30%;
-  font-size: 35rpx;
-  font-weight: 500;
-  height: 54rpx;
-  line-height: 54rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  height: 44rpx;
+  line-height: 44rpx;
 }
 
 .swiper {
@@ -251,8 +251,8 @@ page {
 }
 
 .content-content-title {
-  height: 92rpx;
-  line-height: 92rpx;
+  height: 72rpx;
+  line-height: 72rpx;
   border-bottom: 1rpx solid #ececec;
   font-size: 32rpx;
   font-weight: bold;
@@ -670,7 +670,7 @@ page {
 }
 
 .type1 {
-  background-color: #5183f7;
+  background-color: #34d3fb;
   color: #fff;
   text-align: center;
   height: 54rpx;
@@ -679,7 +679,7 @@ page {
 }
 
 .type2 {
-  background-color: #fe8d34;
+  background-color: #ff7d60;
   color: #fff;
   text-align: center;
   height: 54rpx;
@@ -688,13 +688,24 @@ page {
 }
 
 .type3 {
-  background-color: #f1324d;
+  background-color: #07c1ac;
   color: #fff;
   text-align: center;
   height: 54rpx;
   line-height: 54rpx;
   width: 120rpx;
 }
+
+.type4 {
+  background-color: #ff854f;
+  color: #fff;
+  text-align: center;
+  height: 54rpx;
+  line-height: 54rpx;
+  width: 120rpx;
+}
+
+
 
 .bottom {
   width: 92%;
@@ -708,7 +719,6 @@ page {
 
 .bottom-center {
   width: 4%;
-
 }
 
 .bottom-right {
@@ -729,5 +739,52 @@ page {
   background: red;
   text-align: center;
   color: #fff;
-  height: 40rpx;
+  height: 54rpx;
+  line-height: 54rpx;
+}
+
+.update {
+  position: absolute;
+  right: 140rpx;
+  width: 120rpx;
+  background: #38bdf1;
+  text-align: center;
+  color: #fff;
+  height: 54rpx;
+  line-height: 54rpx;
+}
+
+.delete {
+  position: absolute;
+  right: 0rpx;
+  width: 120rpx;
+  background: #f4820d;
+  text-align: center;
+  color: #fff;
+  height: 54rpx;
+  line-height: 54rpx;
+}
+
+.type-yuan {
+  font-size: 30rpx;
+  border-radius: 6rpx;
+  margin-right: 30rpx;
+  margin-top:10rpx;
+}
+
+.button-type {
+  width: 100%;
+  height: 60rpx;
+}
+.userinfo-icon{
+  width: 8%;
+}
+.userinfo-content{
+  width: 92%;
+  height: 42rpx;
+  line-height: 42rpx;
+}
+.userinfo-img{
+  width: 42rpx;
+  height: 42rpx;
 }

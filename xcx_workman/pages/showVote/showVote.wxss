@@ -88,7 +88,7 @@ page {
 }
 
 .delete-button {
-  width: 100rpx;
+  width: 177rpx;
   /* height: 80rpx; */
   border-radius: 4rpx;
   border: 2rpx solid #f4820d;

@@ -11,10 +11,6 @@ var Y = date.getFullYear();
 var M = (date.getMonth());
 //日
 var D = date.getDate();
-//时
-var h = date.getHours();
-//分
-var m = date.getMinutes();
 
 Page({
   data: {
@@ -180,7 +176,7 @@ Page({
       if(M <= 9){
         if(D < 16){
           wx.showToast({
-            title: '投票通道9月16日开启',
+            title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
             icon:'none'
           })
           that.setData({
@@ -188,7 +184,25 @@ Page({
           })
           return
         }
+      }else{
+        wx.showToast({
+          title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
+          icon:'none'
+        })
+        that.setData({
+          btnFlag: false
+        })
+        return
       }
+    }else{
+      wx.showToast({
+        title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
+        icon:'none'
+      })
+      that.setData({
+        btnFlag: false
+      })
+      return
     }
     if (that.data.voteNum == 0) {
       wx.showToast({
@@ -237,6 +251,9 @@ Page({
     this.getCasePageVote()
   },
 
+  /**
+   * 下拉刷新
+   */
   onPullDownRefresh: function () {
     app.globalData.showid = 1
     this.data.pageNo = 1

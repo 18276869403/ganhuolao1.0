@@ -22,11 +22,10 @@ Page({
       url: '../welfareExplain/welfareExplain',
     })
   },
-  // 活动详情
-  WelfareDetail: function (e) {
-    var id = e.currentTarget.dataset.id
+  // 我的作品
+  myShowVote: function (e) {
     wx.navigateTo({
-      url: '../WelfareDetail/WelfareDetail?id=' + id,
+      url: '../myShowVote/myShowVote',
     })
   },
   // 作品欣赏

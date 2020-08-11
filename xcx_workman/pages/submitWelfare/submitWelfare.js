@@ -282,6 +282,13 @@ Page({
               that.setData({
                 btnFlag: false
               })
+              if(res.message == "操作失败"){
+                wx.showToast({
+                  title: '修改失败',
+                  icon:'none'
+                })
+                return
+              }
               if(res.success == true){
                 wx.showToast({
                   title: res.message,
@@ -304,6 +311,13 @@ Page({
               that.setData({
                 btnFlag: false
               })
+              if(re.message == "操作失败"){
+                wx.showToast({
+                  title: '发布失败',
+                  icon:"none"
+                })
+                return
+              }
               if (re.success == true) {
                 wx.showToast({
                   title: '发布成功',
@@ -333,6 +347,13 @@ Page({
               that.setData({
                 btnFlag: false
               })
+              if(res.message == "操作失败"){
+                wx.showToast({
+                  title: '修改失败',
+                  icon:"none"
+                })
+                return
+              }
               if(res.success == true){
                 wx.showToast({
                   title: res.message,
@@ -355,6 +376,13 @@ Page({
               that.setData({
                 btnFlag: false
               })
+              if(re.message == "操作失败"){
+                wx.showToast({
+                  title: '发布失败',
+                  icon:"none"
+                })
+                return
+              }
               if (re.success == true) {
                 wx.showToast({
                   title: '发布成功',

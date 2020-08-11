@@ -105,9 +105,6 @@ Page({
             page.onLoad();
           }
         })
-        // wx.redirectTo({
-        //   url: '../myGoods/myGoods',
-        // })
       }
     }, 'put')
   },
@@ -153,7 +150,13 @@ Page({
       that.setData({
         btnFlag: false
       })
-      if (re.success == true) {
+      if(re.message == "操作失败"){
+        wx.showToast({
+          title: "添加失败!",
+          icon:'none'
+        })
+        return
+      }else if (re.success == true) {
         wx.showToast({
           title: '添加成功！',
           icon: 'success',

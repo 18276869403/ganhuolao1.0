@@ -122,6 +122,10 @@ const convenienceEdit = baseUrl + "work/convenience/edit"
 const queryconvenienceById = baseUrl + "work/convenience/queryconvenienceById"
 // 便民站获取详情
 const getConveniencePage = baseUrl + "work/convenience/list"
+// 便民站删除
+const convDelete = baseUrl + "work/convenience/delete" 
+// 获取点赞头像
+const getShowGive = baseUrl + "pc/user/getShowGive"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -180,5 +184,7 @@ module.exports = {
   convenienceAdd:convenienceAdd,
   convenienceEdit:convenienceEdit,
   queryconvenienceById:queryconvenienceById,
-  getConveniencePage:getConveniencePage
+  getConveniencePage:getConveniencePage,
+  getShowGive:getShowGive,
+  convDelete:convDelete
 };

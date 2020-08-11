@@ -5,28 +5,55 @@
 			<view class="content-list-item hengxiang">
 				<view class="title hengxiang">
 					<view class="title-text" wx:if="{{convenience.type == 1}}">
-						<view class="type1">人找车</view>
+						<view class="">人找车</view>
 					</view>
 					<view class="title-text" wx:if="{{convenience.type == 2}}">
-						<view class="type2">车找人</view>
+						<view class="">车找人</view>
 					</view>
 					<view class="title-text" wx:if="{{convenience.type == 3}}">
-						<view class="type3">车找货</view>
+						<view class="">车找货</view>
 					</view>
-					<view class="title-time">
+					<view class="title-text" wx:if="{{convenience.type == 4}}">
+						<view class="">货找车</view>
+					</view>
+					<!-- <view class="title-time">
 						<view class="title-time-text">发布时间：{{convenience.createTime}}</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 			<view class="uhengxiang"></view>
 			<view class="hengxiang content-list-type">
 				<view class="header-text zongxiang">
-					<view class="header-text-font">联系人：{{convenience.linkName}}</view>
-					<view class="header-text-font hengxiang" style="padding-top:10rpx;">
-						<view><text decode="{{true}}" space="{{true}}">电 &nbsp;&nbsp;话：</text>{{convenience.linkPhone}}</view>
-						<view class="phone" bindtap="phone" data-phone="{{convenience.linkPhone}}">联系TA</view>
+					<view class="userinfo hengxiang">
+						<view class="userinfo-icon">
+							<image src="../image/convlinkname.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font userinfo-content">联系人：{{convenience.linkName}}</view>
 					</view>
+					<view class="userinfo hengxiang">
+						<view class="userinfo-icon">
+							<image src="../image/convphone.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font userinfo-content">
+							<view><text decode="{{true}}" space="{{true}}">电 &nbsp;&nbsp;话：</text>{{convenience.linkPhone}}</view>
+						</view>
+					</view>
+					<view class="userinfo hengxiang">
+						<view class="userinfo-icon">
+							<image src="../image/convfabushijian.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font userinfo-content">
+							<view>发布时间：{{convenience.createTime}}</view>
+						</view>
+					</view>
+
 				</view>
+			</view>
+			<view class="uhengxiang"></view>
+			<view class="button-type hengxiang">
+				<view class="phone type-yuan" bindtap="phone" data-phone="{{convenience.linkPhone}}" wx:if="{{wxUserId != convenience.wxUserId}}">联系TA</view>
+				<view class="update type-yuan" bindtap="edit" data-id="{{convenience.id}}" wx:if="{{wxUserId == convenience.wxUserId}}">修改</view>
+				<view class="delete type-yuan" bindtap="delete" data-id="{{convenience.id}}" wx:if="{{wxUserId == convenience.wxUserId}}">删除</view>
 			</view>
 		</view>
 		<view class="content-content zongxiang">
@@ -34,9 +61,24 @@
 				<view>便民信息</view>
 			</view>
 			<view class="content-content-list">
-				<view style="color:#dc132c;">出发时间：{{convenience.starTime}}</view>
-				<view style="padding-top:8rpx;">出发地：{{convenience.starAddress}}</view>
-				<view style="padding-top:8rpx;">目的地：{{convenience.endAddress}}</view>
+				<view class="userinfo hengxiang">
+					<view class="userinfo-icon">
+						<image src="../image/convstartime.png" class="userinfo-img"></image>
+					</view>
+					<view class="userinfo-content" style="color:#dc132c;">出发时间：{{convenience.starTime}}</view>
+				</view>
+				<view class="userinfo hengxiang">
+					<view class="userinfo-icon">
+						<image src="../image/convstaraddress.png" class="userinfo-img"></image>
+					</view>
+					<view class="userinfo-content">出发地：{{convenience.starAddress}}</view>
+				</view>
+				<view class="userinfo hengxiang">
+					<view class="userinfo-icon">
+						<image src="../image/convendaddress.png" class="userinfo-img"></image>
+					</view>
+					<view class="userinfo-content">目的地：{{convenience.endAddress}}</view>
+				</view>
 			</view>
 		</view>
 		<!-- 备注 -->

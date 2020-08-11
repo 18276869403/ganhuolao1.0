@@ -155,7 +155,13 @@ Page({
         that.setData({
           btnFlag: false
         })
-        if (res.message == "添加成功!") {
+        if(res.message == "操作失败"){
+          wx.showToast({
+            title: '发布失败！',
+            icon:"none",
+          })
+          return
+        }else if (res.message == "添加成功!") {
           wx.showToast({
             title: '发布成功',
             icon: "none"
@@ -178,14 +184,21 @@ Page({
         that.setData({
           btnFlag: false
         })
+        if(res.message == "操作失败"){
+          wx.showToast({
+            title: '修改失败',
+            icon:"none"
+          })
+          return
+        }
         if (res.message == "编辑成功！") {
           wx.showToast({
             title: '修改成功',
             icon: "none"
           })
           setTimeout(function () {
-            wx.redirectTo({
-              url: '../convenience/convenience',
+            wx.navigateBack({
+              delta:1
             })
           }, 1000)
         } else {
@@ -234,7 +247,6 @@ Page({
    */
   onLoad: function (options) {
     // 传入id表示修改
-    this.chushihua(1)
     if (options != undefined) {
       if (options.id != undefined) {
         this.chushihua(1)

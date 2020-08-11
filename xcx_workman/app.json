@@ -2,8 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/submitConvenience/submitConvenience",
-    "pages/submitActivity/submitActivity",
     "pages/convenience/convenience",
+    "pages/myShowVote/myShowVote",
+    "pages/submitActivity/submitActivity",
     "pages/convenienceDetails/convenienceDetails",
     "pages/welfareExplain/welfareExplain",
     "pages/showwork/showwork",

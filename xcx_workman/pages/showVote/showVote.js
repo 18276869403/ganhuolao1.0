@@ -3,8 +3,12 @@ const app = getApp()
 const api = require("../../utils/config.js")
 const qingqiu = require("../../utils/request.js")
 const date = new Date();
-//时
-var h = date.getHours();
+//年
+var Y = date.getFullYear();
+//月
+var M = (date.getMonth());
+//日
+var D = date.getDate();
 
 Page({
 
@@ -19,7 +23,8 @@ Page({
     wxUserid: '',
     voteNum: 0,
     btnFlag: false,
-    date: ''
+    date: '',
+    repara:0
   },
 
   /**
@@ -33,6 +38,11 @@ Page({
         this.setData({
           wxCase: url,
           wxUserid: app.globalData.wxid
+        })
+      }
+      if(options.repara != undefined){
+        this.setData({
+          repara:options.repara
         })
       }
     }
@@ -88,10 +98,19 @@ Page({
                 duration: 2000
               })
               setTimeout(function () {
-                app.globalData.showworkRefresh = 1
-                wx.switchTab({
-                  url: '../showwork/showwork',
-                })
+                if(that.data.repara == 0){
+                  app.globalData.showworkRefresh = 1
+                  wx.switchTab({
+                    url: '../showwork/showwork',
+                  })
+                }else{
+                  that.setData({
+                    repara:0
+                  })
+                  wx.navigateBack({
+                    delta:1
+                  })
+                }
               }, 1000)
             }
           }, 'delete')
@@ -123,15 +142,33 @@ Page({
       if (M <= 9) {
         if (D < 16) {
           wx.showToast({
-            title: '投票通道于8月20日0:00开启',
-            icon: 'none'
+            title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
+            icon:'none'
           })
           that.setData({
             btnFlag: false
           })
           return
         }
+      }else{
+        wx.showToast({
+          title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
+          icon:'none'
+        })
+        that.setData({
+          btnFlag: false
+        })
+        return
       }
+    }else{
+      wx.showToast({
+        title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
+        icon:'none'
+      })
+      that.setData({
+        btnFlag: false
+      })
+      return
     }
     if (that.data.voteNum == 0) {
       wx.showToast({

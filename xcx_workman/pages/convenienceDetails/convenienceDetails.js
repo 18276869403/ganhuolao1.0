@@ -11,6 +11,7 @@ Page({
   data: {
     iconUrl:api.iconUrl,
     convenience:{},
+    wxUserId:'',
     tupian:[]
   },
 
@@ -54,8 +55,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.chushihuabyid(1)
+    this.setData({
+      wxUserId:app.globalData.wxid
+    })
+    console.log(this.data.wxUserId)
     // 通过id加载数据
+    console.log(options)
     if(options != undefined){
       if(options.id != undefined){
         this.chushihuabyid(options.id)
@@ -84,6 +89,37 @@ Page({
   },
 
   /**
+   * 修改
+   * @param {*} e id
+   */
+  edit:function(e){
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../submitConvenience/submitConvenience?id=' + id,
+    })
+  },
+  
+  /**
+   * 删除
+   * @param {*}} e 
+   */
+  delete:function(e){ 
+    var that = this
+    var id = e.currentTarget.dataset.id
+    qingqiu.get("convDelete",{id:id},function(res){
+      wx.showToast({
+        title: res.message,
+        icon:"none"
+      })
+      setTimeout(function(){
+        wx.navigateBack({
+          delta:1
+        })
+      },1000)
+    },'delete')
+  },
+
+  /**
    * 联系TA
    * @param {*} e 
    */
@@ -104,7 +140,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

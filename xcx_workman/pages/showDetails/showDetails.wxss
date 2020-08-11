@@ -1,7 +1,8 @@
 /* pages/showDetails/showDetails.wxss */
-page{
+page {
   padding-bottom: 50rpx;
 }
+
 .banner {
   width: 100%;
   text-align: center;
@@ -14,7 +15,7 @@ page{
   margin-bottom: 20rpx;
   width: 100%;
   margin: auto;
-} 
+}
 
 .slide-image {
   /* width: 100%; */
@@ -40,8 +41,7 @@ page{
   margin-left: 3%;
 }
 
-.top-left {
-}
+.top-left {}
 
 .top-content {
   margin-left: 20rpx;
@@ -184,52 +184,90 @@ page{
   height: 30rpx;
   margin-top: 15rpx;
 }
-.bottom-details{
+
+.bottom-details {
   font-size: 14px;
   color: #666;
   margin-left: 11%;
 }
-.content-bottom{
+
+.content-bottom {
   width: 100%;
 }
-.top-content-bottom-left{
+
+.top-content-bottom-left {
   width: 80%;
 }
-.top-content-bottom-right{
+
+.top-content-bottom-right {
   width: 20%;
   text-align: center;
 }
+
 /* 点赞 */
-.dianzan-img{
+.dianzan-img {
   width: 50rpx;
   height: 50rpx;
   margin-top: 25rpx;
   margin-right: 10rpx;
   margin-left: 20rpx;
 }
-.dianzan-img-class{
+
+.dianzan-img-class {
   width: 60%;
   text-align: center;
 }
-.top-content-bottom-left{
+
+.top-content-bottom-left {
   width: 80%;
 }
-.top-content-bottom-right{
+
+.top-content-bottom-right {
   width: 20%;
 }
-.dianzan-class{
+
+.dianzan-class {
   width: 100%;
 }
-.dianzan-text{
+
+.dianzan-text {
   height: 50rpx;
   line-height: 50rpx;
+  padding-left: 20rpx;
 }
-.dianzan-text-class{
-  width:20%;
+
+.dianzan-text-class {
+  width: 20%;
   height: 50rpx;
   padding-top: 30rpx;
 }
+
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
 }
+
+/* 点赞头像 */
+.givePic {
+  width: 100%;
+  padding: 3%;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-around;
+}
+.givePic-item{
+  padding: 10rpx;
+}
+.pic-img {
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: 50%;
+}
+.content1 {
+  border-top: 16rpx solid #f5f6f9;
+  /* margin-top: 30rpx; */
+  border-bottom: 2rpx solid #f0f0f0;
+  position: relative;
+  
+  }
+  

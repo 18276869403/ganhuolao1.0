@@ -55,9 +55,22 @@
 				</view>
 			</view>
 		</view>
-		<!-- <view class="top-button" bindtap="lianxita">
-      联系TA
-    </view> -->
+	</view>
+	<view class="content1 zongxiang">
+		<view class="content-title hengxiang">
+			<view class="content-text">
+				点赞
+			</view>
+		</view>
+	</view>
+	<!-- <view class="pichengxiang"></view> -->
+	<view class="givePic hengxiang">
+		<block wx:for="{{givePic}}">
+			<view>
+				<image src="{{item.piciurl}}" class="pic-img"></image>
+			</view>
+			<view style="width:1%;"></view>
+		</block>
 	</view>
 	<!-- 评论 -->
 	<view class="content zongxiang">

@@ -121,7 +121,13 @@ Page({
         that.setData({
           btnFlag: false
         })
-        if (re.success == true) {
+        if(re.message == "操作失败"){
+          wx.showToast({
+            title: '发布失败！',
+            icon:"none"
+          })
+          return
+        }else if (re.success == true) {
           wx.showToast({
             title: '发布成功！',
             icon: 'success',
@@ -148,9 +154,15 @@ Page({
       }
       qingqiu.get("updateCase", data, function (res) {
         that.setData({
-          btnFlag: true
+          btnFlag: false
         })
-        if (res.result != true) {
+        if(res.message == "操作失败"){
+          wx.showToast({
+            title: '修改失败!',
+            icon:"none"
+          })
+          return
+        }else if (res.result != true) {
           wx.showToast({
             title: '修改成功',
             icon: 'none'

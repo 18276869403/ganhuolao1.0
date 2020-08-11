@@ -15,9 +15,9 @@
 					<view style="width:100%">上传时间：{{wxCase.createTime}}</view>
 				</view>
 				<view class="top-date-right hengxiang">
-					<view class="update-button" data-id="{{wxCase.id}}" bindtap="editVote" wx:if="{{wxCase.wxUserId===wxUserid}}">
+					<!-- <view class="update-button" data-id="{{wxCase.id}}" bindtap="editVote" wx:if="{{wxCase.wxUserId===wxUserid}}">
 						修改
-					</view>
+					</view> -->
 					<view class="delete-button" data-id="{{wxCase.id}}" bindtap="deleteVote" wx:if="{{wxCase.wxUserId===wxUserid}}">
 						删除
 					</view>

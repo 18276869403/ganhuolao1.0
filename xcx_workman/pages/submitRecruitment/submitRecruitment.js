@@ -32,6 +32,7 @@ Page({
     areaId: '',
     workcityname: '',
     workareaname: '',
+    typeid:1,
     city: [],
     area: [],
     btnFlag: false,
@@ -399,13 +400,21 @@ Page({
       data.id = that.data.id
       qingqiu.get("localHireEdit", data, function (res) {
         console.log('修改招工', res)
+        that.setData({
+          btnFlag: false
+        })
+        if(res.message == "操作失败"){
+          wx.showToast({
+            title: '修改失败',
+            icon:"none"
+          })
+          return
+        }
         wx.showToast({
           title: res.message,
           icon: 'success',
         })
-        that.setData({
-          btnFlag: false
-        })
+       
         setTimeout(function () {
           wx.redirectTo({
             url: '../recruitmentDetail/recruitmentDetail?id=' + that.data.id,
@@ -419,29 +428,37 @@ Page({
         })
         console.log('招工', re)
         if (re.success == true) {
-          wx.showToast({
-            title: '发布成功',
-            icon: 'success',
-            duration: 3000
-          })
-          var localid = re.result.id
-          // 公众号消息推送
-          var objdata = {
-            access_token: app.globalData.access_TokenOff,
-            firstValue: "干活佬又上新啦，赶紧去看看！",
-            firstColor: '#173177',
-            keyword1Value: "有1条招工信息发布啦！",
-            keyword1Color: '#173177',
-            keyword2Value: utils.nowTime(),
-            keyword2Color: '#173177',
-            remarkValue: '请进入干活佬查看详情',
-            remarkColor: '#173177',
-            MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
+          if(re.result != null){
+            wx.showToast({
+              title: '发布成功',
+              icon: 'success',
+              duration: 3000
+            })
+            var localid = re.result.id
+            // 公众号消息推送
+            var objdata = {
+              access_token: app.globalData.access_TokenOff,
+              firstValue: "干活佬又上新啦，赶紧去看看！",
+              firstColor: '#173177',
+              keyword1Value: "有1条招工信息发布啦！",
+              keyword1Color: '#173177',
+              keyword2Value: utils.nowTime(),
+              keyword2Color: '#173177',
+              remarkValue: '请进入干活佬查看详情',
+              remarkColor: '#173177',
+              MiniUrl: 'pages/recruitmentDetail/recruitmentDetail?id=' + localid
+            }
+            qingqiu.get("SendWxMsgIM", objdata, function (re) {})
+            wx.navigateBack({
+              delta: 1
+            })
+          }else{
+            wx.showToast({
+              title: '发布失败',
+              icon: 'none',
+              duration: 2000
+            })
           }
-          qingqiu.get("SendWxMsgIM", objdata, function (re) {})
-          wx.navigateBack({
-            delta: 1
-          })
         } else {
           wx.showToast({
             title: re.message,
@@ -562,7 +579,8 @@ Page({
   //地址 显示弹窗样式
   showModal: function (e) {
     this.setData({
-      hasMask: true
+      hasMask: true,
+      workcityname:'万载县'
     })
     var animation = wx.createAnimation({
       duration: 300,
@@ -616,7 +634,7 @@ Page({
       show: true,
       typeid: id,
       curIndex: index,
-      workcityname1: name,
+      workcityname: name,
     })
   },
   // 右侧单选点击
@@ -625,7 +643,7 @@ Page({
     var index = e.currentTarget.dataset.index;
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
-    if (that.data.workcityname1 == undefined) {
+    if (that.data.workcityname == undefined) {
       wx.showToast({
         title: '请先选择城市',
         icon: 'none',
@@ -639,7 +657,7 @@ Page({
       areaId: id,
       curIndex: index,
       workareaname: name,
-      workcityname: that.data.workcityname1
+      workcityname: that.data.workcityname
     })
   },
   // 服务规则页面显示

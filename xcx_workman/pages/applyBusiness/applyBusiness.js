@@ -58,6 +58,7 @@ Page({
     twoclassid: '',
     fenClass1: '请选择业务分类',
     fenClass2: '',
+    workcityname1: '万载县',
     tempClass: '',
     gongzhong: [{
       id: 1,
@@ -367,7 +368,7 @@ Page({
           needsTypeid: 2,
           select: 'success'
         })
-      } else if(re.result.wxState == 1){
+      } else if (re.result.wxState == 1) {
         // 加载-工人
         var str = []
         var index = []
@@ -389,16 +390,33 @@ Page({
         }
         var temp = ''
         if (str.length > 0 && str1.length > 0) {
-          if(str.length > 1 && str1.length > 1){
+          if (str.length > 1 && str1.length > 1) {
             temp = str[0] + "|" + str1[0] + "," + str[1] + "|" + str1[1]
-            that.setData({[typeid]: index[0], [typeid1]: index1[0],[typeerji]: index[1],[typeerji1]: index1[1],oneClassName: index[0] + "," + index1[0],twoClassName:index[1] + "," + index1[1],})
-          }else{
+            that.setData({
+              [typeid]: index[0],
+              [typeid1]: index1[0],
+              [typeerji]: index[1],
+              [typeerji1]: index1[1],
+              oneClassName: index[0] + "," + index1[0],
+              twoClassName: index[1] + "," + index1[1],
+            })
+          } else {
             temp = str[0] + "|" + str1[0]
-            that.setData({[typeid]: index[0], [typeid1]: index1[0],oneClassName: index[0],twoClassName:index[1]})
+            that.setData({
+              [typeid]: index[0],
+              [typeid1]: index1[0],
+              oneClassName: index[0],
+              twoClassName: index[1]
+            })
           }
         } else {
           temp = str[0] + "," + str1[0]
-          that.setData({[typeid]: index[0], [typeid1]: index1[0],oneClassName: index[0],twoClassName:index[1]})
+          that.setData({
+            [typeid]: index[0],
+            [typeid1]: index1[0],
+            oneClassName: index[0],
+            twoClassName: index[1]
+          })
         }
         var data = re.result.dateBirth.split(' ')
         that.setData({
@@ -921,44 +939,54 @@ Page({
             btnFlag: false
           })
           return
-        }
-        if (re.success == true) {
+        } else if (re.message == "操作失败") {
           wx.showToast({
-            title: '修改成功',
-            icon: 'success',
-            duration: 3000
+            title: '修改失败!',
+            icon:"none"
           })
-          app.globalData.serverRefresh = 1
-          setTimeout(function () {
-            wx.login({
-              success: function (res) {
-                qingqiu.get("getKeyInfo", {
-                  code: res.code
-                }, function (re) {
-                  console.log('修改', re)
-                  app.globalData.wxid = re.result.wxUser.id
-                  app.globalData.openid = re.result.openId
-                  app.globalData.wxState = re.result.wxUser.wxState
-                  that.setData({
-                    btnFlag: false
-                  })
-                  wx.switchTab({
-                    url: '../mine/mine',
-                  })
-                }, "POST")
-              }
-            })
-          }, 1000)
-        } else {
           that.setData({
             btnFlag: false
           })
-          wx.showToast({
-            title: re.message,
-            icon: 'none',
-            duration: 2000
-          })
           return
+        }else{
+          if (re.success == true) {
+            wx.showToast({
+              title: '修改成功',
+              icon: 'success',
+              duration: 3000
+            })
+            app.globalData.serverRefresh = 1
+            setTimeout(function () {
+              wx.login({
+                success: function (res) {
+                  qingqiu.get("getKeyInfo", {
+                    code: res.code
+                  }, function (re) {
+                    console.log('修改', re)
+                    app.globalData.wxid = re.result.wxUser.id
+                    app.globalData.openid = re.result.openId
+                    app.globalData.wxState = re.result.wxUser.wxState
+                    that.setData({
+                      btnFlag: false
+                    })
+                    wx.switchTab({
+                      url: '../mine/mine',
+                    })
+                  }, "POST")
+                }
+              })
+            }, 1000)
+          } else {
+            that.setData({
+              btnFlag: false
+            })
+            wx.showToast({
+              title: re.message,
+              icon: 'none',
+              duration: 2000
+            })
+            return
+          }
         }
       }, 'put')
     } else {
@@ -973,84 +1001,94 @@ Page({
             btnFlag: false
           })
           return
-        }
-        if (re.success == true) {
+        } else if (re.message == "操作失败") {
           wx.showToast({
-            title: '入驻成功',
-            icon: 'success',
-            duration: 3000
+            title: '入驻失败！',
+            icon:'none'
           })
-          app.globalData.serverRefresh = 1
-          setTimeout(function () {
-            wx.login({
-              success: function (res) {
-                qingqiu.get("getKeyInfo", {
-                  code: res.code
-                }, function (re) {
-                  that.setData({
-                    btnFlag: false
-                  })
-                  console.log('添加', re)
-                  app.globalData.wxid = re.result.wxUser.id
-                  app.globalData.openid = re.result.openId
-                  app.globalData.wxState = re.result.wxUser.wxState
-                  wx.redirectTo({
-                    url: '../activityPublic/activityPublic',
-                  })
-                }, "POST")
-              }
-            })
-          }, 1000)
-          if (that.data.needsTypeid != 1) {
-            // 公众号消息推送
-            var objdata = {
-              access_token: app.globalData.access_TokenOff,
-              firstValue: "干活佬又上新啦，赶紧去看看！",
-              firstColor: '#173177',
-              keyword1Value: "有1位商家入驻啦！",
-              keyword1Color: '#173177',
-              keyword2Value: utils.nowTime(),
-              keyword2Color: '#173177',
-              remarkValue: '请进入干活佬查看详情',
-              remarkColor: '#173177',
-              MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
-            }
-            qingqiu.get("SendWxMsgIM", objdata, function (re) {
-              console.log(re)
-              that.setData({
-                btnFlag: false
-              })
-            })
-          } else {
-            // 公众号消息推送
-            var objdata = {
-              access_token: app.globalData.access_TokenOff,
-              firstValue: "干活佬又上新啦，赶紧去看看！",
-              firstColor: '#173177',
-              keyword1Value: "有1位工人入驻啦！",
-              keyword1Color: '#173177',
-              keyword2Value: utils.nowTime(),
-              keyword2Color: '#173177',
-              remarkValue: '请进入干活佬查看详情',
-              remarkColor: '#173177',
-              MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
-            }
-            qingqiu.get("SendWxMsgIM", objdata, function (re) {
-              console.log(re)
-              that.setData({
-                btnFlag: false
-              })
-            })
-          }
-        } else {
           that.setData({
             btnFlag: false
           })
-          wx.showToast({
-            title: re.message,
-            icon: 'none',
-            duration: 2000
-          })
+          return
+        } else {
+          if (re.success == true) {
+            wx.showToast({
+              title: '入驻成功！',
+              icon: 'success',
+              duration: 3000
+            })
+            app.globalData.serverRefresh = 1
+            setTimeout(function () {
+              wx.login({
+                success: function (res) {
+                  qingqiu.get("getKeyInfo", {
+                    code: res.code
+                  }, function (re) {
+                    that.setData({
+                      btnFlag: false
+                    })
+                    console.log('添加', re)
+                    app.globalData.wxid = re.result.wxUser.id
+                    app.globalData.openid = re.result.openId
+                    app.globalData.wxState = re.result.wxUser.wxState
+                    wx.redirectTo({
+                      url: '../activityPublic/activityPublic',
+                    })
+                  }, "POST")
+                }
+              })
+            }, 1000)
+            if (that.data.needsTypeid != 1) {
+              // 公众号消息推送
+              var objdata = {
+                access_token: app.globalData.access_TokenOff,
+                firstValue: "干活佬又上新啦，赶紧去看看！",
+                firstColor: '#173177',
+                keyword1Value: "有1位商家入驻啦！",
+                keyword1Color: '#173177',
+                keyword2Value: utils.nowTime(),
+                keyword2Color: '#173177',
+                remarkValue: '请进入干活佬查看详情',
+                remarkColor: '#173177',
+                MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
+              }
+              qingqiu.get("SendWxMsgIM", objdata, function (re) {
+                console.log(re)
+                that.setData({
+                  btnFlag: false
+                })
+              })
+            } else {
+              // 公众号消息推送
+              var objdata = {
+                access_token: app.globalData.access_TokenOff,
+                firstValue: "干活佬又上新啦，赶紧去看看！",
+                firstColor: '#173177',
+                keyword1Value: "有1位工人入驻啦！",
+                keyword1Color: '#173177',
+                keyword2Value: utils.nowTime(),
+                keyword2Color: '#173177',
+                remarkValue: '请进入干活佬查看详情',
+                remarkColor: '#173177',
+                MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
+              }
+              qingqiu.get("SendWxMsgIM", objdata, function (re) {
+                console.log(re)
+                that.setData({
+                  btnFlag: false
+                })
+              })
+            }
+          } else {
+            that.setData({
+              btnFlag: false
+            })
+            wx.showToast({
+              title: re.message,
+              icon: 'none',
+              duration: 2000
+            })
+          }
         }
       }, 'post')
     }
