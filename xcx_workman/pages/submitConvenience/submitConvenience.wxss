@@ -51,7 +51,6 @@
 .content-item-textarea {
   width: 100%;
   margin-top: 32rpx;
-  font-size: 14px;
 }
 .placeholder1 {
   font-size: 14px;
@@ -66,13 +65,14 @@
   padding-top: 16rpx;
   padding-bottom: 16rpx;
   padding-left: 25rpx;
+  z-index: 10;
   padding-right: 25rpx;
   background: #f5f6f9;
 }
 /* 底部 */
 .bottom {
   width: 100%;
-  padding-top: 65rpx;
+  /* padding-top: 65rpx; */
   margin-bottom: 160rpx;
 }
 .bottom-right {
@@ -152,8 +152,9 @@
   height: 44rpx;
 }
 .fabu {
-  width: 95%;
+  width: 92%;
   margin-left: 4%;
+  margin-right: 4%;
   text-align: center;
   float: left;
   margin-top: 20rpx;
@@ -161,4 +162,103 @@
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
+}
+/* 协议 */
+
+.content-icon {
+  margin-left: 3%;
+  margin-top: 32rpx;
+  margin-bottom: 42rpx;
+}
+
+.icon-leftText {
+  font-size: 12px;
+  color: #6b6b6b;
+  line-height: 50rpx;
+  margin-left: 15rpx;
+}
+
+.icon-righText {
+  font-size: 12px;
+  color: #e61a0f;
+  line-height: 50rpx;
+  margin-left: 5rpx;
+}
+/* 服务协议 */
+
+.commodity_screen1 {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.6;
+  overflow: hidden;
+  z-index: 1000;
+  color: #fff;
+  text-align: center;
+}
+
+.commodity_attr_box1 {
+  border-radius: 10px;
+  position: fixed;
+  z-index: 20000;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  justify-content: center;
+  top: 13%;
+}
+
+.tanchuang {
+  width: 600rpx;
+  height: 850rpx;
+  background: #fff;
+  border-radius: 20rpx;
+  margin: auto;
+}
+
+.tankuang-top {
+  width: 600rpx;
+  height: 80rpx;
+  line-height: 60rpx;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 30rpx;
+  border-bottom: 1rpx solid #f4f4f8;
+}
+
+.tankuang-content {
+  width: 516rpx;
+  margin-left: 42rpx;
+  margin-right: 42rpx;
+  height: 655rpx;
+  font-size: 12px;
+  color: rgb(94, 96, 102);
+  text-align: left;
+  margin-top: 30rpx;
+  line-height: 39rpx;
+}
+
+.close-button {
+  height: 80rpx;
+  width: 280rpx;
+  background: #e02323;
+  border-radius: 40rpx;
+  margin-left: 160rpx;
+  color: #fff;
+  font-size: 14px;
+  line-height: 80rpx;
+  text-align: center;
+  margin-top: 60rpx;
+  margin-bottom: 50rpx;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
 }

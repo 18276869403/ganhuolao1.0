@@ -52,7 +52,7 @@
           <view>
             <image src="{{iconUrl}}static/image/jifen.png" class="worker-img"></image>
           </view>
-          <view>推荐入驻</view>
+          <view>入驻积分</view>
           <view class="ziti">{{wxUser.backup2}}</view>
         </view>
       </view>

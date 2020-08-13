@@ -3,7 +3,17 @@
 	<view class="hengxian"></view>
 	<view class="top zongxiang">
 		<view class="top-img">
-			<image src="{{iconUrl}}static/image/gongyi.jpg" class="bg-img"></image>
+			<image src="{{iconUrl}}static/image/convbanner.png" class="bg-img"></image>
+		</view>
+	</view>
+	<view class="content text-remark">
+		<view class="tongzhi-img hengxiang">
+			<image src="{{iconUrl}}static/image/laba.png" class="laba-img"></image>
+			<text style="color:red;height:40rpx;line-height:40rpx;padding-left:10rpx;">提醒：\n</text>
+		</view>
+		<view>
+			<text space="nbsp" decode="true">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本平台仅提供便民信息发布桥梁，</text><text style="color:red;">不收取任何费用</text>，请谨慎并<text style="color:red;">确认对方信息，签订好协议</text>留存凭证。如发生纠纷<text style="color:red;">请及时报警</text>，本平台可配合调查，但概不负责。
+			<!-- <text>\n2、发布车找人信息时，</text><text style="color:red;">请确认是否有营运资质</text>，如无资质<text style="color:red;">请不要做有偿营运。</text> -->
 		</view>
 	</view>
 	<view class="content zongxiang">
@@ -12,16 +22,16 @@
 			<view class="list" wx:for="{{conveniencelist}}" wx:for-index="index" wx:key="index">
 				<view class="need-list hengxiang" bindtap="convenienceDetails" data-id="{{item.id}}">
 					<view class="need-list-left" wx:if="{{item.type===1}}">
-						<image src="../image/chezhaoren1.png" class="need-content-img"></image>
+						<image src="{{iconUrl}}static/image/chezhaoren.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-left" wx:if="{{item.type ===2}}">
-						<image src="../image/renzhaoche.png" class="need-content-img"></image>
+						<image src="{{iconUrl}}static/image/renzhaoche1.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-left" wx:if="{{item.type ===3}}">
-						<image src="../image/chezhaohuo.png" class="need-content-img"></image>
+						<image src="{{iconUrl}}static/image/chezhaohuo1.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-left" wx:if="{{item.type ===4}}">
-						<image src="../image/huozhaoche.png" class="need-content-img"></image>
+						<image src="{{iconUrl}}static/image/huozhaoche1.png" class="need-content-img"></image>
 					</view>
 					<view class="need-list-right">
 						<view class="content-list">
@@ -32,27 +42,19 @@
 								<!-- <view class="content-list-type">详情</view> -->
 							</view>
 							<view class="content-list-bottom hengxiang">
-								<view class="list-bottom-item2 hengxiang">
-									<view class="bottom-item hengxiang">
-										<view class="baoming-img-item">
-											出发地：
-										</view>
-										<view>
-											<text style="color:#333333">{{item.starAddress}}</text>
-										</view>
-									</view>
+								<view class="baoming-img-item">
+									出发地：
+								</view>
+								<view class="baoming-img-item1 zifujiequ" style="color:#333333">
+									{{item.starAddress}}
 								</view>
 							</view>
 							<view class="content-list-bottom hengxiang">
-								<view class="list-bottom-item2 hengxiang">
-									<view class="bottom-item hengxiang">
-										<view class="baoming-img-item">
-											目的地：
-										</view>
-										<view>
-											<text style="color:#333333">{{item.endAddress}}</text>
-										</view>
-									</view>
+								<view class="baoming-img-item">
+									目的地：
+								</view>
+								<view class="baoming-img-item1 zifujiequ" style="color:#333333">
+									{{item.endAddress}}
 								</view>
 							</view>
 						</view>
@@ -64,8 +66,8 @@
 	</view>
 	<view class="bottom zongxiang">
 		<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
-		<image src="../image/kefusousuo.png" bindtap="Findss" class="sousuo-img"></image>
-		<image src="../image/kefufabu.png" bindtap="submit" class="submit-img"></image>
+		<image src="{{iconUrl}}static/image/kefusousuo5.png" bindtap="Findss" class="sousuo-img"></image>
+		<image src="{{iconUrl}}static/image/kefufabu4.png" bindtap="submit" class="submit-img"></image>
 	</view>
 
 </view>
@@ -85,10 +87,10 @@
 								</view>
 								<view class="navbar-type-text">{{item.name}}</view>
 								<view class="navbar-type-checked" wx:if="{{item.type == 1}}">
-									<image src="../image/convchecked.png" class="checked-img"></image>
+									<image src="{{iconUrl}}static/image/convchecked.png" class="checked-img"></image>
 								</view>
 								<view class="navbar-type-checked" wx:if="{{item.type == 0}}">
-									<image src="../image/convnochecked.png" class="checked-img"></image>
+									<image src="/image/convnochecked.png" class="checked-img"></image>
 								</view>
 							</view>
 						</block>
@@ -119,7 +121,7 @@
 					</view>
 					<view class="hengxiang">
 						<view class="bottom-right" bindtap="queding">确定</view>
-						<view class="bottom-left" bindtap="quxiao">取消</view>
+						<view class="bottom-left" bindtap="quxiao">关闭</view>
 					</view>
 				</scroll-view>
 			</view>

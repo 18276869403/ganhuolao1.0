@@ -16,15 +16,21 @@ Page({
       newDate: '',
       starAddress: '',
       endAddress: '',
-      typeid: -1,
+      typeid: 0,
       pageNo: 1,
       pageSize: 10
     },
-    type: [{
+    type: [
+      {
+        value:'0',
+        name:'全部',
+        type:1
+      },
+      {
         value: '1',
         name: '车找人',
         src: '../image/iconchezhaoren.png',
-        type: 1
+        type: 0
       },
       {
         value: '2',
@@ -62,7 +68,7 @@ Page({
       return
     }
     this.setData({
-      ['parameter.pageNo']: this.data.pageNo + 1
+      ['parameter.pageNo']: this.data.parameter.pageNo + 1
     })
     this.chushihua()
   },
@@ -77,10 +83,12 @@ Page({
       pageNo: para.pageNo,
       pageSize: para.pageSize
     }
-    if (para.typeid != -1) {
+    if (para.typeid != 0) {
       data.type = para.typeid
     }
+    
     if (para.date != '') {
+      para.date = para.date.indexOf(' ') != -1?para.date:para.date + ' 00:00:00'
       data.starTime = para.date
     }
     if (para.starAddress != '') {
@@ -97,11 +105,13 @@ Page({
           that.data.isLastPage = true
           return
         }
+        
         for (let obj of res.result.records) {
           obj.starTime = obj.starTime.substring(0, 10)
+          that.data.conveniencelist.push(obj)
         }
         that.setData({
-          conveniencelist: res.result.records
+          conveniencelist: that.data.conveniencelist
         })
       }
     })
@@ -114,7 +124,18 @@ Page({
     this.setData({
       ['parameter.pageNo']: 1,
       conveniencelist: [],
+      showModalStatus: false,
       isLastPage: false
+    })
+    var type = this.data.type
+    for (let i = 0, len = type.length; i < len; i++) {
+      type[i].type = 0 
+      if(type[i].value == "0"){
+        type[i].type = 1
+      }
+    }
+    this.setData({
+      type:type
     })
     this.chushihua()
   },
@@ -135,6 +156,15 @@ Page({
   convType: function (e) {
     console.log('radio发生change事件，携带value值为：', e.currentTarget.dataset.id)
     var value = e.currentTarget.dataset.id
+    if(e.currentTarget.dataset.id == "0"){
+      this.setData({
+        ['parameter.typeid']:-1,
+      })
+    }else{
+      this.setData({
+        ['parameter.typeid']:value,
+      })
+    }
     var type = this.data.type
     for (let i = 0, len = type.length; i < len; i++) {
       type[i].type = 0 
@@ -143,7 +173,6 @@ Page({
       }
     }
     this.setData({
-      ['parameter.typeid']:value,
       type:type
     })
   },
@@ -172,8 +201,13 @@ Page({
   onPullDownRefresh: function () {
     this.setData({
       conveniencelist: [],
-      ['parameter.typeid']: -1,
+      ['parameter.typeid']: 0,
+      ['parameter.date']: '',
+      ['parameter.newDate']: '',
+      ['parameter.starAddress']: '',
+      ['parameter.endAddress']: '',
       ['parameter.pageNo']: 1,
+      ['parameter.pageSize']: 10,
       isLastPage: false
     })
     this.onShow()
@@ -190,6 +224,10 @@ Page({
   },
 
   onShow:function(){
+    wx.showShareMenu({
+      withShareTicket: true,
+      isLastPage:false
+    })
     this.chushihua()
     this.setData({
       ['parameter.newDate']: utils.newDate

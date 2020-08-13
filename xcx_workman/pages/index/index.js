@@ -546,6 +546,19 @@ Page({
       })
     }
   },
+
+  // 建房图纸
+  builddraw:function(){
+    wx.showToast({
+      title: '功能开发中...',
+      icon:'none'
+    })
+    return
+    wx.navigateTo({
+      url: '../builddraw/builddraw',
+    })
+  },
+
   // 商家促销
   cuxiao: function () {
     app.globalData.goodsRefresh=1

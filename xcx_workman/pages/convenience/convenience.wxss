@@ -112,8 +112,8 @@ page {
 
 .need-list {
   width: 100%;
-  padding-top: 25rpx;
-  padding-bottom: 25rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
   background: rgba(255, 255, 255, 1);
   box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
   border-radius: 8rpx;
@@ -121,18 +121,18 @@ page {
 }
 
 .need-list-left {
-  width: 31%;
+  width: 24%;
   text-align: center;
-  /* margin-left: 3%; */
+  margin-right: -12rpx;
 }
 
 .need-list-right {
-  width: 69%;
+  width: 76%;
 }
 
 .need-content-img {
-  width: 150rpx;
-  height: 150rpx;
+  width: 130rpx;
+  height: 130rpx;
   border-radius: 8rpx;
 }
 
@@ -142,9 +142,9 @@ page {
 }
 
 .content-list-item {
-  width: 96%;
-  margin-left: 2%;
-  margin-right: 2%;
+  width: 94%;
+  margin-left: 3%;
+  margin-right: 3%;
   border-bottom: 1px solid rgb(122, 119, 119);
 }
 
@@ -347,7 +347,7 @@ page {
   height: 112rpx;
   position: absolute;
   right: 20rpx;
-  bottom: 845rpx;
+  bottom: 445rpx;
 }
 
 .submit-img {
@@ -355,7 +355,7 @@ page {
   height: 112rpx;
   position: absolute;
   right: 20rpx;
-  bottom: 970rpx;
+  bottom: 570rpx;
 }
 
 /* 遮罩层 地址选择*/
@@ -576,7 +576,7 @@ page {
   background: rgb(17, 197, 241);
   /* box-shadow: 0rpx 6rpx 24rpx 0rpx rgba(220, 14, 14, 0.41); */
   border-radius: 10rpx;
-  margin-top: 600px;
+  margin-top: 500px;
 }
 
 .bottom-left {
@@ -591,7 +591,7 @@ page {
   border: 1px solid rgb(22, 22, 22);
   /* box-shadow: 0rpx 6rpx 24rpx 0rpx rgba(220, 14, 14, 0.41); */
   border-radius: 10rpx;
-  margin-top: 600px;
+  margin-top: 500px;
 }
 
 .null {
@@ -647,4 +647,33 @@ page {
   width: 58rpx;
   height: 49rpx;
   padding-top: 10rpx;
+}
+/* 截取 */
+.zifujiequ{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.baoming-img-item{
+  width: 24%;
+}
+.baoming-img-item1{
+  width: 76%;
+}
+.text-remark{
+  margin-top:12rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
+  border-radius: 8rpx;
+  padding: 2% 3%;
+  width: 88%;
+  font-size: 28rpx;
+}
+.laba-img {
+  width: 40rpx;
+  height: 40rpx;
+}
+.tongzhi-img {
+  width: 50%;
+  text-align: center;
 }

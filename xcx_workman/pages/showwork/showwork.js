@@ -94,6 +94,10 @@ Page({
               wx.navigateTo({
                 url: '../Welfare/Welfare',
               })
+            }else{
+              that.setData({
+                btnFlag: false
+              })
             }
           }
         })

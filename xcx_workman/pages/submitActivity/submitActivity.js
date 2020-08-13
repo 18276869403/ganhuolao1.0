@@ -226,7 +226,6 @@ Page({
     // 去掉特殊字符
     s = s.replace(/[\@\#\$\%\^\&\*\(\)\{\}\:\"\L\<\>\?\[\]]/);
     return s;
-
   },
   //获取输入的晒活内容
   needscontentinput: function (e) {

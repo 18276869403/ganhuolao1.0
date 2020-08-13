@@ -75,7 +75,7 @@ Page({
           }
           that.setData({
             caseMsgList: that.data.caseMsgList,
-            imgList: that.imgList
+            imgList: that.data.imgList
           })
           console.log('晒晒', that.data.caseMsgList)
         } else {
@@ -150,10 +150,11 @@ Page({
     this.pinglun()
   },
   fangda: function (e) {
-    var img = e.currentTarget.dataset.img
+    var img = e.currentTarget.dataset.src
+    var imglist = this.data.imgList
     wx.previewImage({
       current: img, // 当前显示图片的http链接
-      urls: this.data.bannerImg // 需要预览的图片http链接列表
+      urls: imglist // 需要预览的图片http链接列表
     })
   },
   //跳转到添加评论页面

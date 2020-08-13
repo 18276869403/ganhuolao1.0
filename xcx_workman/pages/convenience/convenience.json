@@ -1,7 +1,7 @@
 {
   "navigationBarBackgroundColor": "#fff",
   "navigationBarTextStyle": "black",
-  "navigationBarTitleText": "便民站",
+  "navigationBarTitleText": "顺风车",
   "enablePullDownRefresh": true,
   "usingComponents": {}
 } 

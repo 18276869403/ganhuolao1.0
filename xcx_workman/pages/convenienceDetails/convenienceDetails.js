@@ -12,6 +12,7 @@ Page({
     iconUrl:api.iconUrl,
     convenience:{},
     wxUserId:'',
+    id:0,
     tupian:[]
   },
 
@@ -25,15 +26,21 @@ Page({
       console.log(res)
       if(res.success == true){
         if(res.result != null){
-          if(res.result.pic.indexOf(',') != -1){
-            that.data.tupian = res.result.pic.split(',')
-          }else{
-            that.data.tupian.push(res.result.pic)
+          that.data.tupian = []
+          if(res.result.pic != "" && res.result.pic != null){
+            if(res.result.pic.indexOf(',') != -1){
+              that.data.tupian = res.result.pic.split(',')
+            }else{
+              that.data.tupian.push(res.result.pic)
+            }
           }
+          res.result.createTime = res.result.createTime.split(' ')[0]
+          res.result.starTime = res.result.starTime.split(' ')[0]
           that.setData({
             convenience:res.result,
             tupian:that.data.tupian
           })
+          console.log(that.data.tupian)
         }
       }
     })
@@ -55,14 +62,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
     this.setData({
       wxUserId:app.globalData.wxid
     })
-    console.log(this.data.wxUserId)
+    this.setData({
+      convenience:{},
+    })
     // 通过id加载数据
-    console.log(options)
     if(options != undefined){
       if(options.id != undefined){
+        this.setData({
+          id:options.id
+        })
         this.chushihuabyid(options.id)
       }else{
         wx.showToast({
@@ -75,6 +89,8 @@ Page({
           })
         })
       }
+    }else if(this.data.id != 0){
+      this.chushihuabyid(this.data.id)
     }else{
       wx.showToast({
         title: '资源不存在',
@@ -140,6 +156,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.onLoad()
   },
 
   /**

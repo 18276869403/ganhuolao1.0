@@ -33,9 +33,12 @@ page {
 .title-text {
   width: 30%;
   font-size: 32rpx;
-  font-weight: 600;
+  font-weight: bold;
   height: 44rpx;
   line-height: 44rpx;
+  padding: 0rpx 6rpx;
+  color: #38bdf1;
+  /* border: 2rpx solid #999; */
 }
 
 .swiper {
@@ -781,7 +784,6 @@ page {
 }
 .userinfo-content{
   width: 92%;
-  height: 42rpx;
   line-height: 42rpx;
 }
 .userinfo-img{

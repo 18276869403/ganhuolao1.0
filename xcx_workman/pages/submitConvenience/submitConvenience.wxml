@@ -18,10 +18,10 @@
 	<view class="content-item hengxiang">
 		<view class="content-item-left">出发日期</view>
 		<view class="content-item-right">
-			<picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+			<picker mode="date" bindchange="bindchange" value="{{stardate}}" start="{{nowdate}}" range="{{multiArray}}">
 				<view class="picker hengxiang">
-					<view class="prcker-text {{time == '选择出发日期'?'font-class':''}}">
-						{{time}}</view>
+					<view class="prcker-text {{stardate == '选择出发日期'?'font-class':''}}">
+						{{stardate}}</view>
 					<view>
 						<image src="{{iconUrl}}static/image/enter.png" class="enter-img" style=""></image>
 					</view>
@@ -50,30 +50,51 @@
 	<view class="content-item hengxiang">
 		<view class="content-item-left">联系电话</view>
 		<view class="content-item-right">
-			<input type="text" placeholder="输入联系电话" placeholder-class="font-class" class="shurukuang" value="{{linkphone}}" bindinput="linkphoneinput" bindblur="linkphoneblur"></input>
+			<input type="number" placeholder="输入联系电话" placeholder-class="font-class" class="shurukuang" value="{{linkphone}}" bindinput="linkphoneinput" bindblur="linkphoneblur"></input>
 		</view>
 	</view>
 	<view class="content-item-textarea">
-		<textarea class="textarea" placeholder="输入详细介绍" placeholder-class="placeholder1" maxlength='-1' value='{{content}}' name="content" bindinput='contentinput' bindblur="contentblur"></textarea>
+		<textarea class="textarea" placeholder="输入详细介绍（可不填）" placeholder-class="placeholder1" maxlength='-1' value='{{content}}' name="content" bindinput='contentinput' bindblur="contentblur"></textarea>
 	</view>
 
 	<view class="showImg">
-			<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
-				<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill" class="show-img"></image>
-				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
-			</view>
+		<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
+			<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill" class="show-img"></image>
+			<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
 		</view>
+	</view>
 
-		<!-- 上传 -->
-		<view class="fabu" wx-if="{{tupianlists.length<5}}">
-			<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
-				<view>
-					<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
-				</view>
+	<!-- 上传 -->
+	<view class="fabu" wx-if="{{tupianlists.length<5}}">
+		<view class="fabu-item zongxiang {{btnFlag == true?'disabled':''}}" bindtap='upimg' data-number="0" data-type="{{num}}">
+			<view>
+				<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
 			</view>
 		</view>
+	</view>
+
+	<view class="hengxiang" style="width:100%">
+		<view class='content-icon hengxiang' style="height:50rpx;">
+			<icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change" />
+			<view class='icon-leftText' bindtap='showModal1'>提交前请仔细阅读</view>
+			<view class='icon-righText' bindtap='showModal1'> 《干活佬使用协议》 </view>
+		</view>
+	</view>
 
 	<view class="bottom hengxiang">
 		<view class="bottom-right {{btnFlag == true?'disabled':''}}" bindtap="submit">立即发布</view>
 	</view>
+</view>
+
+<!-- 注册协议 -->
+<view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
+<view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
+  <view class='tanchuang zongxiang'>
+    <view class='tankuang-top'>免责协议</view>
+
+    <scroll-view scroll-y style="height: 275px;" class='tankuang-content'>
+      <view>{{mianzhe}}</view>
+    </scroll-view>
+    <view class='close-button' bindtap='hideModal1'>关闭</view>
+  </view> 
 </view>

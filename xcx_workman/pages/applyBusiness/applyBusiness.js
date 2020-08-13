@@ -845,6 +845,16 @@ Page({
         })
         return
       }
+      if(that.data.workername.length > 10){
+        wx.showToast({
+          title: '联系人长度超出范围',
+          icon:'none'
+        })
+        that.setData({
+          btnFlag: false
+        })
+        return
+      }
       if (that.data.workerphone.length != 11) {
         wx.showToast({
           title: '输入11位手机号',
@@ -887,6 +897,16 @@ Page({
           title: s,
           icon: 'none',
           duration: 2000
+        })
+        that.setData({
+          btnFlag: false
+        })
+        return
+      }
+      if(that.data.needsname.length > 20){
+        wx.showToast({
+          title: '商品名长度超出范围',
+          icon:'none'
         })
         that.setData({
           btnFlag: false
@@ -1031,53 +1051,56 @@ Page({
                     app.globalData.wxid = re.result.wxUser.id
                     app.globalData.openid = re.result.openId
                     app.globalData.wxState = re.result.wxUser.wxState
-                    wx.redirectTo({
-                      url: '../activityPublic/activityPublic',
+                    wx.navigateBack({
+                      delta:1
                     })
+                    // wx.redirectTo({
+                    //   url: '../activityPublic/activityPublic',
+                    // })
                   }, "POST")
                 }
               })
             }, 1000)
             if (that.data.needsTypeid != 1) {
-              // 公众号消息推送
-              var objdata = {
-                access_token: app.globalData.access_TokenOff,
-                firstValue: "干活佬又上新啦，赶紧去看看！",
-                firstColor: '#173177',
-                keyword1Value: "有1位商家入驻啦！",
-                keyword1Color: '#173177',
-                keyword2Value: utils.nowTime(),
-                keyword2Color: '#173177',
-                remarkValue: '请进入干活佬查看详情',
-                remarkColor: '#173177',
-                MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
-              }
-              qingqiu.get("SendWxMsgIM", objdata, function (re) {
-                console.log(re)
-                that.setData({
-                  btnFlag: false
-                })
-              })
+              // // 公众号消息推送
+              // var objdata = {
+              //   access_token: app.globalData.access_TokenOff,
+              //   firstValue: "干活佬又上新啦，赶紧去看看！",
+              //   firstColor: '#173177',
+              //   keyword1Value: "有1位商家入驻啦！",
+              //   keyword1Color: '#173177',
+              //   keyword2Value: utils.nowTime(),
+              //   keyword2Color: '#173177',
+              //   remarkValue: '请进入干活佬查看详情',
+              //   remarkColor: '#173177',
+              //   MiniUrl: 'pages/businessDetails/businessDetails?id=' + app.globalData.wxid
+              // }
+              // qingqiu.get("SendWxMsgIM", objdata, function (re) {
+              //   console.log(re)
+              //   that.setData({
+              //     btnFlag: false
+              //   })
+              // })
             } else {
-              // 公众号消息推送
-              var objdata = {
-                access_token: app.globalData.access_TokenOff,
-                firstValue: "干活佬又上新啦，赶紧去看看！",
-                firstColor: '#173177',
-                keyword1Value: "有1位工人入驻啦！",
-                keyword1Color: '#173177',
-                keyword2Value: utils.nowTime(),
-                keyword2Color: '#173177',
-                remarkValue: '请进入干活佬查看详情',
-                remarkColor: '#173177',
-                MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
-              }
-              qingqiu.get("SendWxMsgIM", objdata, function (re) {
-                console.log(re)
-                that.setData({
-                  btnFlag: false
-                })
-              })
+            //   // 公众号消息推送
+            //   var objdata = {
+            //     access_token: app.globalData.access_TokenOff,
+            //     firstValue: "干活佬又上新啦，赶紧去看看！",
+            //     firstColor: '#173177',
+            //     keyword1Value: "有1位工人入驻啦！",
+            //     keyword1Color: '#173177',
+            //     keyword2Value: utils.nowTime(),
+            //     keyword2Color: '#173177',
+            //     remarkValue: '请进入干活佬查看详情',
+            //     remarkColor: '#173177',
+            //     MiniUrl: 'pages/workerDetails/workerDetails?id=' + app.globalData.wxid
+            //   }
+            //   qingqiu.get("SendWxMsgIM", objdata, function (re) {
+            //     console.log(re)
+            //     that.setData({
+            //       btnFlag: false
+            //     })
+            //   })
             }
           } else {
             that.setData({

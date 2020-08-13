@@ -5,10 +5,10 @@
 			<view class="content-list-item hengxiang">
 				<view class="title hengxiang">
 					<view class="title-text" wx:if="{{convenience.type == 1}}">
-						<view class="">人找车</view>
+						<view class="">车找人</view>
 					</view>
 					<view class="title-text" wx:if="{{convenience.type == 2}}">
-						<view class="">车找人</view>
+						<view class="">人找车</view>
 					</view>
 					<view class="title-text" wx:if="{{convenience.type == 3}}">
 						<view class="">车找货</view>
@@ -26,13 +26,13 @@
 				<view class="header-text zongxiang">
 					<view class="userinfo hengxiang">
 						<view class="userinfo-icon">
-							<image src="../image/convlinkname.png" class="userinfo-img"></image>
+							<image src="{{iconUrl}}static/image/convlinkname.png" class="userinfo-img"></image>
 						</view>
 						<view class="header-text-font userinfo-content">联系人：{{convenience.linkName}}</view>
 					</view>
 					<view class="userinfo hengxiang">
 						<view class="userinfo-icon">
-							<image src="../image/convphone.png" class="userinfo-img"></image>
+							<image src="{{iconUrl}}static/image/convphone.png" class="userinfo-img"></image>
 						</view>
 						<view class="header-text-font userinfo-content">
 							<view><text decode="{{true}}" space="{{true}}">电 &nbsp;&nbsp;话：</text>{{convenience.linkPhone}}</view>
@@ -40,7 +40,7 @@
 					</view>
 					<view class="userinfo hengxiang">
 						<view class="userinfo-icon">
-							<image src="../image/convfabushijian.png" class="userinfo-img"></image>
+							<image src="{{iconUrl}}static/image/convfabushijian.png" class="userinfo-img"></image>
 						</view>
 						<view class="header-text-font userinfo-content">
 							<view>发布时间：{{convenience.createTime}}</view>
@@ -63,19 +63,19 @@
 			<view class="content-content-list">
 				<view class="userinfo hengxiang">
 					<view class="userinfo-icon">
-						<image src="../image/convstartime.png" class="userinfo-img"></image>
+						<image src="{{iconUrl}}static/image/convstartime.png" class="userinfo-img"></image>
 					</view>
 					<view class="userinfo-content" style="color:#dc132c;">出发时间：{{convenience.starTime}}</view>
 				</view>
 				<view class="userinfo hengxiang">
 					<view class="userinfo-icon">
-						<image src="../image/convstaraddress.png" class="userinfo-img"></image>
+						<image src="{{iconUrl}}static/image/convstaraddress.png" class="userinfo-img"></image>
 					</view>
 					<view class="userinfo-content">出发地：{{convenience.starAddress}}</view>
 				</view>
 				<view class="userinfo hengxiang">
 					<view class="userinfo-icon">
-						<image src="../image/convendaddress.png" class="userinfo-img"></image>
+						<image src="{{iconUrl}}static/image/convendaddress.png" class="userinfo-img"></image>
 					</view>
 					<view class="userinfo-content">目的地：{{convenience.endAddress}}</view>
 				</view>
