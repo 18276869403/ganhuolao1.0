@@ -1,0 +1,30 @@
+<!--pages/myShowVote/myShowVote.wxml-->
+<view class="bottom-activity">
+	<view class="hengxian"></view>
+	<block wx:for-items="{{activityList}}">
+		<view class="show-activity zongxiang">
+			<view class="show-item-top" bindtap="showVote" data-obj="{{item}}">
+				<image src="{{iconUrl}}{{item.picOne[0]}}" class="show-img" mode="aspectFill">
+				</image>
+			</view>
+			<view class="hengxiang">
+				<view class="activity-bottom-left">
+					<view class="activity-left-text hengxiang">
+						<view class="bianhao" style="width:70%;font-size:28rpx;">编号:{{item.needId}}
+						</view>
+						<view class="bianhao" style="width:30%;font-size:28rpx;">
+							<image src="{{iconUrl}}static/image/vote.png" class="icon-img"></image>
+							<text> {{item.giveGood}}</text> 票
+						</view>
+					</view>
+				</view>
+				<view bindtap="activity" class="{{btnFlag == true?'disabled':''}}" data-itemobj="{{item}}">
+					<image src="{{iconUrl}}static/image/weitoupiao.png" class="activity-img"></image>
+				</view>
+				<!-- <view wx:if="{{item.giveState==1}}">
+							<image src="{{iconUrl}}static/image/yitoupiao.png" class="activity-img"></image>
+						</view> -->
+			</view>
+		</view>
+	</block>
+</view>
