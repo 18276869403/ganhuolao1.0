@@ -309,7 +309,7 @@ Page({
         } else {
           if (re.result.oneClassIds.indexOf(',') < 0 && re.result.twoClassIds.indexOf(',') > -1) {
             index[0] = re.result.oneClassIds
-            index[1] = re.result.oneClassIds
+            index[1] = re.result.twoClassIds
             str = re.result.oneClassName.split(',')
             str = re.result.oneClassName.split(',')
           } else {
@@ -326,7 +326,7 @@ Page({
         }
         var temp = ''
         if (str.length > 1 && str1.length > 1) {
-          temp = str[0] + "|" + str1[0] + "," + str[1] + "|" + str1[1]
+          temp = str[0] + " | " + str1[0] + "," + str[1] + " | " + str1[1]
           flag = true
           flag1 = true
         } else {
@@ -1184,7 +1184,7 @@ Page({
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
-                  var sj = that.data.viewUrl + jj.message
+                  var sj = jj.message
                   console.log(res)
                   if (type == '1') {
                     that.setData({

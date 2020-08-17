@@ -71,7 +71,7 @@
 					</view>
 					<view wx:if="{{picIurl!=''&&picIurl != null}}">
 						<image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu1-img"></image>
-						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{1}}" data-tplj="{{iconUrl}}{{picIurl}}" wx:if="{{picIurl!=''}}"></image>
+						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{1}}" data-tplj="{{picIurl}}" wx:if="{{picIurl!=''}}"></image>
 					</view>
 				</view>
 			</view>
@@ -82,7 +82,7 @@
 					</view>
 					<view wx:if="{{picZz!=''&&picZz!=null}}">
 						<image src="{{viewUrl}}{{picZz}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picZz}}" class="fabu1-img"></image>
-						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{2}}" data-tplj="{{iconUrl}}{{picZz}}" wx:if="{{picZz!=''}}"></image>
+						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{2}}" data-tplj="{{picZz}}" wx:if="{{picZz!=''}}"></image>
 					</view>
 				</view>
 			</view>
@@ -160,7 +160,7 @@
 					</view>
 					<view wx:if="{{picIurl!=''&&picIurl!=null}}">
 						<image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu1-img"></image>
-						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{3}}" data-tplj="{{iconUrl}}{{picIurl}}" wx:if="{{picIurl!=''}}"></image>
+						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{3}}" data-tplj="{{picIurl}}" wx:if="{{picIurl!=''}}"></image>
 					</view>
 				</view>
 			</view>
@@ -171,7 +171,7 @@
 					</view>
 					<view wx:if="{{picPerson1!=''&&picPerson1!=null}}">
 						<image src="{{viewUrl}}{{picPerson1}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picPerson1}}" class="fabu1-img"></image>
-						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{4}}" data-tplj="{{iconUrl}}{{picPerson1}}" wx:if="{{picPerson1!=''}}"></image>
+						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{4}}" data-tplj="{{picPerson1}}" wx:if="{{picPerson1!=''}}"></image>
 					</view>
 				</view>
 			</view>
@@ -188,7 +188,7 @@
 					</view>
 					<view wx:if="{{picPerson2!=''&&picPerson2!=null}}">
 						<image src="{{viewUrl}}{{picPerson2}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picPerson2}}" class="fabu1-img"></image>
-						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{5}}" data-tplj="{{iconUrl}}{{picPerson2}}" wx:if="{{picPerson2!=''}}"></image>
+						<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-type="{{5}}" data-tplj="{{picPerson2}}" wx:if="{{picPerson2!=''}}"></image>
 					</view>
 				</view>
 			</view>
