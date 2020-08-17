@@ -358,12 +358,12 @@ Page({
           phone: re.result.phone,
           workeraddress: re.result.shopAddress,
           needscontent: re.result.content,
-          picIurl: api.viewUrl + re.result.picIurl,
+          picIurl:  re.result.picIurl,
           picIurl1: re.result.picIurl,
-          picPerson1: api.viewUrl + re.result.picPerson1,
-          picZz: api.viewUrl + re.result.picZz,
+          picPerson1: re.result.picPerson1,
+          picZz: re.result.picZz,
           picZz1: re.result.picZz,
-          picPerson2: api.viewUrl + re.result.picPerson,
+          picPerson2: re.result.picPerson,
           wxState: re.result.wxState,
           needsTypeid: 2,
           select: 'success'
@@ -436,10 +436,10 @@ Page({
           workerphone: re.result.phone,
           workeraddress: re.result.shopAddress,
           workerskill: re.result.content,
-          picIurl: api.viewUrl + re.result.picIurl,
-          picZz: api.viewUrl + re.result.picZz,
-          picPerson1: api.viewUrl + re.result.picPerson1,
-          picPerson2: api.viewUrl + re.result.picPerson2,
+          picIurl: re.result.picIurl,
+          picZz: re.result.picZz,
+          picPerson1: re.result.picPerson1,
+          picPerson2: re.result.picPerson2,
           picIurl1: re.result.picIurl,
           picPerson3: re.result.picPerson1,
           picPerson4: re.result.picPerson2,
@@ -869,7 +869,6 @@ Page({
       data = {
         id: app.globalData.wxid,
         oneClassName: that.data.fenleitype1.yjid + "," + that.data.fenleitype2.yjid,
-        twoClassName: that.data.fenleitype1.erjiid + "," + that.data.fenleitype2.erjiid,
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
         name: that.data.workername,
@@ -883,6 +882,9 @@ Page({
         picPerson1: that.data.picPerson3,
         picPerson2: that.data.picPerson4,
         wxState: 1
+      }
+      if(that.data.fenleitype1.erjiid != '' && that.data.fenleitype1.erjiid != null){
+        data.twoClassName = that.data.fenleitype1.erjiid + "," + that.data.fenleitype2.erjiid
       }
     } else {
       if (that.data.fenleitype1.yjid == '' && that.data.fenleitype2.yjid != '') {
@@ -933,7 +935,6 @@ Page({
       data = {
         id: app.globalData.wxid,
         oneClassName: that.data.fenleitype1.yjid + "," + that.data.fenleitype2.yjid,
-        twoClassName: that.data.fenleitype1.erjiid + "," + that.data.fenleitype2.erjiid,
         oneAreaId: that.data.typeid,
         twoAreaId: that.data.areaId,
         shopName: that.data.needsname,
@@ -945,6 +946,9 @@ Page({
         picIurl: that.data.picIurl1,
         picZz: that.data.picZz1,
         wxState: 0,
+      }
+      if(that.data.fenleitype1.erjiid != '' && that.data.fenleitype1.erjiid != null){
+        data.twoClassName = that.data.fenleitype1.erjiid + "," + that.data.fenleitype2.erjiid
       }
     }
     console.log(data)
