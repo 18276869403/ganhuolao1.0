@@ -1,0 +1,91 @@
+<!--pages/buildDrawDetails/buildDrawDetails.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="content zongxiang">
+		<view class="content-list zongxiang">
+			<view class="content-list-item hengxiang">
+				<view class="title hengxiang">
+					<view class="title-text">
+						<view class="">图纸信息</view>
+					</view>
+				</view>
+			</view>
+			<view class="uhengxiang"></view>
+			<view class="hengxiang content-list-type">
+				<view class="header-text zongxiang">
+					<view class="userinfo hengxiang">
+						<view class="userinfo-content">{{builddraw.title}}</view>
+					</view>
+					<view class="userinfo userinfo-margin hengxiang">
+						<view class="userinfo-icon">
+							<image src="{{iconUrl}}static/image/fenleiicon.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font">
+							<view><text decode="{{true}}" space="{{true}}">楼 &nbsp;层：</text>{{builddraw.layerName}}</view>
+						</view>
+					</view>
+					<view class="userinfo userinfo-margin hengxiang">
+						<view class="userinfo-icon">
+							<image src="{{iconUrl}}static/image/fenleiicon.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font">
+							<view><text decode="{{true}}" space="{{true}}">风 &nbsp;格：</text>{{builddraw.buildStyleName}}</view>
+						</view>
+					</view>
+					<view class="userinfo userinfo-margin hengxiang">
+						<view class="userinfo-icon">
+							<image src="{{iconUrl}}static/image/fenleiicon.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font">
+							<view><text decode="{{true}}" space="{{true}}">结 &nbsp;构：</text>{{builddraw.structureName}}</view>
+						</view>
+					</view>
+					<view class="userinfo userinfo-margin hengxiang">
+						<view class="userinfo-icon">
+							<image src="{{iconUrl}}static/image/fenleiicon.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font">
+							<view><text decode="{{true}}" space="{{true}}">造 &nbsp;价：</text>{{builddraw.manufacturName}}</view>
+						</view>
+					</view>
+					<view class="userinfo userinfo-margin hengxiang">
+						<view class="userinfo-icon">
+							<image src="{{iconUrl}}static/image/fenleiicon.png" class="userinfo-img"></image>
+						</view>
+						<view class="header-text-font">
+							<view><text decode="{{true}}" space="{{true}}">面 &nbsp;积：</text>{{builddraw.buildAreaName}}</view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="uhengxiang"></view>
+			<view class="button-type hengxiang">
+				<view class="hengxiang">
+					<view>
+						<image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
+					</view>
+					<view class="liulan-text">{{builddraw.browseNum}}</view>
+				</view>
+				<view class="phone type-yuan" bindtap="phone" data-phone="{{builddraw.bphone}}" wx:if="{{wxUserId != builddraw.wxUserId}}">我要全套图纸</view>
+				<view class="update type-yuan {{btnFlag?'disabled':''}}" bindtap="edit" data-id="{{builddraw.id}}" wx:if="{{wxUserId == builddraw.wxUserId}}">修改</view>
+				<view class="delete type-yuan" bindtap="delete" data-id="{{builddraw.id}}" wx:if="{{wxUserId == builddraw.wxUserId}}">删除</view>
+			</view>
+		</view>
+		<!-- 备注 -->
+		<view class="content-content zongxiang">
+			<view class="content-content-title hengxiang">
+				<view>图纸描述</view>
+			</view>
+			<view class="content-content-list">
+				<text>{{builddraw.bcontent}}</text>
+			</view>
+		</view>
+		<view class="bottom zongxiang">
+			<block wx:for="{{builddraw.pic}}">
+				<view class="bottom-left">
+					<image src="{{iconUrl}}{{item}}" mode="widthFix" class="tupian" bindtap="tupian" data-url="{{iconUrl}}{{item}}"></image>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>

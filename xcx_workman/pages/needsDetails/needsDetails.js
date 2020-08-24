@@ -39,6 +39,26 @@ Page({
     })
   },
 
+  /**
+   * 查看报名人员详细信息
+   * @param {*} e 
+   */
+  goWorkerDetail:function(e){
+    console.log(e)
+    var id = e.currentTarget.dataset.wxuserid
+    var state = e.currentTarget.dataset.state
+    console.log(id)
+    if(state == "1"){
+      wx.navigateTo({
+        url: '../workerDetails/workerDetails?id=' + id,
+      })
+    }else if(state == "0"){
+      wx.navigateTo({
+        url: '../businessDetails/businessDetails?id=' + id,
+      })
+    }
+  },
+
   onLoad: function (options) {
     this.getTokenValue()
     wx.showShareMenu({
@@ -132,7 +152,7 @@ Page({
     qingqiu.get("needSignPage", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
-          console.log(re)
+          console.log('接单人员',re)
           var list = re.result.records
           for (let obj of list) {
             if (obj.name != null && obj.name != "" && obj.name != "null") {

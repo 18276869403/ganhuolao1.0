@@ -13,6 +13,8 @@ Page({
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     type: 2,
+    // 是否实名认证
+    checkeds:'circle',
     btnFlag: false,
     // 获取分类
     fenleitype1: {
@@ -772,6 +774,7 @@ Page({
       fenClass1: '',
       fenClass2: '',
       needsTypeid: id,
+      checkeds:'circle',
       litype: litype,
       yijiname: '',
       secondId: 0,
@@ -802,7 +805,16 @@ Page({
     that.setData({
       select: stype
     })
-
+  },
+  // 改变实名认证状态
+  changecheckeds:function(e){
+    var that = this 
+    var checkeds = e.currentTarget.dataset.select
+    var stype = checkeds == "success"?'circle':'success'
+    //赋值
+    that.setData({
+      checkeds: stype
+    })
   },
   // 右侧多选点击
   itemSelected: function (e) {
@@ -1184,6 +1196,13 @@ Page({
                   })
                   var r = res.data
                   var jj = JSON.parse(r);
+                  if(!jj.success){
+                    wx.showToast({
+                      title: '图片上传失败',
+                      icon:'none'
+                    })
+                    return
+                  }
                   var sj = jj.message
                   console.log(res)
                   if (type == '1') {

@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-font-family:'微软雅黑';
+  font-family:'微软雅黑';
 }
 
 .hengxiang {
@@ -27,6 +27,6 @@ font-family:'微软雅黑';
 }
 .shenglue{
   overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }

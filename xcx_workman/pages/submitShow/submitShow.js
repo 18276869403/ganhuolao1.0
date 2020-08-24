@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    uploaderlist:[],
+    uploaderlist: [],
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
     needscontent: '',
@@ -138,7 +138,7 @@ Page({
       })
       return
     }
-    that.data.picIurl1=[]
+    that.data.picIurl1 = []
     if (that.data.tupianlists.length > 0) {
       for (let obj of that.data.tupianlists) {
         that.data.picIurl1 += obj + ','
@@ -170,10 +170,10 @@ Page({
       that.setData({
         btnFlag: false
       })
-      if(re.message == "操作失败"){
+      if (re.message == "操作失败") {
         wx.showToast({
           title: '发布失败',
-          icon:'none'
+          icon: 'none'
         })
         return
       }
@@ -358,8 +358,8 @@ Page({
     var type = e.currentTarget.dataset.type
     var index = e.currentTarget.dataset.number
     var that = this
-    var index2=0
-    var index3=0
+    var index2 = 0
+    var index3 = 0
     that.setData({
       btnFlag: true
     })
@@ -374,14 +374,14 @@ Page({
         console.log(res)
         const tempFilePaths = res.tempFilePaths;
         // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)  
-        for(let i=0;i<tempFilePaths.length;i++){
-          if(!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])){
+        for (let i = 0; i < tempFilePaths.length; i++) {
+          if (!/\.(jpg|jpeg|png|JPG|PNG)$/.test(tempFilePaths[i])) {
             wx.showToast({
               title: '请上传静态图片',
-              icon:'none'
+              icon: 'none'
             })
             that.setData({
-              btnFlag:false
+              btnFlag: false
             })
             return
           }
@@ -422,12 +422,23 @@ Page({
                     that.setData({
                       btnFlag: false
                     })
-                    console.log(index2)
                     var r = res.data
                     var jj = JSON.parse(r);
+                    if (!jj.success) {
+                      // wx.showToast({
+                      //   title: '图片上传失败' + tempFilePaths.wxfile,
+                      //   icon: 'none'
+                      // })
+                      var asvalue = typeof tempFilePaths
+                      wx.showToast({
+                        title: asvalue + '   ' + tempFilePaths.wxfile,
+                        icon: "none"
+                      })
+                      return
+                    }
                     var sj = api.viewUrl + jj.message
                     var tupianlists = that.data.tupianlists
-                    if(tupianlists.length<9){
+                    if (tupianlists.length < 9) {
                       tupianlists.push(jj.message)
                     }
                     // tupianlists.push(jj.message)
@@ -438,18 +449,18 @@ Page({
                     })
                   }
                 })
-                index2+=1
+                index2 += 1
               }
             }
           })
-          index3+=1
+          index3 += 1
         }
       },
     })
     that.setData({
       btnFlag: false
     })
-  }, 
+  },
   // 删除图片
   shanchu: function (e) {
     var that = this
@@ -465,11 +476,11 @@ Page({
     });
   },
   // 预览图片
-  imgview:function(e){
+  imgview: function (e) {
     var src = e.currentTarget.dataset.src
     wx.previewImage({
-      current:src,
-      urls:[src]
+      current: src,
+      urls: [src]
     })
   }
 })

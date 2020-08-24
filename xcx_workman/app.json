@@ -1,6 +1,10 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/buildDraw/buildDraw",
+    "pages/buildDrawDetails/buildDrawDetails",
+    "pages/submitBuilddraw/submitBuilddraw",
+    "pages/submitNeeds/submitNeeds",
     "pages/submitConvenience/submitConvenience",
     "pages/convenience/convenience",
     "pages/myShowVote/myShowVote",
@@ -35,7 +39,6 @@
     "pages/calculate/calculate",
     "pages/businessDetails/businessDetails",
     "pages/workerDetails/workerDetails",
-    "pages/submitNeeds/submitNeeds",
     "pages/needsDetails/needsDetails",
     "pages/need/need",
     "pages/outurl/outurl",

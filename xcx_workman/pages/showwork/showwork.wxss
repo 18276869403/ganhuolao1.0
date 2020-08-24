@@ -234,6 +234,19 @@ page {
   overflow-x: hidden;
 }
 
+.bottom {
+  position: fixed;
+  right: 0rpx;
+  bottom: 16rpx;
+}
+.backtop-img {
+  width: 110rpx;
+  height: 110rpx;
+  position: absolute;
+  bottom: 15rpx;
+  right: 0rpx;
+}
+
 .left {
   display: flex;
   flex-direction: column;
@@ -251,6 +264,26 @@ page {
   margin-left: 1.5%;
   justify-content: flex-start;
 }
+
+
+.left1 {
+  display: flex;
+  flex-direction: column;
+  width: 48.5%;
+  /* margin-left: 3%; */
+  /* margin-right: 1.5%; */
+  justify-content: flex-start;
+}
+
+.right1 {
+  display: flex;
+  flex-direction: column;
+  width: 48.5%;
+  /* margin-right: 3%; */
+  /* margin-left: 1.5%; */
+  justify-content: flex-start;
+}
+
 
 .image {
   width: 100%;
@@ -639,8 +672,8 @@ page {
 .activity-left-text{
   width: 100%;
   padding-top: 10rpx;
-  height: 80rpx;
-  line-height: 80rpx;
+  /* height: 80rpx;
+  line-height: 80rpx; */
 }
 /* 禁用按钮 */
 .disabled {

@@ -83,11 +83,11 @@
       <view class="content-content-title">报名接单人员</view>
       <view class="content-jiedan zongxiang" wx:for="{{jiedanList}}" wx:for-index="index" wx:key="{{item.id}}">
         <view class="jiedan-top hengxiang">
-          <view class="jiedan-top-left">
+          <view class="jiedan-top-left" bindtap="goWorkerDetail" data-wxUserId="{{item.wxUserId}}" data-state="{{item.wxState}}">
             <image src="{{item.picIurl}}" class="avator-img" wx-if="{{item.picIurl!=''|| item.picIurl!=null}}"></image>
             <image src="{{item.picUrl}}" class="avator-img" wx-if="{{item.picIurl==''|| item.picIurl==null}}"></image>
           </view>
-          <view class="jiedan-top-content zongxiang">
+          <view class="jiedan-top-content zongxiang" bindtap="goWorkerDetail" data-wxUserId="{{item.wxUserId}}" data-state="{{item.wxState}}">
             <view class="jiedan-top-content-name">{{item.name}}</view>
             <view class="jiedan-top-content-date">{{item.signTime}}</view>
           </view>

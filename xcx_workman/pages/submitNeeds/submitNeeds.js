@@ -1031,8 +1031,6 @@ Page({
   },
   // 图片上传（对接完成）
   upimg: function (e) {
-    var type = e.currentTarget.dataset.type
-    var index = e.currentTarget.dataset.number
     var that = this
     var index2 = 0
     var index3 = 0
@@ -1097,6 +1095,13 @@ Page({
                     })
                     var r = res.data
                     var jj = JSON.parse(r);
+                    if(!jj.success){
+                      wx.showToast({
+                        title: '图片上传失败',
+                        icon:'none'
+                      })
+                      return
+                    }
                     var sj = api.viewUrl + jj.message
                     if (that.data.tupianlists.length < 9) {
                       that.data.tupianlists.push(jj.message)
@@ -1123,17 +1128,13 @@ Page({
   },
   // 删除图片
   shanchu: function (e) {
-    var that = this
     var tplj = e.currentTarget.dataset.tplj
-    that.data.tupianlists.splice(tplj, 1)
-    console.log(that.data.tupianlists)
-    that.setData({
-      tupianlists: that.data.tupianlists
+    this.data.tupianlists.splice(tplj, 1)
+    this.data.num -= 1;
+    this.setData({
+      tupianlists: this.data.tupianlists,
+      num: this.data.num
     })
-    that.data.num -= 1;
-    that.setData({
-      num: that.data.num
-    });
   },
 
   // 预览图片

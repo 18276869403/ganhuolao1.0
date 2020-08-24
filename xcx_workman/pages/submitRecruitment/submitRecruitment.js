@@ -534,6 +534,13 @@ Page({
                   var r = res.data
                   var jj = JSON.parse(r);
                   var sj = jj.message
+                  if(!jj.success){
+                    wx.showToast({
+                      title: '图片上传失败',
+                      icon:'none'
+                    })
+                    return
+                  }
                   console.log(res)
                   that.setData({
                     picIurl: sj,

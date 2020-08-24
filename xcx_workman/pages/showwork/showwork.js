@@ -401,6 +401,16 @@ Page({
       }
     })
   },
+
+  /**
+   * 置顶
+   */
+  goTop:function(){
+    wx.pageScrollTo({
+      scrollTop: 0,
+      duration: 300
+    })
+  },
   // 晒晒点赞
   dianzan: function (e) {
     var that = this

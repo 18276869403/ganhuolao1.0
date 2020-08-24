@@ -874,6 +874,13 @@ Page({
                     console.log(index2)
                     var r = res.data
                     var jj = JSON.parse(r);
+                    if(!jj.success){
+                      wx.showToast({
+                        title: '图片上传失败',
+                        icon:'none'
+                      })
+                      return
+                    }
                     var tupianlists = that.data.tupianlists
                     if (tupianlists.length < 5) {
                       tupianlists.push(jj.message)

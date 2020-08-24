@@ -549,13 +549,13 @@ Page({
 
   // 建房图纸
   builddraw:function(){
-    wx.showToast({
-      title: '功能开发中...',
-      icon:'none'
-    })
-    return
+    // wx.showToast({
+    //   title: '功能开发中...',
+    //   icon:'none'
+    // })
+    // return
     wx.navigateTo({
-      url: '../builddraw/builddraw',
+      url: '../buildDraw/buildDraw',
     })
   },
 

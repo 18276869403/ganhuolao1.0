@@ -1,0 +1,113 @@
+<!--pages/submitBuilddraw/submitBuilddraw.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="content zongxiang">
+		<view class="content-item hengxiang" bindtap="showModal" data-type="0" data-id="{{layerid}}">
+			<view class="content-title">建筑层数<text style="color:red;">*</text></view>
+			<view class="content-text select-color" wx:if="{{layertext == ''}}">选择建筑层数</view>
+			<view class="content-text2 shenglue" wx:if="{{layertext != ''}}">{{layertext}}</view>
+			<view class="enter">
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+		<view class="content-item hengxiang" bindtap="showModal" data-type="1" data-id="{{buildstyleId}}">
+			<view class="content-title">建筑风格<text style="color:red;">*</text></view>
+			<view class="content-text select-color" wx:if="{{buildstyle == ''}}">选择建筑风格</view>
+			<view class="content-text2 shenglue" wx:if="{{buildstyle != ''}}">{{buildstyle}}</view>
+			<view class="enter">
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+		<view class="content-item hengxiang" bindtap="showModal" data-type="2" data-id="{{structureId}}">
+			<view class="content-title">结构形式<text style="color:red;">*</text></view>
+			<view class="content-text select-color" wx:if="{{structure == ''}}">选择结构形式</view>
+			<view class="content-text2 shenglue" wx:if="{{structure != ''}}">{{structure}}</view>
+			<view class="enter">
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+		<view class="content-item hengxiang" bindtap="showModal" data-type="3" data-id="{{manufacturId}}">
+			<view class="content-title">主体造价<text style="color:red;">*</text></view>
+			<view class="content-text select-color" wx:if="{{manufactur == ''}}">选择主体造价</view>
+			<view class="content-text2 shenglue" wx:if="{{manufactur != ''}}">{{manufactur}}</view>
+			<view class="enter">
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+		<view class="content-item hengxiang" bindtap="showModal" data-type="4" data-id="{{buildareaId}}">
+			<view class="content-title">占地面积<text style="color:red;">*</text></view>
+			<view class="content-text select-color" wx:if="{{buildarea == ''}}">选择占地面积</view>
+			<view class="content-text2 shenglue" wx:if="{{buildarea != ''}}">{{buildarea}}</view>
+			<view class="enter">
+				<image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
+			</view>
+		</view>
+    <view class="content zongxiang">
+      <view class="content-item hengxiang">
+      <view class="content-title">图纸标题<text style="color:red;">*</text></view>
+      <input type="text" placeholder="输入图纸标题" class="shurukuang" placeholder-class="placeholder" value="{{builddraw}}" name="builddraw" bindinput="builddrawinput" bindblur="builddrawblur"></input>
+      </view>
+    </view>
+    <view class="content zongxiang">
+      <view class="content-item hengxiang">
+        <view class="content-title">联系电话<text style="color:red;">*</text></view>
+        <input type="number" placeholder="输入联系电话" class="shurukuang" placeholder-class="placeholder" value="{{buildphone}}" name="linkman" bindinput="buildphoneinput"></input>
+      </view>
+    </view>
+    <view class="content-item-textarea">
+      <textarea class="textarea" placeholder="输入图纸详情" placeholder-class="placeholder1" maxlength="-1" value="{{buildcontent}}" name="buildcontent" bindinput="buildcontentinput" bindblur="buildcontentblur" wx:if="{{!showModalStatus}}"></textarea>
+    </view>
+    <view class="showImg">
+      <view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index">
+				<image src="{{viewUrl}}{{item}}" mode="aspctFill" bindtap="imgview" data-src="{{iconUrl}}{{item}}" class="show-img"></image>
+				<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+			</view>
+    </view>
+		<view class="fabu {{btnFlag == true?'disabled':''}}" bindtap="upimg" wx:if="{{num<9}}">
+			<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+		</view>
+		<view class="need-photo-text">建筑图纸图片(可以上传多张，可以不上传)</view>
+		<view class="content-icon hengxiang">
+			<icon type="{{select}}" size="22" data-index="{{index}}" data-select="{{select}}" bindtap="change"></icon>
+			<view class="icon-leftText" bindtap="showModal1">提交请仔细阅读</view>
+			<view class="icon-righText" bindtap="showModal1">《干活佬使用协议》</view>
+		</view>
+		<view class="bottom hengxiang">
+			<view class="bottom-right {{btnFlag == true?'disabled':''}}" bindtap="submit">立即发布</view>
+		</view>
+	</view>
+</view>
+<!-- 注册协议 -->
+<view class="commodity_screen1" wx:if="{{showModalStatus1}}"></view>
+<view animation="{{animationData1}}" class="commodity_attr_box1" wx:if="{{showModalStatus1}}">
+	<view class='tanchuang zongxiang'>
+		<view class='tankuang-top1'>免责协议</view>
+		<scroll-view scroll-y style="height: 275px;" class='tankuang-content1'>
+			<view>{{mianzhe}}</view>
+		</scroll-view>
+		<view class='close-button' bindtap='hideModal1'>关闭</view>
+	</view>
+</view>
+<!-- 遮罩 -->
+<view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData3}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+	<view class="tankuang zongxiang">
+		<view class="tankuang-top hengxiang">
+			<view class="tankuang-top-left" bindtap="hideModal" data-return="false">取消</view>
+			<view class="tankuang-top-content">选择{{showModaltitle[showModaltype]}}</view>
+			<view class="tankuang-top-right" bindtap="hideModal" data-return="true">确认</view>
+		</view>
+		<scroll-view scroll-y style="height:310px;" class="tankuang-content zongxiang">
+			<view class="content-list zongxiang" wx:for="{{classification}}" wx:key="key">
+				<view class="content-list-one zongxiang">
+					<view class="list-one-item hengxiang" bindtap="changeclass" data-id="{{item.id}}" data-name="{{item.bname}}">
+					<view class="list-one-item-left shenglue">{{item.bname}}</view> 
+          <view class="list-one-item-right" wx:if="{{classid == item.id}}">
+            <image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
+          </view>
+          </view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>

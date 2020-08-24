@@ -6,7 +6,7 @@ const imgurl= "https://www.it-ys.com:81/work-boot/"
 // 体验
 // const imgurl = "http://111.231.51.198:9045/work-boot/"  
 // 本地
-// const imgurl = "http://192.168.1.250:8080/work-boot/" 
+// const imgurl = "http://192.168.1.250:8081/work-boot/" 
 // const imgurl = "http://192.168.1.233:8080/work-boot/" //本地
 // const imgurl = "http://192.168.1.235:8080/work-boot/" //本地 
 const baiduAK = 'CauqHCxjKu4NcebB4UjlUYTbGqtRpEN5'

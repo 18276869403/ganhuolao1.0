@@ -1,5 +1,6 @@
 <!--pages/convenienceDetails/convenienceDetails.wxml-->
 <view class="container">
+	<view class="hengxian"></view>
 	<view class="content zongxiang">
 		<view class="content-list zongxiang">
 			<view class="content-list-item hengxiang">

@@ -42,6 +42,7 @@ page {
   width: 100%;
   text-align: center;
 }
+
 .top-item-normal1 {
   height: 80rpx;
   font-size: 32rpx;
@@ -85,7 +86,7 @@ page {
   width: 77%;
   margin-right: 3%;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -96,21 +97,21 @@ page {
   width: 80%;
   margin-right: 3%;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
- 
+
 .content-text2 {
   color: #333;
   font-size: 28rpx;
   line-height: 72rpx;
   width: 80%;
   overflow: hidden;
-  text-overflow:ellipsis;
+  text-overflow: ellipsis;
   white-space: nowrap;
   padding-right: 3%;
 }
-  
+
 .content-title-gongzhong {
   width: 20%;
   text-align: left;
@@ -539,7 +540,7 @@ page {
 
 .delete-img {
   position: absolute;
-  right:0rpx;
+  right: 0rpx;
   width: 44rpx;
   height: 44rpx;
 }
@@ -551,7 +552,7 @@ page {
   margin-left: 4%;
   margin-right: 4%;
   width: 92%;
-  margin-top: 32rpx;
+  /* margin-top: 32rpx; */
   display: flex;
   flex-flow: row wrap;
 }
@@ -560,14 +561,16 @@ page {
   width: 50%;
   text-align: center;
 }
+
 .fabu2 {
   width: 50%;
   text-align: center;
 }
-.fabu-item2{
+
+.fabu-item2 {
   height: 50rpx;
   font-size: 26rpx;
-  color:#999999;
+  color: #999999;
 }
 
 
@@ -699,7 +702,7 @@ page {
 }
 
 .tanchuang2 {
-width: 100%;
+  width: 100%;
   height: 730rpx;
   background: #fff;
   border-radius: 20rpx;
@@ -774,19 +777,23 @@ width: 100%;
   line-height: 68rpx;
   border-bottom: 1rpx solid #ececec;
 }
-.list-two-item{
-width: 100%;
+
+.list-two-item {
+  width: 100%;
 }
-.list-two-item-left{
+
+.list-two-item-left {
   width: 90%;
   text-align: left;
   padding-left: 16rpx;
 }
-.list-two-item-right{
+
+.list-two-item-right {
   width: 10%;
   text-align: right;
 }
-.duihao-img{
+
+.duihao-img {
   width: 40rpx;
   height: 40rpx;
   margin-top: 14rpx;
@@ -795,4 +802,9 @@ width: 100%;
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
-  }
+}
+
+.content-icon1 {
+  margin: 3%;
+  /* line-height: 44rpx; */
+}

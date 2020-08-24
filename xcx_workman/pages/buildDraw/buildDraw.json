@@ -1,0 +1,7 @@
+{
+  "navigationBarBackgroundColor": "#fff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "建房图纸",
+  "enablePullDownRefresh": true,
+  "usingComponents": {}
+} 

@@ -4,7 +4,7 @@ const baseUrl = "https://www.it-ys.com:81/work-boot/"
 // 体验
 // const baseUrl = "http://111.231.51.198:9045/work-boot/"  
 // 本地
-// const baseUrl = "http://192.168.1.250:8080/work-boot/" 
+// const baseUrl = "http://192.168.1.250:8081/work-boot/" 
 // const baseUrl = "http://192.168.1.233:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.235:8080/work-boot/"   
 
@@ -126,6 +126,20 @@ const getConveniencePage = baseUrl + "work/convenience/list"
 const convDelete = baseUrl + "work/convenience/delete" 
 // 获取点赞头像
 const getShowGive = baseUrl + "pc/user/getShowGive"
+// 获取图纸分类
+const findClass = baseUrl + "work/buildDrawClass/findClass"
+// 建筑图纸添加
+const buildAdd = baseUrl + "work/buildDraw/add"
+// 建筑图纸编辑
+const buildEdit = baseUrl + "work/buildDraw/edit"
+// 建房图纸通过id查询
+const buildQueryById = baseUrl + "work/buildDraw/queryById"
+// 查询建房图纸集合
+const buildfindlist = baseUrl + "work/buildDraw/findlist"
+// 建房图纸浏览+1
+const buildeditById = baseUrl + "work/buildDraw/editById"
+// 删除建房图纸
+const builddelete = baseUrl + "work/buildDraw/delete"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -186,5 +200,12 @@ module.exports = {
   queryconvenienceById:queryconvenienceById,
   getConveniencePage:getConveniencePage,
   getShowGive:getShowGive,
-  convDelete:convDelete
+  convDelete:convDelete,
+  findClass:findClass,
+  buildAdd:buildAdd,
+  buildEdit:buildEdit,
+  buildQueryById:buildQueryById,
+  buildfindlist:buildfindlist,
+  buildeditById:buildeditById,
+  builddelete:builddelete
 };

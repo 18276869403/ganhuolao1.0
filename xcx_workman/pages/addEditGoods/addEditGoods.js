@@ -331,6 +331,13 @@ Page({
                   })
                   var r = re.data
                   var jj = JSON.parse(r);
+                  if(!jj.success){
+                    wx.showToast({
+                      title: '图片上传失败',
+                      icon:'none'
+                    })
+                    return
+                  }
                   var sj = api.viewUrl + jj.message
                   console.log(re)
                   if (type == '1') {

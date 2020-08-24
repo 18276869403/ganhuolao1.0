@@ -1,0 +1,89 @@
+<!--pages/buildDraw/buildDraw.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="top">
+		<view class="top-search hengxiang">
+			<view class="top-title-right hengxiang">
+				<view class="top-title-right-img">
+					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
+				</view>
+				<view class="top-title-right-shuru">
+					<input type="text" placeholder="输入图纸标题搜索" value="{{title}}" bindinput="getSearch" class="shurukuang"></input>
+				</view>
+				<view class="top-title-right-sousuo">
+					<view class="sousuo-button" bindtap="getbuilds">搜索</view>
+				</view>
+			</view>
+			<view class="top-search-fabu">
+				<image src="{{iconUrl}}static/image/woyaofabubutton.png" bindtap="submit" class="fabu-img"></image>
+			</view>
+		</view>
+
+		<scroll-view scroll-x class="scroll-x">
+			<view wx:for="{{items}}" wx:key="{{index}}" class="view-parent">
+				<view class="view-item hengxiang" bindtap="showModal" data-type="{{index}}">
+					<view>{{item.name}}</view>
+					<view>
+						<image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+	<view class="bottom">
+		<!-- 左侧 -->
+		<view class="left">
+			<block wx:for-items="{{buildslist}}">
+				<view class="show" wx:if="{{index%2 == 0}}">
+					<view class="show-item-top {{btnFlag?'disabled':''}}" bindtap="buildsDetails" data-id="{{item.id}}">
+						<image src="{{iconUrl}}{{item.pic[0]}}" class="show-img" mode="aspectFill"></image>
+					</view>
+					<view class="show-item-bottom hengxiang">
+						<view class="goods-name">
+							{{item.title}}
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+		<!-- 右边 -->
+		<view class="right">
+			<block wx:for-items="{{buildslist}}">
+				<view class="show" wx:if="{{index%2 != 0}}">
+					<view class="show-item-top" bindtap="buildsDetails" data-id="{{item.id}}">
+						<image src="{{iconUrl}}{{item.pic[0]}}" class="show-img" mode="aspectFill"></image>
+					</view>
+					<view class="show-item-bottom hengxiang">
+						<view class="goods-name">
+							{{item.title}}
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>
+
+<!-- 遮罩 -->
+<view class="commodity_screen" wx:if="{{showModalStatus}}"></view>
+<view animation="{{animationData1}}" class="commodity_attr_box" wx:if="{{showModalStatus}}">
+	<view class="tankuang zongxiang">
+		<view class="tankuang-top hengxiang">
+			<view class="tankuang-top-left" bindtap="hideModal">取消</view>
+			<view class="tankuang-top-content">选择{{items[showModaltype].name}}</view>
+			<view class="tankuang-top-right" bindtap="hideModal">确认</view>
+		</view>
+		<scroll-view scroll-y style="height:310px;" class="tankuang-content zongxiang">
+			<view class="content-list zongxiang" wx:for="{{classification}}" wx:key="key">
+				<view class="content-list-one zongxiang">
+					<view class="list-one-item hengxiang" bindtap="changeclass" data-id="{{item.id}}" data-name="{{item.bname}}">
+						<view class="list-one-item-left shenglue">{{item.bname}}</view>
+						<view class="list-one-item-right" wx:if="{{items[showModaltype].classid == item.id}}">
+							<image src="{{iconUrl}}static/image/duihao.png" class="duihao-img"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+	</view>
+</view>

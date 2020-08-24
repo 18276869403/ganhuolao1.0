@@ -63,11 +63,15 @@
 		<view class="content-item-textarea">
 			<textarea class="textarea" placeholder="输入商铺介绍" style="color:#999999;" placeholder-class="placeholder" maxlength='-1' value='{{needscontent}}' name="needscontent" bindinput='needscontentinput' bindblur="needscontentblur" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}"></textarea>
 		</view>
+		<view class="content-icon1 hengxiang">
+			<icon type="{{checkeds}}" size="22" data-index="{{index}}" data-select="{{checkeds}}" bindtap="changecheckeds" />
+			<view class='icon-leftText' bindtap='showModal1'>是否实名认证</view>
+		</view>
 		<view class="hengxiang fabu-list1">
 			<view class="fabu1">
 				<view class="fabu-item1 zongxiang">
 					<view wx:if="{{picIurl==''||picIurl == null}}">
-						<image src="{{iconUrl}}static/image/sctouxiang.png" bindtap='upimg' class="fabu-item {{btnFlag == true ? 'disabled' : ''}}" data-number="0" data-type='5'></image>
+						<image src="{{iconUrl}}static/image/sjtouxiang.png" bindtap='upimg' class="fabu-item {{btnFlag == true ? 'disabled' : ''}}" data-number="0" data-type='5'></image>
 					</view>
 					<view wx:if="{{picIurl!=''&&picIurl != null}}">
 						<image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu1-img"></image>
@@ -77,7 +81,7 @@
 			</view>
 			<view class="fabu">
 				<view class="fabu-item1 zongxiang">
-					<view wx:if="{{picZz=='' || picZz == null}}">
+					<view wx:if="{{(picZz=='' || picZz == null) && checkeds == 'success'}}">
 						<image src="{{iconUrl}}static/image/yingyezhizhao.jpg" bindtap='upimg' data-number="0" data-type='2' class="fabu-item {{btnFlag == true ? 'disabled' : ''}}"></image>
 					</view>
 					<view wx:if="{{picZz!=''&&picZz!=null}}">
@@ -87,9 +91,9 @@
 				</view>
 			</view>
 			<view class="fabu2">
-				<view class="fabu-item2">店铺照片</view>
+				<view class="fabu-item2">店铺照</view>
 			</view>
-			<view class="fabu2">
+			<view class="fabu2" wx:if="{{checkeds == 'success'}}">
 				<view class="fabu-item2">营业执照</view>
 			</view>
 		</view>
@@ -151,12 +155,15 @@
 		<view class="content-item-textarea" wx:if="{{!showModalStatus6&&!show&&!showModalStatus1&&!showModalStatus}}">
 			<textarea class="textarea" placeholder="输入技能介绍" style="color:#999999" placeholder-class="placeholder" maxlength='-1' value='{{workerskill}}' name="workerskill" bindinput='workerskillinput' bindblur="workerskillblur"></textarea>
 		</view>
-
+		<view class="content-icon1 hengxiang">
+			<icon type="{{checkeds}}" size="22" data-index="{{index}}" data-select="{{checkeds}}" bindtap="changecheckeds" />
+			<view class='icon-leftText' bindtap='showModal1'>是否实名认证</view>
+		</view>
 		<view class="hengxiang fabu-list1">
 			<view class="fabu1">
 				<view class="fabu-item1 zongxiang">
 					<view wx:if="{{picIurl==''||picIurl==null}}">
-						<image src="{{iconUrl}}static/image/sctouxiang.png" bindtap='upimg' data-number="0" data-type='1' class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}}"></image>
+						<image src="{{iconUrl}}static/image/grtouxiang.png" bindtap='upimg' data-number="0" data-type='1' class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}}"></image>
 					</view>
 					<view wx:if="{{picIurl!=''&&picIurl!=null}}">
 						<image src="{{viewUrl}}{{picIurl}}" mode="aspectFill" bindtap='imgview' data-src="{{iconUrl}}{{picIurl}}" class="fabu1-img"></image>
@@ -166,7 +173,7 @@
 			</view>
 			<view class="fabu1">
 				<view class="fabu-item1 zongxiang">
-					<view wx:if="{{picPerson1==''||picPerson1==null}}">
+					<view wx:if="{{(picPerson1==''||picPerson1==null) && checkeds == 'success'}}">
 						<image src="{{iconUrl}}static/image/zhengmian.png" bindtap='upimg' data-number="0" data-type='3' class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}}"></image>
 					</view>
 					<view wx:if="{{picPerson1!=''&&picPerson1!=null}}">
@@ -178,10 +185,10 @@
 			<view class="fabu2">
 				<view class="fabu-item2">工作照</view>
 			</view>
-			<view class="fabu2">
+			<view class="fabu2" wx:if="{{checkeds == 'success'}}">
 				<view class="fabu-item2">身份证正面照</view>
 			</view>
-			<view class="fabu1">
+			<view class="fabu1" wx:if="{{checkeds == 'success'}}">
 				<view class="fabu-item1 zongxiang">
 					<view wx:if="{{picPerson2==''||picPerson2==null}}">
 						<image src="{{iconUrl}}static/image/fanmian.png" bindtap='upimg' data-number="0" data-type='4' class="fabu-item1 {{btnFlag == true ? 'disabled' : ''}}"></image>
@@ -192,8 +199,8 @@
 					</view>
 				</view>
 			</view>
-			<view class="fabu1"></view>
-			<view class="fabu2">
+			<view class="fabu1" wx:if="{{checkeds == 'success'}}"></view>
+			<view class="fabu2" wx:if="{{checkeds == 'success'}}">
 				<view class="fabu-item2">身份证反面照</view>
 			</view>
 		</view>
