@@ -1,0 +1,20 @@
+<!--pages/uploadImage/uploadImage.wxml-->
+<view class="showImg">
+	<view class="showImg-item" wx:for="{{tupianlists}}" wx:for-index="index" wx:key="{{item.id}}">
+		<image src="{{viewUrl}}{{item}}" bindtap='imgview' data-src="{{iconUrl}}{{item}}" mode="aspectFill" class="show-img"></image>
+		<image src="{{iconUrl}}static/image/shanchu.png" class="delete-img" bindtap="shanchu" data-tplj="{{index}}"></image>
+	</view>
+</view>
+<!-- 上传 -->
+<view class="fabu" wx-if="{{tupianlists.length<9}}">
+	<view class="fabu-item zongxiang" bindtap='upimg' data-number="0" data-type="{{num}}">
+		<view>
+			<image src="{{iconUrl}}static/image/shangchuan.png" class="fabu-item"></image>
+		</view>
+		<!-- <view>
+					上传照片
+				</view> -->
+	</view>
+</view>
+
+<view bindtap="gotop"> 开启调试 </view>

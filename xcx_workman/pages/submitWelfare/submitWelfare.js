@@ -575,6 +575,9 @@ Page({
             })
             return
           }
+          wx.showLoading({
+            title: '上传图片中',
+          })
           wx.uploadFile({
             url: api.imgFilter,
             name: 'file',
@@ -584,7 +587,7 @@ Page({
             },
             method: 'POST',
             header: {
-              "Content-Type": "multipart/form-data"
+              // "Content-Type": "multipart/form-data"
             },
             success: function (res) {
               console.log(res)
@@ -602,7 +605,7 @@ Page({
                   url: api.uploadurl,
                   filePath: tempFilePaths[index2],
                   header: {
-                    "Content-Type": "multipart/form-data"
+                    // "Content-Type": "multipart/form-data"
                   },
                   formData: {
                     method: 'POST' //请求方式
@@ -621,6 +624,7 @@ Page({
                       })
                       return
                     }
+                    wx.hideLoading()
                     console.log(res)
                     if(that.data.piclist.length<9){
                       that.data.piclist.push(jj.message)

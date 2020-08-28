@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/submitWelfare/submitWelfare",
     "pages/buildDraw/buildDraw",
     "pages/buildDrawDetails/buildDrawDetails",
     "pages/submitBuilddraw/submitBuilddraw",
@@ -52,7 +53,9 @@
     "pages/myRecruitment/myRecruitment",
     "pages/myWelfare/myWelfare",
     "pages/Welfare/Welfare",
-    "pages/showVote/showVote"
+    "pages/showVote/showVote",
+    "pages/uploadImage/uploadImage",
+    "pages/workList/workList"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

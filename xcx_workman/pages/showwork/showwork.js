@@ -16,6 +16,9 @@ Page({
   data: {
     viewUrl: api.viewUrl,
     iconUrl: api.iconUrl,
+    // 点赞
+    icon_like: api.iconUrl + "static/image/zan.png",
+    icon_unlike: api.iconUrl + "static/image/zan2.png",
     btnFlag: false,
     showList: [],
     activityList: [],
@@ -94,7 +97,7 @@ Page({
               wx.navigateTo({
                 url: '../Welfare/Welfare',
               })
-            }else{
+            } else {
               that.setData({
                 btnFlag: false
               })
@@ -177,31 +180,31 @@ Page({
       }
     })
     if (Y == 2020) {
-      if(M == 9){
-        if(D < 16){
+      if (M == 9) {
+        if (D < 16) {
           wx.showToast({
             title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
-            icon:'none'
+            icon: 'none'
           })
           that.setData({
             btnFlag: false
           })
           return
         }
-      }else{
+      } else {
         wx.showToast({
           title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
-          icon:'none'
+          icon: 'none'
         })
         that.setData({
           btnFlag: false
         })
         return
       }
-    }else{
+    } else {
       wx.showToast({
         title: '考虑大赛公平性，投票通道2020年9月16日开启，8月6日至7日投票数仍然有效累计。',
-        icon:'none'
+        icon: 'none'
       })
       that.setData({
         btnFlag: false
@@ -388,11 +391,22 @@ Page({
     qingqiu.get("CasePage", data, function (re) {
       if (re.success == true) {
         if (re.result != null) {
-          that.showList = re.result.records
-          for (var i = 0; i < that.showList.length; i++) {
-            that.showList[i].picOne = api.iconUrl + re.result.records[i].picOne.split(',')[0]
-            that.data.imgList[i] = that.showList[i].picOne
-            that.data.showList.push(re.result.records[i])
+          // that.showList = re.result.records
+          // for (var i = 0; i < that.showList.length; i++) {
+          //   that.showList[i].picOne = api.iconUrl + re.result.records[i].picOne.split(',')[0]
+          //   that.data.imgList[i] = that.showList[i].picOne
+          //   that.data.showList.push(re.result.records[i])
+          // }
+          
+          for (let obj of re.result.records) {
+            var imgList = []
+            if (obj.picOne.indexOf(',') != -1) {
+              imgList = obj.picOne.split(',')
+            }else{
+              imgList.push(obj.picOne)
+            }
+            obj.picOne = imgList
+            that.data.showList.push(obj)
           }
           that.setData({
             showList: that.data.showList
@@ -405,7 +419,7 @@ Page({
   /**
    * 置顶
    */
-  goTop:function(){
+  goTop: function () {
     wx.pageScrollTo({
       scrollTop: 0,
       duration: 300
@@ -414,12 +428,21 @@ Page({
   // 晒晒点赞
   dianzan: function (e) {
     var that = this
+    // var index = e.currentTarget.dataset.index
     var item = e.currentTarget.dataset.itemobj;
     console.log(item)
+    // wx.vibrateShort() // 手机震动api
+    // that.animation = wx.createAnimation({
+    //   duration: 200, // 动画持续时，单位 ms
+    //   timingFunction:'linear', // 动画的效果
+    //   delay:2,  // 动画延迟时间
+    //   transformOrigin:'50% 50%' // 动画的中心点
+    // })
     var data = {
       wxCaseId: item.id,
       wxUserIdGo: app.globalData.wxid
     }
+    console.log(data)
     qingqiu.get("userLikes", data, function (re) {
       if (re.success == true) {
         for (let obj of that.data.showList) {
@@ -432,7 +455,11 @@ Page({
             obj.giveState = item.giveState == 0 ? 1 : 0
           }
         }
+        // that.animation.scale(1.5).step();
+        // that.animation.scale(1.0).step();
+        // var animation = "animation"+index
         that.setData({
+          // [animation]:that.animation.export(),
           showList: that.data.showList
         })
       }

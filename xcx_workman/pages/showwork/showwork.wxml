@@ -56,7 +56,7 @@
 										</view>
 										<view class="bianhao" style="width:100%;font-size:26rpx;margin-top:6rpx;">
 											<!-- <image src="{{iconUrl}}static/image/vote.png" class="icon-img"></image> -->
-											票数:<text> {{item.giveGood}}</text> 
+											票数:<text> {{item.giveGood}}</text>
 										</view>
 									</view>
 								</view>
@@ -131,9 +131,68 @@
 			</view>
 		</view>
 
-		<view class="bottom1">
+		<view class="bottom2">
+			<view class="bottom-1">
+				<block wx:for="{{showList}}" wx:index="key" wx:for-item="showList">
+					<view class="newshowwork zongxiang" bindtap="showDetails" data-ssid="{{showList.id}}">
+						<view class="hengxiang newshowwork-title">
+							<view class="newshow-picurl">
+								<image src="{{showList.wximgurl}}" mode="widthFix" class="show-img1"></image>
+							</view>
+							<view class="newshow-title">
+								<view class="zongxiang show-item1">
+									<view class="show-name" wx:if="{{showList.wxnc == null}}">未知</view>
+									<view class="show-name" wx:else>{{showList.wxnc}}</view>
+									<view class="show-title">{{showList.caseName}}</view>
+								</view>
+							</view>
+							<view class="newshow-remark hengxiang">
+								<view class="hengxiang">
+									<view>
+										<image src="{{iconUrl}}static/image/liulan.png" class="liulan-img"></image>
+									</view>
+									<view wx:if="{{showList.backup5 == ''||showList.backup5==null}}" class="newshow-text">0</view>
+									<view wx:if="{{showList.backup5 != ''&&showList.backup5!=null}}" class="newshow-text">{{showList.backup5}}</view>
+								</view>
+								<view class="hengxiang">
+									<view>
+										<image src="{{iconUrl}}static/image/pinglun.png" class="pinglun-img"></image>
+									</view>
+									<view class="newshow-text">{{showList.messageSum}}</view>
+								</view>
+								<view class="hengxiang">
+									<view catchtap="dianzan" data-itemobj="{{showList}}" data-index="{{index}}">
+										<image src="{{showList.giveState == 0?icon_like:icon_unlike}}" class="dianzan-img"></image>
+									</view>
+									<view class="newshow-text">{{showList.giveGood}}</view>
+								</view>
+							</view>
+						</view>
+						<view class="hengxiang show-imgs">
+							<view style="width:100%;" wx:if="{{showList.picOne.length === 1}}">
+								<image src="{{iconUrl}}{{showList.picOne[0]}}" mode="aspectFill" class="showdatil-imgs"></image>
+							</view>
+							<view class="hengxiang show-items" wx:if="{{showList.picOne.length === 2}}">
+								<block wx:for="{{showList.picOne}}" wx:for-index="index" wx:for-item="item">
+									<view class="img-item2">
+										<image src="{{iconUrl}}{{item}}" mode="aspectFill" class="item-imgs2"></image>
+									</view>
+									<view class="img-border2" wx:if="{{index==0}}"></view>
+								</block>
+							</view>
+							<view wx:if="{{showList.picOne.length > 2}}" class="hengxiang show-items">
+								<block wx:for="{{showList.picOne}}" wx:for-index="index" wx:for-item="item">
+									<view class="img-item {{index == 1?'img-border':''}} || {{index == 4?'img-border':''}} || {{index == 7?'img-border':''}}">
+										<image src="{{iconUrl}}{{item}}" mode="aspectFill" class="item-imgs"></image>
+									</view>
+								</block>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
 			<!-- 左侧 -->
-			<view class="left">
+			<!-- <view class="left">
 				<block wx:for-items="{{showList}}">
 					<view class="show" wx:if="{{index%2 == 0}}">
 						<view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
@@ -156,20 +215,17 @@
 								<view>{{item.messageSum}}</view>
 							</view>
 							<view class="dianzan hengxiang">
-								<view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==0}}">
-									<image src="{{iconUrl}}static/image/zan.png" class="dianzan-img"></image>
-								</view>
-								<view bindtap="dianzan" data-itemobj="{{item}}" wx:if="{{item.giveState==1}}">
-									<image src="{{iconUrl}}static/image/zan2.png" class="dianzan-img"></image>
+								<view bindtap="dianzan" data-itemobj="{{item}}" data-index="{{index}}">
+									<image src="{{item.giveState == 0?icon_like:icon_unlike}}" class="dianzan-img"></image>
 								</view>
 								<view>{{item.giveGood}}</view>
 							</view>
 						</view>
 					</view>
 				</block>
-			</view>
+			</view> -->
 			<!-- 右侧 -->
-			<view class="right">
+			<!-- <view class="right">
 				<block wx:for-items="{{showList}}">
 					<view class="show" wx:if="{{index%2 != 0}}">
 						<view class="show-item-top" bindtap="showDetails" data-ssid="{{item.id}}">
@@ -202,9 +258,11 @@
 						</view>
 					</view>
 				</block>
-			</view>
+			</view> -->
 		</view>
-
+		<view class="bottom12 zongxiang">
+			<image src="{{iconUrl}}static/image/backtop.png" bindtap="goTop" class="backtop-img"></image>
+		</view>
 		<view class="fabu-button">
 			<image src="{{iconUrl}}static/image/fabubutton.png" class="fabu-img" bindtap="showModal1"></image>
 		</view>

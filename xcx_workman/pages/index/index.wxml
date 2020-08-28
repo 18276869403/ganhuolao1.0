@@ -202,11 +202,13 @@
 				</view>
 			</view>
 		</view>
+
 		<!-- 推荐工人 -->
 		<view class="content-worker1">
 			<view class="need-title hengxiang">
 				<view class="need-title-left">推荐工人</view>
-				<view class="need-title-right" bindtap="services" data-type="1">更多 > </view>
+				<!--  bindtap="services" data-type="1" -->
+				<view class="need-title-right" bindtap="worklist">更多 > </view>
 			</view>
 			<scroll-view class="worker-list" scroll-x="true" style='width:100%'>
 				<view class="hengxiang">
@@ -277,9 +279,59 @@
 					</view>
 				</view>
 			</scroll-view>
-
 		</view>
-
+		<!-- 最新晒晒 -->
+		<view class="content-show">
+			<view class="need-title hengxiang">
+				<view class="need-title-left">最新晒晒</view>
+				<view class="need-title-right" bindtap="showwork">更多 > </view>
+			</view>
+			<block wx:for="{{showitems}}" wx:for-index="indexi" wx:for-item="showitems">
+				<view class="zongxiang" bindtap="showDetails" data-id="{{showitems.id}}">
+					<view class="hengxiang">
+						<view class="newshow-picurl">
+							<image src="{{showitems.wximgurl}}" mode="widthFix" class="show-img"></image>
+						</view>
+						<view class="newshow-title">
+							<view class="zongxiang show-item1">
+								<view class="show-name">{{showitems.wxnc}}</view>
+								<view class="show-title">{{showitems.caseName}}</view>
+							</view>
+						</view>
+						<view class="newshow-remark hengxiang">
+							<view class="hengxiang">
+								<view catchtap="dianzan" data-itemobj="{{showitems}}">
+									<image src="{{showitems.giveState === 0?icon_like:icon_unlike}}" class="dianzan-img"></image>
+								</view>
+								<view class="newshow-text">{{showitems.giveGood}}</view>
+							</view>
+						</view>
+					</view>
+					<view class="hengxiang show-imgs">
+						<view style="width:100%;" wx:if="{{showitems.picOne.length === 1}}">
+							<image src="{{iconUrl}}{{showitems.picOne[0]}}" mode="aspectFill" class="showdatil-imgs"></image>
+						</view>
+						<view class="hengxiang show-items" wx:if="{{showitems.picOne.length === 2}}">
+							<block wx:for="{{showitems.picOne}}" wx:for-index="index">
+								<!--  {{index == 1?'img-border':''}} || {{index == 4?'img-border':''}} -->
+								<view class="img-item2">
+									<image src="{{iconUrl}}{{item}}" mode="widthFix" class="item-imgs2"></image>
+								</view>
+								<view class="img-border2" wx:if="{{index==0}}"></view>
+							</block>
+						</view>
+						<view wx:if="{{showitems.picOne.length > 2}}" class="hengxiang show-items">
+							<block wx:for="{{showitems.picOne}}" wx:for-index="index">
+								<view class="img-item {{index == 1?'img-border':''}} || {{index == 4?'img-border':''}}">
+									<image src="{{iconUrl}}{{item}}" mode="aspectFill" class="item-imgs"></image>
+								</view>
+							</block>
+						</view>
+					</view>
+				</view>
+				<view class="hengxian2" wx:if="{{indexi == 0}}"></view>
+			</block>
+		</view>
 		<!-- 推荐商品 -->
 		<view class="content-worker">
 			<view class="need-title hengxiang">

@@ -34,8 +34,7 @@ page {
   /* overflow: hidden; */
 }
 
-.top-title-left-enter {
-}
+.top-title-left-enter {}
 
 .xiala-img {
   width: 26rpx;
@@ -218,7 +217,7 @@ page {
 }
 
 .pinglun-img {
-  margin-left: 20rpx;
+  /* margin-left: 20rpx; */
   width: 32rpx;
   height: 32rpx;
   margin-top: 25rpx;
@@ -239,6 +238,13 @@ page {
   right: 0rpx;
   bottom: 16rpx;
 }
+.bottom12{
+  position: fixed;
+  right: 0rpx;
+  bottom: 16rpx;
+  z-index: 99999999;
+}
+
 .backtop-img {
   width: 110rpx;
   height: 110rpx;
@@ -397,13 +403,14 @@ page {
 .tanchuang-close {
   width: 100%;
   text-align: center;
-} 
+}
 
 .close-img {
   width: 80rpx;
   height: 80rpx;
   margin-top: 170rpx;
 }
+
 /* 遮罩层 地址选择*/
 
 .commodity_screen {
@@ -551,33 +558,38 @@ page {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 /* 点赞 */
-.dianzan-img{
+.dianzan-img {
   width: 32rpx;
   height: 32rpx;
   margin-top: 25rpx;
   margin-right: 10rpx;
 }
+
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
 }
 
-.dianzan{
-  margin-left: 50px; 
-}  
+.dianzan {
+  margin-left: 50px;
+}
+
 /* 活动 */
-.top-type{
+.top-type {
   width: 80%;
   background: #fff;
   padding: 3%;
   padding-left: 10%;
   padding-right: 10%;
 }
+
 .xuanzhong {
   width: 50%;
   text-align: center;
 }
+
 .top-item-normal {
   font-size: 32rpx;
   font-weight: 400;
@@ -585,6 +597,7 @@ page {
   width: 100%;
   text-align: center;
 }
+
 .top-item-checked {
   width: 100%;
   text-align: center;
@@ -594,32 +607,38 @@ page {
   color: #e02323;
   /* line-height: 80rpx; */
 }
-.top-title-activty{
+
+.top-title-activty {
   width: 75%;
   height: 60rpx;
   line-height: 60rpx;
   background: rgba(242, 242, 242, 1);
   overflow: hidden;
 }
-.top-title-activty-right{
+
+.top-title-activty-right {
   width: 25%;
   height: 60rpx;
   line-height: 60rpx;
   overflow: hidden;
 }
-.top-img{
+
+.top-img {
   padding-left: 10rpx;
   width: 160rpx;
   height: 60rpx;
 }
+
 .bian {
   border-bottom: 6rpx solid #e02323;
   padding-bottom: 13rpx;
 }
-.top-hr{
+
+.top-hr {
   height: 4rpx;
   background-color: #999;
 }
+
 .show-activity {
   width: 100%;
   margin-bottom: 25rpx;
@@ -631,6 +650,7 @@ page {
   background: rgba(255, 255, 255, 1);
   box-shadow: 0rpx 2rpx 12rpx 0rpx rgba(45, 49, 61, 0.1);
 }
+
 .bottom-activity {
   flex-direction: row;
   justify-content: flex-start;
@@ -638,6 +658,7 @@ page {
   width: 93%;
   overflow-x: hidden;
 }
+
 .top-activity {
   height: 80rpx;
   width: 94%;
@@ -645,44 +666,167 @@ page {
   padding-right: 3%;
   padding-left: 3%;
 }
-.activity-image{
+
+.activity-image {
   padding-top: -10rpx;
 }
-.activity-img{
+
+.activity-img {
   width: 199rpx;
   height: 99rpx;
 }
-.activity-bottom-left{
+
+.activity-bottom-left {
   width: 70%;
   padding-left: 3%;
   padding-bottom: 2%;
   /* line-height: 40rpx; */
 }
-.bianhao{
+
+.bianhao {
   font-size: 30rpx;
   font-weight: 500;
 }
-.activity-text{
+
+.activity-text {
   font-size: 26rpx;
 }
-.icon-img{
+
+.icon-img {
   width: 30rpx;
   height: 30rpx;
 }
-.activity-left-text{
+
+.activity-left-text {
   width: 100%;
   padding-top: 10rpx;
   /* height: 80rpx;
   line-height: 80rpx; */
 }
+
 /* 禁用按钮 */
 .disabled {
   pointer-events: none;
 }
-.gonggao{
+
+.gonggao {
   width: 96%;
   border: 2rpx solid #999;
   margin-bottom: 30rpx;
   padding: 2%;
   border-radius: 10rpx;
+}
+
+/* 晒晒专栏 */
+.content-show {
+  padding: 2%;
+  width: 96%;
+  background: rgba(255, 255, 255, 1);
+  margin-bottom: 32rpx;
+  /* height: 606rpx; */
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
+  border-radius: 8rpx;
+}
+
+.show-img1 {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.show-item1 {
+  margin-left: 12rpx;
+  line-height: 40rpx;
+}
+
+.show-items {
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.show-title {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.show-imgs {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.showdatil-imgs {
+  width: 338.89px;
+  height: 338.89px;
+}
+
+.img-item {
+  width: 111px;
+  height: 113px;
+}
+
+.img-item2 {
+  width: 49%;
+}
+
+.item-imgs2 {
+  width: 165.8px;
+  height: 165.8px;
+}
+
+.img-border2 {
+  width: 2%;
+}
+
+.img-border {
+  margin: 0px 2px;
+}
+
+.item-imgs {
+  width: 109px;
+  height: 109px;
+}
+
+.newshowwork {
+  width: 96%;
+  padding: 2%;
+  background: #fff;
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(111, 119, 140, 0.18);
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.bottom2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-bottom: 30rpx;
+  width: 100%;
+  overflow-x: hidden;
+  background: #f5f7fb;
+}
+
+.bottom-1 {
+  width: 94%;
+  margin: 3%;
+}
+
+.newshowwork-title {
+  margin-top: 20rpx;
+}
+.newshow-picurl{
+  width: 12%;
+}
+.newshow-title{
+  width: 50%;
+}
+.newshow-remark{
+  width: 38%;
+}
+.newshow-text{
+  line-height: 80rpx;
+  width: 40rpx;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }

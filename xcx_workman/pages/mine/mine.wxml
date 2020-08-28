@@ -171,5 +171,16 @@
         <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
       </view>
     </view>
+    <!-- <view class="bottom-list hengxiang" bindtap="uploadImage">
+      <view class="bottom-list-left">
+        <image src="{{iconUrl}}static/image/lianxiwomen.png" class="ziliao-img"></image>
+      </view>
+      <view class="bottom-list-content">
+        上传图片测试
+      </view>
+      <view class="bottom-list-right">
+        <image src="{{iconUrl}}static/image/enter.png" class="enter-img"></image>
+      </view>
+    </view> -->
   </view>
 </view>

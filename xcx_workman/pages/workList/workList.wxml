@@ -1,0 +1,111 @@
+<!--pages/workList/workList.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="top zongxiang">
+		<view class="top-title hengxiang">
+			<view class="top-title-left hengxiang" bindtap="showModal">
+				<view class="top-title-left-name" wx-if="{{weizhi==undefined}}">全部</view>
+				<view class="top-title-left-name" wx-if="{{weizhi!=undefined}}">{{weizhi}}</view>
+				<view class="top-title-left-enter">
+					<image src="{{iconUrl}}static/image/xiala.png" class="xiala-img"></image>
+				</view>
+			</view>
+			<view class="top-title-right hengxiang">
+				<view class="top-title-right-img">
+					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
+				</view>
+				<view class="top-title-right-shuru">
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入工种或姓名" class="shurukuang"></input>
+				</view>
+				<view class="top-title-right-sousuo">
+					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
+				</view>
+			</view>
+			<view class="top-search-fabu" bindtap="submitNeeds">
+				入驻
+			</view>
+		</view>
+		<view class="top-work zongxiang">
+			<view class="top-work-title">金牌工人</view>
+			<scroll-view class="top-worker-list" scroll-x="true">
+				<view class="hengxiang">
+					<block wx:for="{{workerListTop}}">
+						<view class="top-worker-item zongxiang">
+							<view>
+								<image class="top-worker-url" mode="aspectFill" src="{{iconUrl}}{{item.picIurl}}"></image>
+							</view>
+							<view class="top-worker-name shenglue">{{item.name}}</view>
+							<view class="top-worker-type shenglue">{{item.oneClassName}}</view>
+							<view class="top-worker-type shenglue">{{item.twoClassName}}</view>
+						</view>
+					</block>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="bottom zongxiang">
+		<view>热门工种</view>
+		<view class="hengxiang bottom-type">
+			<block wx:for="{{8}}">
+				<view class="bottom-type-item shenglue">粉刷工匠</view>
+			</block>
+			<view class="bottom-type-items"><text space="nbsp" decode="true">更多工种&nbsp;&nbsp;&nbsp;&nbsp;>></text></view>
+		</view>
+		<view class="zongxiang">
+			<block wx:for="{{8}}">
+				<view class="bottom-worker hengxiang">
+					<view class="bottom-worker-pic">
+						<image class="worker-pic" mode="aspectFill" src="{{iconUrl}}static/image/gongyi.jpg"></image>
+					</view>
+					<view class="bottom-worker-remark">
+						<view class="bottom-worker-remark-item hengxiang">
+							<view class="bottom-worker-name">我是一个粉刷匠</view>
+							<view class="bottom-worker-birth">30岁</view>
+						</view>
+						<view class="right-content hengxiang">
+							<view class="right-content-item hengxiang">
+								<view class="">
+									<image src="{{iconUrl}}static/image/dengji.png" class="dengji-img"></image>
+								</view>
+								<view>二级工匠</view>
+							</view>
+							<view class="right-content-item hengxiang">
+								<view class="">
+									<image src="{{iconUrl}}static/image/shiming.png" class="dengji-img"></image>
+								</view>
+								<view wx:if="{{1 == 1}}">未实名认证</view>
+								<view wx:if="{{item.backup4 == 1}}">实名认证</view>
+							</view>
+							<view class="right-content-item hengxiang">
+								<view class="">
+									<image src="{{iconUrl}}static/image/jingyan.png" class="dengji-img"></image>
+								</view>
+								<view>34年经验</view>
+							</view>
+						</view>
+						<view class="right-sort zongxiang">
+							<view class="right-sort-item hengxiang">
+								<view class="dot"></view>
+								<view class="shenglue"> 粉刷匠 | 本领强 </view>
+							</view>
+							<view class="right-sort-item hengxiang">
+								<view class="dot" wx:if="{{item.twoClassName != ''}}"></view>
+								<view class="shenglue"> 粉刷匠 | 本领强</view>
+							</view>
+						</view>
+						<view class="right-bottom hengxiang">
+							<view class="right-bottom-left shenglue hengxiang">
+								<view class="hengxiang">
+									<view>
+										<image src="{{iconUrl}}static/image/fuwudingwei.png" class="dingwei-img"></image>
+									</view>
+									<view> 万载县 | 县城</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>

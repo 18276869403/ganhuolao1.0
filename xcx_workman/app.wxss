@@ -25,6 +25,12 @@
   height: 1rpx;
   background: #f0f0f0;
 }
+.hengxian2{
+  width: 100%;
+  margin:10rpx 0px;
+  height: 2rpx;
+  background: #f0f0f0;
+}
 .shenglue{
   overflow: hidden;
   text-overflow:ellipsis;

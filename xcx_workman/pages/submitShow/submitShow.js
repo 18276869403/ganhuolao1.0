@@ -167,6 +167,7 @@ Page({
     }
     console.log(data)
     qingqiu.get("insertCase", data, function (re) {
+      console.log(re)
       that.setData({
         btnFlag: false
       })
@@ -372,6 +373,9 @@ Page({
           btnFlag: false
         })
         console.log(res)
+        wx.showLoading({
+          title: '上传图片中',
+        })
         const tempFilePaths = res.tempFilePaths;
         // const uploaderlist=that.data.uploaderlist.concat(tempFilePaths)  
         for (let i = 0; i < tempFilePaths.length; i++) {
@@ -394,10 +398,10 @@ Page({
             },
             method: 'POST',
             header: {
-              "Content-Type": "multipart/form-data"
+              // "Content-Type": "multipart/form-data"
             },
             success: function (res) {
-              console.log(res)
+              console.log('过滤',res)
               if (res.data == "false") {
                 that.setData({
                   btnFlag: false
@@ -412,7 +416,7 @@ Page({
                   url: api.uploadurl,
                   filePath: tempFilePaths[index2],
                   header: {
-                    "Content-Type": "multipart/form-data"
+                    // "Content-Type": "multipart/form-data"
                   },
                   formData: {
                     method: 'POST' //请求方式
@@ -425,17 +429,13 @@ Page({
                     var r = res.data
                     var jj = JSON.parse(r);
                     if (!jj.success) {
-                      // wx.showToast({
-                      //   title: '图片上传失败' + tempFilePaths.wxfile,
-                      //   icon: 'none'
-                      // })
-                      var asvalue = typeof tempFilePaths
                       wx.showToast({
-                        title: asvalue + '   ' + tempFilePaths.wxfile,
-                        icon: "none"
+                        title: '图片上传失败',
+                        icon: 'none'
                       })
                       return
                     }
+                    wx.hideLoading()
                     var sj = api.viewUrl + jj.message
                     var tupianlists = that.data.tupianlists
                     if (tupianlists.length < 9) {

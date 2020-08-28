@@ -41,6 +41,11 @@ Page({
       wx.stopPullDownRefresh()
     }, 1000);
   },
+  uploadImage:function(){
+    wx.navigateTo({
+      url: '../uploadImage/uploadImage',
+    })
+  },
   getWxUser:function(){
     var that = this
     var data = {

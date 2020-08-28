@@ -10,8 +10,14 @@ const bmap = require('../../utils/bmap-wx.min.js')
 Page({
   data: {
     viewUrl: api.viewUrl,
-    iconUrl:api.iconUrl,
+    iconUrl: api.iconUrl,
+    // 点赞
+    icon_like: api.iconUrl + "static/image/zan.png",
+    icon_unlike: api.iconUrl + "static/image/zan2.png",
     showModalStatus1: true,
+    imgheight:'',
+    showflag: 0,
+    showitems: [],
     openid: '',
     sousuotext: '',
     gongren: '2',
@@ -196,6 +202,106 @@ Page({
     })
   },
 
+  /**
+   * 跳转晒晒
+   */
+  showwork:function(){
+    app.globalData.showtype = 1
+    wx.switchTab({
+      url: '../showwork/showwork',
+    })
+  },
+
+  // 晒晒点赞
+  dianzan: function (e) {
+    var that = this
+    var item = e.currentTarget.dataset.itemobj;
+    var data = {
+      wxCaseId: item.id,
+      wxUserIdGo: app.globalData.wxid
+    }
+    console.log(data)
+    qingqiu.get("userLikes", data, function (re) {
+      if (re.success == true) {
+        for (let obj of that.data.showitems) {
+          if (obj.id == item.id) {
+            if (item.giveState == 0) {
+              obj.giveGood += 1
+            } else {
+              obj.giveGood -= 1
+            }
+            obj.giveState = item.giveState == 0 ? 1 : 0
+          }
+        }
+        that.setData({
+          showitems: that.data.showitems
+        })
+      }
+    })
+  },
+
+  /**
+   * 跳转晒晒
+   * @param {id} e 
+   */
+  showDetails:function(e){  
+    var id = e.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '../showDetails/showDetails?id=' + id,
+    })
+  },
+
+  // 获取最新晒晒
+  showlist: function () {
+    var that = this
+    var data = {
+      pageNo: 1,
+      pageSize: 2,
+      backup2: 0,
+      wxUserIdGo: app.globalData.wxid
+    }
+    qingqiu.get("CasePage", data, function (res) {
+      console.log("晒晒", res)
+      // if(res.result)
+      if (res.result.records.length > 0) {
+        for (let obj of res.result.records) {
+          var imglist = []
+          if (obj.picOne.indexOf(',') != -1) {
+            imglist = obj.picOne.split(",")
+            if (imglist.length > 6) {
+              imglist.splice(6, imglist.length - 1)
+            }
+          } else {
+            imglist.push(obj.picOne)
+          }
+          obj.picOne = imglist
+        }
+        that.setData({
+          showitems: res.result.records
+        })
+        console.log('最新晒晒',that.data.showitems)
+      }
+    })
+  },
+  imageLoad: function (e) {
+    //获取图片真实宽度
+    var imgwidth = e.detail.width,
+      imgheight = e.detail.height,
+      //宽高比
+      ratio = imgwidth / imgheight;
+    //计算的高度值
+    var viewHeight = 750 / ratio;
+    var imgheight = viewHeight
+    this.setData({
+      imgheight:imgheight
+    })
+  },
+  // 跳转工人列表页面
+  worklist:function(){
+    wx.navigateTo({
+      url: '../workList/workList',
+    })
+  },
   onShow: function () {
     wx.showShareMenu({
       withShareTicket: true
@@ -235,6 +341,7 @@ Page({
         pageSize: 10,
         backup1: 1
       }) //商品
+      this.showlist()
     } else {
       this.setData({
         weizhi: app.globalData.oneCity.name + app.globalData.twoCity.name
@@ -263,6 +370,7 @@ Page({
         backup1: 1,
         oneAreaId: app.globalData.oneCity.id
       }) //商品
+      this.showlist()
     }
   },
   onLoad: function (options) {
@@ -478,9 +586,15 @@ Page({
     console.log(data)
     wx.navigateTo({
       url: data, //
-      success: function (e) {console.log('成功')}, //成功后的回调；
-      fail: function (e) {console.log(e)}, //失败后的回调；
-      complete: function () {console.log('没成功没失败')}, //结束后的回调(成功，失败都会执行)
+      success: function (e) {
+        console.log('成功')
+      }, //成功后的回调；
+      fail: function (e) {
+        console.log(e)
+      }, //失败后的回调；
+      complete: function () {
+        console.log('没成功没失败')
+      }, //结束后的回调(成功，失败都会执行)
     })
   },
 
@@ -548,7 +662,7 @@ Page({
   },
 
   // 建房图纸
-  builddraw:function(){
+  builddraw: function () {
     // wx.showToast({
     //   title: '功能开发中...',
     //   icon:'none'
@@ -561,7 +675,7 @@ Page({
 
   // 商家促销
   cuxiao: function () {
-    app.globalData.goodsRefresh=1
+    app.globalData.goodsRefresh = 1
     wx.navigateTo({
       url: '../goodsList/goodsList',
     })
@@ -595,13 +709,13 @@ Page({
   },
   // 跳转到更多需求页面
   need: function () {
-    app.globalData.needRefresh=1
+    app.globalData.needRefresh = 1
     wx.switchTab({
       url: '../need/need',
     })
   },
   // 便民站
-  Convenience:function(){
+  Convenience: function () {
     // wx.showToast({
     //   title: '功能开发中...',
     //   icon:'none'
@@ -649,7 +763,7 @@ Page({
   },
   // 跳转到推荐商品更多页面
   goodList: function () {
-    app.globalData.goodsRefresh=1
+    app.globalData.goodsRefresh = 1
     wx.navigateTo({
       url: '../goodsList/goodsList',
     })
@@ -702,9 +816,9 @@ Page({
             }
             obj.goodPic1 = obj.goodPic1.split(',')
             obj.goodPic2 = obj.goodPic2.split(',')
-            if(obj.goodPic1[0]==''&&obj.goodPic1[1]!=''){
-              obj.goodPic1[0]=obj.goodPic1[1]
-              obj.goodPic1[1]=''
+            if (obj.goodPic1[0] == '' && obj.goodPic1[1] != '') {
+              obj.goodPic1[0] = obj.goodPic1[1]
+              obj.goodPic1[1] = ''
             }
           }
           that.setData({
@@ -806,7 +920,7 @@ Page({
   // },
   // 跳转到商品详情页面
   goodsDetails(e) {
-    app.globalData.goodsRefresh=1
+    app.globalData.goodsRefresh = 1
     var obj = e.currentTarget.dataset.vals;
     var shopxq = JSON.stringify(obj);
     //debugger
