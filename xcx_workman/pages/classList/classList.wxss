@@ -1,0 +1,58 @@
+/* pages/classList/classList.wxss */
+page{
+  background: #f5f7fb;
+}
+.left{
+  width: 40%;
+  text-align: center;
+  position: fixed;
+}
+.left1{
+  width: 40%;
+}
+.scroll-class{
+  height: 600px;
+}
+.left-type{
+  width: 100%;
+  background: #FFF;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.right{
+  width: 60%;
+}
+.hengxian2{
+  width: 100%;
+  margin: 0rpx;
+  background: #f0f0f0;
+}
+.icon-url{
+  width: 66px;
+  height: 66px;
+  margin: 0rpx;
+  padding: 0rpx;
+}
+.type-content{
+  width: 100%;
+  background: #FFF;
+  padding: 3%;
+  flex-wrap: wrap;
+}
+.icon-text{
+  width: 100%;
+  text-align: center;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.type-title{
+  width: 100%;
+  background: #f5f7fb;
+  text-align: center;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.type-items{
+  width: 30%;
+  margin-right: 10rpx;
+}

@@ -15,7 +15,7 @@
 					<image src="{{iconUrl}}static/image/search.png" class="search-img"></image>
 				</view>
 				<view class="top-title-right-shuru">
-					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入工种或姓名" class="shurukuang"></input>
+					<input type="text" bindinput="shurukuang" value="{{sousuotext}}" placeholder="输入工人姓名" class="shurukuang"></input>
 				</view>
 				<view class="top-title-right-sousuo">
 					<view class="sousuo-button" bindtap="btnsearch">搜索</view>
@@ -25,9 +25,11 @@
 				入驻
 			</view>
 		</view>
-		<view class="top-work zongxiang">
-			<view class="top-work-title">金牌工人</view>
-			<scroll-view class="top-worker-list" scroll-x="true">
+	</view>
+	<view class="bottom zongxiang">
+			<view class="top-work zongxiang">
+			<view class="top-work-title"><image src="{{iconUrl}}static/image/jinpaigongren.png" class="iconurl"></image> 金牌工人</view>
+			<scroll-view class="top-worker-list" scroll-x="true" bindscrolltolower="bindWorkerTop">
 				<view class="hengxiang">
 					<block wx:for="{{workerListTop}}">
 						<view class="top-worker-item zongxiang">
@@ -42,55 +44,53 @@
 				</view>
 			</scroll-view>
 		</view>
-	</view>
-	<view class="bottom zongxiang">
-		<view>热门工种</view>
+		<view style="margin-top: 20rpx;font-weight: bold;"><image src="{{iconUrl}}static/image/gongrenfenlei.png" style="width:25rpx;height:31rpx;"></image> 热门工种</view>
 		<view class="hengxiang bottom-type">
-			<block wx:for="{{8}}">
-				<view class="bottom-type-item shenglue">粉刷工匠</view>
+			<block wx:for="{{classListTop}}">
+				<view class="bottom-type-item shenglue" bindtap="WorkerClass" data-twoid="{{item.twoClassId}}" data-oneid="{{item.oneClassId}}" data-onename="{{item.oneClassName}}" data-twoname="{{item.twoClassName}}">{{item.twoClassName}}</view>
 			</block>
-			<view class="bottom-type-items"><text space="nbsp" decode="true">更多工种&nbsp;&nbsp;&nbsp;&nbsp;>></text></view>
+			<view class="bottom-type-items" bindtap="ClassList">更多工种<text space="nbsp" decode="true"> ></text></view>
 		</view>
 		<view class="zongxiang">
-			<block wx:for="{{8}}">
+			<block wx:for="{{workerList}}">
 				<view class="bottom-worker hengxiang">
 					<view class="bottom-worker-pic">
-						<image class="worker-pic" mode="aspectFill" src="{{iconUrl}}static/image/gongyi.jpg"></image>
+						<image class="worker-pic" mode="aspectFill" src="{{iconUrl}}{{item.picIurl}}"></image>
 					</view>
 					<view class="bottom-worker-remark">
 						<view class="bottom-worker-remark-item hengxiang">
-							<view class="bottom-worker-name">我是一个粉刷匠</view>
-							<view class="bottom-worker-birth">30岁</view>
+							<view class="bottom-worker-name">{{item.name}}</view>
+							<view class="bottom-worker-birth">{{item.dateBirth}}岁</view>
 						</view>
 						<view class="right-content hengxiang">
 							<view class="right-content-item hengxiang">
 								<view class="">
 									<image src="{{iconUrl}}static/image/dengji.png" class="dengji-img"></image>
 								</view>
-								<view>二级工匠</view>
+								<view>{{item.shopName}}</view>
 							</view>
 							<view class="right-content-item hengxiang">
 								<view class="">
 									<image src="{{iconUrl}}static/image/shiming.png" class="dengji-img"></image>
 								</view>
-								<view wx:if="{{1 == 1}}">未实名认证</view>
+								<view wx:if="{{item.backup4 == 0}}">未实名认证</view>
 								<view wx:if="{{item.backup4 == 1}}">实名认证</view>
 							</view>
 							<view class="right-content-item hengxiang">
 								<view class="">
 									<image src="{{iconUrl}}static/image/jingyan.png" class="dengji-img"></image>
 								</view>
-								<view>34年经验</view>
+								<view>{{item.employ}}经验</view>
 							</view>
 						</view>
 						<view class="right-sort zongxiang">
 							<view class="right-sort-item hengxiang">
 								<view class="dot"></view>
-								<view class="shenglue"> 粉刷匠 | 本领强 </view>
+								<view class="shenglue">{{item.oneClassName}}</view>
 							</view>
 							<view class="right-sort-item hengxiang">
 								<view class="dot" wx:if="{{item.twoClassName != ''}}"></view>
-								<view class="shenglue"> 粉刷匠 | 本领强</view>
+								<view class="shenglue">{{item.twoClassName}}</view>
 							</view>
 						</view>
 						<view class="right-bottom hengxiang">
@@ -99,7 +99,7 @@
 									<view>
 										<image src="{{iconUrl}}static/image/fuwudingwei.png" class="dingwei-img"></image>
 									</view>
-									<view> 万载县 | 县城</view>
+									<view> {{item.oneAreaName}} | {{item.twoAreaName}}</view>
 								</view>
 							</view>
 						</view>

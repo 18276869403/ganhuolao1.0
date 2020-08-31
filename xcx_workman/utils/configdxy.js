@@ -1,10 +1,10 @@
 var api = require('./config.js')
 // 线上
-const baseUrl = "https://www.it-ys.com:81/work-boot/"
+// const baseUrl = "https://www.it-ys.com:81/work-boot/"
 // 体验
 // const baseUrl = "http://111.231.51.198:9045/work-boot/"  
 // 本地
-// const baseUrl = "http://192.168.1.250:8081/work-boot/" 
+const baseUrl = "http://192.168.1.250:8081/work-boot/" 
 // const baseUrl = "http://192.168.1.233:8080/work-boot/"  
 // const baseUrl = "http://192.168.1.235:8080/work-boot/"   
 
@@ -140,6 +140,10 @@ const buildfindlist = baseUrl + "work/buildDraw/findlist"
 const buildeditById = baseUrl + "work/buildDraw/editById"
 // 删除建房图纸
 const builddelete = baseUrl + "work/buildDraw/delete"
+// 获取热门分类
+const twoClassListTop = baseUrl + "pc/hall/twoClassListTop"
+// 获取所有二级分类
+const twoClassListAll = baseUrl + "pc/hall/twoClassListAll"
 
 module.exports = {
   wxUserAdd: WxUserAdd,
@@ -207,5 +211,7 @@ module.exports = {
   buildQueryById:buildQueryById,
   buildfindlist:buildfindlist,
   buildeditById:buildeditById,
-  builddelete:builddelete
+  builddelete:builddelete,
+  twoClassListTop:twoClassListTop,
+  twoClassListAll:twoClassListAll
 };

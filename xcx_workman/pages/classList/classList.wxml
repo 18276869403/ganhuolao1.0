@@ -1,0 +1,32 @@
+<!--pages/classList/classList.wxml-->
+<view class="container">
+	<view class="hengxian"></view>
+	<view class="hengxiang">
+		<view class="zongxiang left">
+			<scroll-view class="scroll-class" show-scrollbar="false" enhanced="true" scroll-y="true">
+				<view class="">
+					<block wx:for="{{oneList}}">
+						<view class="left-type shenglue" bindtap="oneClass" data-oneid="{{item.id}}">{{item.className}}</view>
+						<view class="hengxian2"></view>
+					</block>
+				</view>
+			</scroll-view>
+		</view>
+		<view class="left1"></view>
+		<view class="zongxiang right">
+			<block wx:for="{{oneList}}" wx:for-item="oneItem">
+				<view class="hengxiang type-content" id="type{{oneItem.id}}">
+					<view class="type-title">{{oneItem.className}}</view>
+					<block wx:for="{{twoList}}">
+						<view class="zongxiang type-items" wx:if="{{oneItem.id == item.oneClassId}}">
+							<view class="">
+								<image class="icon-url" src="{{iconUrl}}static/image/gongyi.jpg"></image>
+							</view>
+							<view class="icon-text shenglue">{{item.twoClassName}}</view>
+						</view>
+					</block>
+				</view>
+			</block>
+		</view>
+	</view>
+</view>

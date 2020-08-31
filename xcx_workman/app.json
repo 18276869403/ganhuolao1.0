@@ -55,7 +55,8 @@
     "pages/Welfare/Welfare",
     "pages/showVote/showVote",
     "pages/uploadImage/uploadImage",
-    "pages/workList/workList"
+    "pages/workList/workList",
+    "pages/classList/classList"
   ],
   "window": {
     "navigationBarBackgroundColor": "#ffffff",

@@ -7,7 +7,7 @@ page {
 .top {
   /* height: 60rpx; */
   width: 94%;
-  background: rgb(125, 208, 247);
+  background: #FFF;
   padding: 3%;
 }
 
@@ -81,7 +81,8 @@ page {
   width: 20%;
   margin-left: 2%;
   text-align: center;
-  background: #fff;
+  background: #1592f4;
+  color: #fff;
   border-radius: 8rpx;
   font-size: 28rpx;
 }
@@ -95,10 +96,10 @@ page {
   width: 94rpx;
   height: 44rpx;
   border-radius: 8rpx;
-  border: 2rpx solid rgb(78, 191, 243);
+  border: 2rpx solid #1592f4;
   line-height: 44rpx;
   margin-top: 8rpx;
-  color:  rgb(78, 191, 243);
+  color:  #1592f4;
   text-align: center;
   font-size: 28rpx;
 }
@@ -109,14 +110,16 @@ page {
 }
 .top-work-title{
   margin-bottom: 10rpx;
-  color: #fff;
+  font-weight: bold;
+  height: 40rpx;
 }
 .top-worker-list {
   width: 100%;
 }
 
 .top-worker-item {
-  width: 30%;
+  width: 190rpx;
+  height: 234rpx;
   align-items: center;
   padding: 2%;
   border-radius: 8rpx;
@@ -132,15 +135,18 @@ page {
 }
 
 .top-worker-name {
-  width: 100%;
+  width: 190rpx;
+  text-align: center;
+  color: #1592f4;
   font-size: 28rpx;
   font-weight: 600;
 }
 
 .top-worker-type {
-  width: 100%;
+  width: 190rpx;
+  text-align: center;
   margin-top: 5rpx;
-  font-size: 24rpx;
+  font-size: 22rpx;
   color: #999;
 }
 .bottom{
@@ -151,25 +157,32 @@ page {
   width: 100%;
   margin-top: 10rpx;
   flex-wrap: wrap;
-  font-size: 24rpx;
+  font-size: 26rpx;
   height: 120rpx;
 }
+.iconurl{
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 4rpx;
+}
 .bottom-type-item{
-  width: 17.2%;
+  width: 20%;
   border: 1rpx solid rgb(173, 172, 172);
   line-height: 40rpx;
   margin: 1%;
   text-align: center;  
   border-radius: 8rpx;
+  padding: 0rpx 1%;
 }
 .bottom-type-items{
-  width: 36.4%;
+  width: 20%;
   background:rgb(78, 191, 243);
-  line-height: 40rpx;
+  line-height: 44rpx;
   color: #fff;
   margin: 1%;
   text-align: center;
   border-radius: 8rpx;
+  padding: 0rpx 1%;
 }
 .bottom-worker{
   margin-top: 20rpx;
