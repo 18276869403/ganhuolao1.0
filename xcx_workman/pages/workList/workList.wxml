@@ -27,13 +27,15 @@
 		</view>
 	</view>
 	<view class="bottom zongxiang">
-			<view class="top-work zongxiang">
-			<view class="top-work-title"><image src="{{iconUrl}}static/image/jinpaigongren.png" class="iconurl"></image> 金牌工人</view>
+		<view class="top-work zongxiang">
+			<view class="top-work-title">
+				<image src="{{iconUrl}}static/image/jinpaigongren.png" class="iconurl"></image> 金牌工人
+			</view>
 			<scroll-view class="top-worker-list" scroll-x="true" bindscrolltolower="bindWorkerTop">
 				<view class="hengxiang">
 					<block wx:for="{{workerListTop}}">
 						<view class="top-worker-item zongxiang">
-							<view>
+							<view style="padding-top:10rpx;">
 								<image class="top-worker-url" mode="aspectFill" src="{{iconUrl}}{{item.picIurl}}"></image>
 							</view>
 							<view class="top-worker-name shenglue">{{item.name}}</view>
@@ -44,24 +46,29 @@
 				</view>
 			</scroll-view>
 		</view>
-		<view style="margin-top: 20rpx;font-weight: bold;"><image src="{{iconUrl}}static/image/gongrenfenlei.png" style="width:25rpx;height:31rpx;"></image> 热门工种</view>
+		<view class="hengxiang" style="margin-top: 20rpx;font-weight: bold;">
+			<view class="iconView">
+				<image src="{{iconUrl}}static/image/gongrenfenlei.png" style="width:25rpx;height:31rpx;"></image>
+			</view>热门工种
+		</view>
 		<view class="hengxiang bottom-type">
 			<block wx:for="{{classListTop}}">
 				<view class="bottom-type-item shenglue" bindtap="WorkerClass" data-twoid="{{item.twoClassId}}" data-oneid="{{item.oneClassId}}" data-onename="{{item.oneClassName}}" data-twoname="{{item.twoClassName}}">{{item.twoClassName}}</view>
 			</block>
-			<view class="bottom-type-items" bindtap="ClassList">更多工种<text space="nbsp" decode="true"> ></text></view>
+			<view class="bottom-type-items" bindtap="ClassList">更多工种</view>
 		</view>
 		<view class="zongxiang">
 			<block wx:for="{{workerList}}">
 				<view class="bottom-worker hengxiang">
-					<view class="bottom-worker-pic">
-						<image class="worker-pic" mode="aspectFill" src="{{iconUrl}}{{item.picIurl}}"></image>
-					</view>
-					<view class="bottom-worker-remark">
-						<view class="bottom-worker-remark-item hengxiang">
-							<view class="bottom-worker-name">{{item.name}}</view>
-							<view class="bottom-worker-birth">{{item.dateBirth}}岁</view>
+					<view class="zongxiang bottom-worker-pic">
+						<view class="">
+							<image class="worker-pic" mode="aspectFill" src="{{iconUrl}}{{item.picIurl}}"></image>
 						</view>
+						<view class="bottom-worker-name shenglue">{{item.name}}</view>
+						<view class="bottom-worker-birth">{{item.dateBirth}}岁</view>
+					</view>
+					<view class="shuxian"></view>
+					<view class="bottom-worker-remark">
 						<view class="right-content hengxiang">
 							<view class="right-content-item hengxiang">
 								<view class="">
@@ -69,7 +76,7 @@
 								</view>
 								<view>{{item.shopName}}</view>
 							</view>
-							<view class="right-content-item hengxiang">
+							<view class="right-content-item1 hengxiang">
 								<view class="">
 									<image src="{{iconUrl}}static/image/shiming.png" class="dengji-img"></image>
 								</view>
@@ -86,11 +93,11 @@
 						<view class="right-sort zongxiang">
 							<view class="right-sort-item hengxiang">
 								<view class="dot"></view>
-								<view class="shenglue">{{item.oneClassName}}</view>
+								<view class="shenglue" style="background:#f5f7fb;border:1px solid #d7d7d7;border-radius:4rpx;">{{item.oneClassName}}</view>
 							</view>
-							<view class="right-sort-item hengxiang">
-								<view class="dot" wx:if="{{item.twoClassName != ''}}"></view>
-								<view class="shenglue">{{item.twoClassName}}</view>
+							<view class="right-sort-item hengxiang" style="margin-top:2px;">
+								<view class="dot"></view>
+								<view class="shenglue" wx:if="{{item.twoClassName != ''}}" style="background:#f5f7fb;border:1px solid #d7d7d7;border-radius:4rpx;">{{item.twoClassName}}</view>
 							</view>
 						</view>
 						<view class="right-bottom hengxiang">

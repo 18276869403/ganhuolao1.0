@@ -11,50 +11,51 @@ Page({
   data: {
     iconUrl: api.iconUrl,
     /** 一级分类 */
-    oneList:[],
-    twoList:[],
-    toView:'',
+    oneList: [],
+    twoList: [],
+    toView: '',
   },
 
   /**
    * 一级分类
    */
-  classListOne:function(){
+  classListOne: function () {
     var that = this
     var data = {
-      type:1
+      type: 1
     }
-    qingqiu.get("oneClassList",data,function(res){
-      console.log('一级分类',res)
+    qingqiu.get("oneClassList", data, function (res) {
+      console.log('一级分类', res)
       that.setData({
-        oneList:res.result
+        oneList: res.result
       })
     })
   },
 
-  oneClass:function(e){
+  oneClass: function (e) {
     var oneid = e.currentTarget.dataset.oneid
     this.setData({
-      toView:oneid
+      toView: oneid
     })
     this.toView()
   },
-  
-  toView:function(){
+
+  toView: function () {
     var toViewid = '#type' + this.data.toView
-    console.log('id',toViewid)
+    console.log('id', toViewid)
     var scrollTop;
     const query = wx.createSelectorQuery(); // 创建节点查询器
     query.select(toViewid).boundingClientRect() // 选择toViewid获取位置信息
     query.selectViewport().scrollOffset() // 获取页面查询位置的
-    query.exec(function(res){
+    query.exec(function (res) {
       console.log(res)
       scrollTop = res[0].top
-      wx.createSelectorQuery().select('.container').boundingClientRect(function(rect){
-        wx.pageScrollTo({
-          scrollTop:scrollTop,
-          duration:300
-        })
+      wx.pageScrollTo({
+        scrollTop: scrollTop,
+        duration: 300
+      })
+      wx.createSelectorQuery().select('.container').boundingClientRect(function (rect) {
+
       })
     })
   },
@@ -62,15 +63,15 @@ Page({
   /**
    * 二级分类
    */
-  classListTwo:function(){
+  classListTwo: function () {
     var that = this
     var data = {
-      type:1
+      type: 1
     }
-    qingqiu.get("twoClassListAll",data,function(res){
-      console.log('所有二级分类',res)
+    qingqiu.get("twoClassListAll", data, function (res) {
+      console.log('所有二级分类', res)
       that.setData({
-        twoList:res.result
+        twoList: res.result
       })
     })
   },
